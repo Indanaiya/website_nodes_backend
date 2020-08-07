@@ -1,0 +1,66 @@
+{
+  "Multifaceted Varnish": {
+      "universalisId": "27695",
+      "tomestonePrice": "5"
+  },
+
+  "Multifaceted Abrasive":{
+      "universalisId": "27718",
+      "tomestonePrice": "5"
+  },
+
+  "Multifaceted Resin": {
+      "universalisId": "27719",
+      "tomestonePrice": "5"
+  },
+
+  "Multifaceted Alumen": {
+      "universalisId": "27744",
+      "tomestonePrice": "5"
+  },
+
+  "Multifaceted Cotton Cloth": {
+      "universalisId": "27762",
+      "tomestonePrice": "5"
+  },
+
+  "Multifaceted Alchemic": {
+      "universalisId": "27796",
+      "tomestonePrice": "5"
+  },
+
+  "Chalicotherium Skin": {
+      "universalisId": "27737",
+      "tomestonePrice": "5"
+  },
+
+  "Dwarven Chromite": {
+      "universalisId": "29969",
+      "tomestonePrice": "20"
+  },
+
+  "Workbench Resin": {
+      "universalisId": "29971",
+      "tomestonePrice": "20"
+  },
+
+  "Tempest Adhesive": {
+      "universalisId": "29973",
+      "tomestonePrice": "20"
+  },
+
+  "Caprice Fleece": {
+      "universalisId": "29975",
+      "tomestonePrice": "20"
+  },
+
+  "Megalania Skin": {
+      "universalisId": "29977",
+      "tomestonePrice": "20"
+  },
+
+  "Dried Hi-Ether": {
+      "universalisId": "29979",
+      "tomestonePrice": "20"
+  }
+}
