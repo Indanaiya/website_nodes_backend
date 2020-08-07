@@ -16,9 +16,9 @@ function updateItem(item) {
         item
           .save()
           .then(() => resolve("Item Updated"))
-          .catch((err) => reject("Error: " + err));
+          .catch((err) => reject(`Error: ${err}`));
       })
-      .catch((err) => reject("Error: " + err))
+      .catch((err) => reject(`Error: ${err}`))
   );
 }
 
@@ -26,7 +26,7 @@ function updateAll() {
   return new Promise((resolve, reject) => {
     const update = function (err, data) {
       if (err) {
-        console.log("Couldn't read file: " + err);
+        console.log(`Couldn't read file: ${err}`);
         reject(err);
         return;
       }
@@ -37,8 +37,8 @@ function updateAll() {
           .then((response) => response.text())
           .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"])
           .catch((err) => {
-            console.log("Rejected: " + err);
-            reject("ItemPricePromises error: " + err);
+            console.log(`Rejected: ${err}`);
+            reject(`ItemPricePromises error: ${err}`);
             return;
           })
       );
