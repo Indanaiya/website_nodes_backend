@@ -30,8 +30,10 @@ function updateAll() {
         reject(err);
         return;
       }
-      const items = JSON.parse(data);
+      const items = JSON.parse(data);   
+      const itemNames = Object.keys(items);
 
+      //An array of promises, the value of each is the lowest price for the item it was mapped from.
       const itemPricePromises = Object.keys(items).map((item) =>
         fetch(UNIVERSALIS_URL + items[item].universalisId)
           .then((response) => response.text())
@@ -39,44 +41,69 @@ function updateAll() {
           .catch((err) => {
             console.log(`Rejected: ${err}`);
             reject(`ItemPricePromises error: ${err}`);
-            return;
           })
       );
 
       Promise.all(itemPricePromises)
         .then((itemPrices) => {
           console.log(itemPrices);
-          const itemNames = Object.keys(items);
+          const itemNamesToPrices = {};
           for (let i = 0; i < itemPrices.length; i++) {
-            console.log(items);
-            const itemName = itemNames[i];
-            const itemPrice = itemPrices[i];
+            itemNamesToPrices[itemNames[i]] = itemPrices[i];
+          }
+          return itemNamesToPrices;
+        })
+        .then((itemNamesToPrices) => {
+          const errors = {};
+
+          const itemSavingPromises = itemNames.map((itemName) => {
+            const itemPrice = itemNamesToPrices[itemName];
             const itemUniversalisId = items[itemName].universalisId;
 
-            Item.where({ name: itemName }).findOne((err, item) => {
-              if (err) {
-                console.log(`Rejected. Unable to save ${itemName}: ${err}`);
-              } else {
-                if (item) {
-                  console.log(`${item}Found`);
-                  item.price = itemPrice;
+            const promise = Item.where({ name: itemName })
+              .findOne()
+              .then((err, item) => {
+                if (err) {
+                  console.log(`Unable to find ${itemName}: ${err}`);
                 } else {
-                  const item = new Item({
-                    name: itemName,
-                    price: itemPrice,
-                    universalisId: itemUniversalisId,
+                  if (item) {
+                    console.log(`${item} Found`);
+                    item.price = itemPrice;
+                  } else {
+                    item = new Item({
+                      name: itemName,
+                      universalisId: itemUniversalisId,
+                    });
+                  }
+                  item.save().catch((err) => {
+                    console.log(`Rejected. Unable to save ${itemName}: ${err}`);
+                    errors[itemName] = err;
                   });
                 }
-                item.save();
+              })
+              .catch((err) => {
+                console.log(`Unexpected error occured when saving ${itemName}`);
+                errors[itemName] = err;
+              });
+
+            return promise;
+          });
+
+          Promise.all(itemSavingPromises)
+            .then(() => {
+              console.log(errors)
+              const unsavedItems = Object.keys(errors);
+              let resolveMessage = "Updating complete.";
+              if (unsavedItems.length > 0) {
+                resolveMessage += `Unable to update the following: ${unsavedItems}`;
               }
+
+              resolve(resolveMessage);
+            })
+            .catch((err) => {
+              console.log(`Rejected: ${err}`);
+              reject(`Saving error: ${err}`);
             });
-          }
-        })
-        .then(() => resolve("All items updated"))
-        .catch((err) => {
-          console.log(`Rejected: ${err}`);
-          reject(`Saving error: ${err}`);
-          return;
         });
     };
 
