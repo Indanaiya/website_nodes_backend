@@ -44,16 +44,16 @@ function updateItem(item) {
 //   })
 //   .catch((err) => res.status(400).json("Error: " + err));
 
-async function getItems(...servers) {
-  Item.find().then((items) => { items = items.map((item) => item.)
-    const getItemPromises = servers.map((server) => {
-      new Promise((resolve, reject) => {
-        resolve(Item.find().then((items) => items)); //TODO
-      });
-    });
-  });
-  return Promise.all(getItemPromises);
-}
+// async function getItems(...servers) {
+//   Item.find().then((items) => { items = items.map((item) => item.)
+//     const getItemPromises = servers.map((server) => {
+//       new Promise((resolve, reject) => {
+//         resolve(Item.find().then((items) => items)); //TODO
+//       });
+//     });
+//   });
+//   return Promise.all(getItemPromises);
+// }
 
 /**
  * Add an item to the database.
@@ -87,7 +87,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
           .then((price) => {
             const item = new Item({
               name: itemName,
-              datacenters: { servers: { CerberusPrice: price } },
+              servers: { CerberusPrice: price },
               universalisId: items[itemName].universalisId,
             });
             return item

@@ -1,29 +1,7 @@
 const mongoose = require("mongoose");
-const { DATACENTERS } = require("../src/constants");
+const { SERVERS } = require("../src/constants");
 
 const Schema = mongoose.Schema;
-
-const serverPriceSchema = new Schema(
-  { name: { type: String, required: true, unique: true } },
-  { timestamps: true }
-);
-
-const datacenterSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    servers: {
-      type: [serverPriceSchema],
-      default: undefined,
-      required: true,
-      unique: true,
-    },
-  },
-  { timestamps: true }
-);
 
 const protoItemSchema = {
   name: {
@@ -31,7 +9,7 @@ const protoItemSchema = {
     required: true,
     unique: true,
   },
-  datacenters: {},
+  servers: {},
   universalisId: {
     type: Number,
     required: true,
@@ -39,14 +17,12 @@ const protoItemSchema = {
   },
 };
 
-const datacenters = Object.keys(DATACENTERS);
-for (let datacenter of datacenters) {
-  protoItemSchema.datacenters[datacenter] = {};
-  for (let server of DATACENTERS[datacenter]) {
-    protoItemSchema.datacenters[datacenter][`${server}Price`] = {
-      type: Number,
-    };
-  }
+const servers = Object.keys(SERVERS);
+for (let server of servers) {
+  protoItemSchema.servers[`${server}Price`] = {
+    type: Number,
+    min: 1,
+  };
 }
 
 const itemSchema = new Schema(protoItemSchema, {
