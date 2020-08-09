@@ -1,80 +1,29 @@
 const mongoose = require("mongoose");
+const { DATACENTERS } = require("../src/constants");
 
 const Schema = mongoose.Schema;
 
-//Server list from https://xivapi.com/servers/dc with non japanese/european/american servers removed
-const SERVERS = {
-  Aether: [
-    "Adamantoise",
-    "Cactuar",
-    "Faerie",
-    "Gilgamesh",
-    "Jenova",
-    "Midgardsormr",
-    "Sargatanas",
-    "Siren",
-  ],
-  Chaos: ["Cerberus", "Louisoix", "Moogle", "Omega", "Ragnarok", "Spriggan"],
-  Crystal: [
-    "Balmung",
-    "Brynhildr",
-    "Coeurl",
-    "Diabolos",
-    "Goblin",
-    "Malboro",
-    "Mateus",
-    "Zalera",
-  ],
-  Elemental: [
-    "Aegis",
-    "Atomos",
-    "Carbuncle",
-    "Garuda",
-    "Gungnir",
-    "Kujata",
-    "Ramuh",
-    "Tonberry",
-    "Typhon",
-    "Unicorn",
-  ],
-  Gaia: [
-    "Alexander",
-    "Bahamut",
-    "Durandal",
-    "Fenrir",
-    "Ifrit",
-    "Ridill",
-    "Tiamat",
-    "Ultima",
-    "Valefor",
-    "Yojimbo",
-    "Zeromus",
-  ],
-  Light: ["Lich", "Odin", "Phoenix", "Shiva", "Zodiark", "Twintania"],
-  Mana: [
-    "Anima",
-    "Asura",
-    "Belias",
-    "Chocobo",
-    "Hades",
-    "Ixion",
-    "Mandragora",
-    "Masamune",
-    "Pandaemonium",
-    "Shinryu",
-    "Titan",
-  ],
-  Primal: [
-    "Behemoth",
-    "Excalibur",
-    "Exodus",
-    "Famfrit",
-    "Hyperion",
-    "Lamia",
-    "Leviathan",
-    "Ultros",
-  ],
-};
+const serverPriceSchema = new Schema(
+  { name: { type: String, required: true, unique: true } },
+  { timestamps: true }
+);
+
+const datacenterSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    servers: {
+      type: [serverPriceSchema],
+      default: undefined,
+      required: true,
+      unique: true,
+    },
+  },
+  { timestamps: true }
+);
 
 const protoItemSchema = {
   name: {
@@ -90,10 +39,13 @@ const protoItemSchema = {
   },
 };
 
-for (let dc of Object.keys(SERVERS)) {
-  protoItemSchema.datacenters[dc] = {};
-  for (let server of SERVERS[dc]) {
-    protoItemSchema.datacenters[dc][server] = { type: Number };
+const datacenters = Object.keys(DATACENTERS);
+for (let datacenter of datacenters) {
+  protoItemSchema.datacenters[datacenter] = {};
+  for (let server of DATACENTERS[datacenter]) {
+    protoItemSchema.datacenters[datacenter][`${server}Price`] = {
+      type: Number,
+    };
   }
 }
 

@@ -1,9 +1,12 @@
 const Item = require("../models/Item.model");
+const {
+  SERVERS,
+  UNIVERSALIS_URL,
+  PHANTASMAGORIA_MATS_JSON_PATH,
+  DEFAULT_SERVER,
+} = require("../src/constants");
 const fetch = require("node-fetch");
-const fs = require("fs");
-
-const UNIVERSALIS_URL = "https://universalis.app/api/Chaos/"; //Will need to be changed to allow for using different datacenters
-const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
+const fs = require("fs").promises;
 
 function updateItem(item) {
   return new Promise((resolve, reject) =>
@@ -22,6 +25,122 @@ function updateItem(item) {
   );
 }
 
+// const itemUpdates = [];
+// Item.find()
+//   .then((items) => {
+//     for (let item of items) {
+//       const itemTime = new Date(item.updatedAt);
+//       if (Date.now() > itemTime.getTime() + ITEM_TTL * 1000) {
+//         console.log("Updating: " + item.name);
+//         itemUpdates.push(ItemHelper.updateItem(item));
+//       }
+//     }
+//   })
+//   .then(() => {
+//     Promise.all(itemUpdates)
+//       .then(() => Item.find())
+//       .then((items) => res.json(items))
+//       .catch((err) => res.status(400).json("Error: " + err));
+//   })
+//   .catch((err) => res.status(400).json("Error: " + err));
+
+async function getItems(...servers) {
+  Item.find().then((items) => { items = items.map((item) => item.)
+    const getItemPromises = servers.map((server) => {
+      new Promise((resolve, reject) => {
+        resolve(Item.find().then((items) => items)); //TODO
+      });
+    });
+  });
+  return Promise.all(getItemPromises);
+}
+
+/**
+ * Add an item to the database.
+ * Does nothing if an item with that name already exists in the database.
+ *
+ * @param {string} itemName The name of the item to add to the database
+ * @returns {Promise<string>} A promise, the value of which will be a string indicating success or failure.
+ */
+async function addItem(itemName, server = DEFAULT_SERVER) {
+  let items;
+  return fs
+    .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+    .then((data) => {
+      //console.log(data);
+      items = JSON.parse(data);
+      if (!Object.keys(items).includes(itemName)) {
+        return `Invalid item name: ${itemName}`; //TODO this should probably be an error
+      }
+      return Item.find({ name: itemName });
+    })
+    .then((savedItems) => {
+      //console.log(savedItems);
+      if (savedItems.length > 0) {
+        return `Item "${itemName}" already exists in database.`;
+      } else {
+        return fetch(
+          `${UNIVERSALIS_URL + server}/${items[itemName].universalisId}`
+        )
+          .then((response) => response.text())
+          .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"])
+          .then((price) => {
+            const item = new Item({
+              name: itemName,
+              datacenters: { servers: { CerberusPrice: price } },
+              universalisId: items[itemName].universalisId,
+            });
+            return item
+              .save()
+              .then(() => `Item "${itemName}" saved.`)
+              .catch((err) => `Could not save "${itemName}": ${err}`);
+          });
+      }
+    });
+}
+
+/**
+ * Ensure that all the items in PHANTASMAGORIA_MATS_JSON are in the items collection
+ *
+ * @returns {Promise} A promise that runs the function code. You may wish to add a catch after it.
+ */
+async function setupDB() {
+  const requiredItemNames = [];
+  const presentItemNames = [];
+  return await fs
+    .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      for (let itemName of Object.keys(json)) {
+        requiredItemNames.push(itemName);
+      }
+      //console.log(`Required Items: ${requiredItemNames}`);
+    })
+    .then(() => Item.find())
+    .then((items) => {
+      for (let item of items) {
+        presentItemNames.push(item.name);
+      }
+      //console.log(`Present items: ${presentItemNames}`);
+    })
+    .then(() => {
+      const nonPresentItemNames = requiredItemNames.filter((itemName) => {
+        console.log(
+          `Is ${itemName} in presentItemNames?: ${presentItemNames.includes(
+            itemName
+          )}`
+        );
+        return !presentItemNames.includes(itemName);
+      });
+      //console.log(`Non-present items: ${nonPresentItemNames}`);
+
+      for (let itemName of nonPresentItemNames) {
+        //console.log(`Adding item: ${itemName}`);
+        addItem(itemName).then((response) => console.log(response));
+      }
+    });
+}
+
 function updateAll() {
   return new Promise((resolve, reject) => {
     const update = function (err, data) {
@@ -30,7 +149,7 @@ function updateAll() {
         reject(err);
         return;
       }
-      const items = JSON.parse(data);   
+      const items = JSON.parse(data);
       const itemNames = Object.keys(items);
 
       //An array of promises, the value of each is the lowest price for the item it was mapped from.
@@ -75,6 +194,7 @@ function updateAll() {
                       universalisId: itemUniversalisId,
                     });
                   }
+                  //console.log(item.Chaos.CerberusPrice)
                   item.save().catch((err) => {
                     console.log(`Rejected. Unable to save ${itemName}: ${err}`);
                     errors[itemName] = err;
@@ -91,7 +211,7 @@ function updateAll() {
 
           Promise.all(itemSavingPromises)
             .then(() => {
-              console.log(errors)
+              console.log(errors);
               const unsavedItems = Object.keys(errors);
               let resolveMessage = "Updating complete.";
               if (unsavedItems.length > 0) {
@@ -111,6 +231,6 @@ function updateAll() {
   });
 }
 
-const functionsBundle = { updateItem, updateAll };
+const functionsBundle = { updateItem, updateAll, addItem, setupDB };
 
 module.exports = functionsBundle;
