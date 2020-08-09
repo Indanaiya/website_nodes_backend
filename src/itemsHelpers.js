@@ -1,6 +1,5 @@
 const Item = require("../models/Item.model");
 const {
-  SERVERS,
   UNIVERSALIS_URL,
   PHANTASMAGORIA_MATS_JSON_PATH,
   DEFAULT_SERVER,

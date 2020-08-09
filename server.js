@@ -36,6 +36,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
+
 ItemHelper.setupDB();
 
 const itemsRouter = require("./routes/items");

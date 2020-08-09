@@ -17,13 +17,14 @@ const protoItemSchema = {
   },
 };
 
-const servers = Object.keys(SERVERS);
-for (let server of servers) {
+for (let server of SERVERS) {
   protoItemSchema.servers[`${server}Price`] = {
     type: Number,
     min: 1,
   };
 }
+
+console.log(protoItemSchema);
 
 const itemSchema = new Schema(protoItemSchema, {
   timestamps: true,
