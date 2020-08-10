@@ -150,5 +150,17 @@ describe("Items Helpers", function () {
       );
       return assert.equal(nonUpdatedItems.length, 0);
     });
+
+    it("updateAllItems with server provided", async function () {
+      const oldTimes = await Item.find().then((items) =>
+        items.map((item) => item.updatedAt)
+      );
+      await ItemsHelpers.updateAllItems("Cerberus");
+      const nonUpdatedItems = await Item.find().then((items) =>
+        items.filter((item, index) => item.updatedAt < oldTimes[index])
+      );
+      return assert.equal(nonUpdatedItems.length, 0);
+    })
   });
+
 });
