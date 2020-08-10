@@ -5,7 +5,6 @@ const fs = require("fs").promises;
 const mongoose = require("mongoose");
 const Item = require("../models/Item.model");
 const { InvalidArgumentError } = require("../src/errors");
-const { addAllItems, updateItem } = require("../src/itemsHelpers");
 
 require("dotenv").config();
 
@@ -79,13 +78,30 @@ describe("Items Helpers", function () {
 
     it("updateItem with string instead of document", async function () {
       return ItemsHelpers.updateItem("Gobbledeegoop")
-        .then(() => assert.fail("updateItem with string instead of document did not throw an error"))
+        .then(() =>
+          assert.fail(
+            "updateItem with string instead of document did not throw an error"
+          )
+        )
         .catch((err) => assert.instanceOf(err, TypeError));
     });
 
     it("updateItem with unsaved document", async function () {
       return ItemsHelpers.updateItem(new Item({}))
-        .then(() => assert.fail("updateItem with unsaved document did not throw an error"))
+        .then(() =>
+          assert.fail("updateItem with unsaved document did not throw an error")
+        )
+        .catch((err) => assert.instanceOf(err, InvalidArgumentError));
+    });
+  });
+
+  describe("addItem", function () {
+    it("addItem should throw an error when given an invalid itemName", async function () {
+      await Item.deleteMany({});
+      ItemsHelpers.addItem("Gobbledeegook")
+        .then(() =>
+          assert.fail("addItem with invalid itemName did not throw an error")
+        )
         .catch((err) => assert.instanceOf(err, InvalidArgumentError));
     });
   });
@@ -97,7 +113,7 @@ describe("Items Helpers", function () {
       const items = await Item.find();
       assert.equal(items.length, 0);
 
-      await addAllItems();
+      await ItemsHelpers.addAllItems();
       const presentItems = await Item.find();
       const missingItems = Object.keys(phantaJson).filter((requiredItem) =>
         presentItems.includes(requiredItem)
