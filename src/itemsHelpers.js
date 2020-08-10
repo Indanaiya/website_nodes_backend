@@ -45,7 +45,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
     .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
     .then((data) => JSON.parse(data));
   if (!Object.keys(items).includes(itemName)) {
-    throw new Error("Invalid itemName.");
+    throw new InvalidArgumentError("Invalid itemName.");
   }
 
   //Check to see if an item with name: itemName is already in the collection
