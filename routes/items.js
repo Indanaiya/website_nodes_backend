@@ -12,11 +12,12 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/updateAll").post((req, res) => {
+router.route("/updateAll/:server").post((req, res) => {
+  const server = req.params.server;
   if (req.body.pass !== "update123") {
     res.json("Invalid.");
   }
-  ItemHelper.addItem("Tempest Adhesive")
+  ItemHelper.updateAllItems(server)
     .then((response) => res.json(response))
     .catch((err) => res.status(400).json("Error: " + err));
 });

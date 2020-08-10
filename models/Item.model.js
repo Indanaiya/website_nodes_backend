@@ -24,7 +24,7 @@ for (let server of SERVERS) {
   };
 }
 
-console.log(protoItemSchema);
+//console.log(protoItemSchema);
 
 const itemSchema = new Schema(protoItemSchema, {
   timestamps: true,

@@ -37,7 +37,7 @@ connection.once("open", () => {
 });
 
 
-ItemHelper.setupDB();
+ItemHelper.addAllItems();
 
 const itemsRouter = require("./routes/items");
 
