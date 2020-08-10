@@ -1,10 +1,7 @@
 "use strict";
 
 const router = require("express").Router();
-const Item = require("../models/Item.model");
 const ItemHelper = require("../src/itemsHelpers");
-
-const ITEM_TTL = 24 * 60 * 60; //Minutes
 
 router.route("/").get((req, res) => {
   ItemHelper.getItems()

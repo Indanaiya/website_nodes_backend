@@ -81,6 +81,7 @@ const SERVERS = Object.keys(DATACENTERS).reduce(
 const UNIVERSALIS_URL = "https://universalis.app/api/";
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
 const DEFAULT_SERVER = "Cerberus";
+const ITEM_TTL = 24 * 60 * 60; //Minutes
 
 module.exports = {
   DATACENTERS,
@@ -88,4 +89,5 @@ module.exports = {
   UNIVERSALIS_URL,
   PHANTASMAGORIA_MATS_JSON_PATH,
   DEFAULT_SERVER,
+  ITEM_TTL,
 };
