@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const uri = process.env.ATLAS_URI;
 let phantaJson = null;
+const TEST_ITEM_NAME = "Tempest Adhesive";
 //TODO Add a test to make sure that items aren't updated if they don't need to be
 describe("Items Helpers", function () {
   before(() =>
@@ -46,13 +47,40 @@ describe("Items Helpers", function () {
     });
   });
 
+  describe("addItem", async function () {
+    before(async () => await Item.deleteMany({}));
+
+    it("addItem should throw an error when given an invalid itemName", async function () {
+      return ItemsHelpers.addItem("Gobbledeegook")
+        .then(() =>
+          assert.fail("addItem with invalid itemName did not throw an error")
+        )
+        .catch((err) => assert.instanceOf(err, InvalidArgumentError));
+    });
+
+    it("addItem should add an item to the collection", async function () {
+      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 1);
+      const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
+        assert.fail("More than one item with the same name found")
+      );
+      if (savedItems.length != 1) {
+        assert.fail("More than one item with the same name found");
+      }
+      const savedItemName = savedItems[0].name;
+      assert.equal(savedItemName, TEST_ITEM_NAME);
+    });
+
+    it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
+      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 0);
+    });
+  });
+
   describe("updateItem", function () {
     it("updateItem should update an Item", async function () {
-      const ITEM_NAME = "Tempest Adhesive";
       let oldDate = null;
 
       //Get the date of the item, ITEM_NAME, as it is currently saved and then call updateItem on it
-      await Item.find({ name: ITEM_NAME })
+      await Item.find({ name: TEST_ITEM_NAME })
         .then((items) => {
           if (items.length !== 1) {
             throw new Error("Items.length should have been 1");
@@ -66,7 +94,7 @@ describe("Items Helpers", function () {
         .then((item) => ItemsHelpers.updateItem(item));
 
       //Check that the item was updated
-      const items = await Item.find({ name: ITEM_NAME });
+      const items = await Item.find({ name: TEST_ITEM_NAME });
       if (items.length !== 1) {
         throw new Error(
           `Items.length should have been 1. Was actually ${items.length}`
@@ -95,17 +123,6 @@ describe("Items Helpers", function () {
     });
   });
 
-  describe("addItem", function () {
-    it("addItem should throw an error when given an invalid itemName", async function () {
-      await Item.deleteMany({});
-      ItemsHelpers.addItem("Gobbledeegook")
-        .then(() =>
-          assert.fail("addItem with invalid itemName did not throw an error")
-        )
-        .catch((err) => assert.instanceOf(err, InvalidArgumentError));
-    });
-  });
-
   describe("addAllItems", function () {
     it("addAllItems should add all items in the json to the db", async function () {
       //Empty the items collection
@@ -119,6 +136,19 @@ describe("Items Helpers", function () {
         presentItems.includes(requiredItem)
       );
       return assert.equal(missingItems.length, 0);
+    });
+  });
+
+  describe("updateAllItems", function () {
+    it("updateAllItems updates all items in the collection", async function () {
+      const oldTimes = await Item.find().then((items) =>
+        items.map((item) => item.updatedAt)
+      );
+      await ItemsHelpers.updateAllItems();
+      const nonUpdatedItems = await Item.find().then((items) =>
+        items.filter((item, index) => item.updatedAt < oldTimes[index])
+      );
+      return assert.equal(nonUpdatedItems.length, 0);
     });
   });
 });
