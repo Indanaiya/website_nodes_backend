@@ -81,7 +81,7 @@ async function addAllItems() {
     .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
     .then((data) => JSON.parse(data))
     .then((json) => Object.keys(json));
-    
+
   const presentItemNames = await Item.find().then((items) =>
     items.map((item) => item.name)
   );
@@ -113,7 +113,7 @@ async function updateItem(item, ...servers) {
   if (!(item instanceof Document)) {
     throw new TypeError("'item' must be a document.");
   }
-  if(item.isNew){
+  if (item.isNew) {
     throw new InvalidArgumentError("Item is new.");
   }
   if (servers.length === 0) {
@@ -143,7 +143,7 @@ async function updateItem(item, ...servers) {
  * Update all of the items in the items collection for the given server
  *
  * @param {...string} servers All the servers to update items' prices
- * @returns {Promise<Promise<any>[]>} A promise that runs the function code.
+ * @returns Promise<any[]> A promise that runs the function code.
  */
 async function updateAllItems(...servers) {
   if (servers.length === 0) {
@@ -151,7 +151,7 @@ async function updateAllItems(...servers) {
   }
 
   return Item.find().then((items) =>
-    items.map((item) => updateItem(item, servers))
+    Promise.all(items.map((item) => updateItem(item, servers)))
   );
 }
 
