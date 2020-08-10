@@ -5,8 +5,10 @@ const {
   DEFAULT_SERVER,
   ITEM_TTL,
 } = require("../src/constants");
+const Document = require("mongoose").Document;
 const fetch = require("node-fetch");
 const fs = require("fs").promises;
+const { InvalidArgumentError } = require("../src/errors");
 
 /**
  * Get the saved items from the collection, updating them first if they are out of date.
@@ -19,7 +21,7 @@ async function getItems(...servers) {
     .then((items) =>
       items.filter((item) => {
         const itemTime = new Date(item.updatedAt);
-        return Date.now() < itemTime.getTime() + ITEM_TTL * 1000;
+        return Date.now() > itemTime.getTime() + ITEM_TTL * 1000;
       })
     )
     .then((outOfDateItems) =>
@@ -35,43 +37,38 @@ async function getItems(...servers) {
  *
  * @param {string} itemName The name of the item to add to the database
  * @param {string} server The server to add the price for TODO should be spread syntax
- * @returns {Promise<string>} A promise, the value of which will be a string indicating success or failure.
+ * @returns {Promise<number>} A promise, the value is a number. 0 means an item with this name already exists in the collection, 1 means that the item was sucessfully saved to the collection
  */
 async function addItem(itemName, server = DEFAULT_SERVER) {
-  let items;
-  return fs
+  //Check that this is a valid itemName
+  const items = await fs
     .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
-    .then((data) => {
-      //console.log(data);
-      items = JSON.parse(data);
-      if (!Object.keys(items).includes(itemName)) {
-        return `Invalid item name: ${itemName}`; //TODO this should probably be an error
-      }
-      return Item.find({ name: itemName });
-    })
-    .then((savedItems) => {
-      //console.log(savedItems);
-      if (savedItems.length > 0) {
-        return `Item "${itemName}" already exists in database.`;
-      } else {
-        return fetch(
-          `${UNIVERSALIS_URL + server}/${items[itemName].universalisId}`
-        )
-          .then((response) => response.text())
-          .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"])
-          .then((price) => {
-            const item = new Item({
-              name: itemName,
-              servers: { CerberusPrice: price },
-              universalisId: items[itemName].universalisId,
-            });
-            return item
-              .save()
-              .then(() => `Item "${itemName}" saved.`)
-              .catch((err) => `Could not save "${itemName}": ${err}`);
-          });
-      }
-    });
+    .then((data) => JSON.parse(data));
+  if (!Object.keys(items).includes(itemName)) {
+    throw new Error("Invalid itemName.");
+  }
+
+  //Check to see if an item with name: itemName is already in the collection
+  const savedItemsWithItemName = await Item.find({ name: itemName });
+  if (savedItemsWithItemName.length > 0) {
+    return 0;
+  }
+
+  //Create a new item corresponding to itemName and save it to the collection
+  const item = await fetch(
+    `${UNIVERSALIS_URL + server}/${items[itemName].universalisId}`
+  )
+    .then((response) => response.text())
+    .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"])
+    .then(
+      (price) =>
+        new Item({
+          name: itemName,
+          servers: { CerberusPrice: price },
+          universalisId: items[itemName].universalisId,
+        })
+    );
+  return item.save().then(() => 1);
 }
 
 /**
@@ -80,40 +77,29 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
  * @returns {Promise} An awaited promise that runs the function code. You may wish to add a catch after it.
  */
 async function addAllItems() {
-  const requiredItemNames = [];
-  const presentItemNames = [];
-  return await fs //TODO using the await here rather than when the function is called may be wrong
+  const requiredItemNames = await fs
     .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
     .then((data) => JSON.parse(data))
-    .then((json) => {
-      for (let itemName of Object.keys(json)) {
-        requiredItemNames.push(itemName);
-      }
-      //console.log(`Required Items: ${requiredItemNames}`);
-    })
-    .then(() => Item.find())
-    .then((items) => {
-      for (let item of items) {
-        presentItemNames.push(item.name);
-      }
-      //console.log(`Present items: ${presentItemNames}`);
-    })
-    .then(() => {
-      const nonPresentItemNames = requiredItemNames.filter((itemName) => {
-        console.log(
-          `Is ${itemName} in presentItemNames?: ${presentItemNames.includes(
-            itemName
-          )}`
-        );
-        return !presentItemNames.includes(itemName);
-      });
-      //console.log(`Non-present items: ${nonPresentItemNames}`);
+    .then((json) => Object.keys(json));
+    
+  const presentItemNames = await Item.find().then((items) =>
+    items.map((item) => item.name)
+  );
 
-      for (let itemName of nonPresentItemNames) {
-        //console.log(`Adding item: ${itemName}`);
-        addItem(itemName).then((response) => console.log(response));
-      }
-    });
+  const nonPresentItemNames = requiredItemNames.filter((itemName) => {
+    console.log(
+      `Is ${itemName} in presentItemNames?: ${presentItemNames.includes(
+        itemName
+      )}`
+    );
+    return !presentItemNames.includes(itemName);
+  });
+
+  return Promise.all(
+    nonPresentItemNames.map((itemName) =>
+      addItem(itemName).then((response) => console.log(response))
+    )
+  );
 }
 
 /**
@@ -121,9 +107,15 @@ async function addAllItems() {
  *
  * @param {Document} item The item to update
  * @param {...string} servers All the servers to update the item's price for
- * @returns {Promise} a promise that runs the function code
+ * @returns {Promise} a promise that runs the function code and returns the saved item
  */
 async function updateItem(item, ...servers) {
+  if (!(item instanceof Document)) {
+    throw new TypeError("'item' must be a document.");
+  }
+  if(item.isNew){
+    throw new InvalidArgumentError("Item is new.");
+  }
   if (servers.length === 0) {
     servers = [DEFAULT_SERVER];
   }
@@ -134,8 +126,13 @@ async function updateItem(item, ...servers) {
         .then((response) => response.text())
         .then((body) => {
           item.updatedAt = Date.now().toString();
-          console.log(item.updatedAt);
-          item.price = JSON.parse(body)["listings"][0]["pricePerUnit"];
+          item.servers[`${server}Price`] = JSON.parse(body)["listings"][0][
+            "pricePerUnit"
+          ];
+          console.log(
+            `Updated ${item.name}'s ${server}Price to: ` +
+              item.servers[`${server}Price`]
+          );
           return item.save().then(() => item);
         })
     )
@@ -158,6 +155,12 @@ async function updateAllItems(...servers) {
   );
 }
 
-const functionsBundle = { updateItem, updateAllItems, addItem, addAllItems, getItems };
+const functionsBundle = {
+  updateItem,
+  updateAllItems,
+  addItem,
+  addAllItems,
+  getItems,
+};
 
 module.exports = functionsBundle;

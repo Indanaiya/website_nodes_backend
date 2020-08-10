@@ -36,8 +36,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-
-ItemHelper.addAllItems();
+ItemHelper.addAllItems().then("All items present in collection.");
 
 const itemsRouter = require("./routes/items");
 
