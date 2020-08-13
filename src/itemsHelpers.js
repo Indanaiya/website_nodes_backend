@@ -65,7 +65,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
         new Item({
           name: itemName,
           servers: {
-            CerberusPrice: { price, updatedAt: Date.now().toString() },
+            [`${server}Price`]: { price, updatedAt: Date.now().toString() },
           },
           universalisId: items[itemName].universalisId,
         })
@@ -116,7 +116,7 @@ async function updateItem(item, ...servers) {
     throw new TypeError("'item' must be a document.");
   }
   if (item.isNew) {
-    throw new InvalidArgumentError("Item is new.");
+    throw new InvalidArgumentError("'item' is new.");
   }
   if (servers.length === 0) {
     servers = [DEFAULT_SERVER];
