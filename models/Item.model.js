@@ -19,16 +19,19 @@ const protoItemSchema = {
 
 for (let server of SERVERS) {
   protoItemSchema.servers[`${server}Price`] = {
-    type: Number,
-    min: 1,
+    price: {
+      type: Number,
+      min: 1,
+    },
+    updatedAt: {
+      type: Date,
+    }
   };
 }
 
 //console.log(protoItemSchema);
 
-const itemSchema = new Schema(protoItemSchema, {
-  timestamps: true,
-});
+const itemSchema = new Schema(protoItemSchema);
 
 const Item = mongoose.model("Item", itemSchema);
 

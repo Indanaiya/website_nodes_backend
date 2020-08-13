@@ -64,7 +64,9 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
       (price) =>
         new Item({
           name: itemName,
-          servers: { CerberusPrice: price },
+          servers: {
+            CerberusPrice: { price, updatedAt: Date.now().toString() },
+          },
           universalisId: items[itemName].universalisId,
         })
     );
@@ -107,7 +109,7 @@ async function addAllItems() {
  *
  * @param {Document} item The item to update
  * @param {...string} servers All the servers to update the item's price for
- * @returns {Promise} a promise that runs the function code and returns the saved item
+ * @returns {Promise<any[]>} a promise that runs the function code and returns the saved item
  */
 async function updateItem(item, ...servers) {
   if (!(item instanceof Document)) {
@@ -126,9 +128,10 @@ async function updateItem(item, ...servers) {
         .then((response) => response.text())
         .then((body) => {
           item.updatedAt = Date.now().toString();
-          item.servers[`${server}Price`] = JSON.parse(body)["listings"][0][
-            "pricePerUnit"
-          ];
+          item.servers[`${server}Price`] = {
+            price: JSON.parse(body)["listings"][0]["pricePerUnit"],
+            updatedAt: Date.now().toString(),
+          };
           console.log(
             `Updated ${item.name}'s ${server}Price to: ` +
               item.servers[`${server}Price`]
@@ -143,7 +146,7 @@ async function updateItem(item, ...servers) {
  * Update all of the items in the items collection for the given server
  *
  * @param {...string} servers All the servers to update items' prices
- * @returns Promise<any[]> A promise that runs the function code.
+ * @returns {Promise<any[]>} A promise that runs the function code.
  */
 async function updateAllItems(...servers) {
   if (servers.length === 0) {
