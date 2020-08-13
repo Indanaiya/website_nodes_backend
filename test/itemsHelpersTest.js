@@ -60,8 +60,8 @@ describe("Items Helpers", function () {
         .catch((err) => assert.instanceOf(err, InvalidArgumentError));
     });
 
-    it("addItem should add an item to the collection", async function () {
-      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 1);
+    it("addItem should add a supplied item that doesn't exist to the collection", async function () {
+      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 2);
       const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
         assert.fail("More than one item with the same name found")
       );
@@ -75,7 +75,22 @@ describe("Items Helpers", function () {
       assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`].updatedAt, undefined)
     });
 
-    it("addItem should ad")
+    it("addItem add the price for a new server for an item that already exists in the collection", async function () {
+      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME, TEST_SERVER_NAME), 1);
+      const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
+        assert.fail("More than one item with the same name found")
+      );
+      if (savedItems.length != 1) {
+        assert.fail("More than one item with the same name found");
+      }
+      const savedItem = savedItems[0];
+      assert.equal(savedItem.name, TEST_ITEM_NAME);
+      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`], undefined)
+      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`].price, undefined)
+      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`].updatedAt, undefined)
+    });
+
+
 
     it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
       assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 0);

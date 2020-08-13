@@ -49,18 +49,19 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
     throw new InvalidArgumentError("Invalid itemName.");
   }
 
-  //Check to see if an item with name 'itemName' is already in the collection
   const savedItemsWithItemName = await Item.find({ name: itemName });
-  if (savedItemsWithItemName.length != 1) {
+  if (savedItemsWithItemName.length > 1) {
     throw new Error(
-      `Incorrect number of items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
+      `Too many items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
     );
   }
+
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
-    savedItemsWithItemName[0].servers[`${server}Price`] !== undefined
+    savedItemsWithItemName[0].servers[`${server}Price`].price !== undefined
   ) {
+    console.log(savedItemsWithItemName[0].servers[`${server}Price`]);
     return 0;
   }
 
