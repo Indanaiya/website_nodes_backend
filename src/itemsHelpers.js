@@ -33,11 +33,12 @@ async function getItems(...servers) {
 
 /**
  * Add an item to the database.
- * Does nothing if an item with that name already exists in the database.
+ * If item exists, but doesn't have a price saved for the specified server, then the price for that server is added.
+ * If the item exists and has a price saved for the specified server, then nothing happens
  *
  * @param {string} itemName The name of the item to add to the database
  * @param {string} server The server to add the price for TODO should be spread syntax
- * @returns {Promise<number>} A promise, the value is a number. 0 means an item with this name already exists in the collection, 1 means that the item was sucessfully saved to the collection
+ * @returns {Promise<number>} A promise, the value is a number. 0 means an item with this name already exists in the collection and it has a price for the specified server, 1 means that the item existed but had the price for the specified server, 2 means that no changes were made
  */
 async function addItem(itemName, server = DEFAULT_SERVER) {
   //Check that this is a valid itemName
@@ -48,29 +49,48 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
     throw new InvalidArgumentError("Invalid itemName.");
   }
 
-  //Check to see if an item with name: itemName is already in the collection
+  //Check to see if an item with name 'itemName' is already in the collection
   const savedItemsWithItemName = await Item.find({ name: itemName });
-  if (savedItemsWithItemName.length > 0) {
+  if (savedItemsWithItemName.length != 1) {
+    throw new Error(
+      `Incorrect number of items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
+    );
+  }
+  //Information requested already exists in collection?:
+  if (
+    savedItemsWithItemName.length === 1 &&
+    savedItemsWithItemName[0].servers[`${server}Price`] !== undefined
+  ) {
     return 0;
   }
 
-  //Create a new item corresponding to itemName and save it to the collection
-  const item = await fetch(
+  //Get price
+  const price = await fetch(
     `${UNIVERSALIS_URL + server}/${items[itemName].universalisId}`
   )
     .then((response) => response.text())
-    .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"])
-    .then(
-      (price) =>
-        new Item({
-          name: itemName,
-          servers: {
-            [`${server}Price`]: { price, updatedAt: Date.now().toString() },
-          },
-          universalisId: items[itemName].universalisId,
-        })
-    );
-  return item.save().then(() => 1);
+    .then((body) => JSON.parse(body)["listings"][0]["pricePerUnit"]);
+
+  //Save price
+  if (savedItemsWithItemName.length === 1) {
+    const item = savedItemsWithItemName[0];
+    item.servers[`${server}Price`] = {
+      price,
+      updatedAt: Date.now().toString(),
+    };
+
+    return item.save().then(() => 1);
+  } else {
+    const item = new Item({
+      name: itemName,
+      servers: {
+        [`${server}Price`]: { price, updatedAt: Date.now().toString() },
+      },
+      universalisId: items[itemName].universalisId,
+    });
+
+    return item.save().then(() => 2);
+  }
 }
 
 /**

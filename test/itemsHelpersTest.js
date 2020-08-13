@@ -68,9 +68,14 @@ describe("Items Helpers", function () {
       if (savedItems.length != 1) {
         assert.fail("More than one item with the same name found");
       }
-      const savedItemName = savedItems[0].name;
-      assert.equal(savedItemName, TEST_ITEM_NAME);
+      const savedItem = savedItems[0];
+      assert.equal(savedItem.name, TEST_ITEM_NAME);
+      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`], undefined)
+      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`].price, undefined)
+      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`].updatedAt, undefined)
     });
+
+    it("addItem should ad")
 
     it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
       assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 0);
