@@ -61,7 +61,6 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
     savedItemsWithItemName.length === 1 &&
     savedItemsWithItemName[0].servers[`${server}Price`].price !== undefined
   ) {
-    console.log(savedItemsWithItemName[0].servers[`${server}Price`]);
     return 0;
   }
 

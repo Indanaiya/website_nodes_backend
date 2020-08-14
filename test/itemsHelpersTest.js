@@ -9,20 +9,20 @@ const { InvalidArgumentError } = require("../src/errors");
 require("dotenv").config();
 
 const uri = process.env.ATLAS_URI;
-let phantaJson = null;
+let phantaMats = null;
 const TEST_ITEM_NAME = "Tempest Adhesive";
 const TEST_SERVER_NAME = "Moogle";
 
 //TODO Add a test to make sure that items aren't updated if they don't need to be
 describe("Items Helpers", function () {
-  before(() =>
-    Promise.all([
+  before(async () =>
+    await Promise.all([
       mongoose.connect(uri, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
       }),
-      (phantaJson = fs.readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")),
+      (phantaMats = fs.readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8").then((json) => JSON.parse(json))),
     ])
   );
   describe("getItems", function () {
@@ -154,7 +154,7 @@ describe("Items Helpers", function () {
 
       await ItemsHelpers.addAllItems();
       const presentItems = await Item.find();
-      const missingItems = Object.keys(phantaJson).filter((requiredItem) =>
+      const missingItems = Object.keys(phantaMats).filter((requiredItem) =>
         presentItems.includes(requiredItem)
       );
       return assert.equal(missingItems.length, 0);
