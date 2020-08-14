@@ -14,11 +14,32 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/:id").get((req, res) =>{
+router.route("/:id").get(async (req, res) => {
   const server = req.query.server;
   const datacenter = req.query.datacenter;
-  res.json({server,datacenter});
-})
+  const id = req.params.id;
+  if (server !== undefined && datacenter !== undefined) {
+    res.status(422).json({
+      message: "Expected only one of server and datacenter",
+      server,
+      datacenter,
+    });
+  } else if (server === undefined && datacenter === undefined) {
+    //Non phanta items might have useful information to return here
+    const phantaMats = JSON.parse(await phantaJsonPromise);
+    const matchingItemNames = Object.keys(phantaMats).filter(
+      (phantaMat) => phantaMats[phantaMat].universalisId === id
+    );
+    console.log(matchingItemNames)
+    const matchingItems = {}
+    for(let name of matchingItemNames){
+      matchingItems[name] = phantaMats[name];
+    }
+    res.json(matchingItems);
+  } else {
+    res.json({ server, datacenter });
+  }
+});
 
 // router.route("/:id").get((req, res) => {
 //   const id = req.params.id;
