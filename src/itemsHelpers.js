@@ -59,7 +59,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
-    savedItemsWithItemName[0].servers[`${server}Price`].price !== undefined
+    savedItemsWithItemName[0].prices[server].price !== undefined
   ) {
     return 0;
   }
@@ -74,7 +74,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
   //Save price
   if (savedItemsWithItemName.length === 1) {
     const item = savedItemsWithItemName[0];
-    item.servers[`${server}Price`] = {
+    item.prices[server] = {
       price,
       updatedAt: Date.now().toString(),
     };
@@ -83,8 +83,8 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
   } else {
     const item = new Item({
       name: itemName,
-      servers: {
-        [`${server}Price`]: { price, updatedAt: Date.now().toString() },
+      prices: {
+        [server]: { price, updatedAt: Date.now().toString() },
       },
       universalisId: items[itemName].universalisId,
     });
@@ -148,13 +148,13 @@ async function updateItem(item, ...servers) {
         .then((response) => response.text())
         .then((body) => {
           item.updatedAt = Date.now().toString();
-          item.servers[`${server}Price`] = {
+          item.prices[server] = {
             price: JSON.parse(body)["listings"][0]["pricePerUnit"],
             updatedAt: Date.now().toString(),
           };
           console.log(
-            `Updated ${item.name}'s ${server}Price to: ` +
-              item.servers[`${server}Price`]
+            `Updated ${item.name}'s ${server} Price to: ` +
+              item.prices[server]
           );
           return item.save().then(() => item);
         })

@@ -70,9 +70,9 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`], undefined)
-      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`].price, undefined)
-      assert.notEqual(savedItem.servers[`${DEFAULT_SERVER}Price`].updatedAt, undefined)
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER], undefined)
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER].price, undefined)
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER].updatedAt, undefined)
     });
 
     it("addItem add the price for a new server for an item that already exists in the collection", async function () {
@@ -85,9 +85,9 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`], undefined)
-      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`].price, undefined)
-      assert.notEqual(savedItem.servers[`${TEST_SERVER_NAME}Price`].updatedAt, undefined)
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME], undefined)
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].price, undefined)
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].updatedAt, undefined)
     });
 
 
@@ -110,7 +110,7 @@ describe("Items Helpers", function () {
           return items[0];
         })
         .then((item) => {
-          oldDate = item.servers[`${DEFAULT_SERVER}Price`].updatedAt;
+          oldDate = item.prices[DEFAULT_SERVER].updatedAt;
           return item;
         })
         .then((item) => ItemsHelpers.updateItem(item));
@@ -164,7 +164,7 @@ describe("Items Helpers", function () {
   describe("updateAllItems", function () {
     it("updateAllItems updates all items in the collection", async function () {
       const oldTimes = await Item.find().then((items) =>
-        items.map((item) => item.servers[`${DEFAULT_SERVER}Price`].updatedAt)
+        items.map((item) => item.prices[DEFAULT_SERVER].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems();
@@ -172,7 +172,7 @@ describe("Items Helpers", function () {
       const nonUpdatedItems = await Item.find().then((items) =>
         items.filter(
           (item, index) =>
-            item.servers[`${DEFAULT_SERVER}Price`].updatedAt < oldTimes[index]
+            item.prices[DEFAULT_SERVER].updatedAt < oldTimes[index]
         )
       );
 
@@ -181,7 +181,7 @@ describe("Items Helpers", function () {
 
     it("updateAllItems with server provided", async function () {
       const oldTimes = await Item.find().then((items) =>
-        items.map((item) => item.servers[`${TEST_SERVER_NAME}Price`].updatedAt)
+        items.map((item) => item.prices[TEST_SERVER_NAME].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems(TEST_SERVER_NAME);
@@ -189,7 +189,7 @@ describe("Items Helpers", function () {
       const nonUpdatedItems = await Item.find().then((items) =>
         items.filter(
           (item, index) =>
-            item.servers[`${TEST_SERVER_NAME}Price`].updatedAt < oldTimes[index]
+            item.prices[TEST_SERVER_NAME].updatedAt < oldTimes[index]
         )
       );
 
