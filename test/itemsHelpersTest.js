@@ -1,6 +1,10 @@
 const assert = require("chai").assert;
 const ItemsHelpers = require("../src/itemsHelpers");
-const { PHANTASMAGORIA_MATS_JSON_PATH, ITEM_TTL, DEFAULT_SERVER } = require("../src/constants");
+const {
+  PHANTASMAGORIA_MATS_JSON_PATH,
+  ITEM_TTL,
+  DEFAULT_SERVER,
+} = require("../src/constants");
 const fs = require("fs").promises;
 const mongoose = require("mongoose");
 const Item = require("../models/Item.model");
@@ -15,14 +19,22 @@ const TEST_SERVER_NAME = "Moogle";
 
 //TODO Add a test to make sure that items aren't updated if they don't need to be
 describe("Items Helpers", function () {
-  before(async () =>
-    await Promise.all([
-      mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-      }),
-      (phantaMats = fs.readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8").then((json) => JSON.parse(json))),
+  before(() =>
+    Promise.all([
+      mongoose
+        .connect(uri, {
+          useNewUrlParser: true,
+          useCreateIndex: true,
+          useUnifiedTopology: true,
+        })
+        .then(() => console.log("Connected to MongoDB Atlas"))
+        .catch((err) => {
+          console.log("Failed to connect to MongoDB Atlas: " + err);
+          throw err;
+        }),
+      (phantaMats = fs
+        .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+        .then((json) => JSON.parse(json))),
     ])
   );
   describe("getItems", function () {
@@ -70,13 +82,16 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER], undefined)
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER].price, undefined)
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER].updatedAt, undefined)
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER], undefined);
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER].price, undefined);
+      assert.notEqual(savedItem.prices[DEFAULT_SERVER].updatedAt, undefined);
     });
 
     it("addItem add the price for a new server for an item that already exists in the collection", async function () {
-      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME, TEST_SERVER_NAME), 1);
+      assert.equal(
+        await ItemsHelpers.addItem(TEST_ITEM_NAME, TEST_SERVER_NAME),
+        1
+      );
       const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
         assert.fail("More than one item with the same name found")
       );
@@ -85,12 +100,10 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME], undefined)
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].price, undefined)
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].updatedAt, undefined)
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME], undefined);
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].price, undefined);
+      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].updatedAt, undefined);
     });
-
-
 
     it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
       assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 0);
