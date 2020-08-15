@@ -11,6 +11,32 @@ const fs = require("fs").promises;
 const { InvalidArgumentError } = require("../src/errors");
 
 /**
+ * Get the price information for the specified item from the collection
+ * @param {string} universalisId The id of the item
+ * @param  {...string} servers The name of the server(s) or datacenter to get prices for
+ */
+async function getItem(universalisId, ...servers) {
+  const projection = { name: 1 };
+  for (let server of servers) {
+    projection[`prices.${server}`] = 1;
+  }
+  console.log(projection);
+  const response = await Item.findOne({ universalisId }, projection);
+
+  Promise.all(
+    servers
+      .filter((server) => response.prices?.server === undefined)
+      .map((server) => addItem(response.name, server))
+  );
+
+  for (let server of servers) {
+    if (response.prices?.server === undefined) {
+      addItem(response.name);
+    }
+  }
+}
+
+/**
  * Get the saved items from the collection, updating them first if they are out of date.
  * @param  {...string} servers Nothing yet TODO
  * @returns {Promise<Document[]>} A promise for an array of all the documents in the items collection
@@ -153,8 +179,7 @@ async function updateItem(item, ...servers) {
             updatedAt: Date.now().toString(),
           };
           console.log(
-            `Updated ${item.name}'s ${server} Price to: ` +
-              item.prices[server]
+            `Updated ${item.name}'s ${server} Price to: ` + item.prices[server]
           );
           return item.save().then(() => item);
         })
@@ -184,6 +209,7 @@ const functionsBundle = {
   addItem,
   addAllItems,
   getItems,
+  getItem,
 };
 
 module.exports = functionsBundle;
