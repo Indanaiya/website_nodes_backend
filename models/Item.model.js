@@ -10,7 +10,6 @@ const protoItemSchema = {
     unique: true,
   },
   prices: {},
-  tomestonePrice: { type: Number },
   universalisId: {
     type: Number,
     required: true,
@@ -32,8 +31,11 @@ for (let server of SERVERS) {
 
 //console.log(protoItemSchema);
 
-const itemSchema = new Schema(protoItemSchema);
+const phantaMatSchema = new Schema({
+  tomestonePrice: { type: Number },
+  ...protoItemSchema,
+});
 
-const Item = mongoose.model("Item", itemSchema);
+const PhantaItem = mongoose.model("PhantaItem", phantaMatSchema);
 
-module.exports = Item;
+module.exports = {PhantaItem};

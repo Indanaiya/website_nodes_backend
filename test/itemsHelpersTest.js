@@ -8,7 +8,7 @@ const {
 } = require("../src/constants");
 const fs = require("fs").promises;
 const mongoose = require("mongoose");
-const Item = require("../models/Item.model");
+const {PhantaItem} = require("../models/Item.model");
 const { InvalidArgumentError } = require("../src/errors");
 
 require("dotenv").config();
@@ -21,7 +21,7 @@ const TEST_SERVER_NAME = "Moogle";
 //TODO Add a test to make sure that items aren't updated if they don't need to be
 describe("Items Helpers", function () {
   before(async () => {
-    Item.find().deleteMany();
+    PhantaItem.find().deleteMany();
     return await Promise.all([
       mongoose
         .connect(uri, {
@@ -43,12 +43,12 @@ describe("Items Helpers", function () {
   describe("addAllItems", function () {
     it("addAllItems should add all items in the json to the db", async function () {
       //Empty the items collection
-      await Item.deleteMany({});
-      const items = await Item.find();
+      await PhantaItem.deleteMany({});
+      const items = await PhantaItem.find();
       assert.equal(items.length, 0);
 
       await ItemsHelpers.addAllItems();
-      const presentItems = await Item.find();
+      const presentItems = await PhantaItem.find();
       const missingItems = Object.keys(phantaMats).filter((requiredItem) =>
         presentItems.includes(requiredItem)
       );
@@ -69,7 +69,7 @@ describe("Items Helpers", function () {
     it("getItems should return all items in the items collection", async function () {
       return Promise.all([
         ItemsHelpers.getItems().then((items) => items.map((item) => item.name)),
-        Item.find().then((items) => items.map((item) => item.name)),
+        PhantaItem.find().then((items) => items.map((item) => item.name)),
       ])
         .then((results) => {
           return results[1].filter((item) => !results[0].includes(item));
@@ -81,7 +81,7 @@ describe("Items Helpers", function () {
   });
 
   describe("addItem", async function () {
-    before(async () => await Item.deleteMany({}));
+    before(async () => await PhantaItem.deleteMany({}));
 
     //TODO Functionality removed. Should I reimplement it?
     // it("addItem should throw an error when given an invalid itemName", async function () {
@@ -97,7 +97,7 @@ describe("Items Helpers", function () {
         await ItemsHelpers.addItem(TEST_ITEM_NAME, phantaMats[TEST_ITEM_NAME]),
         2
       );
-      const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
+      const savedItems = await PhantaItem.find({ name: TEST_ITEM_NAME }).catch(() =>
         assert.fail("More than one item with the same name found")
       );
       if (savedItems.length != 1) {
@@ -119,7 +119,7 @@ describe("Items Helpers", function () {
         ),
         1
       );
-      const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
+      const savedItems = await PhantaItem.find({ name: TEST_ITEM_NAME }).catch(() =>
         assert.fail("More than one item with the same name found")
       );
       if (savedItems.length != 1) {
@@ -142,7 +142,7 @@ describe("Items Helpers", function () {
       let oldDate = null;
 
       //Get the date of the item, ITEM_NAME, as it is currently saved and then call updateItem on it
-      await Item.find({ name: TEST_ITEM_NAME })
+      await PhantaItem.find({ name: TEST_ITEM_NAME })
         .then((items) => {
           if (items.length !== 1) {
             throw new Error("Items.length should have been 1");
@@ -156,7 +156,7 @@ describe("Items Helpers", function () {
         .then((item) => ItemsHelpers.updateItem(item));
 
       //Check that the item was updated
-      const items = await Item.find({ name: TEST_ITEM_NAME });
+      const items = await PhantaItem.find({ name: TEST_ITEM_NAME });
       if (items.length !== 1) {
         throw new Error(
           `Items.length should have been 1. Was actually ${items.length}`
@@ -177,7 +177,7 @@ describe("Items Helpers", function () {
     });
 
     it("updateItem with unsaved document", async function () {
-      return ItemsHelpers.updateItem(new Item({}))
+      return ItemsHelpers.updateItem(new PhantaItem({}))
         .then(() =>
           assert.fail("updateItem with unsaved document did not throw an error")
         )
@@ -187,13 +187,13 @@ describe("Items Helpers", function () {
 
   describe("updateAllItems", function () {
     it("updateAllItems updates all items in the collection", async function () {
-      const oldTimes = await Item.find().then((items) =>
+      const oldTimes = await PhantaItem.find().then((items) =>
         items.map((item) => item.prices[DEFAULT_SERVER].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems();
 
-      const nonUpdatedItems = await Item.find().then((items) =>
+      const nonUpdatedItems = await PhantaItem.find().then((items) =>
         items.filter(
           (item, index) =>
             item.prices[DEFAULT_SERVER].updatedAt < oldTimes[index]
@@ -204,13 +204,13 @@ describe("Items Helpers", function () {
     });
 
     it("updateAllItems with server provided", async function () {
-      const oldTimes = await Item.find().then((items) =>
+      const oldTimes = await PhantaItem.find().then((items) =>
         items.map((item) => item.prices[TEST_SERVER_NAME].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems(TEST_SERVER_NAME);
 
-      const nonUpdatedItems = await Item.find().then((items) =>
+      const nonUpdatedItems = await PhantaItem.find().then((items) =>
         items.filter(
           (item, index) =>
             item.prices[TEST_SERVER_NAME].updatedAt < oldTimes[index]

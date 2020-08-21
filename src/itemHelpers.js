@@ -1,4 +1,4 @@
-const Item = require("../models/Item.model");
+const {PhantaItem} = require("../models/Item.model");
 const { Document } = require("mongoose");
 const fetch = require("node-fetch");
 const fs = require("fs").promises;
@@ -157,7 +157,7 @@ async function updateAllItems(...servers) {
     servers = [DEFAULT_SERVER];
   }
 
-  return Item.find().then((items) =>
+  return PhantaItem.find().then((items) =>
     Promise.all(items.map((item) => updateItem(item, servers)))
   );
 }
@@ -165,7 +165,7 @@ async function updateAllItems(...servers) {
 const phantasmagoria = {
   addItem: async function (itemName, itemDetails, server) {
     return addItemGeneric(
-      Item,
+      PhantaItem,
       (itemDetails) => {
         return {
           tomestonePrice: itemDetails.tomestonePrice,
@@ -179,12 +179,12 @@ const phantasmagoria = {
   addAllItems: async function () {
     return addAllItemsGeneric(
       PHANTASMAGORIA_MATS_JSON_PATH,
-      Item,
+      PhantaItem,
       this.addItem
     );
   },
   getItems: async function (...servers) {
-    return getItemsGeneric(Item, "tomestonePrice", ...servers);
+    return getItemsGeneric(PhantaItem, "tomestonePrice", ...servers);
   },
   updateItem,
   updateAllItems,
