@@ -41,7 +41,7 @@ describe("Items Helpers", function () {
     it("getItems should only return up to date items", async function () {
       const items = await ItemsHelpers.getItems();
       const outOfDateItems = items.filter((item) => {
-        const itemTime = new Date(item.updatedAt);
+        const itemTime = new Date(item.prices[DEFAULT_SERVER].updatedAt);
         return Date.now() > itemTime.getTime() + ITEM_TTL * 1000;
       });
       return assert.equal(outOfDateItems.length, 0);

@@ -10,6 +10,7 @@ const protoItemSchema = {
     unique: true,
   },
   prices: {},
+  tomestonePrice: { type: Number },
   universalisId: {
     type: Number,
     required: true,
@@ -25,7 +26,7 @@ for (let server of SERVERS) {
     },
     updatedAt: {
       type: Date,
-    }
+    },
   };
 }
 

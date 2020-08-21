@@ -38,23 +38,35 @@ async function getItem(universalisId, ...servers) {
 
 /**
  * Get the saved items from the collection, updating them first if they are out of date.
- * @param  {...string} servers Nothing yet TODO
+ * @param  {...string} servers Which server(s) to fetch the price(s) for.
  * @returns {Promise<Document[]>} A promise for an array of all the documents in the items collection
  */
-//TODO Servers does nothing. Update time is per item and not per server.
 async function getItems(...servers) {
-  return Item.find()
-    .then((items) =>
-      items.filter((item) => {
-        const itemTime = new Date(item.updatedAt);
-        return Date.now() > itemTime.getTime() + ITEM_TTL * 1000;
-      })
-    )
-    .then((outOfDateItems) =>
-      Promise.all(outOfDateItems.map((item) => updateItem(item))).then(() =>
-        Item.find()
-      )
-    );
+  //Update the out of date items
+  const outOfDatePrices = await Item.find().then((items) =>
+    items.map((item) => {
+      const outOfDateServers = { name: item, servers: [] };
+      servers.forEach((server) => {
+        if (
+          item.prices[`server`]?.updatedAt === undefined ||
+          new Date(item.prices[`server`].updatedAt).getTime() +
+            ITEM_TTL * 1000 <
+            Date.now()
+        ) {
+          outOfDateServers.servers.push(server);
+        }
+      });
+      return outOfDateServers;
+    })
+  );
+  await Promise.all(
+    outOfDatePrices.map((item) => updateItem(item.name, ...item.servers))
+  );
+
+  //Return the items
+  const projection =
+    servers.map((server) => `prices.${server}`).join(" ") + " name tomestonePrice";
+  return Item.find({}, projection);
 }
 
 /**
@@ -109,6 +121,7 @@ async function addItem(itemName, server = DEFAULT_SERVER) {
   } else {
     const item = new Item({
       name: itemName,
+      tomestonePrice: items[itemName].tomestonePrice,
       prices: {
         [server]: { price, updatedAt: Date.now().toString() },
       },
@@ -168,23 +181,20 @@ async function updateItem(item, ...servers) {
     servers = [DEFAULT_SERVER];
   }
 
-  return Promise.all(
+  await Promise.all(
     servers.map((server) =>
       fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
         .then((response) => response.text())
         .then((body) => {
-          item.updatedAt = Date.now().toString();
           item.prices[server] = {
             price: JSON.parse(body)["listings"][0]["pricePerUnit"],
             updatedAt: Date.now().toString(),
           };
-          console.log(
-            `Updated ${item.name}'s ${server} Price to: ` + item.prices[server]
-          );
-          return item.save().then(() => item);
         })
     )
   );
+
+  return item.save().then(() => item);
 }
 
 /**
