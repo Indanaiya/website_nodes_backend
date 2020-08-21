@@ -5,7 +5,7 @@ const {
   DEFAULT_SERVER,
   ITEM_TTL,
 } = require("../src/constants");
-const Document = require("mongoose").Document;
+const {Document} = require("mongoose");
 const fetch = require("node-fetch");
 const fs = require("fs").promises;
 const { InvalidArgumentError } = require("../src/errors");
