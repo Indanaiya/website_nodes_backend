@@ -25,12 +25,12 @@ async function getItem(universalisId, ...servers) {
 
   Promise.all(
     servers
-      .filter((server) => response.prices?.server === undefined)
+      .filter((server) => response.prices?.[server] === undefined)
       .map((server) => addItem(response.name, server))
   );
 
   for (let server of servers) {
-    if (response.prices?.server === undefined) {
+    if (response.prices?.[server] === undefined) {
       addItem(response.name);
     }
   }

@@ -2,11 +2,7 @@
 
 const router = require("express").Router();
 const ItemHelper = require("../src/itemsHelpers");
-const Item = require("../models/Item.model");
-const fs = require("fs").promises;
-const { DATACENTERS, PHANTASMAGORIA_MATS_JSON_PATH } = require("../src/constants");
-
-const phantaJsonPromise = fs.readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8");
+const { DATACENTERS} = require("../src/constants");
 
 router.route("/").get((req, res) => {
   ItemHelper.getItems()
