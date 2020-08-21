@@ -1,11 +1,11 @@
 "use strict";
 
 const router = require("express").Router();
-const ItemHelper = require("../src/itemsHelpers");
+const ItemHelper = require("../src/itemHelpers");
 const { DATACENTERS} = require("../src/constants");
 
 router.route("/").get((req, res) => {
-  ItemHelper.getItems()
+  ItemHelper.phantasmagoria.getItems()
     .then((response) => res.json(response))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -21,13 +21,13 @@ router.route("/phantasmagoria").get((req, res) => {
     });
   } else if (server === undefined && datacenter === undefined) {
     //Non phanta items might have useful information to return here
-    ItemHelper.getItems()
+    ItemHelper.phantasmagoria.getItems()
       .then((response) => res.json(response))
       .catch((err) => res.status(400).json("Error: " + err));
   } else {
     const servers = datacenter === undefined ? [server] : DATACENTERS[datacenter];
     console.log(servers);
-    ItemHelper.getItems(...servers)
+    ItemHelper.phantasmagoria.getItems(...servers)
       .then((response) => res.json(response))
       .catch((err) => res.status(400).json("Error: " + err));
   }

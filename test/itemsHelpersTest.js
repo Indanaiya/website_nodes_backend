@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 const assert = require("chai").assert;
-const ItemsHelpers = require("../src/itemsHelpers");
+const ItemsHelpers = require("../src/itemHelpers").phantasmagoria;
 const {
   PHANTASMAGORIA_MATS_JSON_PATH,
   ITEM_TTL,
@@ -19,8 +20,9 @@ const TEST_SERVER_NAME = "Moogle";
 
 //TODO Add a test to make sure that items aren't updated if they don't need to be
 describe("Items Helpers", function () {
-  before(() =>
-    Promise.all([
+  before(async () => {
+    Item.find().deleteMany();
+    return await Promise.all([
       mongoose
         .connect(uri, {
           useNewUrlParser: true,
@@ -32,11 +34,28 @@ describe("Items Helpers", function () {
           console.log("Failed to connect to MongoDB Atlas: " + err);
           throw err;
         }),
-      (phantaMats = fs
+      (phantaMats = await fs
         .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
         .then((json) => JSON.parse(json))),
-    ])
-  );
+    ]);
+  });
+
+  describe("addAllItems", function () {
+    it("addAllItems should add all items in the json to the db", async function () {
+      //Empty the items collection
+      await Item.deleteMany({});
+      const items = await Item.find();
+      assert.equal(items.length, 0);
+
+      await ItemsHelpers.addAllItems();
+      const presentItems = await Item.find();
+      const missingItems = Object.keys(phantaMats).filter((requiredItem) =>
+        presentItems.includes(requiredItem)
+      );
+      return assert.equal(missingItems.length, 0);
+    });
+  });
+
   describe("getItems", function () {
     it("getItems should only return up to date items", async function () {
       const items = await ItemsHelpers.getItems();
@@ -64,16 +83,20 @@ describe("Items Helpers", function () {
   describe("addItem", async function () {
     before(async () => await Item.deleteMany({}));
 
-    it("addItem should throw an error when given an invalid itemName", async function () {
-      return ItemsHelpers.addItem("Gobbledeegook")
-        .then(() =>
-          assert.fail("addItem with invalid itemName did not throw an error")
-        )
-        .catch((err) => assert.instanceOf(err, InvalidArgumentError));
-    });
+    //TODO Functionality removed. Should I reimplement it?
+    // it("addItem should throw an error when given an invalid itemName", async function () {
+    //   return ItemsHelpers.addItem("Gobbledeegook")
+    //     .then(() =>
+    //       assert.fail("addItem with invalid itemName did not throw an error")
+    //     )
+    //     .catch((err) => assert.instanceOf(err, InvalidArgumentError));
+    // });
 
     it("addItem should add a supplied item that doesn't exist to the collection", async function () {
-      assert.equal(await ItemsHelpers.addItem(TEST_ITEM_NAME), 2);
+      assert.equal(
+        await ItemsHelpers.addItem(TEST_ITEM_NAME, phantaMats[TEST_ITEM_NAME]),
+        2
+      );
       const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
         assert.fail("More than one item with the same name found")
       );
@@ -89,7 +112,11 @@ describe("Items Helpers", function () {
 
     it("addItem add the price for a new server for an item that already exists in the collection", async function () {
       assert.equal(
-        await ItemsHelpers.addItem(TEST_ITEM_NAME, TEST_SERVER_NAME),
+        await ItemsHelpers.addItem(
+          TEST_ITEM_NAME,
+          phantaMats[TEST_ITEM_NAME],
+          TEST_SERVER_NAME
+        ),
         1
       );
       const savedItems = await Item.find({ name: TEST_ITEM_NAME }).catch(() =>
@@ -155,22 +182,6 @@ describe("Items Helpers", function () {
           assert.fail("updateItem with unsaved document did not throw an error")
         )
         .catch((err) => assert.instanceOf(err, InvalidArgumentError));
-    });
-  });
-
-  describe("addAllItems", function () {
-    it("addAllItems should add all items in the json to the db", async function () {
-      //Empty the items collection
-      await Item.deleteMany({});
-      const items = await Item.find();
-      assert.equal(items.length, 0);
-
-      await ItemsHelpers.addAllItems();
-      const presentItems = await Item.find();
-      const missingItems = Object.keys(phantaMats).filter((requiredItem) =>
-        presentItems.includes(requiredItem)
-      );
-      return assert.equal(missingItems.length, 0);
     });
   });
 

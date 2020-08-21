@@ -3,7 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const ItemHelper = require("./src/itemsHelpers");
+const ItemHelper = require("./src/itemHelpers");
 
 require("dotenv").config();
 
@@ -36,7 +36,9 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-ItemHelper.addAllItems().then("All items present in collection.");
+ItemHelper.phantasmagoria
+  .addAllItems()
+  .then(() => console.log("All items present in collection."));
 
 const itemsRouter = require("./routes/items");
 
