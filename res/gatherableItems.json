@@ -1,161 +1,101 @@
 {
+  "Raw Triplite": {
+    "name": "Raw Triplite",
+    "unviersalisId": "27729",
+    "yellowScrips": [
+      {
+        "collectibility": "450-469",
+        "experience": [4434500, 5321400],
+        "scrips": [40, 48]
+      },
+      {
+        "collectibility": "470-499",
+        "experience": [5099675, 6119610],
+        "scrips": [44, 52]
+      },
+      {
+        "collectibility": "500+",
+        "experience": [5764, 850, 6917820],
+        "scrips": [52, 62]
+      }
+    ]
+  },
+
+  "Raw Onyx": {
+    "name": "Raw Onyx",
+    "univeralisId": "27731",
+    "whiteScrips": [
+      {
+        "collectibility": "470-499",
+        "experience": [7577500, 9093000],
+        "scrips": [25, 30]
+      },
+      {
+        "collectibility": "500-529",
+        "experience": [8714125, 10456950],
+        "scrips": [28, 33]
+      },
+      {
+        "collectibility": "530-",
+        "experience": [9850750, 11820900],
+        "scrips": [32, 38]
+      }
+    ]
+  },
+
+  "Broad Beans": {
+    "name": "Broad Beans",
+    "universalisId": "27833",
+    "yellowScrips": [
+      {
+        "collectibility": "450-469",
+        "experience": [2722300, 3266760],
+        "scrips": [35, 42]
+      },
+      {
+        "collectibility": "470-499",
+        "experience": [3103644, 3756772],
+        "scrips": [38, 45]
+      },
+      {
+        "collectibility": "500+",
+        "experience": [3538990, 4246788],
+        "scrips": [45, 54]
+      }
+    ]
+  },
+
+  "Mist Spinach": {
+    "name": "Mist Spinach",
+    "universalisId": "27828",
+    "whiteScrips": [
+      {
+        "collectibility": "470-499",
+        "experience": [5731250, 6877500],
+        "scrips": [23, 27]
+      },
+      {
+        "collectibility": "500-529",
+        "experience": [6590937, 7909124],
+        "scrips": [26, 31]
+      },
+      {
+        "collectibility": "530+",
+        "experience": [7450625, 8940750],
+        "scrips": [29, 34]
+      }
+    ]
+  },
+
   "Imperial Fern": {
     "name": "Imperial Fern",
     "universalisId": "29978",
-    "spawnTimes": ["00:00", "12:00"],
-    "lifespan": 2,
-    "map": "Kholusia",
-    "x": 28,
-    "y": 21,
-    "patch": "5.2",
-    "class": "BTN"
+    "tome": "Tome of Botanical Folklore - Norvrandt"
   },
 
-  "Fireheart Cobalt": {
-    "name": "Fireheart Cobalt",
-    "universalisId": "29968",
-    "spawnTimes": ["02:00", "14:00"],
-    "lifespan": 2,
-    "map": "Lakeland",
-    "x": 5,
-    "y": 34,
-    "patch": "5.2",
-    "class": "MIN"
-  },
-
-  "Duskblooms": {
-    "name": "Duskblooms",
-    "universalisId": "29974",
-    "spawnTimes": ["04:00", "16:00"],
-    "lifespan": 2,
-    "map": "Ahm Aereng",
-    "x": 32,
-    "y": 33,
-    "patch": "5.2",
-    "class": "BTN"
-  },
-
-  "Purpure Shell Chips": {
-    "name": "Purpure Shell Chips",
-    "universalisId": "29970",
-    "spawnTimes": ["06:00", "18:00"],
-    "lifespan": 2,
-    "map": "Tempest",
-    "x": 34,
-    "y": 31,
-    "patch": "5.2",
-    "class": "MIN"
-  },
-
-  "Merbau Log": {
-    "name": "Merbau Log",
-    "universalisId": "29972",
-    "spawnTimes": ["08:00", "20:00"],
-    "lifespan": 2,
-    "map": "Il Mheg",
-    "x": 36,
-    "y": 27,
-    "patch": "5.2",
-    "class": "BTN"
-  },
-
-  "Ashen Alumen": {
-    "name": "Ashen Alumen",
-    "universalisId": "29976",
-    "spawnTimes": ["10:00", "22:00"],
-    "lifespan": 2,
-    "map": "Ahm Aereng",
-    "x": 20,
-    "y": 9,
-    "patch": "5.2",
-    "class": "MIN"
-  },
-
-  "White Clay": {
-    "name": "White Clay",
-    "universalisId": "27808",
-    "spawnTimes": ["20:00"],
-    "lifespan": 4,
-
-    "filters": {
-      "patch": "5.0",
-      "class": "BTN",
-      "nodeType": "",
-
-      "task": {
-        "reducible": "Chiaroglow Aethersand"
-      }
-    },
-
-    "location": {
-      "map": "Kholusia",
-      "x": 13,
-      "y": 13
-    }
-  },
-
-  "Bog Sage": {
-    "name": "Bog Sage",
-    "universalisId": "27810",
-    "spawnTimes": ["12:00"],
-    "lifespan": 4,
-    "map": "Lakeland",
-    "x": 25,
-    "y": 30,
-    "patch": "5.0",
-    "class": "BTN",
-    "reducible": "Agewood Aethersand"
-  },
-
-  "Sweet Marjoram": {
-    "name": "Sweet Marjoram",
-    "universalisId": "27809",
-    "spawnTimes": ["04:00"],
-    "lifespan": 4,
-    "map": "The Rak'tika Greatwood",
-    "x": 27,
-    "y": 24,
-    "patch": "5.0",
-    "class": "BTN",
-    "reducible": "Scuroglow Aethersand"
-  },
-
-  "Gale Rock": {
-    "name": "Gale Rock",
-    "universalisId": "27805",
-    "spawnTimes": ["00:00"],
-    "lifespan": 4,
-    "map": "The Rak'tika Greatwood",
-    "x": 26,
-    "y": 29,
-    "patch": "5.0",
-    "class": "MIN",
-    "reducible": "Chiaroglow Aethersand"
-  },
-
-  "Solarite": {
-    "name": "Solarite",
-    "universalisId": "27806",
-    "spawnTimes": ["08:00"],
-    "lifespan": 4,
-    "map": "Lakeland",
-    "x": 27,
-    "y": 15,
-    "patch": "5.0",
-    "class": "MIN",
-    "reducible": "Scuroglow Aethersand"
-  },
-
-  "Shade Quartz": {
-    "name": "Shade Quartz",
-    "universalisId": "27807",
-    "spawnTimes": ["16:00"],
-    "lifespan": 4,
-    "map": "Kholusia",
-    "x": 22,
-    "y": 18,
-    "patch": "5.0",
-    "class": "MIN",
-    "reducible": "Agedeep Aethersand"
+  "Tender Dill": {
+    "name": "Tender Dill",
+    "universalisId": "30485",
+    "tome": "Tome of Botanical Folklore - Norvrandt"
   }
 }

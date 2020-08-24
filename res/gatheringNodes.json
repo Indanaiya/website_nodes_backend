@@ -1,7 +1,80 @@
 {
-  "Ladle": ["Raw Triplite"],
-  "The Caliban Gorge": ["Raw Onyx"],
-  "Phisor Lran": ["Broad Beans"],
-  "Bowrest": ["Mist Spinach"],
-  "White Oil Falls": ["Imperial Fern", "Tender Dill"]
+  "nodes": [
+    {
+      "location": {
+        "map": "Amh Araeng",
+        "x": 20,
+        "y": 29
+      },
+      "items": ["Raw Triplite"],
+      "spawnTimes": ["00:00", "12:00"],
+      "lifespan": 2,
+
+      "filters": {
+        "patch": "5.0",
+        "class": "MIN",
+        "nodeType": "unspoiled"
+      }
+    },
+    {
+      "location": {
+        "map": "The Tempest",
+        "x": 16,
+        "y": 21
+      },
+      "items": ["Raw Onyx"],
+      "spawnTimes": ["00:00", "12:00"],
+      "lifespan": 2,
+      "filters": {
+        "patch": "5.0",
+        "class": "MIN",
+        "nodeType": "unspoiled"
+      }
+    },
+    {
+      "location": {
+        "map": "Il Mheg",
+        "x": 25,
+        "y": 36
+      },
+      "items": ["Broad Beans"],
+      "spawnTimes": ["00:00", "12:00"],
+      "lifespan": 2,
+      "filters": {
+        "patch": "5.0",
+        "class": "BTN",
+        "nodeType": "unspoiled"
+      }
+    },
+    {
+      "location": {
+        "map": "The Rak'tika Greatwood",
+        "x": 35,
+        "y": 22
+      },
+      "items": ["Mist Spinach"],
+      "spawnTimes": ["00:00", "12:00"],
+      "lifespan": 2,
+      "filters": {
+        "patch": "5.0",
+        "class": "BTN",
+        "nodeType": "unspoiled"
+      }
+    },
+    {
+      "location": {
+        "map": "Kholusia",
+        "x": 28,
+        "y": 21
+      },
+      "items": ["Imperial Fern", "Tender Dill"],
+      "spawnTimes": ["00:00", "12:00"],
+      "lifespan": 2,
+      "filters": {
+        "patch": "5.0",
+        "class": "BTN",
+        "nodeType": "legendary"
+      }
+    }
+  ]
 }
