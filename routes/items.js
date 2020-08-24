@@ -2,10 +2,11 @@
 
 const router = require("express").Router();
 const ItemHelper = require("../src/itemHelpers");
-const { DATACENTERS} = require("../src/constants");
+const { DATACENTERS } = require("../src/constants");
 
 router.route("/").get((req, res) => {
-  ItemHelper.phantasmagoria.getItems()
+  ItemHelper.phantasmagoria
+    .getItems()
     .then((response) => res.json(response))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -21,13 +22,42 @@ router.route("/phantasmagoria").get((req, res) => {
     });
   } else if (server === undefined && datacenter === undefined) {
     //Non phanta items might have useful information to return here
-    ItemHelper.phantasmagoria.getItems()
+    ItemHelper.phantasmagoria
+      .getItems()
       .then((response) => res.json(response))
       .catch((err) => res.status(400).json("Error: " + err));
   } else {
-    const servers = datacenter === undefined ? [server] : DATACENTERS[datacenter];
+    const servers =
+      datacenter === undefined ? [server] : DATACENTERS[datacenter];
     console.log(servers);
-    ItemHelper.phantasmagoria.getItems(...servers)
+    ItemHelper.phantasmagoria
+      .getItems(...servers)
+      .then((response) => res.json(response))
+      .catch((err) => res.status(400).json("Error: " + err));
+  }
+});
+
+router.route("/gatherable").get((req, res) => {
+  const server = req.query.server;
+  const datacenter = req.query.datacenter;
+  if (server !== undefined && datacenter !== undefined) {
+    res.status(422).json({
+      message: "Expected only one of server and datacenter",
+      server,
+      datacenter,
+    });
+  } else if (server === undefined && datacenter === undefined) {
+    //Non phanta items might have useful information to return here
+    ItemHelper.gatherable
+      .getItems()
+      .then((response) => res.json(response))
+      .catch((err) => res.status(400).json("Error: " + err));
+  } else {
+    const servers =
+      datacenter === undefined ? [server] : DATACENTERS[datacenter];
+    console.log(servers);
+    ItemHelper.gatherable
+      .getItems(...servers)
       .then((response) => res.json(response))
       .catch((err) => res.status(400).json("Error: " + err));
   }

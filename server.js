@@ -38,7 +38,11 @@ connection.once("open", () => {
 
 ItemHelper.phantasmagoria
   .addAllItems()
-  .then(() => console.log("All items present in collection."));
+  .then(() => console.log("All phantasmagoria items present in collection."));
+  
+ItemHelper.gatherable
+  .addAllItems()
+  .then(() => console.log("All gatherable items present in collection."));
 
 const itemsRouter = require("./routes/items");
 

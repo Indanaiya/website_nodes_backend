@@ -1,4 +1,4 @@
-const {PhantaItem} = require("../models/Item.model");
+const { PhantaItem, GatherableItem } = require("../models/Item.model");
 const { Document } = require("mongoose");
 const fetch = require("node-fetch");
 const fs = require("fs").promises;
@@ -7,6 +7,7 @@ const {
   DEFAULT_SERVER,
   UNIVERSALIS_URL,
   PHANTASMAGORIA_MATS_JSON_PATH,
+  GATHERABLE_ITEMS_JSON_PATH,
   ITEM_TTL,
 } = require("../src/constants");
 const { InvalidArgumentError } = require("../src/errors");
@@ -63,9 +64,20 @@ async function addItemGeneric(
     `${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
   )
     .then((response) => response.text())
-    .then((body) => JSON.parse(body));
+    .catch((err) =>
+      console.log(
+        `Error getting response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
+      )
+    )
+    .then((body) => JSON.parse(body))
+    .catch((err) =>
+      console.log(
+        `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
+      )
+    );
 
   const price = universalisObj["listings"][0]["pricePerUnit"];
+  console.log(`price for ${itemName}: ${price}`);
 
   //Save price
   if (savedItemsWithItemName.length === 1) {
@@ -152,16 +164,18 @@ async function updateItem(item, ...servers) {
   return item.save().then(() => item);
 }
 
-async function updateAllItems(...servers) {
+async function updateAllItemsGeneric(model, ...servers) {
   if (servers.length === 0) {
     servers = [DEFAULT_SERVER];
   }
 
-  return PhantaItem.find().then((items) =>
-    Promise.all(items.map((item) => updateItem(item, servers)))
-  );
+  return model
+    .find()
+    .then((items) =>
+      Promise.all(items.map((item) => updateItem(item, servers)))
+    );
 }
-
+//I could probably make a class for these two
 const phantasmagoria = {
   addItem: async function (itemName, itemDetails, server) {
     return addItemGeneric(
@@ -187,7 +201,46 @@ const phantasmagoria = {
     return getItemsGeneric(PhantaItem, "tomestonePrice", ...servers);
   },
   updateItem,
-  updateAllItems,
+  updateAllItems: async function (...servers) {
+    return updateAllItemsGeneric(PhantaItem, ...servers);
+  },
 };
 
-module.exports = { phantasmagoria };
+const gatherable = {
+  addItem: async function (itemName, itemDetails, server) {
+    return addItemGeneric(
+      GatherableItem,
+      (itemDetails) => {
+        console.log(itemDetails);
+        return {
+          filters: itemDetails.filters,
+          location: itemDetails.location,
+          spawnTimes: itemDetails.spawnTimes,
+        };
+      },
+      itemName,
+      itemDetails,
+      server
+    );
+  },
+  addAllItems: async function () {
+    return addAllItemsGeneric(
+      GATHERABLE_ITEMS_JSON_PATH,
+      GatherableItem,
+      this.addItem
+    );
+  },
+  getItems: async function (...servers) {
+    return getItemsGeneric(
+      GatherableItem,
+      "filters location spawnTimes",
+      ...servers
+    );
+  },
+  updateItem,
+  updateAllItems: async function (...servers) {
+    return updateAllItemsGeneric(GatherableItem, ...servers);
+  },
+};
+
+module.exports = { phantasmagoria, gatherable };
