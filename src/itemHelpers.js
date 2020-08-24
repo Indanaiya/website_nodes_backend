@@ -214,7 +214,6 @@ const gatherable = {
         console.log(itemDetails);
         return {
           task: itemDetails.task,
-          tome: itemDetails.tome,
         };
       },
       itemName,
@@ -232,7 +231,7 @@ const gatherable = {
   getItems: async function (...servers) {
     return getItemsGeneric(
       GatherableItem,
-      "filters location spawnTimes",
+      "task",
       ...servers
     );
   },
