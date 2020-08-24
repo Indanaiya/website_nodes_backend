@@ -71,7 +71,7 @@ const DATACENTERS = {
   ],
 };
 
-//This is slower than writing out the arrays. 
+//This is slower than writing out the arrays.
 //But it's insignificant and this is less error prone, as only one variable has to be modified if the ffxiv server list is altered.
 const SERVERS = Object.keys(DATACENTERS).reduce(
   (result, currentValue) => [...DATACENTERS[currentValue], ...result],
@@ -80,7 +80,8 @@ const SERVERS = Object.keys(DATACENTERS).reduce(
 
 const UNIVERSALIS_URL = "https://universalis.app/api/";
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
-const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json"
+const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json";
+const GATHERING_NODES_JSON_PATH = "res/gatheringNodes.json";
 const DEFAULT_SERVER = "Cerberus";
 const ITEM_TTL = 24 * 60 * 60; //Minutes
 
@@ -90,6 +91,7 @@ module.exports = {
   UNIVERSALIS_URL,
   PHANTASMAGORIA_MATS_JSON_PATH,
   GATHERABLE_ITEMS_JSON_PATH,
+  GATHERING_NODES_JSON_PATH,
   DEFAULT_SERVER,
   ITEM_TTL,
 };

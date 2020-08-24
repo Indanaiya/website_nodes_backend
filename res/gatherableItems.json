@@ -100,13 +100,11 @@
 
   "Imperial Fern": {
     "name": "Imperial Fern",
-    "universalisId": "29978",
-    "tome": "Tome of Botanical Folklore - Norvrandt"
+    "universalisId": "29978"
   },
 
   "Tender Dill": {
     "name": "Tender Dill",
-    "universalisId": "30485",
-    "tome": "Tome of Botanical Folklore - Norvrandt"
+    "universalisId": "30485"
   }
 }

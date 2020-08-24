@@ -3,7 +3,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 const ItemHelper = require("./src/itemHelpers");
+const NodeHelper = require("./src/nodeHelpers");
 
 require("dotenv").config();
 
@@ -39,10 +41,14 @@ connection.once("open", () => {
 ItemHelper.phantasmagoria
   .addAllItems()
   .then(() => console.log("All phantasmagoria items present in collection."));
-  
+
 ItemHelper.gatherable
   .addAllItems()
   .then(() => console.log("All gatherable items present in collection."));
+
+NodeHelper.addAllNodes().then(() =>
+  console.log("All gathering nodes present in collection")
+);
 
 const itemsRouter = require("./routes/items");
 

@@ -74,7 +74,8 @@
         "patch": "5.0",
         "class": "BTN",
         "nodeType": "legendary"
-      }
+      },
+      "tome": "Tome of Botanical Folklore - Norvrandt"
     }
   ]
 }
