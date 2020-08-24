@@ -5,10 +5,7 @@ const ItemHelper = require("../src/itemHelpers");
 const { DATACENTERS } = require("../src/constants");
 
 router.route("/").get((req, res) => {
-  ItemHelper.phantasmagoria
-    .getItems()
-    .then((response) => res.json(response))
-    .catch((err) => res.status(400).json("Error: " + err));
+  res.json("I'll add something here later I promise")
 });
 
 router.route("/phantasmagoria").get((req, res) => {
