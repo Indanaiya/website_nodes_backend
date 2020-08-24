@@ -213,9 +213,8 @@ const gatherable = {
       (itemDetails) => {
         console.log(itemDetails);
         return {
-          filters: itemDetails.filters,
-          location: itemDetails.location,
-          spawnTimes: itemDetails.spawnTimes,
+          task: itemDetails.task,
+          tome: itemDetails.tome,
         };
       },
       itemName,

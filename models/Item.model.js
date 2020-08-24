@@ -36,46 +36,47 @@ const phantaItemSchema = new Schema({
 
 //TODO make a lot of these required once I've finished testing it
 const gatherableItemSchema = new Schema({
-  filters: {
-    patch: {
-      type: Number,
-      min: 1,
-      max: 10,
-    },
-    class: {
-      type: String,
-      enum: ["BTN", "MIN", "FSH"],
-    },
-    nodeType: {
-      type: String,
-      enum: ["unspoiled", "ephemeral", "legendary"],
-    },
-    task: {
-      reducible: String,
-      whiteScrips: Number,
-      yellowScrips: Number,
-    },
+  // filters: {
+  //   patch: {
+  //     type: Number,
+  //     min: 1,
+  //     max: 10,
+  //   },
+  //   class: {
+  //     type: String,
+  //     enum: ["BTN", "MIN", "FSH"],
+  //   },
+  //   nodeType: {
+  //     type: String,
+  //     enum: ["unspoiled", "ephemeral", "legendary"],
+  //   },
+  task: {
+    reducible: String,
+    whiteScrips: {type: [], default: undefined},
+    yellowScrips: {type: [], default: undefined},
   },
-  location: {
-    map: {
-      type: String,
-      //TODO Could have an enum here, but it would be tedious and with little benefit
-    },
-    x: {
-      type: Number,
-      min: 0,
-    },
-    y: {
-      type: Number,
-      min: 0,
-    },
-  },
-  spawnTimes: [{
-    type: String,
-    validate:{
-      validator: (v) => /\d{2}:\d{2}/.test(v)
-    }
-  }],
+  tome: String, //TODO could also be an enum
+  // },
+  // location: {
+  //   map: {
+  //     type: String,
+  //     //TODO Could have an enum here, but it would be tedious and with little benefit
+  //   },
+  //   x: {
+  //     type: Number,
+  //     min: 0,
+  //   },
+  //   y: {
+  //     type: Number,
+  //     min: 0,
+  //   },
+  // },
+  // spawnTimes: [{
+  //   type: String,
+  //   validate:{
+  //     validator: (v) => /\d{2}:\d{2}/.test(v)
+  //   }
+  // }],
   ...protoItemSchema,
 });
 
