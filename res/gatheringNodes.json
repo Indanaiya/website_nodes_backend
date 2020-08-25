@@ -14,7 +14,9 @@
         "patch": "5.0",
         "class": "MIN",
         "nodeType": "unspoiled"
-      }
+      },
+      "level": 80,
+      "name": "Unspoiled Mineral Deposit1"
     },
     {
       "location": {
@@ -29,7 +31,9 @@
         "patch": "5.0",
         "class": "MIN",
         "nodeType": "unspoiled"
-      }
+      },
+      "level": 80,
+      "name": "Unspoiled Mineral Deposit"
     },
     {
       "location": {
@@ -44,7 +48,9 @@
         "patch": "5.0",
         "class": "BTN",
         "nodeType": "unspoiled"
-      }
+      },
+      "level": 75,
+      "name": "Unspoiled Lush Vegetation"
     },
     {
       "location": {
@@ -59,7 +65,9 @@
         "patch": "5.0",
         "class": "BTN",
         "nodeType": "unspoiled"
-      }
+      },
+      "level": 80,
+      "name": "Unspoiled Lush Vegetation"
     },
     {
       "location": {
@@ -75,7 +83,26 @@
         "class": "BTN",
         "nodeType": "legendary"
       },
+      "level": 80,
+      "name": "Legendary Lush Vegetation",
       "tome": "Tome of Botanical Folklore - Norvrandt"
+    },
+    {
+      "location": { 
+        "map": "JUST FOR TESTING DELETE LATER", 
+        "x": 26, 
+        "y": 13 
+      },
+      "items": ["Imperial Fern"],
+      "spawnTimes": [6,18],
+      "lifespan": 2,
+      "filters": {
+        "patch": "5.0",
+        "class": "MIN",
+        "nodeType": "unspoiled"
+      },
+      "level": 80,
+      "name": "Legendary Test Vegetation"
     }
   ]
 }

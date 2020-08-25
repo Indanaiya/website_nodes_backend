@@ -47,9 +47,9 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
   NodeHelpers.getAllNodes()
     .then((oldNodes) =>
       //Need to make a new object for each node because nodes are Documents and it will enforce weird checking that I don't want
-      oldNodes.map(({ filters, location, spawnTimes, _id, items, lifespan }) => {
+      oldNodes.map(({ filters, location, spawnTimes, _id, items, lifespan, name, level }) => {
         items = items.map((item) => gatherableItems[item]);
-        return { filters, location, spawnTimes, _id, items, lifespan };
+        return { filters, location, spawnTimes, _id, items, lifespan, name, level };
       })
     )
     .then((newNodes) => res.json(newNodes))

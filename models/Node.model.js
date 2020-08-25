@@ -51,8 +51,9 @@ const gatheringNodeSchema = new Schema({
     required: true,
     default: undefined,
   },
-
   lifespan: { type: Number, required: true, min: 0, max: 24 },
+  level: { type: Number, required: true, min: 1, max: 80 },
+  name: { type: String, required: true },
 });
 
 const GatheringNode = mongoose.model("GatheringNode", gatheringNodeSchema);
