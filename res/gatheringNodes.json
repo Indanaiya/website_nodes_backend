@@ -7,7 +7,7 @@
         "y": 29
       },
       "items": ["Raw Triplite"],
-      "spawnTimes": ["00:00", "12:00"],
+      "spawnTimes": [0, 12],
       "lifespan": 2,
 
       "filters": {
@@ -23,7 +23,7 @@
         "y": 21
       },
       "items": ["Raw Onyx"],
-      "spawnTimes": ["00:00", "12:00"],
+      "spawnTimes": [0, 12],
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
@@ -38,7 +38,7 @@
         "y": 36
       },
       "items": ["Broad Beans"],
-      "spawnTimes": ["00:00", "12:00"],
+      "spawnTimes": [0, 12],
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
@@ -53,7 +53,7 @@
         "y": 22
       },
       "items": ["Mist Spinach"],
-      "spawnTimes": ["00:00", "12:00"],
+      "spawnTimes": [0, 12],
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
@@ -68,7 +68,7 @@
         "y": 21
       },
       "items": ["Imperial Fern", "Tender Dill"],
-      "spawnTimes": ["00:00", "12:00"],
+      "spawnTimes": [0, 12],
       "lifespan": 2,
       "filters": {
         "patch": "5.0",

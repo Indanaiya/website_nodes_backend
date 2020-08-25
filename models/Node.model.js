@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 //TODO make a lot of these required once I've finished testing it
 const gatheringNodeSchema = new Schema({
-  items: {type: [String], required: true, default: undefined},
+  items: { type: [String], required: true, default: undefined },
   filters: {
     patch: {
       type: Number,
@@ -23,9 +23,9 @@ const gatheringNodeSchema = new Schema({
       enum: ["unspoiled", "ephemeral", "legendary"],
     },
     task: {
-      reducible: {type: Boolean, default: false},
-      whiteScrips: {type: Boolean, default: false},
-      yellowScrips: {type: Boolean, default: false},
+      reducible: { type: Boolean, default: false },
+      whiteScrips: { type: Boolean, default: false },
+      yellowScrips: { type: Boolean, default: false },
     },
     tome: String,
   },
@@ -46,16 +46,13 @@ const gatheringNodeSchema = new Schema({
       min: 0,
     },
   },
-  spawnTimes: [
-    {
-      type: String,
-      required: true,
-      validate: {
-        validator: (v) => /\d{2}:\d{2}/.test(v),
-      },
-      default: undefined,
-    },
-  ],
+  spawnTimes: {
+    type: [{ type: Number, min: 0, max: 24 }],
+    required: true,
+    default: undefined,
+  },
+
+  lifespan: { type: Number, required: true, min: 0, max: 24 },
 });
 
 const GatheringNode = mongoose.model("GatheringNode", gatheringNodeSchema);
