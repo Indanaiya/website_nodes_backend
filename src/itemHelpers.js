@@ -132,6 +132,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
     servers.map((server) => `prices.${server}`).join(" ") +
     " name " +
     fieldsToGet;
+  
   return model.find({}, projection);
 }
 

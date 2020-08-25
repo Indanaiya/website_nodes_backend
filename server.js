@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 const ItemHelper = require("./src/itemHelpers");
 const NodeHelper = require("./src/nodeHelpers");
 
+const itemsRouter = require("./routes/items");
+const nodesRouter = require("./routes/nodes")
+
 require("dotenv").config();
 
 const app = express();
@@ -50,9 +53,8 @@ NodeHelper.addAllNodes().then(() =>
   console.log("All gathering nodes present in collection")
 );
 
-const itemsRouter = require("./routes/items");
-
 app.use("/items", itemsRouter);
+app.use("/nodes", nodesRouter);
 
 const httpServer = app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
