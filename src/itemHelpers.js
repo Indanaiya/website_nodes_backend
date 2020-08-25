@@ -111,11 +111,19 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
       const outOfDateServers = { name: item, servers: [] };
       servers.forEach((server) => {
         if (
-          item.prices[`server`]?.updatedAt === undefined ||
-          new Date(item.prices[`server`].updatedAt).getTime() +
+          item.prices[server]?.updatedAt === undefined ||
+          new Date(item.prices[server].updatedAt).getTime() +
             ITEM_TTL * 1000 <
             Date.now()
         ) {
+          const undef = item.prices[server]?.updatedAt === undefined;
+          const ood =
+            new Date(item.prices[server]?.updatedAt).getTime() +
+              ITEM_TTL * 1000 <
+            Date.now();
+          console.log(
+            `Updating ${item.name} on server ${server}, out of date\n Undefined?: ${undef}\n Out of date?: ${ood}`
+          );
           outOfDateServers.servers.push(server);
         }
       });
@@ -132,7 +140,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
     servers.map((server) => `prices.${server}`).join(" ") +
     " name " +
     fieldsToGet;
-  
+
   return model.find({}, projection);
 }
 
@@ -230,11 +238,7 @@ const gatherable = {
     );
   },
   getItems: async function (...servers) {
-    return getItemsGeneric(
-      GatherableItem,
-      "task",
-      ...servers
-    );
+    return getItemsGeneric(GatherableItem, "task", ...servers);
   },
   updateItem,
   updateAllItems: async function (...servers) {
