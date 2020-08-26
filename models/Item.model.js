@@ -22,7 +22,6 @@ for (let server of SERVERS) {
     price: {
       type: Number,
       min: 1,
-      required: true,
     },
     saleVelocity: {
       overall:{
@@ -37,7 +36,6 @@ for (let server of SERVERS) {
         type: Number,
         min: 0,
       },
-      default: {},
     },
     avgPrice:{
       overall:{
@@ -52,11 +50,9 @@ for (let server of SERVERS) {
         type: Number,
         min: 0,
       },
-      default: {},
     },
     updatedAt: {
       type: Date,
-      required: true,
     },
   };
 }

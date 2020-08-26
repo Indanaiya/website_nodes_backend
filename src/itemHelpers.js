@@ -30,9 +30,7 @@ async function addAllItemsGeneric(itemsJsonPath, model, addItem) {
 
   return Promise.all(
     nonPresentItemNames.map((itemName) =>
-      addItem(itemName, requiredItems[itemName]).then((response) =>
-        console.log(response)
-      )
+      addItem(itemName, requiredItems[itemName])
     )
   );
 }
@@ -44,14 +42,13 @@ async function addItemGeneric(
   itemDetails,
   server = DEFAULT_SERVER
 ) {
-  console.log("AddItemGeneric");
   const savedItemsWithItemName = await model.find({ name: itemName });
   if (savedItemsWithItemName.length > 1) {
     throw new Error(
       `Too many items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
     );
   }
-
+  
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
@@ -60,7 +57,9 @@ async function addItemGeneric(
     return 0;
   }
 
-  console.log(`Reading from ${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`);
+  console.log(
+    `Reading from ${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
+  );
   //Get price
   const universalisObj = await fetch(
     `${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
@@ -72,49 +71,38 @@ async function addItemGeneric(
       )
     )
     .then((body) => JSON.parse(body))
-    .catch(
-      (err) =>{
-        console.log("Error reading JSON")
-        throw new Error(//TODO make it not a generic error and catch it when this function is called
-          `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
-        )}
-    );
+    .catch((err) => {
+      console.log("Error reading JSON");
+      throw new Error( //TODO make it not a generic error and catch it when this function is called
+        `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
+      );
+    });
 
-  console.log("Here");
-  console.log(universalisObj)
-  const price = universalisObj.listings[0].pricePerUnit;
-  const saleVelocity = {
-    overall: universalisObj.regularSaleVelocity,
-    nq: universalisObj.nqSaleVelocity,
-    hq: universalisObj.hqSaleVelocity,
+  const marketInfo = {
+    price: universalisObj.listings[0].pricePerUnit,
+    saleVelocity: {
+      overall: universalisObj.regularSaleVelocity,
+      nq: universalisObj.nqSaleVelocity,
+      hq: universalisObj.hqSaleVelocity,
+    },
+    avgPrice: {
+      overall: universalisObj.averagePrice,
+      nq: universalisObj.averagePriceNQ,
+      hq: universalisObj.averagePriceHQ,
+    },
+    updatedAt: Date.now().toString(),
   };
-  const avgPrice = {
-    overall: universalisObj.averagePrice,
-    nq: universalisObj.averagePriceNQ,
-    hq: universalisObj.averagePriceHQ,
-  };
-  console.log(`price for ${itemName}: ${price}`);
 
   //Save price
   if (savedItemsWithItemName.length === 1) {
     const item = savedItemsWithItemName[0];
-    item.marketInfo[server] = {
-      price,
-      updatedAt: Date.now().toString(),
-    };
+    item.marketInfo[server] = marketInfo;
 
     return item.save().then(() => 1);
   } else {
     const item = new model({
       name: itemName,
-      marketInfo: {
-        [server]: {
-          price,
-          saleVelocity,
-          avgPrice,
-          updatedAt: Date.now().toString(),
-        },
-      },
+      marketInfo: { [server]: marketInfo },
       universalisId: itemDetails.universalisId,
       ...addFunction(itemDetails, universalisObj),
     });
@@ -252,7 +240,6 @@ const gatherable = {
     return addItemGeneric(
       GatherableItem,
       (itemDetails) => {
-        console.log(itemDetails);
         return {
           task: itemDetails.task,
         };
