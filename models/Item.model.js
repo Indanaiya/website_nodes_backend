@@ -22,9 +22,41 @@ for (let server of SERVERS) {
     price: {
       type: Number,
       min: 1,
+      required: true,
+    },
+    saleVelocity: {
+      overall:{
+        type: Number,
+        min: 0,
+      },
+      nq:{
+        type: Number,
+        min: 0,
+      },
+      hq:{
+        type: Number,
+        min: 0,
+      },
+      default: {},
+    },
+    avgPrice:{
+      overall:{
+        type: Number,
+        min: 0,
+      },
+      nq:{
+        type: Number,
+        min: 0,
+      },
+      hq:{
+        type: Number,
+        min: 0,
+      },
+      default: {},
     },
     updatedAt: {
       type: Date,
+      required: true,
     },
   };
 }

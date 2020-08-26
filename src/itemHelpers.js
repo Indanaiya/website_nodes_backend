@@ -44,6 +44,7 @@ async function addItemGeneric(
   itemDetails,
   server = DEFAULT_SERVER
 ) {
+  console.log("AddItemGeneric");
   const savedItemsWithItemName = await model.find({ name: itemName });
   if (savedItemsWithItemName.length > 1) {
     throw new Error(
@@ -54,11 +55,12 @@ async function addItemGeneric(
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
-    savedItemsWithItemName[0].marketInfo[server].price !== undefined
+    savedItemsWithItemName[0].marketInfo[server]?.price !== undefined
   ) {
     return 0;
   }
 
+  console.log(`Reading from ${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`);
   //Get price
   const universalisObj = await fetch(
     `${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
@@ -70,13 +72,27 @@ async function addItemGeneric(
       )
     )
     .then((body) => JSON.parse(body))
-    .catch((err) =>
-      console.log(
-        `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
-      )
+    .catch(
+      (err) =>{
+        console.log("Error reading JSON")
+        throw new Error(//TODO make it not a generic error and catch it when this function is called
+          `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
+        )}
     );
 
-  const price = universalisObj["listings"][0]["pricePerUnit"];
+  console.log("Here");
+  console.log(universalisObj)
+  const price = universalisObj.listings[0].pricePerUnit;
+  const saleVelocity = {
+    overall: universalisObj.regularSaleVelocity,
+    nq: universalisObj.nqSaleVelocity,
+    hq: universalisObj.hqSaleVelocity,
+  };
+  const avgPrice = {
+    overall: universalisObj.averagePrice,
+    nq: universalisObj.averagePriceNQ,
+    hq: universalisObj.averagePriceHQ,
+  };
   console.log(`price for ${itemName}: ${price}`);
 
   //Save price
@@ -92,7 +108,12 @@ async function addItemGeneric(
     const item = new model({
       name: itemName,
       marketInfo: {
-        [server]: { price, updatedAt: Date.now().toString() },
+        [server]: {
+          price,
+          saleVelocity,
+          avgPrice,
+          updatedAt: Date.now().toString(),
+        },
       },
       universalisId: itemDetails.universalisId,
       ...addFunction(itemDetails, universalisObj),
@@ -161,9 +182,20 @@ async function updateItem(item, ...servers) {
     servers.map((server) =>
       fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
         .then((response) => response.text())
-        .then((body) => {
+        .then((body) => JSON.parse(body))
+        .then((universalisObj) => {
           item.marketInfo[server] = {
-            price: JSON.parse(body)["listings"][0]["pricePerUnit"],
+            price: universalisObj.listings[0].pricePerUnit,
+            saleVelocity: {
+              overall: universalisObj.regularSaleVelocity,
+              nq: universalisObj.nqSaleVelocity,
+              hq: universalisObj.hqSaleVelocity,
+            },
+            avgPrice: {
+              overall: universalisObj.averagePrice,
+              nq: universalisObj.averagePriceNQ,
+              hq: universalisObj.averagePriceHQ,
+            },
             updatedAt: Date.now().toString(),
           };
         })
