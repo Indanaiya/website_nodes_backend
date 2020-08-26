@@ -60,7 +60,7 @@ describe("Items Helpers", function () {
     it("getItems should only return up to date items", async function () {
       const items = await ItemsHelpers.getItems();
       const outOfDateItems = items.filter((item) => {
-        const itemTime = new Date(item.prices[DEFAULT_SERVER].updatedAt);
+        const itemTime = new Date(item.marketInfo[DEFAULT_SERVER].updatedAt);
         return Date.now() > itemTime.getTime() + ITEM_TTL * 1000;
       });
       return assert.equal(outOfDateItems.length, 0);
@@ -105,9 +105,9 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER], undefined);
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER].price, undefined);
-      assert.notEqual(savedItem.prices[DEFAULT_SERVER].updatedAt, undefined);
+      assert.notEqual(savedItem.marketInfo[DEFAULT_SERVER], undefined);
+      assert.notEqual(savedItem.marketInfo[DEFAULT_SERVER].price, undefined);
+      assert.notEqual(savedItem.marketInfo[DEFAULT_SERVER].updatedAt, undefined);
     });
 
     it("addItem add the price for a new server for an item that already exists in the collection", async function () {
@@ -127,9 +127,9 @@ describe("Items Helpers", function () {
       }
       const savedItem = savedItems[0];
       assert.equal(savedItem.name, TEST_ITEM_NAME);
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME], undefined);
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].price, undefined);
-      assert.notEqual(savedItem.prices[TEST_SERVER_NAME].updatedAt, undefined);
+      assert.notEqual(savedItem.marketInfo[TEST_SERVER_NAME], undefined);
+      assert.notEqual(savedItem.marketInfo[TEST_SERVER_NAME].price, undefined);
+      assert.notEqual(savedItem.marketInfo[TEST_SERVER_NAME].updatedAt, undefined);
     });
 
     it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
@@ -150,7 +150,7 @@ describe("Items Helpers", function () {
           return items[0];
         })
         .then((item) => {
-          oldDate = item.prices[DEFAULT_SERVER].updatedAt;
+          oldDate = item.marketInfo[DEFAULT_SERVER].updatedAt;
           return item;
         })
         .then((item) => ItemsHelpers.updateItem(item));
@@ -188,7 +188,7 @@ describe("Items Helpers", function () {
   describe("updateAllItems", function () {
     it("updateAllItems updates all items in the collection", async function () {
       const oldTimes = await PhantaItem.find().then((items) =>
-        items.map((item) => item.prices[DEFAULT_SERVER].updatedAt)
+        items.map((item) => item.marketInfo[DEFAULT_SERVER].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems();
@@ -196,7 +196,7 @@ describe("Items Helpers", function () {
       const nonUpdatedItems = await PhantaItem.find().then((items) =>
         items.filter(
           (item, index) =>
-            item.prices[DEFAULT_SERVER].updatedAt < oldTimes[index]
+            item.marketInfo[DEFAULT_SERVER].updatedAt < oldTimes[index]
         )
       );
 
@@ -205,7 +205,7 @@ describe("Items Helpers", function () {
 
     it("updateAllItems with server provided", async function () {
       const oldTimes = await PhantaItem.find().then((items) =>
-        items.map((item) => item.prices[TEST_SERVER_NAME].updatedAt)
+        items.map((item) => item.marketInfo[TEST_SERVER_NAME].updatedAt)
       );
 
       await ItemsHelpers.updateAllItems(TEST_SERVER_NAME);
@@ -213,7 +213,7 @@ describe("Items Helpers", function () {
       const nonUpdatedItems = await PhantaItem.find().then((items) =>
         items.filter(
           (item, index) =>
-            item.prices[TEST_SERVER_NAME].updatedAt < oldTimes[index]
+            item.marketInfo[TEST_SERVER_NAME].updatedAt < oldTimes[index]
         )
       );
 

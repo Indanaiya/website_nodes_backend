@@ -54,7 +54,7 @@ async function addItemGeneric(
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
-    savedItemsWithItemName[0].prices[server].price !== undefined
+    savedItemsWithItemName[0].marketInfo[server].price !== undefined
   ) {
     return 0;
   }
@@ -82,7 +82,7 @@ async function addItemGeneric(
   //Save price
   if (savedItemsWithItemName.length === 1) {
     const item = savedItemsWithItemName[0];
-    item.prices[server] = {
+    item.marketInfo[server] = {
       price,
       updatedAt: Date.now().toString(),
     };
@@ -91,7 +91,7 @@ async function addItemGeneric(
   } else {
     const item = new model({
       name: itemName,
-      prices: {
+      marketInfo: {
         [server]: { price, updatedAt: Date.now().toString() },
       },
       universalisId: itemDetails.universalisId,
@@ -111,14 +111,14 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
       const outOfDateServers = { name: item, servers: [] };
       servers.forEach((server) => {
         if (
-          item.prices[server]?.updatedAt === undefined ||
-          new Date(item.prices[server].updatedAt).getTime() +
+          item.marketInfo[server]?.updatedAt === undefined ||
+          new Date(item.marketInfo[server].updatedAt).getTime() +
             ITEM_TTL * 1000 <
             Date.now()
         ) {
-          const undef = item.prices[server]?.updatedAt === undefined;
+          const undef = item.marketInfo[server]?.updatedAt === undefined;
           const ood =
-            new Date(item.prices[server]?.updatedAt).getTime() +
+            new Date(item.marketInfo[server]?.updatedAt).getTime() +
               ITEM_TTL * 1000 <
             Date.now();
           console.log(
@@ -137,7 +137,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
 
   //Return the items
   const projection =
-    servers.map((server) => `prices.${server}`).join(" ") +
+    servers.map((server) => `marketInfo.${server}`).join(" ") +
     " name " +
     fieldsToGet;
 
@@ -162,7 +162,7 @@ async function updateItem(item, ...servers) {
       fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
         .then((response) => response.text())
         .then((body) => {
-          item.prices[server] = {
+          item.marketInfo[server] = {
             price: JSON.parse(body)["listings"][0]["pricePerUnit"],
             updatedAt: Date.now().toString(),
           };

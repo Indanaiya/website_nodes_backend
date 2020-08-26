@@ -9,7 +9,7 @@ const protoItemSchema = {
     required: true,
     unique: true,
   },
-  prices: {},
+  marketInfo: {},
   universalisId: {
     type: Number,
     required: true,
@@ -18,7 +18,7 @@ const protoItemSchema = {
 };
 
 for (let server of SERVERS) {
-  protoItemSchema.prices[server] = {
+  protoItemSchema.marketInfo[server] = {
     price: {
       type: Number,
       min: 1,
