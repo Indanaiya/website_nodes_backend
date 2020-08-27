@@ -90,6 +90,7 @@ async function addItemGeneric(
       nq: universalisObj.averagePriceNQ,
       hq: universalisObj.averagePriceHQ,
     },
+    lastUploadTime: universalisObj.lastUploadTime,
     updatedAt: Date.now().toString(),
   };
 
@@ -184,6 +185,7 @@ async function updateItem(item, ...servers) {
               nq: universalisObj.averagePriceNQ,
               hq: universalisObj.averagePriceHQ,
             },
+            lastUploadTime: universalisObj.lastUploadTime,
             updatedAt: Date.now().toString(),
           };
         })

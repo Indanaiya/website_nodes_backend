@@ -51,6 +51,9 @@ for (let server of SERVERS) {
         min: 0,
       },
     },
+    lastUploadTime:{
+      type: Date,
+    },
     updatedAt: {
       type: Date,
     },
