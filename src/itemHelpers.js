@@ -48,7 +48,7 @@ async function addItemGeneric(
       `Too many items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
     );
   }
-  
+
   //Information requested already exists in collection?:
   if (
     savedItemsWithItemName.length === 1 &&
@@ -118,7 +118,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
   //Update the out of date items
   const outOfDatePrices = await model.find().then((items) =>
     items.map((item) => {
-      const outOfDateServers = { name: item, servers: [] };
+      const outOfDateServers = { item, servers: [] };
       servers.forEach((server) => {
         if (
           item.marketInfo[server]?.updatedAt === undefined ||
@@ -142,7 +142,9 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
   );
 
   await Promise.all(
-    outOfDatePrices.map((item) => updateItem(item.name, ...item.servers))
+    outOfDatePrices.map((item) =>
+      item.servers.length > 0 ? updateItem(item, ...item.servers) : null
+    )
   );
 
   //Return the items
@@ -167,11 +169,20 @@ async function updateItem(item, ...servers) {
     servers = [DEFAULT_SERVER];
   }
 
+  //TODO write a single point of access for fetching from universalis
   await Promise.all(
-    servers.map((server) =>
-      fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
+    servers.map((server) => {
+      console.log(
+        `Fetching from Universalis: ${UNIVERSALIS_URL + server}/${
+          item.universalisId
+        }`
+      );
+      return fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
         .then((response) => response.text())
         .then((body) => JSON.parse(body))
+        .catch((err) =>
+          console.log("Error parsing json, unable to update item", err)
+        )
         .then((universalisObj) => {
           item.marketInfo[server] = {
             price: universalisObj.listings[0].pricePerUnit,
@@ -188,8 +199,8 @@ async function updateItem(item, ...servers) {
             lastUploadTime: universalisObj.lastUploadTime,
             updatedAt: Date.now().toString(),
           };
-        })
-    )
+        });
+    })
   );
 
   return item.save().then(() => item);
