@@ -143,7 +143,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
 
   await Promise.all(
     outOfDatePrices.map((item) =>
-      item.servers.length > 0 ? updateItem(item, ...item.servers) : null
+      item.servers.length > 0 ? updateItem(item.item, ...item.servers) : null
     )
   );
 
@@ -160,7 +160,8 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
 
 async function updateItem(item, ...servers) {
   if (!(item instanceof Document)) {
-    throw new TypeError("'item' must be a document.");
+    console.log(item);
+    throw new TypeError(`'item' must be a document, it was: ${item}`);
   }
   if (item.isNew) {
     throw new InvalidArgumentError("'item' is new.");
