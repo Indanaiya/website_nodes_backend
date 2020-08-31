@@ -8,7 +8,7 @@ const ItemHelper = require("./src/itemHelpers");
 const NodeHelper = require("./src/nodeHelpers");
 
 const itemsRouter = require("./routes/items");
-const nodesRouter = require("./routes/nodes")
+const nodesRouter = require("./routes/nodes");
 
 require("dotenv").config();
 
@@ -41,9 +41,15 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-ItemHelper.phantasmagoria
-  .addAllItems()
-  .then(() => console.log("All phantasmagoria items present in collection."));
+ItemHelper.phantasmagoria.addAllItems().then((results) => {
+  console.log(results)
+  console.log("Finished adding Phantasmagoria items to collection");
+  results.forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result, `did not complete successfully`);
+    }
+  });
+});
 
 ItemHelper.gatherable
   .addAllItems()

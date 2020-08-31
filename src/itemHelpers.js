@@ -1,20 +1,24 @@
 const { PhantaItem, GatherableItem } = require("../models/Item.model");
 const { Document } = require("mongoose");
-const fetch = require("node-fetch");
 const fs = require("fs").promises;
 
 const {
   DEFAULT_SERVER,
-  UNIVERSALIS_URL,
   PHANTASMAGORIA_MATS_JSON_PATH,
   GATHERABLE_ITEMS_JSON_PATH,
   ITEM_TTL,
 } = require("../src/constants");
-const { InvalidArgumentError } = require("../src/errors");
+const fetchFromUniversalis = require("../src/fetchFromUniversalis");
+const { InvalidArgumentError, DBError } = require("../src/errors");
 
 /** CREATE */
-
-async function addAllItemsGeneric(itemsJsonPath, model, addItem) {
+/**
+ * Add all items in the json to the model's collection
+ * @param {string} itemsJsonPath The path to the JSON file containing informaiton about the items to add
+ * @param {Model} model The model for the items to be saved as
+ * @param {Function} addItem A function to save the items
+ */
+async function addAllItemsGeneric(itemsJsonPath, model, addFunction) {
   const requiredItems = await fs
     .readFile(itemsJsonPath, "utf8")
     .then((data) => JSON.parse(data));
@@ -28,13 +32,22 @@ async function addAllItemsGeneric(itemsJsonPath, model, addItem) {
     (itemName) => !presentItemNames.includes(itemName)
   );
 
-  return Promise.all(
+  return Promise.allSettled(
     nonPresentItemNames.map((itemName) =>
-      addItem(itemName, requiredItems[itemName])
+      addFunction(itemName, requiredItems[itemName])
     )
   );
 }
 
+/**
+ * Add a single item to the model's collection
+ *
+ * @param {Model} model The model for the item to be saved as
+ * @param {Function} addFunction A function to save the items (For things unique to this type of item, e.g. phantasmagoria price)
+ * @param {string} itemName The name of the item to be saved
+ * @param {*} itemDetails An object representing the item
+ * @param {string} server The server for market information to be fetched for
+ */
 async function addItemGeneric(
   model,
   addFunction,
@@ -42,9 +55,14 @@ async function addItemGeneric(
   itemDetails,
   server = DEFAULT_SERVER
 ) {
-  const savedItemsWithItemName = await model.find({ name: itemName });
+  let savedItemsWithItemName;
+  try {
+    savedItemsWithItemName = await model.find({ name: itemName });
+  } catch (err) {
+    throw new DBError(`Error adding ${itemName} while trying to access DB: ${err}`);
+  }
   if (savedItemsWithItemName.length > 1) {
-    throw new Error(
+    throw new DBError(
       `Too many items. Searching for ${itemName} returned ${savedItemsWithItemName.length} results.`
     );
   }
@@ -57,26 +75,7 @@ async function addItemGeneric(
     return 0;
   }
 
-  console.log(
-    `Reading from ${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
-  );
-  //Get price
-  const universalisObj = await fetch(
-    `${UNIVERSALIS_URL + server}/${itemDetails.universalisId}`
-  )
-    .then((response) => response.text())
-    .catch((err) =>
-      console.log(
-        `Error getting response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
-      )
-    )
-    .then((body) => JSON.parse(body))
-    .catch((err) => {
-      console.log("Error reading JSON");
-      throw new Error( //TODO make it not a generic error and catch it when this function is called
-        `Error parsing json response from Universalis for item ${itemName}(id: ${itemDetails.universalisId}): ${err}`
-      );
-    });
+  const universalisObj = await fetchFromUniversalis(itemDetails.universalisId);
 
   const marketInfo = {
     price: universalisObj.listings[0].pricePerUnit,
@@ -113,7 +112,12 @@ async function addItemGeneric(
 }
 
 /** READ */
-
+/**
+ * Get all items in a collection
+ * @param {Model} model The model for the collection to get items for
+ * @param {string} fieldsToGet Which fields from the documents to return, as a space seperated string
+ * @param  {...string} servers The servers to retrieve market information from (will update the prices if they are outdated)
+ */
 async function getItemsGeneric(model, fieldsToGet, ...servers) {
   //Update the out of date items
   const outOfDatePrices = await model.find().then((items) =>
@@ -157,14 +161,19 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
 }
 
 /** UPDATE */
-
+/**
+ * Update the market information for an item for the given server(s)
+ *
+ * @param {Document} item The item to update
+ * @param  {...string} servers The servers to update market information for
+ */
 async function updateItem(item, ...servers) {
   if (!(item instanceof Document)) {
     console.log(item);
-    throw new TypeError(`'item' must be a document, it was: ${item}`);
+    throw new TypeError(`'item' must be a document, it was: `, item);
   }
   if (item.isNew) {
-    throw new InvalidArgumentError("'item' is new.");
+    throw new InvalidArgumentError("'item' is new:", item);
   }
   if (servers.length === 0) {
     servers = [DEFAULT_SERVER];
@@ -173,17 +182,7 @@ async function updateItem(item, ...servers) {
   //TODO write a single point of access for fetching from universalis
   await Promise.all(
     servers.map((server) => {
-      console.log(
-        `Fetching from Universalis: ${UNIVERSALIS_URL + server}/${
-          item.universalisId
-        }`
-      );
-      return fetch(`${UNIVERSALIS_URL + server}/${item.universalisId}`)
-        .then((response) => response.text())
-        .then((body) => JSON.parse(body))
-        .catch((err) =>
-          console.log("Error parsing json, unable to update item", err)
-        )
+      return fetchFromUniversalis(item.universalisId, server)
         .then((universalisObj) => {
           item.marketInfo[server] = {
             price: universalisObj.listings[0].pricePerUnit,
@@ -207,6 +206,11 @@ async function updateItem(item, ...servers) {
   return item.save().then(() => item);
 }
 
+/**
+ * Update the market information for the given servers for all items in a collection
+ * @param {Model} model The model for the collection to be updated
+ * @param  {...string} servers The servers for which market information should be updated
+ */
 async function updateAllItemsGeneric(model, ...servers) {
   if (servers.length === 0) {
     servers = [DEFAULT_SERVER];
