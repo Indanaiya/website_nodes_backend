@@ -15,22 +15,23 @@ class IdenticalNodePresentError extends Error {
 }
 
 /** CREATE */
-
+/**
+ * Add the node consistent with the object provided to the collection
+ *
+ * @param {{items:[string], filters:{patch: number, class: string, nodeType: string, tome:string}, location: {map: string, x: number, y: number}, spawnTimes: [number], lifespan: number, level: number, name: string}} nodeDetails An object containing the necessary information to add a node to the collection.
+ */
 async function addNode(nodeDetails) {
-  if(nodeDetails.filters === undefined){
-    nodeDetails.filters = {};
-  }
   nodeDetails.filters.task = {};
-  const itemsThisNodeHas = await GatherableItem.find({ name: nodeDetails.items });
-  console.log(itemsThisNodeHas)
+  const itemsThisNodeHas = await GatherableItem.find({
+    name: nodeDetails.items,
+  });
+  console.log(itemsThisNodeHas);
   //To be used to filter nodes
   itemsThisNodeHas.map((item) => {
     if (item.task?.reducible) nodeDetails.filters.task.reducible = true;
     if (item.task?.whiteScrips) nodeDetails.filters.task.whiteScrips = true;
     if (item.task?.yellowScrips) nodeDetails.filters.task.yellowScrips = true;
   });
-
-  console.log(nodeDetails)
 
   const node = new GatheringNode({
     ...nodeDetails,
@@ -60,6 +61,10 @@ async function addNode(nodeDetails) {
   return node.save();
 }
 
+/**
+ * Add all nodes in the file at GATHERING_NODES_JSON_PATH to the db
+ * @returns {Promise<string[]>}
+ */
 async function addAllNodes() {
   const requiredNodes = await fs
     .readFile(GATHERING_NODES_JSON_PATH, "utf8")
@@ -67,19 +72,24 @@ async function addAllNodes() {
 
   return Promise.all(
     requiredNodes.map((nodeDetails) =>
-      addNode(nodeDetails).catch((err) => {
-        if (err instanceof IdenticalNodePresentError) {
-          console.log("Node already present");
-        } else {
-          throw err;
-        }
-      })
+      addNode(nodeDetails)
+        .then(() => `Node ${nodeDetails} saved.`)
+        .catch((err) => {
+          if (err instanceof IdenticalNodePresentError) {
+            return `Node ${nodeDetails} already present.`;
+          } else {
+            throw err;
+          }
+        })
     )
   );
 }
 
 /** READ */
-
+/**
+ * Get all nodes in the collection
+ * @returns {Document[]} All documents in the nodes collection028
+ */
 async function getAllNodes() {
   return GatheringNode.find();
 }
