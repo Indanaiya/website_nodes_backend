@@ -12,7 +12,7 @@
 
       "filters": {
         "patch": "5.0",
-        "class": "MIN",
+        "className": "MIN",
         "nodeType": "unspoiled"
       },
       "level": 80,
@@ -29,7 +29,7 @@
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
-        "class": "MIN",
+        "className": "MIN",
         "nodeType": "unspoiled"
       },
       "level": 80,
@@ -46,7 +46,7 @@
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
-        "class": "BTN",
+        "className": "BTN",
         "nodeType": "unspoiled"
       },
       "level": 75,
@@ -63,7 +63,7 @@
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
-        "class": "BTN",
+        "className": "BTN",
         "nodeType": "unspoiled"
       },
       "level": 80,
@@ -80,7 +80,7 @@
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
-        "class": "BTN",
+        "className": "BTN",
         "nodeType": "legendary"
       },
       "level": 80,
@@ -98,7 +98,7 @@
       "lifespan": 2,
       "filters": {
         "patch": "5.0",
-        "class": "MIN",
+        "className": "MIN",
         "nodeType": "unspoiled"
       },
       "level": 80,

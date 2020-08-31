@@ -19,4 +19,12 @@ class JSONParseError extends Error {
   }
 }
 
-module.exports = { InvalidArgumentError, DBError, JSONParseError };
+class IdenticalNodePresentError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "IdenticalNodePresentError";
+  }
+}
+
+
+module.exports = { InvalidArgumentError, DBError, JSONParseError, IdenticalNodePresentError };

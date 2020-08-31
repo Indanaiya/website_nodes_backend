@@ -5,14 +5,10 @@ const { GatherableItem } = require("../models/Item.model");
 const fs = require("fs").promises;
 
 const { GATHERING_NODES_JSON_PATH } = require("../src/constants");
-const { InvalidArgumentError } = require("../src/errors");
-
-class IdenticalNodePresentError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "IdenticalNodePresentError";
-  }
-}
+const {
+  InvalidArgumentError,
+  IdenticalNodePresentError,
+} = require("../src/errors");
 
 /** CREATE */
 /**
@@ -25,9 +21,8 @@ async function addNode(nodeDetails) {
   const itemsThisNodeHas = await GatherableItem.find({
     name: nodeDetails.items,
   });
-  console.log(itemsThisNodeHas);
   //To be used to filter nodes
-  itemsThisNodeHas.map((item) => {
+  itemsThisNodeHas.forEach((item) => {
     if (item.task?.reducible) nodeDetails.filters.task.reducible = true;
     if (item.task?.whiteScrips) nodeDetails.filters.task.whiteScrips = true;
     if (item.task?.yellowScrips) nodeDetails.filters.task.yellowScrips = true;
@@ -37,14 +32,15 @@ async function addNode(nodeDetails) {
     ...nodeDetails,
   });
 
-  await node
-    .validate()
-    .catch(
-      (err) =>
-        new InvalidArgumentError(
-          `${nodeDetails} does not create a vaild GatheringNode object: ${err}`
-        )
+  const result = await node.validate().catch((err) => {
+    console.log("The folowing node is invalid: ", node);
+    return new InvalidArgumentError(
+      `${nodeDetails} does not create a vaild GatheringNode object: ${err}`
     );
+  });
+  if (result instanceof Error) {
+    throw result;
+  }
 
   const identicalNodes = await GatheringNode.find({
     "location.map": nodeDetails.location.map,
@@ -62,13 +58,16 @@ async function addNode(nodeDetails) {
 }
 
 /**
- * Add all nodes in the file at GATHERING_NODES_JSON_PATH to the db
+ * Add all nodes in the file at path to the db
+ * @param {string} path The path to the json file containing the node information
  * @returns {Promise<string[]>}
  */
-async function addAllNodes() {
-  const requiredNodes = await fs
-    .readFile(GATHERING_NODES_JSON_PATH, "utf8")
-    .then((data) => JSON.parse(data).nodes);
+async function addAllNodes(nodes) {
+  const requiredNodes =
+    nodes ??
+    (await fs
+      .readFile(GATHERING_NODES_JSON_PATH, "utf8")
+      .then((data) => JSON.parse(data).nodes));
 
   return Promise.all(
     requiredNodes.map((nodeDetails) =>
@@ -94,4 +93,4 @@ async function getAllNodes() {
   return GatheringNode.find();
 }
 
-module.exports = { addAllNodes, getAllNodes };
+module.exports = { addAllNodes, getAllNodes, addNode };
