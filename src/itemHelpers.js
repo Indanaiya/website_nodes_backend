@@ -59,7 +59,9 @@ async function addItemGeneric(
   try {
     savedItemsWithItemName = await model.find({ name: itemName });
   } catch (err) {
-    throw new DBError(`Error adding ${itemName} while trying to access DB: ${err}`);
+    throw new DBError(
+      `Error adding ${itemName} while trying to access DB: ${err}`
+    );
   }
   if (savedItemsWithItemName.length > 1) {
     throw new DBError(
@@ -182,8 +184,8 @@ async function updateItem(item, ...servers) {
   //TODO write a single point of access for fetching from universalis
   await Promise.all(
     servers.map((server) => {
-      return fetchFromUniversalis(item.universalisId, server)
-        .then((universalisObj) => {
+      return fetchFromUniversalis(item.universalisId, server).then(
+        (universalisObj) => {
           item.marketInfo[server] = {
             price: universalisObj.listings[0].pricePerUnit,
             saleVelocity: {
@@ -199,7 +201,8 @@ async function updateItem(item, ...servers) {
             lastUploadTime: universalisObj.lastUploadTime,
             updatedAt: Date.now().toString(),
           };
-        });
+        }
+      );
     })
   );
 

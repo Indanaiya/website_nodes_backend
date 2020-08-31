@@ -83,12 +83,30 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
             assert.equal(itemsInJsonButNotInCollection.length, 0)
           );
       });
+
+      it("should only update items if they need updating", async function () {
+        //Items should all be up to date from previous tests
+        const items = await model.find();
+        const getItems = await helpers.getItems();
+        const modelItemsObj = {};
+        items.forEach(
+          (item) =>
+            (modelItemsObj[item.name] =
+              item.marketInfo[DEFAULT_SERVER].updatedAt)
+        );
+        const updatedItems = getItems.filter(
+          (item) =>
+            item.marketInfo[DEFAULT_SERVER].updatedAt ===
+            modelItemsObj[item.name]
+        );
+        assert.equal(updatedItems.length, 0);
+      });
     });
 
     describe("addItem", async function () {
       before(async () => await model.deleteMany({}));
 
-      it("addItem should add a supplied item that doesn't exist to the collection", async function () {
+      it("should add a supplied item that doesn't exist to the collection", async function () {
         assert.equal(
           await helpers.addItem(testItemName, mats[testItemName]),
           2
@@ -113,7 +131,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
         );
       });
 
-      it("addItem add the price for a new server for an item that already exists in the collection", async function () {
+      it("should add the price for a new server for an item that already exists in the collection", async function () {
         assert.equal(
           await helpers.addItem(
             testItemName,
@@ -145,7 +163,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
         );
       });
 
-      it("addItem should return 0 if one attempts to add an item that already exists to the collection", async function () {
+      it("should return 0 if one attempts to add an item that already exists to the collection", async function () {
         assert.equal(
           await helpers.addItem(testItemName, mats[testItemName]),
           0
@@ -154,7 +172,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
     });
 
     describe("updateItem", function () {
-      it("updateItem should update an Item", async function () {
+      it("should update an Item", async function () {
         let oldDate = null;
 
         //Get the date of the item, ITEM_NAME, as it is currently saved and then call updateItem on it
@@ -183,7 +201,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
         assert.notEqual(item.updatedAt, oldDate);
       });
 
-      it("updateItem with string instead of document", async function () {
+      it("should fail when provided with an argument that isn't a document", async function () {
         return helpers
           .updateItem("Gobbledeegoop")
           .then(() =>
@@ -194,7 +212,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
           .catch((err) => assert.instanceOf(err, TypeError));
       });
 
-      it("updateItem with unsaved document", async function () {
+      it("should fail when provided with an unsaved document", async function () {
         return helpers
           .updateItem(new model({}))
           .then(() =>
@@ -207,7 +225,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
     });
 
     describe("updateAllItems", function () {
-      it("updateAllItems updates all items in the collection", async function () {
+      it("should update all items in the collection", async function () {
         const oldTimes = await model
           .find()
           .then((items) =>
@@ -228,7 +246,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
         assert.equal(nonUpdatedItems.length, 0);
       });
 
-      it("updateAllItems with server provided", async function () {
+      it("should update information for the server provided", async function () {
         const oldTimes = await model
           .find()
           .then((items) =>
