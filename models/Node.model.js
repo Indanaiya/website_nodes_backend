@@ -12,7 +12,7 @@ const gatheringNodeSchema = new Schema({
       min: 1,
       max: 10,
     },
-    class: {
+    className: {
       type: String,
       required: true,
       enum: ["BTN", "MIN", "FSH"],
