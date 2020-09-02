@@ -5,15 +5,16 @@ const {
   gatherable: GatherableHelpers,
 } = require("../src/itemHelpers");
 const {
-  PHANTASMAGORIA_MATS_JSON_PATH,
   ITEM_TTL,
   DEFAULT_SERVER,
-  GATHERABLE_ITEMS_JSON_PATH,
 } = require("../src/constants");
 const fs = require("fs").promises;
 const mongoose = require("mongoose");
 const { PhantaItem, GatherableItem } = require("../models/Item.model");
 const { InvalidArgumentError } = require("../src/errors");
+
+const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json";
+const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json";
 
 require("dotenv").config();
 
@@ -272,7 +273,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
 
 describeItemHelpers(
   PhantaItem,
-  "Tempest Adhesive",
+  "Multifaceted Alumen",
   PHANTASMAGORIA_MATS_JSON_PATH,
   "Phantasmagoria",
   PhantasmagoriaHelpers

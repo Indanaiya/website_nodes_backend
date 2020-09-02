@@ -179,7 +179,6 @@ async function updateItem(item, ...servers) {
     servers = [DEFAULT_SERVER];
   }
 
-  //TODO write a single point of access for fetching from universalis
   await Promise.all(
     servers.map((server) => {
       return fetchFromUniversalis(item.universalisId, server).then(

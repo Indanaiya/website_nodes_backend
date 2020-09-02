@@ -66,7 +66,7 @@ async function addAllNodes(nodesJsonPath, nodes) {
     nodes ??
     (await fs
       .readFile(nodesJsonPath, "utf8")
-      .then((data) => JSON.parse(data).nodes));
+      .then((data) => JSON.parse(data)));
 
   return Promise.all(
     requiredNodes.map((nodeDetails) =>

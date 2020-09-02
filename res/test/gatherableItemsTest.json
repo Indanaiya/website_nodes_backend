@@ -1,0 +1,110 @@
+{
+  "Raw Triplite": {
+    "name": "Raw Triplite",
+    "universalisId": "27729",
+    "task": {
+      "yellowScrips": [
+        {
+          "collectibility": "450-469",
+          "experience": [4434500, 5321400],
+          "scrips": [40, 48]
+        },
+        {
+          "collectibility": "470-499",
+          "experience": [5099675, 6119610],
+          "scrips": [44, 52]
+        },
+        {
+          "collectibility": "500+",
+          "experience": [5764, 850, 6917820],
+          "scrips": [52, 62]
+        }
+      ]
+    }
+  },
+
+  "Raw Onyx": {
+    "name": "Raw Onyx",
+    "universalisId": "27731",
+
+    "task": {
+      "whiteScrips": [
+        {
+          "collectibility": "470-499",
+          "experience": [7577500, 9093000],
+          "scrips": [25, 30]
+        },
+        {
+          "collectibility": "500-529",
+          "experience": [8714125, 10456950],
+          "scrips": [28, 33]
+        },
+        {
+          "collectibility": "530-",
+          "experience": [9850750, 11820900],
+          "scrips": [32, 38]
+        }
+      ]
+    }
+  },
+
+  "Broad Beans": {
+    "name": "Broad Beans",
+    "universalisId": "27833",
+
+    "task": {
+      "yellowScrips": [
+        {
+          "collectibility": "450-469",
+          "experience": [2722300, 3266760],
+          "scrips": [35, 42]
+        },
+        {
+          "collectibility": "470-499",
+          "experience": [3103644, 3756772],
+          "scrips": [38, 45]
+        },
+        {
+          "collectibility": "500+",
+          "experience": [3538990, 4246788],
+          "scrips": [45, 54]
+        }
+      ]
+    }
+  },
+
+  "Mist Spinach": {
+    "name": "Mist Spinach",
+    "universalisId": "27828",
+
+    "task": {
+      "whiteScrips": [
+        {
+          "collectibility": "470-499",
+          "experience": [5731250, 6877500],
+          "scrips": [23, 27]
+        },
+        {
+          "collectibility": "500-529",
+          "experience": [6590937, 7909124],
+          "scrips": [26, 31]
+        },
+        {
+          "collectibility": "530+",
+          "experience": [7450625, 8940750],
+          "scrips": [29, 34]
+        }
+      ]
+    }
+  },
+
+  "Imperial Fern": {
+    "name": "Imperial Fern",
+    "universalisId": "29978"
+  },
+
+  "Tender Dill": {
+    "name": "Tender Dill",
+    "universalisId": "30485"
+  }
+}

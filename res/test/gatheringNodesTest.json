@@ -1,0 +1,106 @@
+[
+  {
+    "location": {
+      "map": "Amh Araeng",
+      "x": 20,
+      "y": 29
+    },
+    "items": ["Raw Triplite"],
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+
+    "filters": {
+      "patch": "5.0",
+      "className": "MIN",
+      "nodeType": "unspoiled"
+    },
+    "level": 80,
+    "name": "Unspoiled Mineral Deposit1"
+  },
+  {
+    "location": {
+      "map": "The Tempest",
+      "x": 16,
+      "y": 21
+    },
+    "items": ["Raw Onyx"],
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "filters": {
+      "patch": "5.0",
+      "className": "MIN",
+      "nodeType": "unspoiled"
+    },
+    "level": 80,
+    "name": "Unspoiled Mineral Deposit"
+  },
+  {
+    "location": {
+      "map": "Il Mheg",
+      "x": 25,
+      "y": 36
+    },
+    "items": ["Broad Beans"],
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "filters": {
+      "patch": "5.0",
+      "className": "BTN",
+      "nodeType": "unspoiled"
+    },
+    "level": 75,
+    "name": "Unspoiled Lush Vegetation"
+  },
+  {
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "x": 35,
+      "y": 22
+    },
+    "items": ["Mist Spinach"],
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "filters": {
+      "patch": "5.0",
+      "className": "BTN",
+      "nodeType": "unspoiled"
+    },
+    "level": 80,
+    "name": "Unspoiled Lush Vegetation"
+  },
+  {
+    "location": {
+      "map": "Kholusia",
+      "x": 28,
+      "y": 21
+    },
+    "items": ["Imperial Fern", "Tender Dill"],
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "filters": {
+      "patch": "5.0",
+      "className": "BTN",
+      "nodeType": "legendary"
+    },
+    "level": 80,
+    "name": "Legendary Lush Vegetation",
+    "tome": "Tome of Botanical Folklore - Norvrandt"
+  },
+  {
+    "location": {
+      "map": "JUST FOR TESTING DELETE LATER",
+      "x": 26,
+      "y": 13
+    },
+    "items": ["Imperial Fern"],
+    "spawnTimes": [6, 18],
+    "lifespan": 2,
+    "filters": {
+      "patch": "5.0",
+      "className": "MIN",
+      "nodeType": "unspoiled"
+    },
+    "level": 80,
+    "name": "Legendary Test Vegetation"
+  }
+]

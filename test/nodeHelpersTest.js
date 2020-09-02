@@ -3,13 +3,14 @@ const assert = require("chai").assert;
 const mongoose = require("mongoose");
 const fs = require("fs").promises;
 
-const { GATHERING_NODES_JSON_PATH } = require("../src/constants");
 const {
   IdenticalNodePresentError,
   InvalidArgumentError,
 } = require("../src/errors");
 const GatheringNode = require("../models/Node.model");
 const { addAllNodes, addNode, getAllNodes } = require("../src/nodeHelpers");
+
+const GATHERING_NODES_JSON_PATH = "res/test/gatheringNodesTest.json";
 
 require("dotenv").config();
 
@@ -94,7 +95,7 @@ describe("test nodeHelpers", function () {
         GatheringNode.deleteMany(),
         (nodes = await fs
           .readFile(GATHERING_NODES_JSON_PATH, "utf8")
-          .then((json) => JSON.parse(json).nodes)),
+          .then((json) => JSON.parse(json))),
       ]);
     });
 
@@ -104,26 +105,26 @@ describe("test nodeHelpers", function () {
       assert.equal(presentNodes.length, nodes.length);
     });
 
-    it("should not throw an error when attempting to add the same node twice", async function() {
+    it("should not throw an error when attempting to add the same node twice", async function () {
       await addAllNodes(GATHERING_NODES_JSON_PATH);
-    })
+    });
 
-    it("should throw an error when attempting to add an invalid node", async function(){
+    it("should throw an error when attempting to add an invalid node", async function () {
       nodes[0].location = undefined;
       await addAllNodes(GATHERING_NODES_JSON_PATH, nodes) //Without filters and map, a different error will be triggered first
-      .then(() =>
-        assert.fail("trying to add an invalid array of nodes did not fail")
-      )
-      .catch((err) => assert.instanceOf(err, InvalidArgumentError))
-      .catch();
-    })
+        .then(() =>
+          assert.fail("trying to add an invalid array of nodes did not fail")
+        )
+        .catch((err) => assert.instanceOf(err, InvalidArgumentError))
+        .catch();
+    });
   });
 
-  describe("test getAllNodes", async function(){
-    it("gets all nodes", async function(){
+  describe("test getAllNodes", async function () {
+    it("gets all nodes", async function () {
       const funcResult = await getAllNodes();
       const mongResult = await GatheringNode.find();
       assert.equal(funcResult.length, mongResult.length);
-    })
-  })
+    });
+  });
 });
