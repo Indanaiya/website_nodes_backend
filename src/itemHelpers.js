@@ -75,7 +75,7 @@ async function addItemGeneric(
     return 0;
   }
 
-  const universalisObj = await fetchFromUniversalis(itemDetails.universalisId);
+  const universalisObj = await fetchFromUniversalis(itemDetails.id);
 
   const marketInfo = {
     price: universalisObj.listings[0].pricePerUnit,
@@ -103,7 +103,7 @@ async function addItemGeneric(
     const item = new model({
       name: itemName,
       marketInfo: { [server]: marketInfo },
-      universalisId: itemDetails.universalisId,
+      id: itemDetails.id,
       ...addFunction(itemDetails, universalisObj),
     });
 
@@ -181,7 +181,7 @@ async function updateItem(item, ...servers) {
 
   await Promise.all(
     servers.map((server) => {
-      return fetchFromUniversalis(item.universalisId, server).then(
+      return fetchFromUniversalis(item.id, server).then(
         (universalisObj) => {
           item.marketInfo[server] = {
             price: universalisObj.listings[0].pricePerUnit,

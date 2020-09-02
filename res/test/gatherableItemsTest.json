@@ -1,7 +1,7 @@
 {
   "Raw Triplite": {
     "name": "Raw Triplite",
-    "universalisId": "27729",
+    "id": "27729",
     "task": {
       "yellowScrips": [
         {
@@ -25,7 +25,7 @@
 
   "Raw Onyx": {
     "name": "Raw Onyx",
-    "universalisId": "27731",
+    "id": "27731",
 
     "task": {
       "whiteScrips": [
@@ -50,7 +50,7 @@
 
   "Broad Beans": {
     "name": "Broad Beans",
-    "universalisId": "27833",
+    "id": "27833",
 
     "task": {
       "yellowScrips": [
@@ -75,7 +75,7 @@
 
   "Mist Spinach": {
     "name": "Mist Spinach",
-    "universalisId": "27828",
+    "id": "27828",
 
     "task": {
       "whiteScrips": [
@@ -100,11 +100,11 @@
 
   "Imperial Fern": {
     "name": "Imperial Fern",
-    "universalisId": "29978"
+    "id": "29978"
   },
 
   "Tender Dill": {
     "name": "Tender Dill",
-    "universalisId": "30485"
+    "id": "30485"
   }
 }

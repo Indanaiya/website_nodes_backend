@@ -10,7 +10,7 @@ const protoItemSchema = {
     unique: true,
   },
   marketInfo: {},
-  universalisId: {
+  id: {
     type: Number,
     required: true,
     unique: true,
