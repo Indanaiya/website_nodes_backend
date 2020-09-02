@@ -4,7 +4,6 @@ const { GatherableItem } = require("../models/Item.model");
 // const fetch = require("node-fetch");
 const fs = require("fs").promises;
 
-const { GATHERING_NODES_JSON_PATH } = require("../src/constants");
 const {
   InvalidArgumentError,
   IdenticalNodePresentError,
@@ -62,11 +61,11 @@ async function addNode(nodeDetails) {
  * @param {string} path The path to the json file containing the node information
  * @returns {Promise<string[]>}
  */
-async function addAllNodes(nodes) {
+async function addAllNodes(nodesJsonPath, nodes) {
   const requiredNodes =
     nodes ??
     (await fs
-      .readFile(GATHERING_NODES_JSON_PATH, "utf8")
+      .readFile(nodesJsonPath, "utf8")
       .then((data) => JSON.parse(data).nodes));
 
   return Promise.all(

@@ -99,18 +99,18 @@ describe("test nodeHelpers", function () {
     });
 
     it("should add all nodes in the json file to the collection", async function () {
-      await addAllNodes();
+      await addAllNodes(GATHERING_NODES_JSON_PATH);
       const presentNodes = await GatheringNode.find();
       assert.equal(presentNodes.length, nodes.length);
     });
 
     it("should not throw an error when attempting to add the same node twice", async function() {
-      await addAllNodes();
+      await addAllNodes(GATHERING_NODES_JSON_PATH);
     })
 
     it("should throw an error when attempting to add an invalid node", async function(){
       nodes[0].location = undefined;
-      await addAllNodes(nodes) //Without filters and map, a different error will be triggered first
+      await addAllNodes(GATHERING_NODES_JSON_PATH, nodes) //Without filters and map, a different error will be triggered first
       .then(() =>
         assert.fail("trying to add an invalid array of nodes did not fail")
       )

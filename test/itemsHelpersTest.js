@@ -52,7 +52,7 @@ function describeItemHelpers(model, testItemName, matsJsonPath, name, helpers) {
         const items = await model.find();
         assert.equal(items.length, 0); //Not really a part of the test
 
-        await helpers.addAllItems();
+        await helpers.addAllItems(GATHERABLE_ITEMS_JSON_PATH);
         const presentItems = await model.find();
         const missingItems = Object.keys(mats).filter((requiredItem) =>
           presentItems.includes(requiredItem)

@@ -4,8 +4,6 @@ const fs = require("fs").promises;
 
 const {
   DEFAULT_SERVER,
-  PHANTASMAGORIA_MATS_JSON_PATH,
-  GATHERABLE_ITEMS_JSON_PATH,
   ITEM_TTL,
 } = require("../src/constants");
 const fetchFromUniversalis = require("../src/fetchFromUniversalis");
@@ -240,9 +238,9 @@ const phantasmagoria = {
       server
     );
   },
-  addAllItems: async function () {
+  addAllItems: async function (phantaMatsJsonPath) {
     return addAllItemsGeneric(
-      PHANTASMAGORIA_MATS_JSON_PATH,
+      phantaMatsJsonPath,
       PhantaItem,
       this.addItem
     );
@@ -270,9 +268,9 @@ const gatherable = {
       server
     );
   },
-  addAllItems: async function () {
+  addAllItems: async function (gatherableItemsJsonPath) {
     return addAllItemsGeneric(
-      GATHERABLE_ITEMS_JSON_PATH,
+      gatherableItemsJsonPath,
       GatherableItem,
       this.addItem
     );
