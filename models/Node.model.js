@@ -18,8 +18,7 @@ const gatheringNodeSchema = new Schema({
       enum: ["BTN", "MIN", "FSH"],
     },
     nodeType: {
-      type: String,
-      required: true,
+      type: String,//TODO make this required again in the future maybe
       enum: ["unspoiled", "ephemeral", "legendary"],
     },
     task: {
@@ -47,13 +46,13 @@ const gatheringNodeSchema = new Schema({
     },
   },
   spawnTimes: {
-    type: [{ type: Number, min: 0, max: 24 }],
+    type: [{ type: Number}], //TODO add validation back for spawntime and lifespan
     required: true,
     default: undefined,
   },
-  lifespan: { type: Number, required: true, min: 0, max: 24 },
+  lifespan: { type: Number, required: true},
   level: { type: Number, required: true, min: 1, max: 80 },
-  name: { type: String, required: true },
+  name: { type: String},
 });
 
 const GatheringNode = mongoose.model("GatheringNode", gatheringNodeSchema);

@@ -280,7 +280,7 @@ describeItemHelpers(
 );
 describeItemHelpers(
   GatherableItem,
-  "Imperial Fern",
+  "White Oak Branch",
   GATHERABLE_ITEMS_JSON_PATH,
   "Gatherable",
   GatherableHelpers

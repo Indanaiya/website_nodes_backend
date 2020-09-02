@@ -15,6 +15,10 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json"
+const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json"
+const GATHERING_NODES_JSON_PATH = "res/test/gatheringNodesTest.json";
+
 app.use(cors());
 app.use(express.json());
 
@@ -41,7 +45,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-ItemHelper.phantasmagoria.addAllItems().then((results) => {
+ItemHelper.phantasmagoria.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH).then((results) => {
   console.log(results)
   console.log("Finished adding Phantasmagoria items to collection");
   results.forEach((result) => {
@@ -52,10 +56,10 @@ ItemHelper.phantasmagoria.addAllItems().then((results) => {
 });
 
 ItemHelper.gatherable
-  .addAllItems()
+  .addAllItems(GATHERABLE_ITEMS_JSON_PATH)
   .then(() => console.log("All gatherable items present in collection."));
 
-NodeHelper.addAllNodes().then(() =>
+NodeHelper.addAllNodes(GATHERING_NODES_JSON_PATH).then(() =>
   console.log("All gathering nodes present in collection")
 );
 
