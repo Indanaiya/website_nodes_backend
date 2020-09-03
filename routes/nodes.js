@@ -30,7 +30,7 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
     .getItems(...servers)
     .then((gatherableItemsArray) =>
       gatherableItemsArray.reduce((gatherableItemsObject, currentItem) => {
-        gatherableItemsObject[currentItem.name] = currentItem;
+        gatherableItemsObject[currentItem.id] = currentItem;
         return gatherableItemsObject;
       }, {})
     )
