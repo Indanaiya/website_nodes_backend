@@ -75,7 +75,7 @@ async function addItemGeneric(
     return 0;
   }
 
-  const universalisObj = await fetchFromUniversalis(itemDetails.id);
+  const universalisObj = await fetchFromUniversalis(itemDetails.id, server);
 
   const marketInfo = {
     price: universalisObj.listings[0].pricePerUnit,
@@ -154,7 +154,7 @@ async function getItemsGeneric(model, fieldsToGet, ...servers) {
   //Return the items
   const projection =
     servers.map((server) => `marketInfo.${server}`).join(" ") +
-    " name " +
+    " name id " +
     fieldsToGet;
 
   return model.find({}, projection);
