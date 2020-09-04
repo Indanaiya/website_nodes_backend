@@ -1,108 +1,432 @@
-{
-  "nodes": [
-    {
-      "location": {
-        "map": "Amh Araeng",
-        "x": 20,
-        "y": 29
-      },
-      "items": ["Raw Triplite"],
-      "spawnTimes": [0, 12],
-      "lifespan": 2,
-
-      "filters": {
-        "patch": "5.0",
-        "className": "MIN",
-        "nodeType": "unspoiled"
-      },
-      "level": 80,
-      "name": "Unspoiled Mineral Deposit1"
+[
+  {
+    "id": 32656,
+    "items": [27805, 30591, 19],
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "aetheryteName": "Slitherbough",
+      "placeName": "The Wild Fete",
+      "x": 25.7,
+      "y": 28.9
     },
-    {
-      "location": {
-        "map": "The Tempest",
-        "x": 16,
-        "y": 21
-      },
-      "items": ["Raw Onyx"],
-      "spawnTimes": [0, 12],
-      "lifespan": 2,
-      "filters": {
-        "patch": "5.0",
-        "className": "MIN",
-        "nodeType": "unspoiled"
-      },
-      "level": 80,
-      "name": "Unspoiled Mineral Deposit"
+    "filters": { "patch": "5.0", "className": "MIN", "nodeType": "ephemeral" },
+    "spawnTimes": [0],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32663,
+    "items": [27806, 30591, 18],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "The Church of the First Light",
+      "x": 36.9,
+      "y": 14.9
     },
-    {
-      "location": {
-        "map": "Il Mheg",
-        "x": 25,
-        "y": 36
-      },
-      "items": ["Broad Beans"],
-      "spawnTimes": [0, 12],
-      "lifespan": 2,
-      "filters": {
-        "patch": "5.0",
-        "className": "BTN",
-        "nodeType": "unspoiled"
-      },
-      "level": 75,
-      "name": "Unspoiled Lush Vegetation"
+    "filters": { "patch": "5.0", "className": "MIN", "nodeType": "ephemeral" },
+    "spawnTimes": [800],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32670,
+    "items": [30591, 27807, 14],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Amity",
+      "x": 22.1,
+      "y": 18.4
     },
-    {
-      "location": {
-        "map": "The Rak'tika Greatwood",
-        "x": 35,
-        "y": 22
-      },
-      "items": ["Mist Spinach"],
-      "spawnTimes": [0, 12],
-      "lifespan": 2,
-      "filters": {
-        "patch": "5.0",
-        "className": "BTN",
-        "nodeType": "unspoiled"
-      },
-      "level": 80,
-      "name": "Unspoiled Lush Vegetation"
+    "filters": { "patch": "5.0", "className": "MIN", "nodeType": "ephemeral" },
+    "spawnTimes": [1600],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32677,
+    "items": [27726],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Governor's Row",
+      "x": 34,
+      "y": 23
     },
-    {
-      "location": {
-        "map": "Kholusia",
-        "x": 28,
-        "y": 21
-      },
-      "items": ["Imperial Fern", "Tender Dill"],
-      "spawnTimes": [0, 12],
-      "lifespan": 2,
-      "filters": {
-        "patch": "5.0",
-        "className": "BTN",
-        "nodeType": "legendary"
-      },
-      "level": 80,
-      "name": "Legendary Lush Vegetation",
-      "tome": "Tome of Botanical Folklore - Norvrandt"
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [200, 1400],
+    "lifespan": 160,
+    "level": 70
+  },
+  {
+    "id": 32678,
+    "items": [27727],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "Sextuplet Shallow",
+      "x": 26,
+      "y": 13
     },
-    {
-      "location": { 
-        "map": "JUST FOR TESTING DELETE LATER", 
-        "x": 26, 
-        "y": 13 
-      },
-      "items": ["Imperial Fern"],
-      "spawnTimes": [6,18],
-      "lifespan": 2,
-      "filters": {
-        "patch": "5.0",
-        "className": "MIN",
-        "nodeType": "unspoiled"
-      },
-      "level": 80,
-      "name": "Legendary Test Vegetation"
-    }
-  ]
-}
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [600, 1800],
+    "lifespan": 160,
+    "level": 75
+  },
+  {
+    "id": 32679,
+    "items": [27728],
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "aetheryteName": "Slitherbough",
+      "placeName": "Cleric",
+      "x": 19,
+      "y": 20
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [400, 1600],
+    "lifespan": 160,
+    "level": 75
+  },
+  {
+    "id": 32680,
+    "items": [27729],
+    "location": {
+      "map": "Amh Araeng",
+      "aetheryteName": "Mord Souq",
+      "placeName": "Ladle",
+      "x": 20.1,
+      "y": 28.8
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32681,
+    "items": [27730],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "Weed",
+      "x": 29,
+      "y": 33
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [600, 1800],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32682,
+    "items": [27731],
+    "location": {
+      "map": "The Tempest",
+      "aetheryteName": "The Ondo Cups",
+      "placeName": "The Caliban Gorge",
+      "x": 15.8,
+      "y": 21.3
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32683,
+    "items": [27705, 28717],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "Saint Fathric's Temple",
+      "x": 30,
+      "y": 21
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [400, 1600],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Mining Folklore"
+  },
+  {
+    "id": 32684,
+    "items": [27704],
+    "location": {
+      "map": "The Tempest",
+      "aetheryteName": "The Ondo Cups",
+      "placeName": "Where the Dry Return",
+      "x": 32.7,
+      "y": 8
+    },
+    "filters": { "patch": "5.0", "className": "MIN" },
+    "spawnTimes": [1000, 2200],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Mining Folklore"
+  },
+  {
+    "id": 32751,
+    "items": [27810, 30592, 17],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "Weed",
+      "x": 25,
+      "y": 29
+    },
+    "filters": { "patch": "5.0", "className": "BTN", "nodeType": "ephemeral" },
+    "spawnTimes": [1200],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32758,
+    "items": [27809, 30592, 16],
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "aetheryteName": "Slitherbough",
+      "placeName": "The Wild Fete",
+      "x": 26.9,
+      "y": 24.3
+    },
+    "filters": { "patch": "5.0", "className": "BTN", "nodeType": "ephemeral" },
+    "spawnTimes": [400],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32765,
+    "items": [30592, 27808, 15],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Scree",
+      "x": 13,
+      "y": 13
+    },
+    "filters": { "patch": "5.0", "className": "BTN", "nodeType": "ephemeral" },
+    "spawnTimes": [2000],
+    "lifespan": 400,
+    "level": 80
+  },
+  {
+    "id": 32766,
+    "items": [27816],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Venmont Yards",
+      "x": 12,
+      "y": 28
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [1000, 2200],
+    "lifespan": 160,
+    "level": 70
+  },
+  {
+    "id": 32767,
+    "items": [27833],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "Phisor Lran",
+      "x": 25,
+      "y": 36
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 75
+  },
+  {
+    "id": 32768,
+    "items": [27836],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "Embrasure",
+      "x": 27,
+      "y": 21
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [1000, 2200],
+    "lifespan": 160,
+    "level": 75
+  },
+  {
+    "id": 32769,
+    "items": [27822],
+    "location": {
+      "map": "Amh Araeng",
+      "aetheryteName": "Mord Souq",
+      "placeName": "The Dragging Tail",
+      "x": 19.6,
+      "y": 17.1
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [800, 2000],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32770,
+    "items": [27828],
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "aetheryteName": "Slitherbough",
+      "placeName": "Bowrest",
+      "x": 34.7,
+      "y": 21.5
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32771,
+    "items": [27835],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Sharptongue Drip",
+      "x": 20,
+      "y": 27
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [600, 1800],
+    "lifespan": 160,
+    "level": 80
+  },
+  {
+    "id": 32772,
+    "items": [27688, 28716],
+    "location": {
+      "map": "The Rak'tika Greatwood",
+      "aetheryteName": "Slitherbough",
+      "placeName": "Mjrl's Regret",
+      "x": 24,
+      "y": 36
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [200, 1400],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Botany Folklore"
+  },
+  {
+    "id": 32773,
+    "items": [27761],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "Inviolate Witness",
+      "x": 26,
+      "y": 11
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [800, 2000],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Botany Folklore"
+  },
+  {
+    "id": 32987,
+    "items": [30486, 29968],
+    "location": {
+      "map": "Lakeland",
+      "aetheryteName": "Fort Jobb",
+      "placeName": "The Isle of Ken",
+      "x": 4.7,
+      "y": 33.8
+    },
+    "filters": { "patch": "5.2", "className": "MIN" },
+    "spawnTimes": [200, 1400],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Mining Folklore"
+  },
+  {
+    "id": 32988,
+    "items": [29970],
+    "location": {
+      "map": "The Tempest",
+      "aetheryteName": "The Ondo Cups",
+      "placeName": "Purpure",
+      "x": 34.4,
+      "y": 31.3
+    },
+    "filters": { "patch": "5.2", "className": "MIN" },
+    "spawnTimes": [600, 1800],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Mining Folklore"
+  },
+  {
+    "id": 32989,
+    "items": [29972],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "Anden's Airs",
+      "x": 36.5,
+      "y": 27.4
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [800, 2000],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Botany Folklore"
+  },
+  {
+    "id": 32990,
+    "items": [30485, 29978],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "White Oil Falls",
+      "x": 28,
+      "y": 21
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Botany Folklore"
+  },
+  {
+    "id": 33234,
+    "items": [29974],
+    "location": {
+      "map": "Amh Araeng",
+      "aetheryteName": "Mord Souq",
+      "placeName": "The Nabaath Severance",
+      "x": 32.2,
+      "y": 33.4
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [400, 1600],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Botany Folklore"
+  },
+  {
+    "id": 33233,
+    "items": [29976],
+    "location": {
+      "map": "Amh Araeng",
+      "aetheryteName": "Mord Souq",
+      "placeName": "Mount Biran Mines",
+      "x": 20.1,
+      "y": 8.6
+    },
+    "filters": { "patch": "5.2", "className": "MIN" },
+    "spawnTimes": [1000, 2200],
+    "lifespan": 160,
+    "level": 80,
+    "book": "Vrandtic Mining Folklore"
+  }
+]
