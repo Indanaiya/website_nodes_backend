@@ -2,7 +2,7 @@ const { PhantaItem, GatherableItem } = require("../models/Item.model");
 const { Document } = require("mongoose");
 const fs = require("fs").promises;
 
-const { DEFAULT_SERVER, ITEM_TTL } = require("../src/constants");
+const { DEFAULT_SERVER, ITEM_TTL, SERVERS } = require("../src/constants");
 const fetchFromUniversalis = require("../src/fetchFromUniversalis");
 const { InvalidArgumentError, DBError } = require("../src/errors");
 
@@ -127,6 +127,11 @@ async function addItemGeneric(
  * @param  {...string} servers The servers to retrieve market information from (will update the prices if they are outdated)
  */
 async function getItemsGeneric(model, fieldsToGet, ...servers) {
+  servers.forEach((server) => {
+    if (!SERVERS.includes(server)) {
+      throw new InvalidArgumentError(`${server} is not a valid server name`);
+    }
+  });
   //Update the out of date items
   const outOfDatePrices = await model.find().then((items) =>
     items.map((item) => {
