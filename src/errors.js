@@ -27,4 +27,12 @@ class IdenticalNodePresentError extends Error {
 }
 
 
-module.exports = { InvalidArgumentError, DBError, JSONParseError, IdenticalNodePresentError };
+class ItemNotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ItemNotFoundError";
+  }
+}
+
+
+module.exports = { InvalidArgumentError, DBError, JSONParseError, IdenticalNodePresentError, ItemNotFoundError };
