@@ -2,10 +2,7 @@ const { PhantaItem, GatherableItem } = require("../models/Item.model");
 const { Document } = require("mongoose");
 const fs = require("fs").promises;
 
-const {
-  DEFAULT_SERVER,
-  ITEM_TTL,
-} = require("../src/constants");
+const { DEFAULT_SERVER, ITEM_TTL } = require("../src/constants");
 const fetchFromUniversalis = require("../src/fetchFromUniversalis");
 const { InvalidArgumentError, DBError } = require("../src/errors");
 
@@ -53,6 +50,19 @@ async function addItemGeneric(
   itemDetails,
   server = DEFAULT_SERVER
 ) {
+  if (
+    model === undefined ||
+    addFunction === undefined ||
+    itemName === undefined ||
+    itemDetails === undefined
+  ) {
+    throw new InvalidArgumentError("Cannot have an undefined argument", {
+      model,
+      addFunction,
+      itemName,
+      itemDetails,
+    });
+  }
   let savedItemsWithItemName;
   try {
     savedItemsWithItemName = await model.find({ name: itemName });
@@ -97,7 +107,6 @@ async function addItemGeneric(
   if (savedItemsWithItemName.length === 1) {
     const item = savedItemsWithItemName[0];
     item.marketInfo[server] = marketInfo;
-
     return item.save().then(() => 1);
   } else {
     const item = new model({
@@ -106,7 +115,6 @@ async function addItemGeneric(
       id: itemDetails.id,
       ...addFunction(itemDetails, universalisObj),
     });
-
     return item.save().then(() => 2);
   }
 }
@@ -181,25 +189,23 @@ async function updateItem(item, ...servers) {
 
   await Promise.all(
     servers.map((server) => {
-      return fetchFromUniversalis(item.id, server).then(
-        (universalisObj) => {
-          item.marketInfo[server] = {
-            price: universalisObj.listings[0].pricePerUnit,
-            saleVelocity: {
-              overall: universalisObj.regularSaleVelocity,
-              nq: universalisObj.nqSaleVelocity,
-              hq: universalisObj.hqSaleVelocity,
-            },
-            avgPrice: {
-              overall: universalisObj.averagePrice,
-              nq: universalisObj.averagePriceNQ,
-              hq: universalisObj.averagePriceHQ,
-            },
-            lastUploadTime: universalisObj.lastUploadTime,
-            updatedAt: Date.now().toString(),
-          };
-        }
-      );
+      return fetchFromUniversalis(item.id, server).then((universalisObj) => {
+        item.marketInfo[server] = {
+          price: universalisObj.listings[0]?.pricePerUnit ?? null,
+          saleVelocity: {
+            overall: universalisObj.regularSaleVelocity,
+            nq: universalisObj.nqSaleVelocity,
+            hq: universalisObj.hqSaleVelocity,
+          },
+          avgPrice: {
+            overall: universalisObj.averagePrice,
+            nq: universalisObj.averagePriceNQ,
+            hq: universalisObj.averagePriceHQ,
+          },
+          lastUploadTime: universalisObj.lastUploadTime,
+          updatedAt: Date.now().toString(),
+        };
+      });
     })
   );
 
@@ -238,11 +244,7 @@ const phantasmagoria = {
     );
   },
   addAllItems: async function (phantaMatsJsonPath) {
-    return addAllItemsGeneric(
-      phantaMatsJsonPath,
-      PhantaItem,
-      this.addItem
-    );
+    return addAllItemsGeneric(phantaMatsJsonPath, PhantaItem, this.addItem);
   },
   getItems: async function (...servers) {
     return getItemsGeneric(PhantaItem, "tomestonePrice", ...servers);
