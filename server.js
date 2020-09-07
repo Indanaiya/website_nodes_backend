@@ -15,9 +15,9 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json"
-const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json"
-const GATHERING_NODES_JSON_PATH = "res/test/gatheringNodesTest.json";
+const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json"
+const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json"
+const GATHERING_NODES_JSON_PATH = "res/gatheringNodes.json";
 
 app.use(cors());
 app.use(express.json());
