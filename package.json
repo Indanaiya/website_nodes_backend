@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text mocha"
+    "test": "jest test --coverage"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +18,25 @@
     "nodemon": "^2.0.4"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "@shelf/jest-mongodb": "^1.2.3",
     "eslint": "^7.7.0",
-    "mocha": "^8.1.1",
-    "nyc": "^15.1.0"
+    "jest": "^26.4.2",
+    "mongodb-memory-server": "^6.6.7"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "@shelf/jest-mongodb"
+  },
+  "jest-mongodb": {
+    "mongodbMemoryServerOptions": {
+      "instance": {
+        "dbName": "jest"
+      },
+      "binary": {
+        "version": "4.0.2",
+        "skipMD5": true
+      },
+      "autoStart": false
+    }
   }
 }
