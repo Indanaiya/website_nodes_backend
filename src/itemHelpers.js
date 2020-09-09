@@ -1,5 +1,4 @@
 const { PhantaItem, GatherableItem } = require("../models/Item.model");
-const { Document } = require("mongoose");
 const fs = require("fs").promises;
 
 const { DEFAULT_SERVER, ITEM_TTL, SERVERS } = require("../src/constants");
@@ -140,6 +139,9 @@ class ItemHelpers {
         throw new InvalidArgumentError(`${server} is not a valid server name`);
       }
     });
+    if (servers.length === 0) {
+      servers = [DEFAULT_SERVER];
+    }
     //Update the out of date items
     const outOfDatePrices = await model.find().then((items) =>
       items.map((item) => {
@@ -191,12 +193,22 @@ class ItemHelpers {
    * @param  {...string} servers The servers to update market information for
    */
   async updateItem(item, ...servers) {
-    if (!(item instanceof Document)) {
+    if(item === undefined){
+      throw new InvalidArgumentError("Item must be defined")
+    }
+    if (!(item instanceof PhantaItem)) {
       throw new TypeError(`'item' must be a document, it was: `, item);
     }
     if (item.isNew) {
       throw new InvalidArgumentError("'item' is new:", item);
     }
+    servers.forEach((server) => {
+      if (!SERVERS.includes(server)) {
+        throw new InvalidArgumentError(
+          `Server ${server} is not a valid server name`
+        );
+      }
+    });
     if (servers.length === 0) {
       servers = [DEFAULT_SERVER];
     }
@@ -222,7 +234,6 @@ class ItemHelpers {
         });
       })
     );
-
     return item.save().then(() => item);
   }
 
