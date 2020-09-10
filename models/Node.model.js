@@ -22,9 +22,9 @@ const gatheringNodeSchema = new Schema({
       enum: ["unspoiled", "ephemeral", "legendary"],
     },
     task: {
-      reducible: { type: Boolean, default: false },
-      whiteScrips: { type: Boolean, default: false },
-      yellowScrips: { type: Boolean, default: false },
+      reducible: { type: Boolean, default: false, required: true },
+      whiteScrips: { type: Boolean, default: false, required: true },
+      yellowScrips: { type: Boolean, default: false, required: true },
     },
     tome: String,
   },

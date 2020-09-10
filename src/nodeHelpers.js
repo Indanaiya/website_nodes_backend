@@ -16,10 +16,16 @@ const {
  * @param {{items:[string], filters:{patch: number, class: string, nodeType: string, tome:string}, location: {map: string, x: number, y: number}, spawnTimes: [number], lifespan: number, level: number, name: string}} nodeDetails An object containing the necessary information to add a node to the collection.
  */
 async function addNode(nodeDetails) {
-  nodeDetails.filters.task = {};
+  nodeDetails.filters.task = {
+    reducible: false,
+    whiteScrips: false,
+    yellowScrips: false,
+  };
+  console.log(nodeDetails.items)
   const itemsThisNodeHas = await GatherableItem.find({
-    name: nodeDetails.items,
+    id: nodeDetails.items,
   });
+  console.log({itemsThisNodeHas})
   //To be used to filter nodes
   itemsThisNodeHas.forEach((item) => {
     if (item.task?.reducible) nodeDetails.filters.task.reducible = true;
@@ -64,9 +70,7 @@ async function addNode(nodeDetails) {
 async function addAllNodes(nodesJsonPath, nodes) {
   const requiredNodes =
     nodes ??
-    (await fs
-      .readFile(nodesJsonPath, "utf8")
-      .then((data) => JSON.parse(data)));
+    (await fs.readFile(nodesJsonPath, "utf8").then((data) => JSON.parse(data)));
 
   return Promise.all(
     requiredNodes.map((nodeDetails) =>
