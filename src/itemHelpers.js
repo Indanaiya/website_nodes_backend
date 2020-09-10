@@ -1,4 +1,5 @@
 const { PhantaItem, GatherableItem } = require("../models/Item.model");
+const {Document} = require('mongoose')
 const fs = require("fs").promises;
 
 const { DEFAULT_SERVER, ITEM_TTL, SERVERS } = require("../src/constants");
@@ -93,20 +94,21 @@ class ItemHelpers {
     }
 
     const universalisObj = await fetchFromUniversalis(itemDetails.id, server);
+    const {listings:{0:{pricePerUnit}}, regularSaleVelocity, nqSaleVelocity, hqSaleVelocity, averagePrice, averagePriceNQ,averagePriceHQ, lastUploadTime} = universalisObj;
 
     const marketInfo = {
-      price: universalisObj.listings[0].pricePerUnit,
+      price: pricePerUnit,
       saleVelocity: {
-        overall: universalisObj.regularSaleVelocity,
-        nq: universalisObj.nqSaleVelocity,
-        hq: universalisObj.hqSaleVelocity,
+        overall: regularSaleVelocity,
+        nq: nqSaleVelocity,
+        hq: hqSaleVelocity,
       },
       avgPrice: {
-        overall: universalisObj.averagePrice,
-        nq: universalisObj.averagePriceNQ,
-        hq: universalisObj.averagePriceHQ,
+        overall: averagePrice,
+        nq: averagePriceNQ,
+        hq: averagePriceHQ,
       },
-      lastUploadTime: universalisObj.lastUploadTime,
+      lastUploadTime: lastUploadTime,
       updatedAt: Date.now().toString(),
     };
 
@@ -196,14 +198,17 @@ class ItemHelpers {
     if(item === undefined){
       throw new InvalidArgumentError("Item must be defined")
     }
-    if (!(item instanceof PhantaItem)) {
+    if (!(item instanceof Document)) {
       throw new TypeError(`'item' must be a document, it was: `, item);
     }
     if (item.isNew) {
       throw new InvalidArgumentError("'item' is new:", item);
     }
+    console.log({servers})
     servers.forEach((server) => {
       if (!SERVERS.includes(server)) {
+        console.log(SERVERS.includes(server))
+        console.log({server})
         throw new InvalidArgumentError(
           `Server ${server} is not a valid server name`
         );
@@ -216,6 +221,7 @@ class ItemHelpers {
     await Promise.all(
       servers.map((server) => {
         return fetchFromUniversalis(item.id, server).then((universalisObj) => {
+          console.log({server, universalisObj})
           item.marketInfo[server] = {
             price: universalisObj.listings[0]?.pricePerUnit ?? null,
             saleVelocity: {
@@ -250,7 +256,7 @@ class ItemHelpers {
     return model
       .find()
       .then((items) =>
-        Promise.all(items.map((item) => this.updateItem(item, servers)))
+        Promise.all(items.map((item) => this.updateItem(item, ...servers)))
       );
   }
 }
