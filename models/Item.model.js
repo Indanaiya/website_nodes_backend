@@ -24,34 +24,34 @@ for (let server of SERVERS) {
       min: 1,
     },
     saleVelocity: {
-      overall:{
+      overall: {
         type: Number,
         min: 0,
       },
-      nq:{
+      nq: {
         type: Number,
         min: 0,
       },
-      hq:{
-        type: Number,
-        min: 0,
-      },
-    },
-    avgPrice:{
-      overall:{
-        type: Number,
-        min: 0,
-      },
-      nq:{
-        type: Number,
-        min: 0,
-      },
-      hq:{
+      hq: {
         type: Number,
         min: 0,
       },
     },
-    lastUploadTime:{
+    avgPrice: {
+      overall: {
+        type: Number,
+        min: 0,
+      },
+      nq: {
+        type: Number,
+        min: 0,
+      },
+      hq: {
+        type: Number,
+        min: 0,
+      },
+    },
+    lastUploadTime: {
       type: Date,
     },
     updatedAt: {
@@ -69,8 +69,22 @@ const phantaItemSchema = new Schema({
 const gatherableItemSchema = new Schema({
   task: {
     aetherialReduce: Number,
-    whiteScrips: {type: [], default: undefined},
-    yellowScrips: {type: [], default: undefined},
+    whiteScrips: {
+      HighCollectability: Number,
+      HighReward: Number,
+      MidCollectability: Number,
+      MidReward: Number,
+      LowCollectability: Number,
+      LowReward: Number,
+    },
+    yellowScrips: {
+      HighCollectability: Number,
+      HighReward: Number,
+      MidCollectability: Number,
+      MidReward: Number,
+      LowCollectability: Number,
+      LowReward: Number,
+    },
   },
   patch: {
     type: Number,

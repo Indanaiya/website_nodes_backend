@@ -71,11 +71,14 @@
     "icon": "/i/021000/021476.png",
     "name": "Raw Hematite",
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 32 },
-        { "MidCollectability": 470, "MidReward": 27 },
-        { "LowCollectability": 450, "LowReward": 25 }
-      ]
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 32,
+        "MidCollectability": 470,
+        "MidReward": 27,
+        "LowCollectability": 450,
+        "LowReward": 25
+      }
     }
   },
   "Raw Diaspore": {
@@ -84,11 +87,14 @@
     "icon": "/i/021000/021473.png",
     "name": "Raw Diaspore",
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 45 },
-        { "MidCollectability": 470, "MidReward": 38 },
-        { "LowCollectability": 450, "LowReward": 35 }
-      ]
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 45,
+        "MidCollectability": 470,
+        "MidReward": 38,
+        "LowCollectability": 450,
+        "LowReward": 35
+      }
     }
   },
   "Raw Lazurite": {
@@ -97,23 +103,20 @@
     "name": "Raw Lazurite",
     "task": {}
   },
-  "Gale Rock": {
-    "id": 27805,
-    "icon": "/i/021000/021473.png",
-    "name": "Gale Rock",
-    "task": { "aetherialReduce": 32 }
-  },
   "Raw Triplite": {
     "collectablesShopItem": { "Item": ["12.42"] },
     "id": 27729,
     "icon": "/i/021000/021471.png",
     "name": "Raw Triplite",
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 52 },
-        { "MidCollectability": 470, "MidReward": 44 },
-        { "LowCollectability": 450, "LowReward": 40 }
-      ]
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 52,
+        "MidCollectability": 470,
+        "MidReward": 44,
+        "LowCollectability": 450,
+        "LowReward": 40
+      }
     }
   },
   "Solarite": {
@@ -122,17 +125,26 @@
     "name": "Solarite",
     "task": { "aetherialReduce": 33 }
   },
+  "Gale Rock": {
+    "id": 27805,
+    "icon": "/i/021000/021473.png",
+    "name": "Gale Rock",
+    "task": { "aetherialReduce": 32 }
+  },
   "Raw Petalite": {
     "collectablesShopItem": { "Item": ["12.44"] },
     "id": 27730,
     "icon": "/i/021000/021477.png",
     "name": "Raw Petalite",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 29 },
-        { "MidCollectability": 500, "MidReward": 26 },
-        { "LowCollectability": 470, "LowReward": 23 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 29,
+        "MidCollectability": 500,
+        "MidReward": 26,
+        "LowCollectability": 470,
+        "LowReward": 23
+      }
     }
   },
   "Raw Onyx": {
@@ -141,11 +153,14 @@
     "icon": "/i/021000/021231.png",
     "name": "Raw Onyx",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 32 },
-        { "MidCollectability": 500, "MidReward": 28 },
-        { "LowCollectability": 470, "LowReward": 25 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 32,
+        "MidCollectability": 500,
+        "MidReward": 28,
+        "LowCollectability": 470,
+        "LowReward": 25
+      }
     }
   },
   "Prismstone": {
@@ -154,11 +169,30 @@
     "icon": "/i/021000/021232.png",
     "name": "Prismstone",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 39 },
-        { "MidCollectability": 500, "MidReward": 34 },
-        { "LowCollectability": 470, "LowReward": 30 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 39,
+        "MidCollectability": 500,
+        "MidReward": 34,
+        "LowCollectability": 470,
+        "LowReward": 30
+      }
+    }
+  },
+  "Tungsten Ore": {
+    "collectablesShopItem": { "Item": ["12.46"] },
+    "id": 27704,
+    "icon": "/i/021000/021203.png",
+    "name": "Tungsten Ore",
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 39,
+        "MidCollectability": 500,
+        "MidReward": 34,
+        "LowCollectability": 470,
+        "LowReward": 30
+      }
     }
   },
   "Shade Quartz": {
@@ -167,30 +201,20 @@
     "name": "Shade Quartz",
     "task": { "aetherialReduce": 34 }
   },
-  "Tungsten Ore": {
-    "collectablesShopItem": { "Item": ["12.46"] },
-    "id": 27704,
-    "icon": "/i/021000/021203.png",
-    "name": "Tungsten Ore",
-    "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 39 },
-        { "MidCollectability": 500, "MidReward": 34 },
-        { "LowCollectability": 470, "LowReward": 30 }
-      ]
-    }
-  },
   "White Oak Branch": {
     "collectablesShopItem": { "Item": ["13.37"] },
     "id": 27816,
     "icon": "/i/022000/022416.png",
     "name": "White Oak Branch",
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 32 },
-        { "MidCollectability": 470, "MidReward": 27 },
-        { "LowCollectability": 450, "LowReward": 25 }
-      ]
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 32,
+        "MidCollectability": 470,
+        "MidReward": 27,
+        "LowCollectability": 450,
+        "LowReward": 25
+      }
     }
   },
   "Lemonette": {
@@ -199,11 +223,14 @@
     "icon": "/i/025000/025305.png",
     "name": "Lemonette",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 32 },
-        { "MidCollectability": 500, "MidReward": 28 },
-        { "LowCollectability": 470, "LowReward": 25 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 32,
+        "MidCollectability": 500,
+        "MidReward": 28,
+        "LowCollectability": 470,
+        "LowReward": 25
+      }
     }
   },
   "Sandalwood Log": {
@@ -212,11 +239,30 @@
     "icon": "/i/022000/022401.png",
     "name": "Sandalwood Log",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 39 },
-        { "MidCollectability": 500, "MidReward": 34 },
-        { "LowCollectability": 470, "LowReward": 30 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 39,
+        "MidCollectability": 500,
+        "MidReward": 34,
+        "LowCollectability": 470,
+        "LowReward": 30
+      }
+    }
+  },
+  "Broad Beans": {
+    "collectablesShopItem": { "Item": ["13.40"] },
+    "id": 27833,
+    "icon": "/i/025000/025353.png",
+    "name": "Broad Beans",
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 45,
+        "MidCollectability": 470,
+        "MidReward": 38,
+        "LowCollectability": 450,
+        "LowReward": 35
+      }
     }
   },
   "Peppermint": {
@@ -225,30 +271,20 @@
     "name": "Peppermint",
     "task": {}
   },
-  "Broad Beans": {
-    "collectablesShopItem": { "Item": ["13.40"] },
-    "id": 27833,
-    "icon": "/i/025000/025353.png",
-    "name": "Broad Beans",
-    "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 45 },
-        { "MidCollectability": 470, "MidReward": 38 },
-        { "LowCollectability": 450, "LowReward": 35 }
-      ]
-    }
-  },
   "Russet Popoto": {
     "collectablesShopItem": { "Item": ["13.43"] },
     "id": 27822,
     "icon": "/i/025000/025204.png",
     "name": "Russet Popoto",
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 52 },
-        { "MidCollectability": 470, "MidReward": 44 },
-        { "LowCollectability": 450, "LowReward": 40 }
-      ]
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 52,
+        "MidCollectability": 470,
+        "MidReward": 44,
+        "LowCollectability": 450,
+        "LowReward": 40
+      }
     }
   },
   "White Clay": {
@@ -269,11 +305,14 @@
     "icon": "/i/025000/025206.png",
     "name": "Mist Spinach",
     "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 29 },
-        { "MidCollectability": 500, "MidReward": 26 },
-        { "LowCollectability": 470, "LowReward": 23 }
-      ]
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 29,
+        "MidCollectability": 500,
+        "MidReward": 26,
+        "LowCollectability": 470,
+        "LowReward": 23
+      }
     }
   },
   "Bog Sage": {
@@ -282,10 +321,26 @@
     "name": "Bog Sage",
     "task": { "aetherialReduce": 37 }
   },
-  "Fireheart Cobalt": {
-    "id": 29968,
-    "icon": "/i/021000/021226.png",
-    "name": "Fireheart Cobalt",
+  "Ethereal Cocoon": {
+    "collectablesShopItem": { "Item": ["13.47"] },
+    "id": 27761,
+    "icon": "/i/021000/021661.png",
+    "name": "Ethereal Cocoon",
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 530,
+        "HighReward": 39,
+        "MidCollectability": 500,
+        "MidReward": 34,
+        "LowCollectability": 470,
+        "LowReward": 30
+      }
+    }
+  },
+  "Beryllium Ore": {
+    "id": 28717,
+    "icon": "/i/021000/021455.png",
+    "name": "Beryllium Ore",
     "task": {}
   },
   "Sandalwood Sap": {
@@ -294,23 +349,10 @@
     "name": "Sandalwood Sap",
     "task": {}
   },
-  "Ethereal Cocoon": {
-    "collectablesShopItem": { "Item": ["13.47"] },
-    "id": 27761,
-    "icon": "/i/021000/021661.png",
-    "name": "Ethereal Cocoon",
-    "task": {
-      "whiteScrips": [
-        { "HighCollectability": 530, "HighReward": 39 },
-        { "MidCollectability": 500, "MidReward": 34 },
-        { "LowCollectability": 470, "LowReward": 30 }
-      ]
-    }
-  },
-  "Beryllium Ore": {
-    "id": 28717,
-    "icon": "/i/021000/021455.png",
-    "name": "Beryllium Ore",
+  "Fireheart Cobalt": {
+    "id": 29968,
+    "icon": "/i/021000/021226.png",
+    "name": "Fireheart Cobalt",
     "task": {}
   },
   "Purpure Shell Chip": {
