@@ -68,7 +68,7 @@ const phantaItemSchema = new Schema({
 //TODO make a lot of these required once I've finished testing it
 const gatherableItemSchema = new Schema({
   task: {
-    aetherialReduce: Number,
+    aetherialReduce: {type: [], default:undefined},
     whiteScrips: {
       HighCollectability: Number,
       HighReward: Number,

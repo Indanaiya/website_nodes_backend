@@ -81,27 +81,17 @@
       }
     }
   },
-  "Raw Diaspore": {
-    "collectablesShopItem": { "Item": ["12.39"] },
-    "id": 27727,
-    "icon": "/i/021000/021473.png",
-    "name": "Raw Diaspore",
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 500,
-        "HighReward": 45,
-        "MidCollectability": 470,
-        "MidReward": 38,
-        "LowCollectability": 450,
-        "LowReward": 35
-      }
-    }
-  },
   "Raw Lazurite": {
     "id": 27728,
     "icon": "/i/021000/021472.png",
     "name": "Raw Lazurite",
     "task": {}
+  },
+  "Gale Rock": {
+    "id": 27805,
+    "icon": "/i/021000/021473.png",
+    "name": "Gale Rock",
+    "task": { "aetherialReduce": ["27811"] }
   },
   "Raw Triplite": {
     "collectablesShopItem": { "Item": ["12.42"] },
@@ -119,17 +109,27 @@
       }
     }
   },
+  "Raw Diaspore": {
+    "collectablesShopItem": { "Item": ["12.39"] },
+    "id": 27727,
+    "icon": "/i/021000/021473.png",
+    "name": "Raw Diaspore",
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "HighReward": 45,
+        "MidCollectability": 470,
+        "MidReward": 38,
+        "LowCollectability": 450,
+        "LowReward": 35
+      }
+    }
+  },
   "Solarite": {
     "id": 27806,
     "icon": "/i/021000/021467.png",
     "name": "Solarite",
-    "task": { "aetherialReduce": 33 }
-  },
-  "Gale Rock": {
-    "id": 27805,
-    "icon": "/i/021000/021473.png",
-    "name": "Gale Rock",
-    "task": { "aetherialReduce": 32 }
+    "task": { "aetherialReduce": ["27812"] }
   },
   "Raw Petalite": {
     "collectablesShopItem": { "Item": ["12.44"] },
@@ -199,7 +199,7 @@
     "id": 27807,
     "icon": "/i/021000/021462.png",
     "name": "Shade Quartz",
-    "task": { "aetherialReduce": 34 }
+    "task": { "aetherialReduce": ["27813"] }
   },
   "White Oak Branch": {
     "collectablesShopItem": { "Item": ["13.37"] },
@@ -291,13 +291,13 @@
     "id": 27808,
     "icon": "/i/022000/022610.png",
     "name": "White Clay",
-    "task": { "aetherialReduce": 35 }
+    "task": { "aetherialReduce": ["27811"] }
   },
   "Sweet Marjoram": {
     "id": 27809,
     "icon": "/i/025000/025015.png",
     "name": "Sweet Marjoram",
-    "task": { "aetherialReduce": 36 }
+    "task": { "aetherialReduce": ["27812"] }
   },
   "Mist Spinach": {
     "collectablesShopItem": { "Item": ["13.45"] },
@@ -319,7 +319,7 @@
     "id": 27810,
     "icon": "/i/025000/025009.png",
     "name": "Bog Sage",
-    "task": { "aetherialReduce": 37 }
+    "task": { "aetherialReduce": ["27814"] }
   },
   "Ethereal Cocoon": {
     "collectablesShopItem": { "Item": ["13.47"] },
@@ -401,24 +401,24 @@
     "id": 30591,
     "icon": "/i/021000/021482.png",
     "name": "Thunder Rock",
-    "task": { "aetherialReduce": 41 }
+    "task": { "aetherialReduce": ["30590"] }
   },
   "Levin Mint": {
     "id": 30592,
     "icon": "/i/025000/025039.png",
     "name": "Levin Mint",
-    "task": { "aetherialReduce": 42 }
-  },
-  "Pummelite": {
-    "id": 17944,
-    "icon": "/i/021000/021209.png",
-    "name": "Pummelite",
-    "task": {}
+    "task": { "aetherialReduce": ["30590"] }
   },
   "Rhalgr's Streak": {
     "id": 17948,
     "icon": "/i/025000/025507.png",
     "name": "Rhalgr's Streak",
+    "task": {}
+  },
+  "Pummelite": {
+    "id": 17944,
+    "icon": "/i/021000/021209.png",
+    "name": "Pummelite",
     "task": {}
   }
 }
