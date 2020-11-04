@@ -21,21 +21,30 @@ async function addNode(nodeDetails) {
     whiteScrips: false,
     yellowScrips: false,
   };
-  console.log(nodeDetails.items)
+  console.log(nodeDetails.items);
   const itemsThisNodeHas = await GatherableItem.find({
     id: nodeDetails.items,
   });
-  console.log({itemsThisNodeHas})
+  console.log({ itemsThisNodeHas });
   //To be used to filter nodes
   itemsThisNodeHas.forEach((item) => {
-    if (item.task?.reducible) nodeDetails.filters.task.reducible = true;
-    if (item.task?.whiteScrips) nodeDetails.filters.task.whiteScrips = true;
-    if (item.task?.yellowScrips) nodeDetails.filters.task.yellowScrips = true;
+    console.log({ item });
+    if (item.task.aetherialReduce !== undefined) {
+      nodeDetails.filters.task.reducible = true;
+    }
+    if (item.task.whiteScrips.midCollectibility !== undefined) {
+      nodeDetails.filters.task.whiteScrips = true;
+    }
+    if (item.task.yellowScrips.midCollectibility !== undefined) {
+      nodeDetails.filters.task.yellowScrips = true;
+    }
   });
 
   const node = new GatheringNode({
     ...nodeDetails,
   });
+
+  console.log({ node: node.filters.task });
 
   const result = await node.validate().catch((err) => {
     console.log("The folowing node is invalid: ", node);
