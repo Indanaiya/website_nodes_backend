@@ -26,14 +26,31 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
     return;
   }
 
+
+  const aethersands = await ItemHelpers.aethersand.getItems().then(aethersandsArray =>
+    aethersandsArray.reduce((aethersandsObject, currentSand)=>{
+      aethersandsObject[currentSand.id] = currentSand;
+      return aethersandsObject
+    }, {}));
+
   const gatherableItems = await ItemHelpers.gatherable
     .getItems(...servers)
-    .then((gatherableItemsArray) =>
-      gatherableItemsArray.reduce((gatherableItemsObject, currentItem) => {
-        gatherableItemsObject[currentItem.id] = currentItem;
-        return gatherableItemsObject;
-      }, {})
-    )
+    .then((gatherableItemsArray) => {
+      gatherableItemsArray.forEach((item) => {
+        if (item.task?.aetherialReduce !== undefined) {
+          item.task.aetherialReduce.forEach((sandId, sandIndex) => {
+            item.task.aetherialReduce[sandIndex] = aethersands[sandId]
+          });
+        }
+      });
+      return gatherableItemsArray.reduce(
+        (gatherableItemsObject, currentItem) => {
+          gatherableItemsObject[currentItem.id] = currentItem;
+          return gatherableItemsObject;
+        },
+        {}
+      );
+    })
     .catch((err) => {
       console.log(
         "An error occured at '/withItemData/:serverOrDatacenter', while fetching items\n",
@@ -47,10 +64,30 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
   NodeHelpers.getAllNodes()
     .then((oldNodes) =>
       //Need to make a new object for each node because nodes are Documents and it will enforce weird checking that I don't want
-      oldNodes.map(({ filters, location, spawnTimes, _id, items, lifespan, name, level }) => {
-        items = items.map((item) => gatherableItems[item]);
-        return { filters, location, spawnTimes, _id, items, lifespan, name, level };
-      })
+      oldNodes.map(
+        ({
+          filters,
+          location,
+          spawnTimes,
+          _id,
+          items,
+          lifespan,
+          name,
+          level,
+        }) => {
+          items = items.map((item) => gatherableItems[item]);
+          return {
+            filters,
+            location,
+            spawnTimes,
+            _id,
+            items,
+            lifespan,
+            name,
+            level,
+          };
+        }
+      )
     )
     .then((newNodes) => res.json(newNodes))
     .catch((err) => {
