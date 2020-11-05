@@ -1,7 +1,5 @@
 const GatheringNode = require("../models/Node.model");
 const { GatherableItem } = require("../models/Item.model");
-// const { Document } = require("mongoose");
-// const fetch = require("node-fetch");
 const fs = require("fs").promises;
 
 const {
