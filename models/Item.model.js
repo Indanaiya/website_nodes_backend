@@ -68,7 +68,7 @@ const phantaItemSchema = new Schema({
 //TODO make a lot of these required once I've finished testing it
 const gatherableItemSchema = new Schema({
   task: {
-    aetherialReduce: {type: [], default:undefined},
+    aetherialReduce: { type: [], default: undefined },
     whiteScrips: {
       HighCollectability: Number,
       HighReward: Number,
@@ -95,10 +95,15 @@ const gatherableItemSchema = new Schema({
   ...protoItemSchema,
 });
 
+const aethersandItemSchema = new Schema({
+  icon: { type: String },
+  ...protoItemSchema,
+});
+
 const PhantaItem = mongoose.model("PhantaItem", phantaItemSchema);
 
 const GatherableItem = mongoose.model("GatherableItem", gatherableItemSchema);
 
-const AethersandItem = mongoose.model("AethersandItem", protoItemSchema);
+const AethersandItem = mongoose.model("AethersandItem", aethersandItemSchema);
 
 module.exports = { PhantaItem, GatherableItem, AethersandItem };

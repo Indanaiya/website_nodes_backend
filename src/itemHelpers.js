@@ -1,5 +1,9 @@
-const { PhantaItem, GatherableItem, AethersandItem } = require("../models/Item.model");
-const {Document} = require('mongoose')
+const {
+  PhantaItem,
+  GatherableItem,
+  AethersandItem,
+} = require("../models/Item.model");
+const { Document } = require("mongoose");
 const fs = require("fs").promises;
 
 const { DEFAULT_SERVER, ITEM_TTL, SERVERS } = require("../src/constants");
@@ -7,7 +11,7 @@ const fetchFromUniversalis = require("../src/fetchFromUniversalis");
 const { InvalidArgumentError, DBError } = require("../src/errors");
 
 class ItemHelpers {
-  constructor(model, addFunction=()=>null, projection="") {
+  constructor(model, addFunction = () => null, projection = "") {
     this.addAllItems = this.addAllItems.bind(this, model, addFunction);
     this.addItem = this.addItem.bind(this, model, addFunction);
     this.getItems = this.getItems.bind(this, model, projection);
@@ -94,7 +98,18 @@ class ItemHelpers {
     }
 
     const universalisObj = await fetchFromUniversalis(itemDetails.id, server);
-    const {listings:{0:{pricePerUnit}}, regularSaleVelocity, nqSaleVelocity, hqSaleVelocity, averagePrice, averagePriceNQ,averagePriceHQ, lastUploadTime} = universalisObj;
+    const {
+      listings: {
+        0: { pricePerUnit },
+      },
+      regularSaleVelocity,
+      nqSaleVelocity,
+      hqSaleVelocity,
+      averagePrice,
+      averagePriceNQ,
+      averagePriceHQ,
+      lastUploadTime,
+    } = universalisObj;
 
     const marketInfo = {
       price: pricePerUnit,
@@ -195,8 +210,8 @@ class ItemHelpers {
    * @param  {...string} servers The servers to update market information for
    */
   async updateItem(item, ...servers) {
-    if(item === undefined){
-      throw new InvalidArgumentError("Item must be defined")
+    if (item === undefined) {
+      throw new InvalidArgumentError("Item must be defined");
     }
     if (!(item instanceof Document)) {
       throw new TypeError(`'item' must be a document, it was: `, item);
@@ -204,11 +219,11 @@ class ItemHelpers {
     if (item.isNew) {
       throw new InvalidArgumentError("'item' is new:", item);
     }
-    console.log({servers})
+    console.log({ servers });
     servers.forEach((server) => {
       if (!SERVERS.includes(server)) {
-        console.log(SERVERS.includes(server))
-        console.log({server})
+        console.log(SERVERS.includes(server));
+        console.log({ server });
         throw new InvalidArgumentError(
           `Server ${server} is not a valid server name`
         );
@@ -221,7 +236,7 @@ class ItemHelpers {
     await Promise.all(
       servers.map((server) => {
         return fetchFromUniversalis(item.id, server).then((universalisObj) => {
-          console.log({server, universalisObj})
+          console.log({ server, universalisObj });
           item.marketInfo[server] = {
             price: universalisObj.listings[0]?.pricePerUnit ?? null,
             saleVelocity: {
@@ -273,7 +288,13 @@ const gatherable = new ItemHelpers(
 
 const aethersand = new ItemHelpers(
   AethersandItem,
-)
+  (itemDetails) => {
+    return {
+      icon: itemDetails.icon,
+    };
+  },
+  "icon"
+);
 
 const phantasmagoria = new ItemHelpers(
   PhantaItem,
