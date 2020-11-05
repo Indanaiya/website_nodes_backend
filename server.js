@@ -18,6 +18,7 @@ const port = process.env.PORT || 5000;
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
 const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json";
 const GATHERING_NODES_JSON_PATH = "res/gatheringNodes.json";
+const AETHERSAND_JSON_PATH = "res/aethersands.json";
 
 app.use(cors());
 app.use(express.json());
@@ -62,6 +63,10 @@ ItemHelper.gatherable
   .then(() => console.log("All gatherable items present in collection."))
   .then(() => NodeHelper.addAllNodes(GATHERING_NODES_JSON_PATH))
   .then(() => console.log("All gathering nodes present in collection"));
+
+ItemHelper.aethersand
+  .addAllItems(AETHERSAND_JSON_PATH)
+  .then(()=> console.log("All athersand items present in collection."))
 
 app.use("/items", itemsRouter);
 app.use("/nodes", nodesRouter);

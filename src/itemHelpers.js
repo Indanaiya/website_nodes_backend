@@ -1,4 +1,4 @@
-const { PhantaItem, GatherableItem } = require("../models/Item.model");
+const { PhantaItem, GatherableItem, AethersandItem } = require("../models/Item.model");
 const {Document} = require('mongoose')
 const fs = require("fs").promises;
 
@@ -7,7 +7,7 @@ const fetchFromUniversalis = require("../src/fetchFromUniversalis");
 const { InvalidArgumentError, DBError } = require("../src/errors");
 
 class ItemHelpers {
-  constructor(model, addFunction, projection) {
+  constructor(model, addFunction=()=>null, projection="") {
     this.addAllItems = this.addAllItems.bind(this, model, addFunction);
     this.addItem = this.addItem.bind(this, model, addFunction);
     this.getItems = this.getItems.bind(this, model, projection);
@@ -271,6 +271,10 @@ const gatherable = new ItemHelpers(
   "task"
 );
 
+const aethersand = new ItemHelpers(
+  AethersandItem,
+)
+
 const phantasmagoria = new ItemHelpers(
   PhantaItem,
   (itemDetails) => {
@@ -281,4 +285,4 @@ const phantasmagoria = new ItemHelpers(
   "tomestonePrice"
 );
 
-module.exports = { phantasmagoria, gatherable };
+module.exports = { phantasmagoria, gatherable, aethersand };

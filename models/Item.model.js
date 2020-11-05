@@ -99,4 +99,6 @@ const PhantaItem = mongoose.model("PhantaItem", phantaItemSchema);
 
 const GatherableItem = mongoose.model("GatherableItem", gatherableItemSchema);
 
-module.exports = { PhantaItem, GatherableItem };
+const AethersandItem = mongoose.model("AethersandItem", protoItemSchema);
+
+module.exports = { PhantaItem, GatherableItem, AethersandItem };
