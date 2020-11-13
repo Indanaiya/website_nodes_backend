@@ -27,7 +27,7 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
   }
 
 
-  const aethersands = await ItemHelpers.aethersand.getItems().then(aethersandsArray =>
+  const aethersands = await ItemHelpers.aethersand.getItems(...servers).then(aethersandsArray =>
     aethersandsArray.reduce((aethersandsObject, currentSand)=>{
       aethersandsObject[currentSand.id] = currentSand;
       return aethersandsObject
