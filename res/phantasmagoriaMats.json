@@ -36,31 +36,61 @@
 
   "Dwarven Chromite": {
       "id": "29969",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
   },
 
   "Workbench Resin": {
       "id": "29971",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
   },
 
   "Tempest Adhesive": {
       "id": "29973",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
   },
 
   "Caprice Fleece": {
       "id": "29975",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
   },
 
   "Megalania Skin": {
       "id": "29977",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
   },
 
   "Dried Hi-Ether": {
       "id": "29979",
-      "tomestonePrice": "20"
+      "tomestonePrice": "10"
+  },
+
+  "Aluminum Ore": {
+    "id": "32945",
+    "tomestonePrice": "20"
+  },
+
+  "Workbench Refining Sand": {
+    "id": "32946",
+    "tomestonePrice": "20"
+  },
+
+  "Thylacoleo Skin": {
+    "id": "32948",
+    "tomestonePrice": "20"
+  },
+
+  "Gardenia Fruit": {
+    "id": "32947",
+    "tomestonePrice": "20"
+  },
+
+  "Horsetail":{
+    "id": "32944",
+    "tomestonePrice": "20"
+  },
+
+  "Spirit Extract": {
+    "id": "32949",
+    "tomestonePrice": "20"
   }
 }
