@@ -11,7 +11,9 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
+  // Decide what servers to get information for
   const serverOrDatacenter = req.params.serverOrDatacenter;
+  /** An array of servers that the request is expecting prices for */
   let servers;
   if (Object.keys(DATACENTERS).includes(serverOrDatacenter)) {
     servers = DATACENTERS[serverOrDatacenter];
@@ -26,12 +28,14 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
     return;
   }
 
-
-  const aethersands = await ItemHelpers.aethersand.getItems(...servers).then(aethersandsArray =>
-    aethersandsArray.reduce((aethersandsObject, currentSand)=>{
-      aethersandsObject[currentSand.id] = currentSand;
-      return aethersandsObject
-    }, {}));
+  const aethersands = await ItemHelpers.aethersand
+    .getItems(...servers)
+    .then((aethersandsArray) =>
+      aethersandsArray.reduce((aethersandsObject, currentSand) => {
+        aethersandsObject[currentSand.id] = currentSand;
+        return aethersandsObject;
+      }, {})
+    );
 
   const gatherableItems = await ItemHelpers.gatherable
     .getItems(...servers)
@@ -39,7 +43,7 @@ router.route("/withItemData/:serverOrDatacenter").get(async (req, res) => {
       gatherableItemsArray.forEach((item) => {
         if (item.task?.aetherialReduce !== undefined) {
           item.task.aetherialReduce.forEach((sandId, sandIndex) => {
-            item.task.aetherialReduce[sandIndex] = aethersands[sandId]
+            item.task.aetherialReduce[sandIndex] = aethersands[sandId];
           });
         }
       });

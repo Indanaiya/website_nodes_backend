@@ -219,7 +219,6 @@ class ItemHelpers {
     if (item.isNew) {
       throw new InvalidArgumentError("'item' is new:", item);
     }
-    console.log({ servers });
     servers.forEach((server) => {
       if (!SERVERS.includes(server)) {
         console.log(SERVERS.includes(server));
@@ -236,7 +235,6 @@ class ItemHelpers {
     await Promise.all(
       servers.map((server) => {
         return fetchFromUniversalis(item.id, server).then((universalisObj) => {
-          console.log({ server, universalisObj });
           item.marketInfo[server] = {
             price: universalisObj.listings[0]?.pricePerUnit ?? null,
             saleVelocity: {

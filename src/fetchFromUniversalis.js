@@ -19,7 +19,7 @@ async function fetchFromUniversalis(universalisId, server = DEFAULT_SERVER) {
     try {
       return JSON.parse(body);
     } catch (err) {
-      console.log("Error parsing JSON", { body });
+      console.log(`Error parsing JSON for ${universalisId}`, { body });
       if (body === "Not Found") {
         throw new ItemNotFoundError(
           `${universalisId} is not a valid item ID for universalis`

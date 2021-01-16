@@ -26,7 +26,7 @@ router.route("/phantasmagoria").get((req, res) => {
   } else {
     const servers =
       datacenter === undefined ? [server] : DATACENTERS[datacenter];
-    console.log(servers);
+    // console.log(servers);
     ItemHelper.phantasmagoria
       .getItems(...servers)
       .then((response) => res.json(response))
@@ -52,7 +52,7 @@ router.route("/gatherable").get((req, res) => {
   } else {
     const servers =
       datacenter === undefined ? [server] : DATACENTERS[datacenter];
-    console.log(servers);
+    // console.log(servers);
     ItemHelper.gatherable
       .getItems(...servers)
       .then((response) => res.json(response))
