@@ -1,7 +1,7 @@
-const fetch = require("node-fetch");
 
-const { JSONParseError, ItemNotFoundError } = require("../src/errors");
-const { UNIVERSALIS_URL, DEFAULT_SERVER } = require("../src/constants");
+import fetch from "node-fetch";
+import { JSONParseError, ItemNotFoundError } from "../src/errors";
+import { UNIVERSALIS_URL, DEFAULT_SERVER } from "../src/constants";
 
 /**
  * Get market information for an item from universalis
@@ -9,7 +9,7 @@ const { UNIVERSALIS_URL, DEFAULT_SERVER } = require("../src/constants");
  * @param {string} universalisId The item id of the item that the market info is to be fetched for
  * @param {string} server The server that the market info is to be fetched for
  */
-async function fetchFromUniversalis(universalisId, server = DEFAULT_SERVER) {
+export default async function fetchFromUniversalis(universalisId: string | number, server: string = DEFAULT_SERVER) {
   const url = `${UNIVERSALIS_URL + server}/${universalisId}`;
   console.log(`Reading from ${url}`);
 
@@ -34,5 +34,3 @@ async function fetchFromUniversalis(universalisId, server = DEFAULT_SERVER) {
 
   return result;
 }
-
-module.exports = fetchFromUniversalis;

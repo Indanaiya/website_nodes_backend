@@ -1,37 +1,53 @@
-const {
+import {
+  IProtoItem,
   PhantaItem,
   GatherableItem,
   AethersandItem,
-} = require("../models/Item.model");
-const { Document } = require("mongoose");
-const fs = require("fs").promises;
+  IProtoItemBaseDocument,
+  IPhantaItemBaseDocument,
+  IAethersandItem,
+  IPhantaItem,
+  IGatherableItem,
+} from "../models/Item.model.js";
+import { Model } from "mongoose";
+import { promises as fs } from "fs";
 
-const { DEFAULT_SERVER, ITEM_TTL, SERVERS } = require("../src/constants");
-const fetchFromUniversalis = require("../src/fetchFromUniversalis");
-const { InvalidArgumentError, DBError } = require("../src/errors");
+import { DEFAULT_SERVER, ITEM_TTL, SERVERS } from "../src/constants.js";
+import fetchFromUniversalis from "../src/fetchFromUniversalis.js";
+import { InvalidArgumentError, DBError } from "../src/errors.js";
 
-class ItemHelpers {
-  constructor(model, addFunction = () => null, projection = "") {
-    this.addAllItems = this.addAllItems.bind(this, model, addFunction);
-    this.addItem = this.addItem.bind(this, model, addFunction);
-    this.getItems = this.getItems.bind(this, model, projection);
-    this.updateItem = this.updateItem.bind(this);
-    this.updateAllItems = this.updateAllItems.bind(this, model);
+/**
+ * A class to assist with interacting with the database for Items
+ */
+ export class ItemHelpers<DocType extends IProtoItemBaseDocument, ItemType extends IProtoItem> {
+  /** The model that this object is a helper for */
+  model: Model<DocType, {}>;
+  /** A function to add any unique properties to the document */
+  addFunction: Function;
+  /** A function to get any unique properties for the document */
+  projection: string;
+
+  constructor(
+    model: Model<DocType, {}>,
+    addFunction: Function = () => ({}),
+    projection = ""
+  ) {
+    this.model = model;
+    this.addFunction = addFunction;
+    this.projection = projection;
   }
+
   /** CREATE */
   /**
    * Add all items in the json to the model's collection
-   * @param {string} itemsJsonPath The path to the JSON file containing informaiton about the items to add
-   * @param {Model} model The model for the items to be saved as
-   * @param {Function} addItem A function to save the items
    */
-  async addAllItems(model, addFunction, itemsJsonPath) {
+  async addAllItems(itemsJsonPath: string) {
     const requiredItems = await fs
       .readFile(itemsJsonPath, "utf8")
       .then((data) => JSON.parse(data));
     const requiredItemNames = Object.keys(requiredItems);
 
-    const presentItemNames = await model
+    const presentItemNames = await this.model
       .find()
       .then((items) => items.map((item) => item.name));
 
@@ -55,28 +71,22 @@ class ItemHelpers {
    * @param {*} itemDetails An object representing the item
    * @param {string} server The server for market information to be fetched for
    */
+  // TODO what the heck do these return values mean
   async addItem(
-    model,
-    addFunction,
-    itemName,
-    itemDetails,
-    server = DEFAULT_SERVER
+    itemName: string,
+    itemDetails: ItemType,
+    server: string = DEFAULT_SERVER
   ) {
-    if (
-      model === undefined ||
-      addFunction === undefined ||
-      itemName === undefined ||
-      itemDetails === undefined
-    ) {
-      throw new InvalidArgumentError("Cannot have an undefined argument", {
-        model,
-        addFunction,
-        itemName,
-        itemDetails,
-      });
+    if (itemName === undefined || itemDetails === undefined) {
+      throw new InvalidArgumentError(
+        `Cannot have an undefined argument. itemName: ${itemName}, itemDetails: ${itemDetails}`
+      );
     }
+
     let savedItemsWithItemName;
     try {
+      // There appears to be an issue with mongoose and generics not allowing me to use queries correctly so this is a workaround
+      const model: any = this.model;
       savedItemsWithItemName = await model.find({ name: itemName });
     } catch (err) {
       throw new DBError(
@@ -97,7 +107,7 @@ class ItemHelpers {
       return 0;
     }
 
-    const universalisObj = await fetchFromUniversalis(itemDetails.id, server);
+    const universalisObj = await fetchFromUniversalis(itemDetails.universalisId, server);
     const {
       listings: {
         0: { pricePerUnit },
@@ -133,11 +143,11 @@ class ItemHelpers {
       item.marketInfo[server] = marketInfo;
       return item.save().then(() => 1);
     } else {
-      const item = new model({
+      const item = new this.model({
         name: itemName,
         marketInfo: { [server]: marketInfo },
-        id: itemDetails.id,
-        ...addFunction(itemDetails, universalisObj),
+        universalisId: itemDetails.universalisId,
+        ...this.addFunction(itemDetails, universalisObj),
       });
       return item.save().then(() => 2);
     }
@@ -150,7 +160,7 @@ class ItemHelpers {
    * @param {string} fieldsToGet Which fields from the documents to return, as a space seperated string
    * @param  {...string} servers The servers to retrieve market information from (will update the prices if they are outdated)
    */
-  async getItems(model, fieldsToGet, ...servers) {
+  async getItems(...servers: string[]) {
     servers.forEach((server) => {
       if (!SERVERS.includes(server)) {
         throw new InvalidArgumentError(`${server} is not a valid server name`);
@@ -160,9 +170,12 @@ class ItemHelpers {
       servers = [DEFAULT_SERVER];
     }
     //Update the out of date items
-    const outOfDatePrices = await model.find().then((items) =>
+    const outOfDatePrices = await this.model.find().then((items) =>
       items.map((item) => {
-        const outOfDateServers = { item, servers: [] };
+        const outOfDateServers: {
+          item: DocType;
+          servers: string[];
+        } = { item, servers: [] };
         servers.forEach((server) => {
           if (
             item.marketInfo[server]?.updatedAt === undefined ||
@@ -196,28 +209,22 @@ class ItemHelpers {
     //Return the items
     const projection =
       servers.map((server) => `marketInfo.${server}`).join(" ") +
-      " name id " +
-      fieldsToGet;
+      " name universalisId " +
+      this.projection;
 
-    return model.find({}, projection);
+    return this.model.find({}, projection);
   }
 
   /** UPDATE */
   /**
    * Update the market information for an item for the given server(s)
-   *
-   * @param {Document} item The item to update
-   * @param  {...string} servers The servers to update market information for
    */
-  async updateItem(item, ...servers) {
+  async updateItem(item: DocType, ...servers: string[]) {
     if (item === undefined) {
       throw new InvalidArgumentError("Item must be defined");
     }
-    if (!(item instanceof Document)) {
-      throw new TypeError(`'item' must be a document, it was: `, item);
-    }
     if (item.isNew) {
-      throw new InvalidArgumentError("'item' is new:", item);
+      throw new InvalidArgumentError(`'item' is new: ${item}`);
     }
     servers.forEach((server) => {
       if (!SERVERS.includes(server)) {
@@ -234,7 +241,7 @@ class ItemHelpers {
 
     await Promise.all(
       servers.map((server) => {
-        return fetchFromUniversalis(item.id, server).then((universalisObj) => {
+        return fetchFromUniversalis(item.universalisId, server).then((universalisObj) => {
           item.marketInfo[server] = {
             price: universalisObj.listings[0]?.pricePerUnit ?? null,
             saleVelocity: {
@@ -258,15 +265,15 @@ class ItemHelpers {
 
   /**
    * Update the market information for the given servers for all items in a collection
-   * @param {Model} model The model for the collection to be updated
-   * @param  {...string} servers The servers for which market information should be updated
+   * @param model The model for the collection to be updated
+   * @param servers The servers for which market information should be updated
    */
-  async updateAllItems(model, ...servers) {
+  async updateAllItems(...servers: string[]) {
     if (servers.length === 0) {
       servers = [DEFAULT_SERVER];
     }
 
-    return model
+    return this.model
       .find()
       .then((items) =>
         Promise.all(items.map((item) => this.updateItem(item, ...servers)))
@@ -274,9 +281,9 @@ class ItemHelpers {
   }
 }
 
-const gatherable = new ItemHelpers(
+export const gatherableItemHelper = new ItemHelpers(
   GatherableItem,
-  (itemDetails) => {
+  (itemDetails: IGatherableItem) => {
     return {
       task: itemDetails.task,
     };
@@ -284,9 +291,9 @@ const gatherable = new ItemHelpers(
   "task"
 );
 
-const aethersand = new ItemHelpers(
+export const aethersandItemHelper = new ItemHelpers(
   AethersandItem,
-  (itemDetails) => {
+  (itemDetails: IAethersandItem) => {
     return {
       icon: itemDetails.icon,
     };
@@ -294,14 +301,12 @@ const aethersand = new ItemHelpers(
   "icon"
 );
 
-const phantasmagoria = new ItemHelpers(
+export const phantasmagoriaItemHelper = new ItemHelpers<IPhantaItemBaseDocument, IPhantaItem>(
   PhantaItem,
-  (itemDetails) => {
+  (itemDetails: IPhantaItem) => {
     return {
       tomestonePrice: itemDetails.tomestonePrice,
     };
   },
   "tomestonePrice"
 );
-
-module.exports = { phantasmagoria, gatherable, aethersand };

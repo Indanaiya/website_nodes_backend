@@ -1,96 +1,96 @@
 {
   "Multifaceted Varnish": {
-      "universalisId": "27695",
+      "id": "27695",
       "tomestonePrice": "5"
   },
 
   "Multifaceted Abrasive":{
-      "universalisId": "27718",
+      "id": "27718",
       "tomestonePrice": "5"
   },
 
   "Multifaceted Resin": {
-      "universalisId": "27719",
+      "id": "27719",
       "tomestonePrice": "5"
   },
 
   "Multifaceted Alumen": {
-      "universalisId": "27744",
+      "id": "27744",
       "tomestonePrice": "5"
   },
 
   "Multifaceted Cotton Cloth": {
-      "universalisId": "27762",
+      "id": "27762",
       "tomestonePrice": "5"
   },
 
   "Multifaceted Alchemic": {
-      "universalisId": "27796",
+      "id": "27796",
       "tomestonePrice": "5"
   },
 
   "Chalicotherium Skin": {
-      "universalisId": "27737",
+      "id": "27737",
       "tomestonePrice": "5"
   },
 
   "Dwarven Chromite": {
-      "universalisId": "29969",
+      "id": "29969",
       "tomestonePrice": "10"
   },
 
   "Workbench Resin": {
-      "universalisId": "29971",
+      "id": "29971",
       "tomestonePrice": "10"
   },
 
   "Tempest Adhesive": {
-      "universalisId": "29973",
+      "id": "29973",
       "tomestonePrice": "10"
   },
 
   "Caprice Fleece": {
-      "universalisId": "29975",
+      "id": "29975",
       "tomestonePrice": "10"
   },
 
   "Megalania Skin": {
-      "universalisId": "29977",
+      "id": "29977",
       "tomestonePrice": "10"
   },
 
   "Dried Hi-Ether": {
-      "universalisId": "29979",
+      "id": "29979",
       "tomestonePrice": "10"
   },
 
   "Aluminum Ore": {
-    "universalisId": "32945",
+    "id": "32945",
     "tomestonePrice": "20"
   },
 
   "Workbench Refining Sand": {
-    "universalisId": "32946",
+    "id": "32946",
     "tomestonePrice": "20"
   },
 
   "Thylacoleo Skin": {
-    "universalisId": "32948",
+    "id": "32948",
     "tomestonePrice": "20"
   },
 
   "Gardenia Fruit": {
-    "universalisId": "32947",
+    "id": "32947",
     "tomestonePrice": "20"
   },
 
   "Horsetail":{
-    "universalisId": "32944",
+    "id": "32944",
     "tomestonePrice": "20"
   },
 
   "Spirit Extract": {
-    "universalisId": "32949",
+    "id": "32949",
     "tomestonePrice": "20"
   }
 }

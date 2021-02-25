@@ -1,10 +1,32 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const {Schema, model} = mongoose;
+
+export interface IGatheringNode{
+  items: [number];
+  filters: {
+    patch: number;
+    class: string;
+    nodeType: string;
+    tome: string;
+    task: {
+      reducible: boolean;
+      whiteScrips: boolean;
+      yellowScrips: boolean;
+    };
+  };
+  location: { map: string; x: number; y: number };
+  spawnTimes: [number];
+  lifespan: number;
+  level: number;
+  name: string;
+}
+
+export interface IGatheringNodeDocument extends IGatheringNode, mongoose.Document {}
 
 //TODO make a lot of these required once I've finished testing it
 const gatheringNodeSchema = new Schema({
-  items: { type: [String], required: true, default: undefined },
+  items: { type: [Number], required: true, default: undefined },
   filters: {
     patch: {
       type: Number,
@@ -55,6 +77,4 @@ const gatheringNodeSchema = new Schema({
   name: { type: String},
 });
 
-const GatheringNode = mongoose.model("GatheringNode", gatheringNodeSchema);
-
-module.exports = GatheringNode;
+export const GatheringNode = model<IGatheringNodeDocument>("GatheringNode", gatheringNodeSchema);

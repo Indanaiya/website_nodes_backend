@@ -1,42 +1,56 @@
-const GatheringNode = require("../models/Node.model");
-const { GatherableItem } = require("../models/Item.model");
-const fs = require("fs").promises;
+import { GatheringNode } from "../models/Node.model.js";
+import { GatherableItem } from "../models/Item.model.js";
+import { promises as fs } from "fs";
 
-const {
+import {
   InvalidArgumentError,
   IdenticalNodePresentError,
-} = require("../src/errors");
+} from "../src/errors.js";
+
+interface NodeDetails {
+  items: [string];
+  filters: {
+    patch: number;
+    job: string;
+    nodeType: string;
+    tome: string;
+    task?: {
+      reducible?: boolean;
+      whiteScrips?: boolean;
+      yellowScrips?: boolean;
+    };
+  };
+  location: { map: string; x: number; y: number };
+  spawnTimes: [number];
+  lifespan: number;
+  level: number;
+  name: string;
+}
 
 /** CREATE */
 /**
  * Add the node consistent with the object provided to the collection
  *
- * @param {{items:[string], filters:{patch: number, class: string, nodeType: string, tome:string}, location: {map: string, x: number, y: number}, spawnTimes: [number], lifespan: number, level: number, name: string}} nodeDetails An object containing the necessary information to add a node to the collection.
+ * @param nodeDetails An object containing the necessary information to add a node to the collection.
  */
-async function addNode(nodeDetails) {
-  nodeDetails.filters.task = {
-    reducible: false,
-    whiteScrips: false,
-    yellowScrips: false,
-  };
-  console.log(nodeDetails.items);
+async function addNode(nodeDetails: NodeDetails) {
   const itemsThisNodeHas = await GatherableItem.find({
-    id: nodeDetails.items,
+    universalisId: {
+      $in: nodeDetails.items.map((itemStr) => Number.parseInt(itemStr)),
+    },
   });
-  console.log({ itemsThisNodeHas });
-  //To be used to filter nodes
-  itemsThisNodeHas.forEach((item) => {
-    console.log({ item });
-    if (item.task.aetherialReduce !== undefined) {
-      nodeDetails.filters.task.reducible = true;
-    }
-    if (item.task.whiteScrips.midCollectibility !== undefined) {
-      nodeDetails.filters.task.whiteScrips = true;
-    }
-    if (item.task.yellowScrips.midCollectibility !== undefined) {
-      nodeDetails.filters.task.yellowScrips = true;
-    }
-  });
+
+  nodeDetails.filters.task = {
+    reducible: itemsThisNodeHas.some(
+      (item) => item.task.aetherialReduce !== undefined
+    ),
+    whiteScrips: itemsThisNodeHas.some(
+      (item) => item.task.whiteScrips.MidCollectability !== undefined
+    ),
+    yellowScrips: itemsThisNodeHas.some(
+      (item) => item.task.yellowScrips.MidCollectability !== undefined
+    ),
+  };
 
   const node = new GatheringNode({
     ...nodeDetails,
@@ -74,13 +88,13 @@ async function addNode(nodeDetails) {
  * @param {string} path The path to the json file containing the node information
  * @returns {Promise<string[]>}
  */
-async function addAllNodes(nodesJsonPath, nodes) {
+async function addAllNodes(nodesJsonPath: string, nodes?: NodeDetails[]) {
   const requiredNodes =
     nodes ??
     (await fs.readFile(nodesJsonPath, "utf8").then((data) => JSON.parse(data)));
 
   return Promise.all(
-    requiredNodes.map((nodeDetails) =>
+    requiredNodes.map((nodeDetails: NodeDetails) =>
       addNode(nodeDetails)
         .then(() => `Node ${nodeDetails} saved.`)
         .catch((err) => {
@@ -103,4 +117,4 @@ async function getAllNodes() {
   return GatheringNode.find();
 }
 
-module.exports = { addAllNodes, getAllNodes, addNode };
+export default { addAllNodes, getAllNodes, addNode };

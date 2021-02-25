@@ -1,4 +1,4 @@
-const DATACENTERS = {
+export const DATACENTERS: {[datacenter: string] : string[]} = {
   Aether: [
     "Adamantoise",
     "Cactuar",
@@ -73,25 +73,14 @@ const DATACENTERS = {
 
 //This is slower than writing out the arrays.
 //But it's insignificant and this is less error prone, as only one variable has to be modified if the ffxiv server list is altered.
-const SERVERS = Object.keys(DATACENTERS).reduce(
-  (result, currentValue) => [...DATACENTERS[currentValue], ...result],
+export const SERVERS: string[] = Object.keys(DATACENTERS).reduce(
+  (result: string[], currentValue) => [...DATACENTERS[currentValue], ...result],
   []
 );
 
-const UNIVERSALIS_URL = "https://universalis.app/api/";
-const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
-const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json";
-const GATHERING_NODES_JSON_PATH = "res/gatheringNodes.json";
-const DEFAULT_SERVER = "Cerberus";
-const ITEM_TTL = 24 * 60 * 60; //Minutes
-
-module.exports = {
-  DATACENTERS,
-  SERVERS,
-  UNIVERSALIS_URL,
-  PHANTASMAGORIA_MATS_JSON_PATH,
-  GATHERABLE_ITEMS_JSON_PATH,
-  GATHERING_NODES_JSON_PATH,
-  DEFAULT_SERVER,
-  ITEM_TTL,
-};
+export const UNIVERSALIS_URL = "https://universalis.app/api/";
+export const PHANTASMAGORIA_MATS_JSON_PATH = "res/phantasmagoriaMats.json";
+export const GATHERABLE_ITEMS_JSON_PATH = "res/gatherableItems.json";
+export const GATHERING_NODES_JSON_PATH = "res/gatheringNodes.json";
+export const DEFAULT_SERVER = "Cerberus";
+export const ITEM_TTL = 24 * 60 * 60; //Minutes

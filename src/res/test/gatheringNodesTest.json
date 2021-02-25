@@ -1,0 +1,47 @@
+[
+  {
+    "id": 32765,
+    "items": [30592, 27808, 15],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Scree",
+      "x": 13,
+      "y": 13
+    },
+    "filters": { "patch": "5.0", "className": "BTN", "nodeType": "ephemeral" },
+    "spawnTimes": [2000],
+    "lifespan": -2000,
+    "level": 80
+  },
+  {
+    "id": 32766,
+    "items": [27816],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "Venmont Yards",
+      "x": 12,
+      "y": 28
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [1000, 2200],
+    "lifespan": 160,
+    "level": 70
+  },
+  {
+    "id": 32767,
+    "items": [27833],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "Phisor Lran",
+      "x": 25,
+      "y": 36
+    },
+    "filters": { "patch": "5.0", "className": "BTN" },
+    "spawnTimes": [0, 1200],
+    "lifespan": 160,
+    "level": 75
+  }
+]
