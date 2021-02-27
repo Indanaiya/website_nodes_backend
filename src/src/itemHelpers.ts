@@ -16,6 +16,7 @@ import { promises as fs } from "fs";
 import { DEFAULT_SERVER, ITEM_TTL, SERVERS } from "../src/constants.js";
 import fetchFromUniversalis from "../src/fetchFromUniversalis.js";
 import { InvalidArgumentError, DBError } from "../src/errors.js";
+import { validateServers } from "./validateServers.js";
 
 /**
  * Get market information for the specified item and server
@@ -157,15 +158,7 @@ export class ItemHelper<
    * @param servers The servers to retrieve market information from (will update the prices if they are outdated)
    */
   async getItems(...servers: string[]) {
-    // Sort out servers
-    servers.forEach((server) => {
-      if (!SERVERS.includes(server)) {
-        throw new InvalidArgumentError(`${server} is not a valid server name`);
-      }
-    });
-    if (servers.length === 0) {
-      servers = [DEFAULT_SERVER];
-    }
+    servers = validateServers(...servers);
 
     // Update the out of date items
     const items = await this.model.find();
@@ -233,19 +226,7 @@ export class ItemHelper<
     if (item.isNew) {
       throw new InvalidArgumentError(`'item' is new: ${item}`);
     }
-    //TODO make a unified function for server validation
-    servers.forEach((server) => {
-      if (!SERVERS.includes(server)) {
-        console.log(SERVERS.includes(server));
-        console.log({ server });
-        throw new InvalidArgumentError(
-          `Server ${server} is not a valid server name`
-        );
-      }
-    });
-    if (servers.length === 0) {
-      servers = [DEFAULT_SERVER];
-    }
+    servers = validateServers(...servers);
 
     if (item.marketInfo === undefined) {
       item.marketInfo = {};
@@ -283,9 +264,7 @@ export class ItemHelper<
    * @param servers The servers for which market information should be updated
    */
   async updateAllItems(...servers: string[]) {
-    if (servers.length === 0) {
-      servers = [DEFAULT_SERVER];
-    }
+    servers = validateServers(...servers);
 
     return this.model
       .find()
