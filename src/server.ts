@@ -1,9 +1,9 @@
 "use strict";
 
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import * as express from "express";
+import * as cors from "cors";
+import * as mongoose from "mongoose";
+import * as dotenv from "dotenv";
 
 import {gatherableItemHelper,aethersandItemHelper,phantasmagoriaItemHelper} from "./src/itemHelpers.js";
 import NodeHelper from "./src/nodeHelpers.js";

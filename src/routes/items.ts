@@ -1,11 +1,11 @@
-import express from "express";
+import * as express from "express";
 import {
   ItemHelpers,
   phantasmagoriaItemHelper,
   gatherableItemHelper,
 } from "../src/itemHelpers.js";
 import { getServers } from "./getServers.js";
-import { IProtoItemBaseDocument } from "../models/Item.model.js";
+import { IProtoItemBaseDocument, IProtoItem } from "../models/Item.model.js";
 
 
 /**
@@ -15,7 +15,7 @@ import { IProtoItemBaseDocument } from "../models/Item.model.js";
  * @param res The response object
  */
 function getItems(
-  model: ItemHelpers<IProtoItemBaseDocument>,
+  model: ItemHelpers<IProtoItemBaseDocument, IProtoItem>,
   req: express.Request,
   res: express.Response
 ) {

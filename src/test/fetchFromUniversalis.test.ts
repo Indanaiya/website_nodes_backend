@@ -1,16 +1,8 @@
-function mockFetchResponse(text: Promise<Buffer> | string) {
-  return Promise.resolve(({
-    text: () => text,
-  } as unknown) as Response);
-  // It's nothing like Response but this makes typescript happy and since it's in a test not the actual program I think it's ok
-}
-
 import fetchFromUniversalis from "../src/fetchFromUniversalis";
-import mockFunction from "./mockFunction"
+import {mockFunction, mockFetchResponse} from "./mockFunction"
 
 jest.mock("node-fetch");
 import nodeFetch from "node-fetch";
-import { Response } from "node-fetch";
 import { readFile } from "fs/promises";
 
 import { UNIVERSALIS_URL, DEFAULT_SERVER } from "../src/constants";

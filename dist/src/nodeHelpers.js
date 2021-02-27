@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { GatheringNode } from "../models/Node.model.js";
-import { GatherableItem } from "../models/Item.model.js";
-import { promises as fs } from "fs";
-import { InvalidArgumentError, IdenticalNodePresentError, } from "../src/errors.js";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Node_model_js_1 = require("../models/Node.model.js");
+const Item_model_js_1 = require("../models/Item.model.js");
+const fs_1 = require("fs");
+const errors_js_1 = require("../src/errors.js");
 /** CREATE */
 /**
  * Add the node consistent with the object provided to the collection
@@ -19,7 +21,7 @@ import { InvalidArgumentError, IdenticalNodePresentError, } from "../src/errors.
  */
 function addNode(nodeDetails) {
     return __awaiter(this, void 0, void 0, function* () {
-        const itemsThisNodeHas = yield GatherableItem.find({
+        const itemsThisNodeHas = yield Item_model_js_1.GatherableItem.find({
             universalisId: {
                 $in: nodeDetails.items.map((itemStr) => Number.parseInt(itemStr)),
             },
@@ -29,23 +31,23 @@ function addNode(nodeDetails) {
             whiteScrips: itemsThisNodeHas.some((item) => item.task.whiteScrips.MidCollectability !== undefined),
             yellowScrips: itemsThisNodeHas.some((item) => item.task.yellowScrips.MidCollectability !== undefined),
         };
-        const node = new GatheringNode(Object.assign({}, nodeDetails));
+        const node = new Node_model_js_1.GatheringNode(Object.assign({}, nodeDetails));
         console.log({ node: node.filters.task });
         const result = yield node.validate().catch((err) => {
             console.log("The folowing node is invalid: ", node);
-            return new InvalidArgumentError(`${nodeDetails} does not create a vaild GatheringNode object: ${err}`);
+            return new errors_js_1.InvalidArgumentError(`${nodeDetails} does not create a vaild GatheringNode object: ${err}`);
         });
         if (result instanceof Error) {
             throw result;
         }
-        const identicalNodes = yield GatheringNode.find({
+        const identicalNodes = yield Node_model_js_1.GatheringNode.find({
             "location.map": nodeDetails.location.map,
             "location.x": nodeDetails.location.x,
             "location.y": nodeDetails.location.y,
         });
         if (identicalNodes.length !== 0) {
             // Assume that if they are in the exact same location, it is the same node
-            throw new IdenticalNodePresentError(`A node already exists at this location: \n${identicalNodes}`);
+            throw new errors_js_1.IdenticalNodePresentError(`A node already exists at this location: \n${identicalNodes}`);
         }
         return node.save();
     });
@@ -57,11 +59,11 @@ function addNode(nodeDetails) {
  */
 function addAllNodes(nodesJsonPath, nodes) {
     return __awaiter(this, void 0, void 0, function* () {
-        const requiredNodes = nodes !== null && nodes !== void 0 ? nodes : (yield fs.readFile(nodesJsonPath, "utf8").then((data) => JSON.parse(data)));
+        const requiredNodes = nodes !== null && nodes !== void 0 ? nodes : (yield fs_1.promises.readFile(nodesJsonPath, "utf8").then((data) => JSON.parse(data)));
         return Promise.all(requiredNodes.map((nodeDetails) => addNode(nodeDetails)
             .then(() => `Node ${nodeDetails} saved.`)
             .catch((err) => {
-            if (err instanceof IdenticalNodePresentError) {
+            if (err instanceof errors_js_1.IdenticalNodePresentError) {
                 return `Node ${nodeDetails} already present.`;
             }
             else {
@@ -77,8 +79,8 @@ function addAllNodes(nodesJsonPath, nodes) {
  */
 function getAllNodes() {
     return __awaiter(this, void 0, void 0, function* () {
-        return GatheringNode.find();
+        return Node_model_js_1.GatheringNode.find();
     });
 }
-export default { addAllNodes, getAllNodes, addNode };
+exports.default = { addAllNodes, getAllNodes, addNode };
 //# sourceMappingURL=nodeHelpers.js.map

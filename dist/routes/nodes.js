@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import express from "express";
-import NodeHelpers from "../src/nodeHelpers.js";
-import { aethersandItemHelper, gatherableItemHelper } from "../src/itemHelpers.js";
-import { getServers } from "./getServers.js";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const nodeHelpers_js_1 = require("../src/nodeHelpers.js");
+const itemHelpers_js_1 = require("../src/itemHelpers.js");
+const getServers_js_1 = require("./getServers.js");
 /**
  * Convert an array of items into an object containing all of those items indexed by their item IDs
  * @param items The array of items to be converted
@@ -27,7 +29,7 @@ function itemArrayToItemObject(items) {
  */
 function getAethersands(...servers) {
     return __awaiter(this, void 0, void 0, function* () {
-        const aethersandsArray = yield aethersandItemHelper.getItems(...servers);
+        const aethersandsArray = yield itemHelpers_js_1.aethersandItemHelper.getItems(...servers);
         return itemArrayToItemObject(aethersandsArray);
     });
 }
@@ -38,7 +40,7 @@ function getAethersands(...servers) {
 function getGatherableItems(...servers) {
     return __awaiter(this, void 0, void 0, function* () {
         const aethersands = yield getAethersands(...servers);
-        const gatherableItemsArray = yield gatherableItemHelper.getItems(...servers);
+        const gatherableItemsArray = yield itemHelpers_js_1.gatherableItemHelper.getItems(...servers);
         const newGatherableItems = gatherableItemsArray.map((item) => {
             var _a;
             if (((_a = item.task) === null || _a === void 0 ? void 0 : _a.aetherialReduce) !== undefined) {
@@ -57,7 +59,7 @@ function getGatherableItems(...servers) {
  */
 function getNodesWithItemData(...servers) {
     return __awaiter(this, void 0, void 0, function* () {
-        const [gatherableItems, nodes] = yield Promise.all([getGatherableItems(...servers), NodeHelpers.getAllNodes()]);
+        const [gatherableItems, nodes] = yield Promise.all([getGatherableItems(...servers), nodeHelpers_js_1.default.getAllNodes()]);
         return nodes.map(({ filters, location, spawnTimes, _id, items: oldItems, lifespan, name, level, }) => {
             const items = oldItems.map((item) => gatherableItems[item]);
             return {
@@ -73,15 +75,15 @@ function getNodesWithItemData(...servers) {
         });
     });
 }
-const router = express.Router();
+const router = express_1.default.Router();
 router.route("/").get((_, res) => {
-    NodeHelpers.getAllNodes()
+    nodeHelpers_js_1.default.getAllNodes()
         .then((response) => res.json(response))
         .catch((err) => res.status(400).json("Error: " + err));
 });
 router.route("/withItemData/:serverOrDatacenter").get((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Decide what servers to get information for
-    const servers = getServers(req.params.serverOrDatacenter);
+    const servers = getServers_js_1.getServers(req.params.serverOrDatacenter);
     if (servers === undefined) {
         res
             .status(422)
@@ -95,5 +97,5 @@ router.route("/withItemData/:serverOrDatacenter").get((req, res) => __awaiter(vo
         res.status(500).json("An error occured while fetching the nodes");
     });
 }));
-export default router;
+exports.default = router;
 //# sourceMappingURL=nodes.js.map

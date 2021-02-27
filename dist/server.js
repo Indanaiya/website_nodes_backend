@@ -1,11 +1,12 @@
 "use strict";
 var _a;
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import { phantasmagoriaItemHelper } from "./src/itemHelpers.js";
-import itemsRouter from "./routes/items.js";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const itemHelpers_js_1 = require("./src/itemHelpers.js");
+const items_js_1 = require("./routes/items.js");
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -40,8 +41,9 @@ const connection = mongoose.connection;
 connection.once("open", () => {
     console.log("MongoDB database connection established successfully");
 });
+//TODO make this into a function that I can call for every helper. e.g. callHelper(phantasmagoriaItemHelper, PHANTASMAGORIA_MATS_JSON_PATH): Promise<void>
 // Add documents to the database
-phantasmagoriaItemHelper
+itemHelpers_js_1.phantasmagoriaItemHelper
     .addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
     .then((results) => {
     console.log("Phantasmagoria results:", results);
@@ -61,7 +63,7 @@ phantasmagoriaItemHelper
 //   .addAllItems(AETHERSAND_JSON_PATH)
 //   .then(() => console.log("All athersand items present in collection."));
 // Routes
-app.use("/items", itemsRouter);
+app.use("/items", items_js_1.default);
 // app.use("/nodes", nodesRouter);
 // Start running
 const httpServer = app.listen(port, () => {

@@ -1,7 +1,9 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GatheringNode = void 0;
+const mongoose = require("mongoose");
 //TODO make a lot of these required once I've finished testing it
-const gatheringNodeSchema = new Schema({
+const gatheringNodeSchema = new mongoose.Schema({
     items: { type: [Number], required: true, default: undefined },
     filters: {
         patch: {
@@ -51,5 +53,5 @@ const gatheringNodeSchema = new Schema({
     level: { type: Number, required: true, min: 1, max: 80 },
     name: { type: String },
 });
-export const GatheringNode = model("GatheringNode", gatheringNodeSchema);
+exports.GatheringNode = mongoose.model("GatheringNode", gatheringNodeSchema);
 //# sourceMappingURL=Node.model.js.map

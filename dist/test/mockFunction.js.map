@@ -1,0 +1,1 @@
+{"version":3,"file":"mockFunction.js","sourceRoot":"","sources":["../../src/test/mockFunction.ts"],"names":[],"mappings":";;;AAEA,mFAAmF;AACnF,SAAgB,YAAY,CAC1B,EAAK;IAEL,OAAO,EAA4B,CAAC;AACtC,CAAC;AAJD,oCAIC;AAED,SAAgB,iBAAiB,CAAC,IAA8B;IAC9D,OAAO,OAAO,CAAC,OAAO,CAAE;QACtB,IAAI,EAAE,GAAG,EAAE,CAAC,IAAI;KACO,CAAC,CAAC;IAC3B,6HAA6H;AAC/H,CAAC;AALD,8CAKC"}

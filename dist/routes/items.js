@@ -1,6 +1,8 @@
-import express from "express";
-import { phantasmagoriaItemHelper, gatherableItemHelper, } from "../src/itemHelpers.js";
-import { getServers } from "./getServers.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const itemHelpers_js_1 = require("../src/itemHelpers.js");
+const getServers_js_1 = require("./getServers.js");
 /**
  * Handle a request by getting the items for the provided model and returning them
  * @param model The model to get items for
@@ -9,7 +11,7 @@ import { getServers } from "./getServers.js";
  */
 function getItems(model, req, res) {
     var _a;
-    const servers = (_a = getServers(req.params.serverOrDatacenter)) !== null && _a !== void 0 ? _a : [];
+    const servers = (_a = getServers_js_1.getServers(req.params.serverOrDatacenter)) !== null && _a !== void 0 ? _a : [];
     model
         .getItems(...servers)
         .then((response) => res.json(response))
@@ -22,9 +24,9 @@ router.route("/").get((_, res) => {
 });
 router
     .route("/phantasmagoria/:serverOrDatacenter")
-    .get((req, res) => getItems(phantasmagoriaItemHelper, req, res));
+    .get((req, res) => getItems(itemHelpers_js_1.phantasmagoriaItemHelper, req, res));
 router
     .route("/gatherable/:serverOrDatacenter")
-    .get((req, res) => getItems(gatherableItemHelper, req, res));
-export default router;
+    .get((req, res) => getItems(itemHelpers_js_1.gatherableItemHelper, req, res));
+exports.default = router;
 //# sourceMappingURL=items.js.map

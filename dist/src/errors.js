@@ -1,31 +1,39 @@
-export class InvalidArgumentError extends Error {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ItemNotFoundError = exports.IdenticalNodePresentError = exports.JSONParseError = exports.DBError = exports.InvalidArgumentError = void 0;
+class InvalidArgumentError extends Error {
     constructor(message) {
         super(message);
         this.name = "InvalidArgumentError";
     }
 }
-export class DBError extends Error {
+exports.InvalidArgumentError = InvalidArgumentError;
+class DBError extends Error {
     constructor(message) {
         super(message);
         this.name = "DBError";
     }
 }
-export class JSONParseError extends Error {
+exports.DBError = DBError;
+class JSONParseError extends Error {
     constructor(message) {
         super(message);
         this.name = "JSONParseError";
     }
 }
-export class IdenticalNodePresentError extends Error {
+exports.JSONParseError = JSONParseError;
+class IdenticalNodePresentError extends Error {
     constructor(message) {
         super(message);
         this.name = "IdenticalNodePresentError";
     }
 }
-export class ItemNotFoundError extends Error {
+exports.IdenticalNodePresentError = IdenticalNodePresentError;
+class ItemNotFoundError extends Error {
     constructor(message) {
         super(message);
         this.name = "ItemNotFoundError";
     }
 }
+exports.ItemNotFoundError = ItemNotFoundError;
 //# sourceMappingURL=errors.js.map

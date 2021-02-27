@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
-import { SERVERS } from "../src/constants.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AethersandItem = exports.GatherableItem = exports.PhantaItem = void 0;
+const mongoose = require("mongoose");
+const constants_js_1 = require("../src/constants.js");
 const marketInfoForSchema = {};
-for (let server of SERVERS) {
+for (let server of constants_js_1.SERVERS) {
     marketInfoForSchema[server] = {
         price: {
             type: Number,
@@ -50,16 +52,16 @@ const protoItemSchema = {
         required: true,
         unique: true,
     },
-    marketInfoForSchema,
+    marketInfo: marketInfoForSchema,
     universalisId: {
         type: Number,
         required: true,
         unique: true,
     },
 };
-const phantaItemSchema = new Schema(Object.assign({ tomestonePrice: { type: Number } }, protoItemSchema));
+const phantaItemSchema = new mongoose.Schema(Object.assign({ tomestonePrice: { type: Number } }, protoItemSchema));
 //TODO make a lot of these required once I've finished testing it
-const gatherableItemSchema = new Schema(Object.assign({ task: {
+const gatherableItemSchema = new mongoose.Schema(Object.assign({ task: {
         aetherialReduce: { type: [], default: undefined },
         whiteScrips: {
             HighCollectability: Number,
@@ -83,8 +85,8 @@ const gatherableItemSchema = new Schema(Object.assign({ task: {
         min: 1,
         max: 10,
     } }, protoItemSchema));
-const aethersandItemSchema = new Schema(Object.assign({ icon: { type: String } }, protoItemSchema));
-export const PhantaItem = model("PhantaItem", phantaItemSchema);
-export const GatherableItem = model("GatherableItem", gatherableItemSchema);
-export const AethersandItem = model("AethersandItem", aethersandItemSchema);
+const aethersandItemSchema = new mongoose.Schema(Object.assign({ icon: { type: String } }, protoItemSchema));
+exports.PhantaItem = mongoose.model("PhantaItem", phantaItemSchema);
+exports.GatherableItem = mongoose.model("GatherableItem", gatherableItemSchema);
+exports.AethersandItem = mongoose.model("AethersandItem", aethersandItemSchema);
 //# sourceMappingURL=Item.model.js.map

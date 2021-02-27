@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-const {Schema, model} = mongoose;
+import * as mongoose from "mongoose";
 
 export interface IGatheringNode{
   items: [number];
@@ -25,7 +23,7 @@ export interface IGatheringNode{
 export interface IGatheringNodeDocument extends IGatheringNode, mongoose.Document {}
 
 //TODO make a lot of these required once I've finished testing it
-const gatheringNodeSchema = new Schema({
+const gatheringNodeSchema = new mongoose.Schema({
   items: { type: [Number], required: true, default: undefined },
   filters: {
     patch: {
@@ -77,4 +75,4 @@ const gatheringNodeSchema = new Schema({
   name: { type: String},
 });
 
-export const GatheringNode = model<IGatheringNodeDocument>("GatheringNode", gatheringNodeSchema);
+export const GatheringNode = mongoose.model<IGatheringNodeDocument>("GatheringNode", gatheringNodeSchema);

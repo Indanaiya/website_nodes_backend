@@ -1,9 +1,8 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+import * as mongoose from "mongoose";
 import { SERVERS } from "../src/constants.js";
 
 // TODO since these things are optional I think I need to make them possibly undefined or something?
-interface ServerPrices {
+export interface ServerPrices {
   price: number;
   saleVelocity: {
     overall: number;
@@ -21,7 +20,7 @@ interface ServerPrices {
 
 export interface IProtoItem {
   name: string;
-  marketInfo: { [serverName: string]: ServerPrices };
+  marketInfo?: { [serverName: string]: ServerPrices };
   universalisId: number;
 }
 //TODO need to look at the difference between Document and BaseDocument again
@@ -111,7 +110,7 @@ const protoItemSchema = {
     required: true,
     unique: true,
   },
-  marketInfoForSchema,
+  marketInfo: marketInfoForSchema,
   universalisId: {
     type: Number,
     required: true,
@@ -119,13 +118,13 @@ const protoItemSchema = {
   },
 };
 
-const phantaItemSchema = new Schema({
+const phantaItemSchema = new mongoose.Schema({
   tomestonePrice: { type: Number },
   ...protoItemSchema,
 });
 
 //TODO make a lot of these required once I've finished testing it
-const gatherableItemSchema = new Schema({
+const gatherableItemSchema = new mongoose.Schema({
   task: {
     aetherialReduce: { type: [], default: undefined },
     whiteScrips: {
@@ -154,20 +153,20 @@ const gatherableItemSchema = new Schema({
   ...protoItemSchema,
 });
 
-const aethersandItemSchema = new Schema({
+const aethersandItemSchema = new mongoose.Schema({
   icon: { type: String },
   ...protoItemSchema,
 });
 
-export const PhantaItem = model<IPhantaItemBaseDocument>(
+export const PhantaItem = mongoose.model<IPhantaItemBaseDocument>(
   "PhantaItem",
   phantaItemSchema
 );
-export const GatherableItem = model<IGatherableItemBaseDocument>(
+export const GatherableItem = mongoose.model<IGatherableItemBaseDocument>(
   "GatherableItem",
   gatherableItemSchema
 );
-export const AethersandItem = model<IAethersandItemBaseDocument>(
+export const AethersandItem = mongoose.model<IAethersandItemBaseDocument>(
   "AethersandItem",
   aethersandItemSchema
 );

@@ -1,7 +1,7 @@
 
 import fetch from "node-fetch";
-import { JSONParseError, ItemNotFoundError } from "../src/errors";
-import { UNIVERSALIS_URL, DEFAULT_SERVER } from "../src/constants";
+import { JSONParseError, ItemNotFoundError } from "../src/errors.js";
+import { UNIVERSALIS_URL, DEFAULT_SERVER } from "../src/constants.js";
 
 /**
  * Get market information for an item from universalis

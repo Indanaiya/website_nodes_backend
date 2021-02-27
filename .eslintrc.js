@@ -1,7 +1,6 @@
-module.exports = {
+export default {
     "env": {
         "browser": true,
-        "commonjs": true,
         "es2020": true
     },
     "extends": "eslint:recommended",

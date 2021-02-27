@@ -1,14 +1,17 @@
-import { DATACENTERS, SERVERS } from "../src/constants.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getServers = void 0;
+const constants_js_1 = require("../src/constants.js");
 /**
  * Get the servers associated with serverOrDatacenter. Returns undefined if serverOrDatacenter is not a valid server or datacenter
  * @param serverOrDatacenter The name of a server or a datacenter
  */
-export function getServers(serverOrDatacenter) {
+function getServers(serverOrDatacenter) {
     let servers;
-    if (Object.keys(DATACENTERS).includes(serverOrDatacenter)) {
-        servers = DATACENTERS[serverOrDatacenter];
+    if (Object.keys(constants_js_1.DATACENTERS).includes(serverOrDatacenter)) {
+        servers = constants_js_1.DATACENTERS[serverOrDatacenter];
     }
-    else if (SERVERS.includes(serverOrDatacenter)) {
+    else if (constants_js_1.SERVERS.includes(serverOrDatacenter)) {
         servers = [serverOrDatacenter];
     }
     else {
@@ -16,4 +19,5 @@ export function getServers(serverOrDatacenter) {
     }
     return servers;
 }
+exports.getServers = getServers;
 //# sourceMappingURL=getServers.js.map

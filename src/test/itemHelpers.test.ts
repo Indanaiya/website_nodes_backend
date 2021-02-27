@@ -1,16 +1,20 @@
-import {MongoMemoryServer} from "mongodb-memory-server";
-import MongoError from "mongodb";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import { MongoError } from "mongodb";
 import * as mongoose from "mongoose";
 
-import mockFunction from "./mockFunction"
-jest.mock("../src/fetchFromUniversalis")
-import fFU from "../src/fetchFromUniversalis";
+import { mockFunction } from "./mockFunction.js";
+jest.mock("../src/fetchFromUniversalis.js");
+import fFU from "../src/fetchFromUniversalis.js";
 const fetchFromUniversalis = mockFunction(fFU);
 
-import {phantasmagoriaItemHelper} from "../src/itemHelpers";
-import {PhantaItem} from "../models/Item.model";
-import {JSONParseError, ItemNotFoundError, InvalidArgumentError} from "../src/errors";
-import {SERVERS, DEFAULT_SERVER} from "../src/constants";
+import { phantasmagoriaItemHelper, getMarketInfo } from "../src/itemHelpers.js";
+import { PhantaItem } from "../models/Item.model.js";
+import {
+  JSONParseError,
+  ItemNotFoundError,
+  InvalidArgumentError,
+} from "../src/errors.js";
+import { SERVERS, DEFAULT_SERVER } from "../src/constants";
 
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json";
 const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json";
@@ -19,13 +23,17 @@ const TEST_SERVER_NAME_2 = "Anima";
 const FAKE_SERVER_NAME = "1234";
 const FAKE_SERVER_NAME_2 = "4321";
 const testItemName = "Multifaceted Alumen";
+const universalisReturnValueFive = generateUniversalisReturnValue(5);
 
 /**
  * Create an object representing a pretend return value from universalis
- * @param value 
- * @param lastUploadTime 
+ * @param value
+ * @param lastUploadTime
  */
-function generateUniversalisReturnValue(value: number, lastUploadTime = 1597591027779) {
+function generateUniversalisReturnValue(
+  value: number,
+  lastUploadTime = 1597591027779
+) {
   return Promise.resolve({
     listings: [{ pricePerUnit: value }],
     regularSaleVelocity: value,
@@ -38,9 +46,65 @@ function generateUniversalisReturnValue(value: number, lastUploadTime = 15975910
   });
 }
 
-describe("itemHelpersTest", () => {
-  const universalisReturnValueFive = generateUniversalisReturnValue(5);
+/**
+ * Create a valid marketInfo object
+ * @param value
+ */
+function generateMarketInfoReturnValue(value: number) {
+  return {
+    avgPrice: {
+      hq: value,
+      nq: value,
+      overall: value,
+    },
+    lastUploadTime: new Date(1597591027779),
+    price: value,
+    saleVelocity: { hq: value, nq: value, overall: value },
+  };
+}
 
+describe("getMarketInfo", () => {
+  test("calls fetchFromUniversalis for the supplied item id and server, then returns a ServerPrices object corresponding to the recieved information", async () => {
+    expect.assertions(5);
+    fetchFromUniversalis.mockImplementation(
+      (universalisId: number | string, server?: string) =>
+        (universalisId === 5 || universalisId === "5") && server === "Cerberus"
+          ? universalisReturnValueFive
+          : fail("called fetchFromUniversalis with the incorrect parameters")
+    );
+
+    const time = Date.now();
+    const {
+      listings: {
+        0: { pricePerUnit },
+      },
+      regularSaleVelocity,
+      nqSaleVelocity,
+      hqSaleVelocity,
+      averagePrice,
+      averagePriceNQ,
+      averagePriceHQ,
+      lastUploadTime,
+    } = await universalisReturnValueFive;
+    const marketInfo = await getMarketInfo(5, "Cerberus");
+
+    expect(marketInfo.price).toEqual(pricePerUnit);
+    expect(marketInfo.saleVelocity).toEqual({
+      overall: regularSaleVelocity,
+      nq: nqSaleVelocity,
+      hq: hqSaleVelocity,
+    });
+    expect(marketInfo.avgPrice).toEqual({
+      overall: averagePrice,
+      nq: averagePriceNQ,
+      hq: averagePriceHQ,
+    });
+    expect(marketInfo.lastUploadTime).toEqual(lastUploadTime);
+    expect(Number.parseInt(marketInfo.updatedAt)).toBeGreaterThanOrEqual(time);
+  });
+});
+
+describe("itemHelpersTest", () => {
   let mongod: MongoMemoryServer;
   beforeAll(async () => {
     mongod = new MongoMemoryServer();
@@ -70,28 +134,34 @@ describe("itemHelpersTest", () => {
   });
 
   describe("addItem", () => {
-    const addItemArgs = [
-      testItemName,
-      {
-        id: "27744",
-        tomestonePrice: "5",
-      },
-    ];
+    const addItemArg = {
+      name: testItemName,
+      universalisId: 27744,
+      tomestonePrice: 5,
+    };
 
     test("adds an item to the collection and returns 2 when adding a new item to the collection", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await phantasmagoriaItemHelper.addItem(testItemName, {universalisId: 27744, tomestonePrice: 5})).toEqual(2);
-      expect((await PhantaItem.find()).length).toEqual(1);
+      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
+      //TODO test that the item saved has all of the expected values
+      const phantaSearchResults = await PhantaItem.find();
+      if (phantaSearchResults.length !== 1) {
+        fail(
+          `phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`
+        );
+      } else {
+        console.log(phantaSearchResults);
+      }
     });
 
     test("adds an item to the collection and returns 0 when the item to be added to the collection is already present", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await phantasmagoriaItemHelper.addItem(...addItemArgs)).toEqual(2);
+      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
       expect((await PhantaItem.find()).length).toEqual(1);
 
-      expect(await phantasmagoriaItemHelper.addItem(...addItemArgs)).toEqual(0);
+      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(0);
       expect((await PhantaItem.find()).length).toEqual(1);
     });
 
@@ -101,11 +171,11 @@ describe("itemHelpersTest", () => {
         .mockReturnValueOnce(generateUniversalisReturnValue(10))
         .mockReturnValue(universalisReturnValueFive);
 
-      expect(await phantasmagoriaItemHelper.addItem(...addItemArgs)).toEqual(2);
+      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
       expect((await PhantaItem.find()).length).toEqual(1);
 
       expect(
-        await phantasmagoriaItemHelper.addItem(...addItemArgs, TEST_SERVER_NAME)
+        await phantasmagoriaItemHelper.addItem(addItemArg, TEST_SERVER_NAME)
       ).toEqual(1);
 
       const expectedCollectionValue = {
@@ -114,36 +184,13 @@ describe("itemHelpersTest", () => {
           Moogle: generateMarketInfoReturnValue(10),
         },
         name: testItemName,
-        id: 27744,
+        universalisId: 27744,
         tomestonePrice: 5,
       };
       const collection = await PhantaItem.find();
 
       expect(collection[0]).toMatchObject(expectedCollectionValue);
       expect(collection.length).toEqual(1);
-    });
-
-    test("Handles addition of two different items with the same id gracefully", async () => {
-      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-
-      expect(await phantasmagoriaItemHelper.addItem(...addItemArgs)).toEqual(2);
-      expect((await PhantaItem.find()).length).toEqual(1);
-
-      return expect(
-        phantasmagoriaItemHelper.addItem(
-          "MultifacetedAlumen",
-          addItemArgs[1],
-          TEST_SERVER_NAME
-        )
-      ).rejects.toThrow(MongoError);
-    });
-
-    test("Will not add to collection when id is not present", async () => {
-      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-
-      return expect(
-        phantasmagoriaItemHelper.addItem(addItemArgs[0], {})
-      ).rejects.toThrow(ValidationError);
     });
 
     test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
@@ -154,7 +201,7 @@ describe("itemHelpersTest", () => {
       });
 
       return expect(
-        phantasmagoriaItemHelper.addItem(...addItemArgs)
+        phantasmagoriaItemHelper.addItem(addItemArg)
       ).rejects.toThrow(ItemNotFoundError);
     });
 
@@ -166,7 +213,7 @@ describe("itemHelpersTest", () => {
       });
 
       return expect(
-        phantasmagoriaItemHelper.addItem(...addItemArgs)
+        phantasmagoriaItemHelper.addItem(addItemArg)
       ).rejects.toThrow(JSONParseError);
     });
   });
