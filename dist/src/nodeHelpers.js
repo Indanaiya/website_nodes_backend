@@ -28,8 +28,8 @@ function addNode(nodeDetails) {
         });
         nodeDetails.filters.task = {
             reducible: itemsThisNodeHas.some((item) => item.task.aetherialReduce !== undefined),
-            whiteScrips: itemsThisNodeHas.some((item) => item.task.whiteScrips.MidCollectability !== undefined),
-            yellowScrips: itemsThisNodeHas.some((item) => item.task.yellowScrips.MidCollectability !== undefined),
+            whiteScrips: itemsThisNodeHas.some((item) => { var _a; return ((_a = item.task.whiteScrips) === null || _a === void 0 ? void 0 : _a.MidCollectability) !== undefined; }),
+            yellowScrips: itemsThisNodeHas.some((item) => { var _a; return ((_a = item.task.yellowScrips) === null || _a === void 0 ? void 0 : _a.MidCollectability) !== undefined; }),
         };
         const node = new Node_model_js_1.GatheringNode(Object.assign({}, nodeDetails));
         console.log({ node: node.filters.task });
@@ -54,8 +54,8 @@ function addNode(nodeDetails) {
 }
 /**
  * Add all nodes in the file at path to the db
- * @param {string} path The path to the json file containing the node information
- * @returns {Promise<string[]>}
+ * @param path The path to the json file containing the node information
+ * @returns
  */
 function addAllNodes(nodesJsonPath, nodes) {
     return __awaiter(this, void 0, void 0, function* () {

@@ -1,51 +1,32 @@
 {
-  "Ice Cluster": {
-    "aetherialReduce": 0,
-    "id": 15,
-    "icon": "/i/020000/020015.png",
-    "name": "Ice Cluster",
-    "task": {}
+  "Doman Yellow": {
+    "icon": "/i/027000/027407.png",
+    "name": "Doman Yellow",
+    "universalisId": 20012,
+    "task": { "aetherialReduce": [20013, 17, 11] },
+    "patch": 5.3
   },
-  "Levin Mint": {
-    "aetherialReduce": 42,
-    "id": 30592,
-    "icon": "/i/025000/025039.png",
-    "name": "Levin Mint",
-    "task": {}
+  "Earth Crystal": {
+    "icon": "/i/020000/020012.png",
+    "name": "Earth Crystal",
+    "universalisId": 11,
+    "task": {},
+    "patch": 5.3
   },
-  "White Clay": {
-    "aetherialReduce": 35,
-    "id": 27808,
-    "icon": "/i/022000/022610.png",
-    "name": "White Clay",
-    "task": {}
-  },
-  "White Oak Branch": {
-    "aetherialReduce": 0,
-    "collectablesShopItem": { "Item": ["13.37"] },
-    "id": 27816,
-    "icon": "/i/022000/022416.png",
-    "name": "White Oak Branch",
+  "Beech Branch": {
+    "icon": "/i/022000/022417.png",
+    "name": "Beech Branch",
+    "universalisId": 19936,
     "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 32 },
-        { "MidCollectability": 470, "MidReward": 27 },
-        { "LowCollectability": 450, "LowReward": 25 }
-      ]
-    }
-  },
-  "Broad Beans": {
-    "aetherialReduce": 0,
-    "collectablesShopItem": { "Item": ["13.40"] },
-    "id": 27833,
-    "icon": "/i/025000/025353.png",
-    "name": "Broad Beans",
-    "task": {
-      "yellowScrips": [
-        { "HighCollectability": 500, "HighReward": 45 },
-        { "MidCollectability": 470, "MidReward": 38 },
-        { "LowCollectability": 450, "LowReward": 35 }
-      ]
-    }
+      "yellowScrips": {
+        "HighCollectability": 500,
+        "MidCollectability": 470,
+        "LowCollectability": 450,
+        "HighReward": 15,
+        "MidReward": 13,
+        "LowReward": 12
+      }
+    },
+    "patch": 5.3
   }
 }

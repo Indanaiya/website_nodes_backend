@@ -15,6 +15,7 @@ const fs_1 = require("fs");
 const constants_js_1 = require("../src/constants.js");
 const fetchFromUniversalis_js_1 = require("../src/fetchFromUniversalis.js");
 const errors_js_1 = require("../src/errors.js");
+const validateServers_js_1 = require("./validateServers.js");
 /**
  * Get market information for the specified item and server
  *
@@ -101,6 +102,11 @@ class ItemHelper {
             }
             else {
                 const item = new this.model(Object.assign({ name: itemDetails.name, universalisId: itemDetails.universalisId }, this.addFunction(itemDetails)));
+                // This can be removed for performance reasons but it's a handy thing to have in case something goes wrong
+                const valid = item.validateSync();
+                if (valid !== undefined) {
+                    console.log({ reason: valid, item, itemDetails });
+                }
                 return item.save().then(() => addItemReturn.ADDED);
             }
         });
@@ -113,15 +119,7 @@ class ItemHelper {
      */
     getItems(...servers) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Sort out servers
-            servers.forEach((server) => {
-                if (!constants_js_1.SERVERS.includes(server)) {
-                    throw new errors_js_1.InvalidArgumentError(`${server} is not a valid server name`);
-                }
-            });
-            if (servers.length === 0) {
-                servers = [constants_js_1.DEFAULT_SERVER];
-            }
+            servers = validateServers_js_1.validateServers(...servers);
             // Update the out of date items
             const items = yield this.model.find();
             const outOfDatePrices = items.map((item) => {
@@ -176,17 +174,7 @@ class ItemHelper {
             if (item.isNew) {
                 throw new errors_js_1.InvalidArgumentError(`'item' is new: ${item}`);
             }
-            //TODO make a unified function for server validation
-            servers.forEach((server) => {
-                if (!constants_js_1.SERVERS.includes(server)) {
-                    console.log(constants_js_1.SERVERS.includes(server));
-                    console.log({ server });
-                    throw new errors_js_1.InvalidArgumentError(`Server ${server} is not a valid server name`);
-                }
-            });
-            if (servers.length === 0) {
-                servers = [constants_js_1.DEFAULT_SERVER];
-            }
+            servers = validateServers_js_1.validateServers(...servers);
             if (item.marketInfo === undefined) {
                 item.marketInfo = {};
             }
@@ -220,9 +208,7 @@ class ItemHelper {
      */
     updateAllItems(...servers) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (servers.length === 0) {
-                servers = [constants_js_1.DEFAULT_SERVER];
-            }
+            servers = validateServers_js_1.validateServers(...servers);
             return this.model
                 .find()
                 .then((items) => Promise.all(items.map((item) => this.updateItem(item, ...servers))));
@@ -234,6 +220,7 @@ exports.ItemHelper = ItemHelper;
 exports.gatherableItemHelper = new ItemHelper(Item_model_js_1.GatherableItem, (itemDetails) => {
     return {
         task: itemDetails.task,
+        patch: itemDetails.patch,
     };
 }, "task");
 /** Item helper for aethersands */

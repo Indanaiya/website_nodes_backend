@@ -81,7 +81,7 @@ const gatherableItemSchema = new mongoose.Schema(Object.assign({ task: {
         },
     }, patch: {
         type: Number,
-        //required: true,
+        required: true,
         min: 1,
         max: 10,
     } }, protoItemSchema));

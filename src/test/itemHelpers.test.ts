@@ -10,11 +10,15 @@ const fetchFromUniversalis = mockFunction(fFU);
 
 import {
   addItemReturn,
+  gatherableItemHelper,
   getMarketInfo,
   ItemHelper,
   phantasmagoriaItemHelper,
 } from "../src/itemHelpers.js";
 import {
+  GatherableItem,
+  IGatherableItem,
+  IGatherableItemBaseDocument,
   IProtoItem,
   IProtoItemBaseDocument,
   PhantaItem,
@@ -75,71 +79,89 @@ function generateMarketInfoReturnValue(value: number) {
 
 /**
  * Runs a full gamut of tests on an ItemHelpers object
- * @param itemHelper
+ * @param itemHelper The object to be tested
+ * @param testItem
  */
-function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType extends IProtoItem>(
+function describeItemHelper<
+  DocType extends IProtoItemBaseDocument,
+  ItemType extends IProtoItem
+>(
+  testName: string,
   itemHelper: ItemHelper<DocType, ItemType>,
-  addItemArg: ItemType
+  testItem: ItemType,
+  testModel: mongoose.Model<IProtoItemBaseDocument, {}>,
+  testJSONAddress: string
 ) {
-  describe("addItem", () => {
+  beforeEach(async () => {
+    await testModel.deleteMany({});
+    if ((await testModel.find()).length !== 0) {
+      throw new Error("Some items in the collection weren't deleted");
+    }
+  });
+
+  describe(`${testName}: addItem`, () => {
     test("adds an item to the collection and returns addItemReturn.ADDED when that item wasn't already present", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ADDED);
+      expect(await itemHelper.addItem(testItem)).toEqual(addItemReturn.ADDED);
       //TODO test that the item saved has all of the expected values
-      const phantaSearchResults = await PhantaItem.find();
-      if (phantaSearchResults.length !== 1) {
-        fail(
-          `phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`
-        );
+      const searchResults = await testModel.find();
+      if (searchResults.length !== 1) {
+        fail(`searchResult's length was not 1, it was ${searchResults.length}`);
+      } else {
+        expect(searchResults[0]).toMatchObject(testItem);
       }
     });
 
     test("adds an item to the collection and returns addItemReturn.ALREADY_PRESENT when the item to be added to the collection is already present", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ADDED);
-      expect((await PhantaItem.find()).length).toEqual(1);
+      expect(await itemHelper.addItem(testItem)).toEqual(addItemReturn.ADDED);
+      expect((await itemHelper.model.find()).length).toEqual(1);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ALREADY_PRESENT);
-      expect((await PhantaItem.find()).length).toEqual(1);
+      expect(await itemHelper.addItem(testItem)).toEqual(
+        addItemReturn.ALREADY_PRESENT
+      );
+      expect((await itemHelper.model.find()).length).toEqual(1);
     });
   });
 
-  describe("addAllItems", () => {
+  describe(`${testName}: addAllItems`, () => {
     test("adds all items in a provided json to the collection", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      const requiredItems = await fs
-        .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+      /** The items expected to be added to the collection */
+      const requiredItems: ItemType[] = await fs
+        .readFile(testJSONAddress, "utf8")
         .then((data) => JSON.parse(data))
         .then((obj) =>
           Object.keys(obj).map((itemName) => {
-            return {
-              name: itemName,
-              universalisId: Number.parseInt(obj[itemName].universalisId),
-              tomestonePrice: Number.parseInt(obj[itemName].tomestonePrice),
-            };
+            const returnVal: any = {};
+            // Ensures that the type is ItemType
+            Object.keys(testItem).forEach(
+              (key) => (returnVal[key] = obj[itemName][key])
+            );
+            return returnVal;
           })
         );
 
-      await itemHelper
-        .addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
-        .then((promises) =>
-          promises.forEach((promise) => {
-            expect(promise.status).toEqual("fulfilled");
-          })
-        );
+      // Add all items to the collection and expect them to all be added successfully
+      await itemHelper.addAllItems(testJSONAddress).then((promises) =>
+        promises.forEach((promise) => {
+          expect(promise.status).toEqual("fulfilled");
+        })
+      );
 
-      const results = await PhantaItem.find();
+      const itemsInCollection = await testModel.find();
 
-      expect(results.length).toEqual(requiredItems.length);
-      requiredItems.forEach((item) => {
-        const matchingResult = results.filter(
-          (resultItem) => resultItem.universalisId === item.universalisId
+      expect(itemsInCollection.length).toEqual(requiredItems.length);
+      requiredItems.forEach((requiredItem) => {
+        const matchingResult = itemsInCollection.filter(
+          (resultItem) =>
+            resultItem.universalisId === requiredItem.universalisId
         );
         expect(matchingResult.length).toEqual(1);
-        expect(matchingResult[0]).toMatchObject(item);
+        expect(matchingResult[0]).toMatchObject(requiredItem);
       });
     });
 
@@ -149,9 +171,7 @@ function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType ext
         throw new Error();
       });
 
-      const results = await itemHelper.addAllItems(
-        PHANTASMAGORIA_MATS_JSON_PATH
-      );
+      const results = await itemHelper.addAllItems(testJSONAddress);
       expect(results.length).toBeGreaterThan(0);
       await Promise.all(
         results.map(async (result: any) => {
@@ -171,7 +191,7 @@ function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType ext
       });
 
       const returnVal = await expect(
-        itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
+        itemHelper.addAllItems(testJSONAddress)
       ).rejects.toThrow(Error);
       readFileMock.mockRestore();
       return returnVal;
@@ -242,16 +262,36 @@ describe("itemHelpersTest", () => {
     await mongod.stop();
   });
 
-  beforeEach(async () => {
-    await PhantaItem.deleteMany({});
-    if ((await PhantaItem.find()).length !== 0) {
-      throw new Error("Some items in the collection weren't deleted");
-    }
-  });
-
-  describeItemHelper(phantasmagoriaItemHelper, {
-    name: testItemName,
-    universalisId: 27744,
-    tomestonePrice: 5,
-  });
+  describeItemHelper(
+    "phantasmagoria",
+    phantasmagoriaItemHelper,
+    {
+      name: testItemName,
+      universalisId: 27744,
+      tomestonePrice: 5,
+    },
+    PhantaItem,
+    PHANTASMAGORIA_MATS_JSON_PATH
+  );
+  describeItemHelper<IGatherableItemBaseDocument, IGatherableItem>(
+    "gatherableItem",
+    gatherableItemHelper,
+    {
+      name: "Beech Branch",
+      universalisId: 19936,
+      task: {
+        yellowScrips: {
+          HighCollectability: 500,
+          MidCollectability: 470,
+          LowCollectability: 450,
+          HighReward: 15,
+          MidReward: 13,
+          LowReward: 12,
+        },
+      },
+      patch: 5.3,
+    },
+    GatherableItem,
+    GATHERABLE_ITEMS_JSON_PATH
+  );
 });

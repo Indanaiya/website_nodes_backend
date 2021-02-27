@@ -61,51 +61,60 @@ function generateMarketInfoReturnValue(value) {
 }
 /**
  * Runs a full gamut of tests on an ItemHelpers object
- * @param itemHelper
+ * @param itemHelper The object to be tested
+ * @param testItem
  */
-function describeItemHelper(itemHelper, addItemArg) {
-    describe("addItem", () => {
+function describeItemHelper(testName, itemHelper, testItem, testModel, testJSONAddress) {
+    beforeEach(() => __awaiter(this, void 0, void 0, function* () {
+        yield testModel.deleteMany({});
+        if ((yield testModel.find()).length !== 0) {
+            throw new Error("Some items in the collection weren't deleted");
+        }
+    }));
+    describe(`${testName}: addItem`, () => {
         test("adds an item to the collection and returns addItemReturn.ADDED when that item wasn't already present", () => __awaiter(this, void 0, void 0, function* () {
             fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
+            expect(yield itemHelper.addItem(testItem)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
             //TODO test that the item saved has all of the expected values
-            const phantaSearchResults = yield Item_model_js_1.PhantaItem.find();
-            if (phantaSearchResults.length !== 1) {
-                fail(`phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`);
+            const searchResults = yield testModel.find();
+            if (searchResults.length !== 1) {
+                fail(`searchResult's length was not 1, it was ${searchResults.length}`);
+            }
+            else {
+                expect(searchResults[0]).toMatchObject(testItem);
             }
         }));
         test("adds an item to the collection and returns addItemReturn.ALREADY_PRESENT when the item to be added to the collection is already present", () => __awaiter(this, void 0, void 0, function* () {
             fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
-            expect((yield Item_model_js_1.PhantaItem.find()).length).toEqual(1);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ALREADY_PRESENT);
-            expect((yield Item_model_js_1.PhantaItem.find()).length).toEqual(1);
+            expect(yield itemHelper.addItem(testItem)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
+            expect((yield itemHelper.model.find()).length).toEqual(1);
+            expect(yield itemHelper.addItem(testItem)).toEqual(itemHelpers_js_1.addItemReturn.ALREADY_PRESENT);
+            expect((yield itemHelper.model.find()).length).toEqual(1);
         }));
     });
-    describe("addAllItems", () => {
+    describe(`${testName}: addAllItems`, () => {
         test("adds all items in a provided json to the collection", () => __awaiter(this, void 0, void 0, function* () {
             fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
+            /** The items expected to be added to the collection */
             const requiredItems = yield fs
-                .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+                .readFile(testJSONAddress, "utf8")
                 .then((data) => JSON.parse(data))
                 .then((obj) => Object.keys(obj).map((itemName) => {
-                return {
-                    name: itemName,
-                    universalisId: Number.parseInt(obj[itemName].universalisId),
-                    tomestonePrice: Number.parseInt(obj[itemName].tomestonePrice),
-                };
+                const returnVal = {};
+                // Ensures that the type is ItemType
+                Object.keys(testItem).forEach((key) => (returnVal[key] = obj[itemName][key]));
+                return returnVal;
             }));
-            yield itemHelper
-                .addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
-                .then((promises) => promises.forEach((promise) => {
+            // Add all items to the collection and expect them to all be added successfully
+            yield itemHelper.addAllItems(testJSONAddress).then((promises) => promises.forEach((promise) => {
                 expect(promise.status).toEqual("fulfilled");
             }));
-            const results = yield Item_model_js_1.PhantaItem.find();
-            expect(results.length).toEqual(requiredItems.length);
-            requiredItems.forEach((item) => {
-                const matchingResult = results.filter((resultItem) => resultItem.universalisId === item.universalisId);
+            const itemsInCollection = yield testModel.find();
+            expect(itemsInCollection.length).toEqual(requiredItems.length);
+            requiredItems.forEach((requiredItem) => {
+                const matchingResult = itemsInCollection.filter((resultItem) => resultItem.universalisId === requiredItem.universalisId);
                 expect(matchingResult.length).toEqual(1);
-                expect(matchingResult[0]).toMatchObject(item);
+                expect(matchingResult[0]).toMatchObject(requiredItem);
             });
         }));
         test("individual promises reject when addItem throws any error", () => __awaiter(this, void 0, void 0, function* () {
@@ -113,7 +122,7 @@ function describeItemHelper(itemHelper, addItemArg) {
             addItemMock.mockImplementation(() => __awaiter(this, void 0, void 0, function* () {
                 throw new Error();
             }));
-            const results = yield itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH);
+            const results = yield itemHelper.addAllItems(testJSONAddress);
             expect(results.length).toBeGreaterThan(0);
             yield Promise.all(results.map((result) => __awaiter(this, void 0, void 0, function* () {
                 Promise.all([
@@ -128,21 +137,10 @@ function describeItemHelper(itemHelper, addItemArg) {
             readFileMock.mockImplementation(() => __awaiter(this, void 0, void 0, function* () {
                 throw new Error();
             }));
-            const returnVal = yield expect(itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)).rejects.toThrow(Error);
+            const returnVal = yield expect(itemHelper.addAllItems(testJSONAddress)).rejects.toThrow(Error);
             readFileMock.mockRestore();
             return returnVal;
         }));
-        // test("propogates an error from reading the database", async () => {
-        //   const findMock = jest.spyOn(mongoose.Model, "find");
-        //   findMock.mockImplementation(async () => {
-        //     throw new MongoError("");
-        //   });
-        //   const returnVal = await expect(
-        //     itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
-        //   ).rejects.toThrow(MongoError);
-        //   findMock.mockRestore();
-        //   return returnVal;
-        // });
     });
 }
 describe("getMarketInfo", () => {
@@ -189,16 +187,25 @@ describe("itemHelpersTest", () => {
         yield mongoose.disconnect();
         yield mongod.stop();
     }));
-    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield Item_model_js_1.PhantaItem.deleteMany({});
-        if ((yield Item_model_js_1.PhantaItem.find()).length !== 0) {
-            throw new Error("Some items in the collection weren't deleted");
-        }
-    }));
-    describeItemHelper(itemHelpers_js_1.phantasmagoriaItemHelper, {
+    describeItemHelper("phantasmagoria", itemHelpers_js_1.phantasmagoriaItemHelper, {
         name: testItemName,
         universalisId: 27744,
         tomestonePrice: 5,
-    });
+    }, Item_model_js_1.PhantaItem, PHANTASMAGORIA_MATS_JSON_PATH);
+    describeItemHelper("gatherableItem", itemHelpers_js_1.gatherableItemHelper, {
+        name: "Beech Branch",
+        universalisId: 19936,
+        task: {
+            yellowScrips: {
+                HighCollectability: 500,
+                MidCollectability: 470,
+                LowCollectability: 450,
+                HighReward: 15,
+                MidReward: 13,
+                LowReward: 12,
+            },
+        },
+        patch: 5.3,
+    }, Item_model_js_1.GatherableItem, GATHERABLE_ITEMS_JSON_PATH);
 });
 //# sourceMappingURL=itemHelpers.test.js.map
