@@ -1,14 +1,23 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { MongoError } from "mongodb";
 import * as mongoose from "mongoose";
+import * as fs from "fs/promises";
 
 import { mockFunction } from "./mockFunction.js";
 jest.mock("../src/fetchFromUniversalis.js");
 import fFU from "../src/fetchFromUniversalis.js";
 const fetchFromUniversalis = mockFunction(fFU);
 
-import { phantasmagoriaItemHelper, getMarketInfo } from "../src/itemHelpers.js";
-import { PhantaItem } from "../models/Item.model.js";
+import {
+  getMarketInfo,
+  ItemHelpers,
+  phantasmagoriaItemHelper,
+} from "../src/itemHelpers.js";
+import {
+  IProtoItem,
+  IProtoItemBaseDocument,
+  PhantaItem,
+} from "../models/Item.model.js";
 import {
   JSONParseError,
   ItemNotFoundError,
@@ -61,6 +70,196 @@ function generateMarketInfoReturnValue(value: number) {
     price: value,
     saleVelocity: { hq: value, nq: value, overall: value },
   };
+}
+
+/**
+ * Runs a full gamut of tests on an ItemHelpers object
+ * @param itemHelper
+ */
+function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType extends IProtoItem>(
+  itemHelper: ItemHelpers<DocType, ItemType>,
+  addItemArg: ItemType
+) {
+  describe("addItem", () => {
+    test("adds an item to the collection and returns 2 when adding a new item to the collection", async () => {
+      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
+
+      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
+      //TODO test that the item saved has all of the expected values
+      const phantaSearchResults = await PhantaItem.find();
+      if (phantaSearchResults.length !== 1) {
+        fail(
+          `phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`
+        );
+      } else {
+        console.log(phantaSearchResults);
+      }
+    });
+
+    test("adds an item to the collection and returns 0 when the item to be added to the collection is already present", async () => {
+      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
+
+      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
+      expect((await PhantaItem.find()).length).toEqual(1);
+
+      expect(await itemHelper.addItem(addItemArg)).toEqual(0);
+      expect((await PhantaItem.find()).length).toEqual(1);
+    });
+
+    test("adds an item to the collection and returns 1 when the item is present but information a different server is provided", async () => {
+      fetchFromUniversalis
+        .mockReturnValueOnce(generateUniversalisReturnValue(15))
+        .mockReturnValueOnce(generateUniversalisReturnValue(10))
+        .mockReturnValue(universalisReturnValueFive);
+
+      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
+      expect((await PhantaItem.find()).length).toEqual(1);
+
+      expect(await itemHelper.addItem(addItemArg, TEST_SERVER_NAME)).toEqual(1);
+
+      const expectedCollectionValue = {
+        marketInfo: {
+          Cerberus: generateMarketInfoReturnValue(15),
+          Moogle: generateMarketInfoReturnValue(10),
+        },
+        name: testItemName,
+        universalisId: 27744,
+        tomestonePrice: 5,
+      };
+      const collection = await PhantaItem.find();
+
+      expect(collection[0]).toMatchObject(expectedCollectionValue);
+      expect(collection.length).toEqual(1);
+    });
+
+    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
+      fetchFromUniversalis.mockImplementation(() => {
+        throw new ItemNotFoundError(
+          `27744 is not a valid item ID for universalis`
+        );
+      });
+
+      return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(
+        ItemNotFoundError
+      );
+    });
+
+    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
+      fetchFromUniversalis.mockImplementation(() => {
+        throw new JSONParseError(
+          `Error parsing json response from Universalis for item 24474: Fake Error`
+        );
+      });
+
+      return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(
+        JSONParseError
+      );
+    });
+  });
+
+  describe("addAllItems", () => {
+    test("adds all items in a provided json to the collection", async () => {
+      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
+
+      const requiredItems = await fs
+        .readFile(PHANTASMAGORIA_MATS_JSON_PATH, "utf8")
+        .then((data) => JSON.parse(data))
+        .then((obj) =>
+          Object.keys(obj).map((itemName) => {
+            return {
+              name: itemName,
+              universalisId: Number.parseInt(obj[itemName].universalisId),
+              tomestonePrice: Number.parseInt(obj[itemName].tomestonePrice),
+            };
+          })
+        );
+
+      await itemHelper
+        .addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
+        .then((promises) =>
+          promises.forEach((promise) => {
+            expect(promise.status).toEqual("fulfilled");
+          })
+        );
+
+      const results = await PhantaItem.find();
+
+      expect(results.length).toEqual(requiredItems.length);
+      requiredItems.forEach((item) => {
+        const matchingResult = results.filter(
+          (resultItem) => resultItem.universalisId === item.universalisId
+        );
+        expect(matchingResult.length).toEqual(1);
+        expect(matchingResult[0]).toMatchObject(item);
+      });
+    });
+
+    test("displays the correct type of error when individual promises reject", async () => {
+      fetchFromUniversalis.mockImplementation(() => {
+        throw new JSONParseError("");
+      });
+
+      const results = await itemHelper.addAllItems(
+        PHANTASMAGORIA_MATS_JSON_PATH
+      );
+      expect(results.length).toBeGreaterThan(0);
+      await Promise.all(
+        results.map(async (result: any) => {
+          Promise.all([
+            expect(result.status).toEqual("rejected"),
+            expect((await result).reason).toBeInstanceOf(JSONParseError),
+          ]);
+        })
+      );
+    });
+
+    test("individual promises reject when addItem throws any error", async () => {
+      const addItemMock = jest.spyOn(itemHelper, "addItem");
+      addItemMock.mockImplementation(async () => {
+        throw new Error();
+      });
+
+      const results = await itemHelper.addAllItems(
+        PHANTASMAGORIA_MATS_JSON_PATH
+      );
+      expect(results.length).toBeGreaterThan(0);
+      await Promise.all(
+        results.map(async (result: any) => {
+          Promise.all([
+            expect(result.status).toEqual("rejected"),
+            expect((await result).reason).toBeInstanceOf(Error),
+          ]);
+        })
+      );
+      addItemMock.mockRestore();
+    });
+
+    test("Throws an error if it cannot read the json", async () => {
+      const readFileMock = jest.spyOn(fs, "readFile");
+      readFileMock.mockImplementation(async () => {
+        throw new Error();
+      });
+
+      const returnVal = await expect(
+        itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
+      ).rejects.toThrow(Error);
+      readFileMock.mockRestore();
+      return returnVal;
+    });
+
+    // test("propogates an error from reading the database", async () => {
+    //   const findMock = jest.spyOn(mongoose.Model, "find");
+    //   findMock.mockImplementation(async () => {
+    //     throw new MongoError("");
+    //   });
+
+    //   const returnVal = await expect(
+    //     itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
+    //   ).rejects.toThrow(MongoError);
+    //   findMock.mockRestore();
+    //   return returnVal;
+    // });
+  });
 }
 
 describe("getMarketInfo", () => {
@@ -133,88 +332,9 @@ describe("itemHelpersTest", () => {
     }
   });
 
-  describe("addItem", () => {
-    const addItemArg = {
-      name: testItemName,
-      universalisId: 27744,
-      tomestonePrice: 5,
-    };
-
-    test("adds an item to the collection and returns 2 when adding a new item to the collection", async () => {
-      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-
-      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
-      //TODO test that the item saved has all of the expected values
-      const phantaSearchResults = await PhantaItem.find();
-      if (phantaSearchResults.length !== 1) {
-        fail(
-          `phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`
-        );
-      } else {
-        console.log(phantaSearchResults);
-      }
-    });
-
-    test("adds an item to the collection and returns 0 when the item to be added to the collection is already present", async () => {
-      fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-
-      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
-      expect((await PhantaItem.find()).length).toEqual(1);
-
-      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(0);
-      expect((await PhantaItem.find()).length).toEqual(1);
-    });
-
-    test("adds an item to the collection and returns 1 when the item is present but information a different server is provided", async () => {
-      fetchFromUniversalis
-        .mockReturnValueOnce(generateUniversalisReturnValue(15))
-        .mockReturnValueOnce(generateUniversalisReturnValue(10))
-        .mockReturnValue(universalisReturnValueFive);
-
-      expect(await phantasmagoriaItemHelper.addItem(addItemArg)).toEqual(2);
-      expect((await PhantaItem.find()).length).toEqual(1);
-
-      expect(
-        await phantasmagoriaItemHelper.addItem(addItemArg, TEST_SERVER_NAME)
-      ).toEqual(1);
-
-      const expectedCollectionValue = {
-        marketInfo: {
-          Cerberus: generateMarketInfoReturnValue(15),
-          Moogle: generateMarketInfoReturnValue(10),
-        },
-        name: testItemName,
-        universalisId: 27744,
-        tomestonePrice: 5,
-      };
-      const collection = await PhantaItem.find();
-
-      expect(collection[0]).toMatchObject(expectedCollectionValue);
-      expect(collection.length).toEqual(1);
-    });
-
-    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
-      fetchFromUniversalis.mockImplementation(() => {
-        throw new ItemNotFoundError(
-          `27744 is not a valid item ID for universalis`
-        );
-      });
-
-      return expect(
-        phantasmagoriaItemHelper.addItem(addItemArg)
-      ).rejects.toThrow(ItemNotFoundError);
-    });
-
-    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
-      fetchFromUniversalis.mockImplementation(() => {
-        throw new JSONParseError(
-          `Error parsing json response from Universalis for item 24474: Fake Error`
-        );
-      });
-
-      return expect(
-        phantasmagoriaItemHelper.addItem(addItemArg)
-      ).rejects.toThrow(JSONParseError);
-    });
+  describeItemHelper(phantasmagoriaItemHelper, {
+    name: testItemName,
+    universalisId: 27744,
+    tomestonePrice: 5,
   });
 });
