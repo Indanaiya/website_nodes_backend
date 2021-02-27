@@ -41,9 +41,9 @@ export interface IPhantaItem extends IProtoItem {
 
 export interface IGatherableItem extends IProtoItem {
   task: {
-    aetherialReduce: number[];
-    whiteScrips: IScrips;
-    yellowScrips: IScrips;
+    aetherialReduce?: number[];
+    whiteScrips?: IScrips;
+    yellowScrips?: IScrips;
   };
   patch: number;
 }

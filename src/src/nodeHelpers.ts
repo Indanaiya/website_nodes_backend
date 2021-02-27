@@ -45,10 +45,10 @@ async function addNode(nodeDetails: NodeDetails) {
       (item) => item.task.aetherialReduce !== undefined
     ),
     whiteScrips: itemsThisNodeHas.some(
-      (item) => item.task.whiteScrips.MidCollectability !== undefined
+      (item) => item.task.whiteScrips?.MidCollectability !== undefined
     ),
     yellowScrips: itemsThisNodeHas.some(
-      (item) => item.task.yellowScrips.MidCollectability !== undefined
+      (item) => item.task.yellowScrips?.MidCollectability !== undefined
     ),
   };
 
@@ -85,10 +85,10 @@ async function addNode(nodeDetails: NodeDetails) {
 
 /**
  * Add all nodes in the file at path to the db
- * @param {string} path The path to the json file containing the node information
- * @returns {Promise<string[]>}
+ * @param path The path to the json file containing the node information
+ * @returns
  */
-async function addAllNodes(nodesJsonPath: string, nodes?: NodeDetails[]) {
+async function addAllNodes(nodesJsonPath: string, nodes?: NodeDetails[]): Promise<string[]> {
   const requiredNodes =
     nodes ??
     (await fs.readFile(nodesJsonPath, "utf8").then((data) => JSON.parse(data)));
