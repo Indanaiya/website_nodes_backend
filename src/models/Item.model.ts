@@ -146,7 +146,7 @@ const gatherableItemSchema = new mongoose.Schema({
   },
   patch: {
     type: Number,
-    //required: true,
+    required: true,
     min: 1,
     max: 10,
   },
