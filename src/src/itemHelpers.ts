@@ -93,7 +93,7 @@ export class ItemHelper<
   /** CREATE */
   /**
    * Add all items in a json file to the model's collection
-   * 
+   *
    * @param itemsJsonPath The location of a JSON file containing the information for the items to be added
    */
   async addAllItems(itemsJsonPath: string) {
@@ -119,7 +119,7 @@ export class ItemHelper<
 
   /**
    * Add a single item to the model's collection
-   * 
+   *
    * @param itemDetails Information about the item to be added
    */
   async addItem(itemDetails: ItemType) {
@@ -147,6 +147,12 @@ export class ItemHelper<
         universalisId: itemDetails.universalisId,
         ...this.addFunction(itemDetails),
       });
+     // This can be removed for performance reasons but it's a handy thing to have in case something goes wrong
+
+      const valid = item.validateSync();
+      if (valid !== undefined) {
+        console.log({ reason: valid, item, itemDetails });
+      }
       return item.save().then(() => addItemReturn.ADDED);
     }
   }
@@ -154,7 +160,7 @@ export class ItemHelper<
   /** READ */
   /**
    * Get all of the documents for this item type
-   * 
+   *
    * @param servers The servers to retrieve market information from (will update the prices if they are outdated)
    */
   async getItems(...servers: string[]) {
@@ -217,7 +223,7 @@ export class ItemHelper<
   /** UPDATE */
   /**
    * Update the market information for an item for the given server(s)
-   * 
+   *
    * @param item The item to update market information for
    * @param servers The servers that the item should have updated market information for
    */
@@ -260,7 +266,7 @@ export class ItemHelper<
 
   /**
    * Update the market information for the given servers for all items in a collection
-   * 
+   *
    * @param servers The servers for which market information should be updated
    */
   async updateAllItems(...servers: string[]) {
@@ -280,6 +286,7 @@ export const gatherableItemHelper = new ItemHelper(
   (itemDetails: IGatherableItem) => {
     return {
       task: itemDetails.task,
+      patch: itemDetails.patch, //TODO I shoud aim to get rid of this function
     };
   },
   "task"
