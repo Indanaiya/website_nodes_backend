@@ -8,7 +8,7 @@ import {
   IAethersandItem,
   IPhantaItem,
   IGatherableItem,
-  ServerPrices
+  ServerPrices,
 } from "../models/Item.model.js";
 import { Model } from "mongoose";
 import { promises as fs } from "fs";
@@ -19,15 +19,15 @@ import { InvalidArgumentError, DBError } from "../src/errors.js";
 
 /**
  * Get market information for the specified item and server
- * 
- * @param universalisId 
- * @param server 
+ *
+ * @param universalisId The id of the item to retrieve market information for
+ * @param server The server that the prices should be fetched for
  */
-export async function getMarketInfo(universalisId: number, server: string): Promise<ServerPrices> {
-  const universalisObj = await fetchFromUniversalis(
-    universalisId,
-    server
-  );
+export async function getMarketInfo(
+  universalisId: number,
+  server: string
+): Promise<ServerPrices> {
+  const universalisObj = await fetchFromUniversalis(universalisId, server);
 
   //Destructuring the universalis object
   const {
@@ -60,10 +60,15 @@ export async function getMarketInfo(universalisId: number, server: string): Prom
   };
 }
 
+export enum addItemReturn {
+  ALREADY_PRESENT = 0,
+  ADDED = 1,
+}
+
 /**
  * A class to assist with interacting with the database for Items
  */
-export class ItemHelpers<
+export class ItemHelper<
   DocType extends IProtoItemBaseDocument,
   ItemType extends IProtoItem
 > {
@@ -86,7 +91,9 @@ export class ItemHelpers<
 
   /** CREATE */
   /**
-   * Add all items in the json to the model's collection
+   * Add all items in a json file to the model's collection
+   * 
+   * @param itemsJsonPath The location of a JSON file containing the information for the items to be added
    */
   async addAllItems(itemsJsonPath: string) {
     const requiredItems = await fs
@@ -111,22 +118,15 @@ export class ItemHelpers<
 
   /**
    * Add a single item to the model's collection
-   *
-   * @param {Model} model The model for the item to be saved as
-   * @param {Function} addFunction A function to save the items (For things unique to this type of item, e.g. phantasmagoria price)
-   * @param {string} itemName The name of the item to be saved
-   * @param {*} itemDetails An object representing the item
-   * @param {string} server The server for market information to be fetched for
+   * 
+   * @param itemDetails Information about the item to be added
    */
-  // TODO what the heck do these return values mean (USE AN ENUM)
-  // TODO I think there might be an issue here with addItem doing multiple things
-  async addItem(itemDetails: ItemType, server: string = DEFAULT_SERVER) {
+  async addItem(itemDetails: ItemType) {
     let savedItemsWithItemName: DocType[];
     try {
       // There appears to be an issue with mongoose and generics not allowing me to use queries correctly so this is a workaround
       const model: any = this.model;
       savedItemsWithItemName = await model.find({ name: itemDetails.name });
-      console.log(savedItemsWithItemName);
     } catch (err) {
       throw new DBError(
         `Error adding ${itemDetails.name} while trying to access DB: ${err}`
@@ -138,40 +138,23 @@ export class ItemHelpers<
       );
     }
 
-    //Information requested already exists in collection?:
-    console.log("savedItems", savedItemsWithItemName);
-    if (
-      savedItemsWithItemName.length === 1 &&
-      savedItemsWithItemName[0].marketInfo?.[server]?.price !== undefined
-    ) {
-      return 0;
-    }
-
-    const marketInfo = await getMarketInfo(itemDetails.universalisId, server);
-
-    //Save price
     if (savedItemsWithItemName.length === 1) {
-      const item = savedItemsWithItemName[0];
-      if (item.marketInfo === undefined) {
-        item.marketInfo = {};
-      }
-      item.marketInfo[server] = marketInfo;
-      return item.save().then(() => 1);
+      return addItemReturn.ALREADY_PRESENT;
     } else {
       const item = new this.model({
         name: itemDetails.name,
-        marketInfo: { [server]: marketInfo },
         universalisId: itemDetails.universalisId,
         ...this.addFunction(itemDetails),
       });
-      return item.save().then(() => 2);
+      return item.save().then(() => addItemReturn.ADDED);
     }
   }
 
   /** READ */
   /**
    * Get all of the documents for this item type
-   * @param  {...string} servers The servers to retrieve market information from (will update the prices if they are outdated)
+   * 
+   * @param servers The servers to retrieve market information from (will update the prices if they are outdated)
    */
   async getItems(...servers: string[]) {
     // Sort out servers
@@ -241,6 +224,9 @@ export class ItemHelpers<
   /** UPDATE */
   /**
    * Update the market information for an item for the given server(s)
+   * 
+   * @param item The item to update market information for
+   * @param servers The servers that the item should have updated market information for
    */
   async updateItem(item: DocType, ...servers: string[]) {
     // Parameter validation
@@ -293,7 +279,7 @@ export class ItemHelpers<
 
   /**
    * Update the market information for the given servers for all items in a collection
-   * @param model The model for the collection to be updated
+   * 
    * @param servers The servers for which market information should be updated
    */
   async updateAllItems(...servers: string[]) {
@@ -309,7 +295,8 @@ export class ItemHelpers<
   }
 }
 
-export const gatherableItemHelper = new ItemHelpers(
+/** Item helper for gatherable items */
+export const gatherableItemHelper = new ItemHelper(
   GatherableItem,
   (itemDetails: IGatherableItem) => {
     return {
@@ -319,7 +306,8 @@ export const gatherableItemHelper = new ItemHelpers(
   "task"
 );
 
-export const aethersandItemHelper = new ItemHelpers(
+/** Item helper for aethersands */
+export const aethersandItemHelper = new ItemHelper(
   AethersandItem,
   (itemDetails: IAethersandItem) => {
     return {
@@ -329,7 +317,8 @@ export const aethersandItemHelper = new ItemHelpers(
   "icon"
 );
 
-export const phantasmagoriaItemHelper = new ItemHelpers<
+/** Item helper for tomestone materials */
+export const phantasmagoriaItemHelper = new ItemHelper<
   IPhantaItemBaseDocument,
   IPhantaItem
 >(

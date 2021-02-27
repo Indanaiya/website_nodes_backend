@@ -18,7 +18,6 @@ const fetchFromUniversalis_js_1 = require("../src/fetchFromUniversalis.js");
 const fetchFromUniversalis = mockFunction_js_1.mockFunction(fetchFromUniversalis_js_1.default);
 const itemHelpers_js_1 = require("../src/itemHelpers.js");
 const Item_model_js_1 = require("../models/Item.model.js");
-const errors_js_1 = require("../src/errors.js");
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json";
 const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json";
 const TEST_SERVER_NAME = "Moogle";
@@ -66,57 +65,21 @@ function generateMarketInfoReturnValue(value) {
  */
 function describeItemHelper(itemHelper, addItemArg) {
     describe("addItem", () => {
-        test("adds an item to the collection and returns 2 when adding a new item to the collection", () => __awaiter(this, void 0, void 0, function* () {
+        test("adds an item to the collection and returns addItemReturn.ADDED when that item wasn't already present", () => __awaiter(this, void 0, void 0, function* () {
             fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(2);
+            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
             //TODO test that the item saved has all of the expected values
             const phantaSearchResults = yield Item_model_js_1.PhantaItem.find();
             if (phantaSearchResults.length !== 1) {
                 fail(`phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`);
             }
-            else {
-                console.log(phantaSearchResults);
-            }
         }));
-        test("adds an item to the collection and returns 0 when the item to be added to the collection is already present", () => __awaiter(this, void 0, void 0, function* () {
+        test("adds an item to the collection and returns addItemReturn.ALREADY_PRESENT when the item to be added to the collection is already present", () => __awaiter(this, void 0, void 0, function* () {
             fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(2);
+            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ADDED);
             expect((yield Item_model_js_1.PhantaItem.find()).length).toEqual(1);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(0);
+            expect(yield itemHelper.addItem(addItemArg)).toEqual(itemHelpers_js_1.addItemReturn.ALREADY_PRESENT);
             expect((yield Item_model_js_1.PhantaItem.find()).length).toEqual(1);
-        }));
-        test("adds an item to the collection and returns 1 when the item is present but information a different server is provided", () => __awaiter(this, void 0, void 0, function* () {
-            fetchFromUniversalis
-                .mockReturnValueOnce(generateUniversalisReturnValue(15))
-                .mockReturnValueOnce(generateUniversalisReturnValue(10))
-                .mockReturnValue(universalisReturnValueFive);
-            expect(yield itemHelper.addItem(addItemArg)).toEqual(2);
-            expect((yield Item_model_js_1.PhantaItem.find()).length).toEqual(1);
-            expect(yield itemHelper.addItem(addItemArg, TEST_SERVER_NAME)).toEqual(1);
-            const expectedCollectionValue = {
-                marketInfo: {
-                    Cerberus: generateMarketInfoReturnValue(15),
-                    Moogle: generateMarketInfoReturnValue(10),
-                },
-                name: testItemName,
-                universalisId: 27744,
-                tomestonePrice: 5,
-            };
-            const collection = yield Item_model_js_1.PhantaItem.find();
-            expect(collection[0]).toMatchObject(expectedCollectionValue);
-            expect(collection.length).toEqual(1);
-        }));
-        test("Will propagate ItemNotFoundError from fetchFromUniversalis", () => __awaiter(this, void 0, void 0, function* () {
-            fetchFromUniversalis.mockImplementation(() => {
-                throw new errors_js_1.ItemNotFoundError(`27744 is not a valid item ID for universalis`);
-            });
-            return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(errors_js_1.ItemNotFoundError);
-        }));
-        test("Will propagate ItemNotFoundError from fetchFromUniversalis", () => __awaiter(this, void 0, void 0, function* () {
-            fetchFromUniversalis.mockImplementation(() => {
-                throw new errors_js_1.JSONParseError(`Error parsing json response from Universalis for item 24474: Fake Error`);
-            });
-            return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(errors_js_1.JSONParseError);
         }));
     });
     describe("addAllItems", () => {
@@ -144,19 +107,6 @@ function describeItemHelper(itemHelper, addItemArg) {
                 expect(matchingResult.length).toEqual(1);
                 expect(matchingResult[0]).toMatchObject(item);
             });
-        }));
-        test("displays the correct type of error when individual promises reject", () => __awaiter(this, void 0, void 0, function* () {
-            fetchFromUniversalis.mockImplementation(() => {
-                throw new errors_js_1.JSONParseError("");
-            });
-            const results = yield itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH);
-            expect(results.length).toBeGreaterThan(0);
-            yield Promise.all(results.map((result) => __awaiter(this, void 0, void 0, function* () {
-                Promise.all([
-                    expect(result.status).toEqual("rejected"),
-                    expect((yield result).reason).toBeInstanceOf(errors_js_1.JSONParseError),
-                ]);
-            })));
         }));
         test("individual promises reject when addItem throws any error", () => __awaiter(this, void 0, void 0, function* () {
             const addItemMock = jest.spyOn(itemHelper, "addItem");

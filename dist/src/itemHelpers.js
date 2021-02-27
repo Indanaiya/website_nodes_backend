@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.phantasmagoriaItemHelper = exports.aethersandItemHelper = exports.gatherableItemHelper = exports.ItemHelpers = exports.getMarketInfo = void 0;
+exports.phantasmagoriaItemHelper = exports.aethersandItemHelper = exports.gatherableItemHelper = exports.ItemHelper = exports.addItemReturn = exports.getMarketInfo = void 0;
 const Item_model_js_1 = require("../models/Item.model.js");
 const fs_1 = require("fs");
 const constants_js_1 = require("../src/constants.js");
@@ -18,8 +18,8 @@ const errors_js_1 = require("../src/errors.js");
 /**
  * Get market information for the specified item and server
  *
- * @param universalisId
- * @param server
+ * @param universalisId The id of the item to retrieve market information for
+ * @param server The server that the prices should be fetched for
  */
 function getMarketInfo(universalisId, server) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -44,10 +44,15 @@ function getMarketInfo(universalisId, server) {
     });
 }
 exports.getMarketInfo = getMarketInfo;
+var addItemReturn;
+(function (addItemReturn) {
+    addItemReturn[addItemReturn["ALREADY_PRESENT"] = 0] = "ALREADY_PRESENT";
+    addItemReturn[addItemReturn["ADDED"] = 1] = "ADDED";
+})(addItemReturn = exports.addItemReturn || (exports.addItemReturn = {}));
 /**
  * A class to assist with interacting with the database for Items
  */
-class ItemHelpers {
+class ItemHelper {
     constructor(model, addFunction = () => ({}), projection = "") {
         this.model = model;
         this.addFunction = addFunction;
@@ -55,7 +60,9 @@ class ItemHelpers {
     }
     /** CREATE */
     /**
-     * Add all items in the json to the model's collection
+     * Add all items in a json file to the model's collection
+     *
+     * @param itemsJsonPath The location of a JSON file containing the information for the items to be added
      */
     addAllItems(itemsJsonPath) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -73,23 +80,15 @@ class ItemHelpers {
     /**
      * Add a single item to the model's collection
      *
-     * @param {Model} model The model for the item to be saved as
-     * @param {Function} addFunction A function to save the items (For things unique to this type of item, e.g. phantasmagoria price)
-     * @param {string} itemName The name of the item to be saved
-     * @param {*} itemDetails An object representing the item
-     * @param {string} server The server for market information to be fetched for
+     * @param itemDetails Information about the item to be added
      */
-    // TODO what the heck do these return values mean (USE AN ENUM)
-    // TODO I think there might be an issue here with addItem doing multiple things
-    addItem(itemDetails, server = constants_js_1.DEFAULT_SERVER) {
-        var _a, _b;
+    addItem(itemDetails) {
         return __awaiter(this, void 0, void 0, function* () {
             let savedItemsWithItemName;
             try {
                 // There appears to be an issue with mongoose and generics not allowing me to use queries correctly so this is a workaround
                 const model = this.model;
                 savedItemsWithItemName = yield model.find({ name: itemDetails.name });
-                console.log(savedItemsWithItemName);
             }
             catch (err) {
                 throw new errors_js_1.DBError(`Error adding ${itemDetails.name} while trying to access DB: ${err}`);
@@ -97,32 +96,20 @@ class ItemHelpers {
             if (savedItemsWithItemName.length > 1) {
                 throw new errors_js_1.DBError(`Too many items. Searching for ${itemDetails.name} returned ${savedItemsWithItemName.length} results.`);
             }
-            //Information requested already exists in collection?:
-            console.log("savedItems", savedItemsWithItemName);
-            if (savedItemsWithItemName.length === 1 &&
-                ((_b = (_a = savedItemsWithItemName[0].marketInfo) === null || _a === void 0 ? void 0 : _a[server]) === null || _b === void 0 ? void 0 : _b.price) !== undefined) {
-                return 0;
-            }
-            const marketInfo = yield getMarketInfo(itemDetails.universalisId, server);
-            //Save price
             if (savedItemsWithItemName.length === 1) {
-                const item = savedItemsWithItemName[0];
-                if (item.marketInfo === undefined) {
-                    item.marketInfo = {};
-                }
-                item.marketInfo[server] = marketInfo;
-                return item.save().then(() => 1);
+                return addItemReturn.ALREADY_PRESENT;
             }
             else {
-                const item = new this.model(Object.assign({ name: itemDetails.name, marketInfo: { [server]: marketInfo }, universalisId: itemDetails.universalisId }, this.addFunction(itemDetails)));
-                return item.save().then(() => 2);
+                const item = new this.model(Object.assign({ name: itemDetails.name, universalisId: itemDetails.universalisId }, this.addFunction(itemDetails)));
+                return item.save().then(() => addItemReturn.ADDED);
             }
         });
     }
     /** READ */
     /**
      * Get all of the documents for this item type
-     * @param  {...string} servers The servers to retrieve market information from (will update the prices if they are outdated)
+     *
+     * @param servers The servers to retrieve market information from (will update the prices if they are outdated)
      */
     getItems(...servers) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -179,6 +166,9 @@ class ItemHelpers {
     /** UPDATE */
     /**
      * Update the market information for an item for the given server(s)
+     *
+     * @param item The item to update market information for
+     * @param servers The servers that the item should have updated market information for
      */
     updateItem(item, ...servers) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -225,7 +215,7 @@ class ItemHelpers {
     }
     /**
      * Update the market information for the given servers for all items in a collection
-     * @param model The model for the collection to be updated
+     *
      * @param servers The servers for which market information should be updated
      */
     updateAllItems(...servers) {
@@ -239,18 +229,21 @@ class ItemHelpers {
         });
     }
 }
-exports.ItemHelpers = ItemHelpers;
-exports.gatherableItemHelper = new ItemHelpers(Item_model_js_1.GatherableItem, (itemDetails) => {
+exports.ItemHelper = ItemHelper;
+/** Item helper for gatherable items */
+exports.gatherableItemHelper = new ItemHelper(Item_model_js_1.GatherableItem, (itemDetails) => {
     return {
         task: itemDetails.task,
     };
 }, "task");
-exports.aethersandItemHelper = new ItemHelpers(Item_model_js_1.AethersandItem, (itemDetails) => {
+/** Item helper for aethersands */
+exports.aethersandItemHelper = new ItemHelper(Item_model_js_1.AethersandItem, (itemDetails) => {
     return {
         icon: itemDetails.icon,
     };
 }, "icon");
-exports.phantasmagoriaItemHelper = new ItemHelpers(Item_model_js_1.PhantaItem, (itemDetails) => {
+/** Item helper for tomestone materials */
+exports.phantasmagoriaItemHelper = new ItemHelper(Item_model_js_1.PhantaItem, (itemDetails) => {
     return {
         tomestonePrice: itemDetails.tomestonePrice,
     };

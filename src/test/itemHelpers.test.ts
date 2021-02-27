@@ -9,8 +9,9 @@ import fFU from "../src/fetchFromUniversalis.js";
 const fetchFromUniversalis = mockFunction(fFU);
 
 import {
+  addItemReturn,
   getMarketInfo,
-  ItemHelpers,
+  ItemHelper,
   phantasmagoriaItemHelper,
 } from "../src/itemHelpers.js";
 import {
@@ -77,83 +78,31 @@ function generateMarketInfoReturnValue(value: number) {
  * @param itemHelper
  */
 function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType extends IProtoItem>(
-  itemHelper: ItemHelpers<DocType, ItemType>,
+  itemHelper: ItemHelper<DocType, ItemType>,
   addItemArg: ItemType
 ) {
   describe("addItem", () => {
-    test("adds an item to the collection and returns 2 when adding a new item to the collection", async () => {
+    test("adds an item to the collection and returns addItemReturn.ADDED when that item wasn't already present", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
+      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ADDED);
       //TODO test that the item saved has all of the expected values
       const phantaSearchResults = await PhantaItem.find();
       if (phantaSearchResults.length !== 1) {
         fail(
           `phantaSearchResult's length was not 1, it was ${phantaSearchResults.length}`
         );
-      } else {
-        console.log(phantaSearchResults);
       }
     });
 
-    test("adds an item to the collection and returns 0 when the item to be added to the collection is already present", async () => {
+    test("adds an item to the collection and returns addItemReturn.ALREADY_PRESENT when the item to be added to the collection is already present", async () => {
       fetchFromUniversalis.mockReturnValue(universalisReturnValueFive);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
+      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ADDED);
       expect((await PhantaItem.find()).length).toEqual(1);
 
-      expect(await itemHelper.addItem(addItemArg)).toEqual(0);
+      expect(await itemHelper.addItem(addItemArg)).toEqual(addItemReturn.ALREADY_PRESENT);
       expect((await PhantaItem.find()).length).toEqual(1);
-    });
-
-    test("adds an item to the collection and returns 1 when the item is present but information a different server is provided", async () => {
-      fetchFromUniversalis
-        .mockReturnValueOnce(generateUniversalisReturnValue(15))
-        .mockReturnValueOnce(generateUniversalisReturnValue(10))
-        .mockReturnValue(universalisReturnValueFive);
-
-      expect(await itemHelper.addItem(addItemArg)).toEqual(2);
-      expect((await PhantaItem.find()).length).toEqual(1);
-
-      expect(await itemHelper.addItem(addItemArg, TEST_SERVER_NAME)).toEqual(1);
-
-      const expectedCollectionValue = {
-        marketInfo: {
-          Cerberus: generateMarketInfoReturnValue(15),
-          Moogle: generateMarketInfoReturnValue(10),
-        },
-        name: testItemName,
-        universalisId: 27744,
-        tomestonePrice: 5,
-      };
-      const collection = await PhantaItem.find();
-
-      expect(collection[0]).toMatchObject(expectedCollectionValue);
-      expect(collection.length).toEqual(1);
-    });
-
-    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
-      fetchFromUniversalis.mockImplementation(() => {
-        throw new ItemNotFoundError(
-          `27744 is not a valid item ID for universalis`
-        );
-      });
-
-      return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(
-        ItemNotFoundError
-      );
-    });
-
-    test("Will propagate ItemNotFoundError from fetchFromUniversalis", async () => {
-      fetchFromUniversalis.mockImplementation(() => {
-        throw new JSONParseError(
-          `Error parsing json response from Universalis for item 24474: Fake Error`
-        );
-      });
-
-      return expect(itemHelper.addItem(addItemArg)).rejects.toThrow(
-        JSONParseError
-      );
     });
   });
 
@@ -194,25 +143,6 @@ function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType ext
       });
     });
 
-    test("displays the correct type of error when individual promises reject", async () => {
-      fetchFromUniversalis.mockImplementation(() => {
-        throw new JSONParseError("");
-      });
-
-      const results = await itemHelper.addAllItems(
-        PHANTASMAGORIA_MATS_JSON_PATH
-      );
-      expect(results.length).toBeGreaterThan(0);
-      await Promise.all(
-        results.map(async (result: any) => {
-          Promise.all([
-            expect(result.status).toEqual("rejected"),
-            expect((await result).reason).toBeInstanceOf(JSONParseError),
-          ]);
-        })
-      );
-    });
-
     test("individual promises reject when addItem throws any error", async () => {
       const addItemMock = jest.spyOn(itemHelper, "addItem");
       addItemMock.mockImplementation(async () => {
@@ -246,19 +176,6 @@ function describeItemHelper<DocType extends IProtoItemBaseDocument, ItemType ext
       readFileMock.mockRestore();
       return returnVal;
     });
-
-    // test("propogates an error from reading the database", async () => {
-    //   const findMock = jest.spyOn(mongoose.Model, "find");
-    //   findMock.mockImplementation(async () => {
-    //     throw new MongoError("");
-    //   });
-
-    //   const returnVal = await expect(
-    //     itemHelper.addAllItems(PHANTASMAGORIA_MATS_JSON_PATH)
-    //   ).rejects.toThrow(MongoError);
-    //   findMock.mockRestore();
-    //   return returnVal;
-    // });
   });
 }
 

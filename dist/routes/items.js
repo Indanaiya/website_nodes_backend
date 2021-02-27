@@ -5,6 +5,7 @@ const itemHelpers_js_1 = require("../src/itemHelpers.js");
 const getServers_js_1 = require("./getServers.js");
 /**
  * Handle a request by getting the items for the provided model and returning them
+ *
  * @param model The model to get items for
  * @param req The request object
  * @param res The response object

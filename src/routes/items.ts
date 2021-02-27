@@ -1,6 +1,6 @@
 import * as express from "express";
 import {
-  ItemHelpers,
+  ItemHelper,
   phantasmagoriaItemHelper,
   gatherableItemHelper,
 } from "../src/itemHelpers.js";
@@ -10,12 +10,13 @@ import { IProtoItemBaseDocument, IProtoItem } from "../models/Item.model.js";
 
 /**
  * Handle a request by getting the items for the provided model and returning them
+ * 
  * @param model The model to get items for
  * @param req The request object
  * @param res The response object
  */
 function getItems(
-  model: ItemHelpers<IProtoItemBaseDocument, IProtoItem>,
+  model: ItemHelper<IProtoItemBaseDocument, IProtoItem>,
   req: express.Request,
   res: express.Response
 ) {
