@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 
 import NodeHelpers from "../src/nodeHelpers.js";
 import { aethersandItemHelper, gatherableItemHelper } from "../src/itemHelpers.js";

@@ -20,6 +20,7 @@ const itemHelpers_js_1 = require("../src/itemHelpers.js");
 const Item_model_js_1 = require("../models/Item.model.js");
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json";
 const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json";
+const AETHERSAND_ITEMS_JSON_PATH = "res/test/aethersandsTest.json";
 const TEST_SERVER_NAME = "Moogle";
 const TEST_SERVER_NAME_2 = "Anima";
 const FAKE_SERVER_NAME = "1234";
@@ -208,4 +209,9 @@ describe("itemHelpersTest", () => {
         patch: 5.3,
     }, Item_model_js_1.GatherableItem, GATHERABLE_ITEMS_JSON_PATH);
 });
+describeItemHelper("aethersandItem", itemHelpers_js_1.aethersandItemHelper, {
+    "name": "Chiaroglow Aethersand",
+    "universalisId": 27811,
+    "icon": "/i/021000/021235.png"
+}, Item_model_js_1.AethersandItem, AETHERSAND_ITEMS_JSON_PATH);
 //# sourceMappingURL=itemHelpers.test.js.map

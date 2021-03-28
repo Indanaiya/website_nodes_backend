@@ -2,421 +2,491 @@
   "Spruce Log": {
     "icon": "/i/022000/022413.png",
     "name": "Spruce Log",
-    "id": 5395,
+    "universalisId": 5395,
+    "patch": 2,
     "task": {}
   },
   "Vampire Plant": {
     "icon": "/i/025000/025001.png",
     "name": "Vampire Plant",
-    "id": 5547,
+    "universalisId": 5547,
+    "patch": 2,
     "task": {}
   },
   "Thavnairian Mistletoe": {
     "icon": "/i/025000/025001.png",
     "name": "Thavnairian Mistletoe",
-    "id": 5537,
+    "universalisId": 5537,
+    "patch": 2,
     "task": {}
   },
   "Prickly Pineapple": {
     "icon": "/i/025000/025303.png",
     "name": "Prickly Pineapple",
-    "id": 4816,
+    "universalisId": 4816,
+    "patch": 2,
     "task": {}
   },
   "Prickly Pineapple Seeds": {
     "icon": "/i/027000/027457.png",
     "name": "Prickly Pineapple Seeds",
-    "id": 7734,
+    "universalisId": 7734,
+    "patch": 2.2,
     "task": {}
   },
   "Fire Cluster": {
     "icon": "/i/020000/020013.png",
     "name": "Fire Cluster",
-    "id": 14,
+    "universalisId": 14,
+    "patch": 2,
     "task": {}
   },
   "Ice Cluster": {
     "icon": "/i/020000/020015.png",
     "name": "Ice Cluster",
-    "id": 15,
+    "universalisId": 15,
+    "patch": 2,
     "task": {}
   },
   "Wind Cluster": {
     "icon": "/i/020000/020016.png",
     "name": "Wind Cluster",
-    "id": 16,
+    "universalisId": 16,
+    "patch": 2,
     "task": {}
   },
   "Earth Cluster": {
     "icon": "/i/020000/020018.png",
     "name": "Earth Cluster",
-    "id": 17,
+    "universalisId": 17,
+    "patch": 2,
     "task": {}
   },
   "Lightning Cluster": {
     "icon": "/i/020000/020017.png",
     "name": "Lightning Cluster",
-    "id": 18,
+    "universalisId": 18,
+    "patch": 2,
     "task": {}
   },
   "Water Cluster": {
     "icon": "/i/020000/020014.png",
     "name": "Water Cluster",
-    "id": 19,
+    "universalisId": 19,
+    "patch": 2,
     "task": {}
   },
   "Silkworm Cocoon": {
     "icon": "/i/021000/021661.png",
     "name": "Silkworm Cocoon",
-    "id": 5350,
+    "universalisId": 5350,
+    "patch": 2,
     "task": {}
   },
   "Mazlaya Greens": {
     "icon": "/i/025000/025016.png",
     "name": "Mazlaya Greens",
-    "id": 10098,
+    "universalisId": 10098,
+    "patch": 2.51,
     "task": {}
   },
   "Trillium": {
     "icon": "/i/022000/022627.png",
     "name": "Trillium",
-    "id": 5545,
+    "universalisId": 5545,
+    "patch": 2,
     "task": {}
   },
   "Trillium Bulb": {
     "icon": "/i/022000/022623.png",
     "name": "Trillium Bulb",
-    "id": 5546,
+    "universalisId": 5546,
+    "patch": 2,
     "task": {}
   },
   "Kidragora": {
     "icon": "/i/059000/059442.png",
     "name": "Kidragora",
-    "id": 6209,
+    "universalisId": 6209,
+    "patch": 2.1,
     "task": {}
   },
   "Honey Lemon": {
     "icon": "/i/025000/025305.png",
     "name": "Honey Lemon",
-    "id": 6147,
+    "universalisId": 6147,
+    "patch": 2.1,
     "task": {}
   },
   "Honey Lemon Seeds": {
     "icon": "/i/027000/027457.png",
     "name": "Honey Lemon Seeds",
-    "id": 7733,
+    "universalisId": 7733,
+    "patch": 2.2,
     "task": {}
   },
   "Dzemael Tomato": {
     "icon": "/i/025000/025209.png",
     "name": "Dzemael Tomato",
-    "id": 6148,
+    "universalisId": 6148,
+    "patch": 2.1,
     "task": {}
   },
   "Dzemael Tomato Seeds": {
     "icon": "/i/027000/027455.png",
     "name": "Dzemael Tomato Seeds",
-    "id": 7724,
+    "universalisId": 7724,
+    "patch": 2.2,
     "task": {}
   },
   "Black Truffle": {
     "icon": "/i/025000/025403.png",
     "name": "Black Truffle",
-    "id": 4800,
+    "universalisId": 4800,
+    "patch": 2,
     "task": {}
   },
   "Darksteel Ore": {
     "icon": "/i/021000/021205.png",
     "name": "Darksteel Ore",
-    "id": 5121,
+    "universalisId": 5121,
+    "patch": 2,
     "task": {}
   },
   "Gregarious Worm": {
     "icon": "/i/027000/027019.png",
     "name": "Gregarious Worm",
-    "id": 10095,
+    "universalisId": 10095,
+    "patch": 2.51,
     "task": {}
   },
   "Gold Ore": {
     "icon": "/i/021000/021212.png",
     "name": "Gold Ore",
-    "id": 5118,
+    "universalisId": 5118,
+    "patch": 2,
     "task": {}
   },
   "Coblyn Larva": {
     "icon": "/i/059000/059433.png",
     "name": "Coblyn Larva",
-    "id": 6199,
+    "universalisId": 6199,
+    "patch": 2.1,
     "task": {}
   },
   "Volcanic Rock Salt": {
     "icon": "/i/022000/022617.png",
     "name": "Volcanic Rock Salt",
-    "id": 6152,
+    "universalisId": 6152,
+    "patch": 2.1,
     "task": {}
   },
   "Astral Rock": {
     "icon": "/i/021000/021251.png",
     "name": "Astral Rock",
-    "id": 5158,
+    "universalisId": 5158,
+    "patch": 2,
     "task": {}
   },
   "Gold Sand": {
     "icon": "/i/021000/021214.png",
     "name": "Gold Sand",
-    "id": 5273,
+    "universalisId": 5273,
+    "patch": 2,
     "task": {}
   },
   "Scarlet Sap": {
     "icon": "/i/022000/022601.png",
     "name": "Scarlet Sap",
-    "id": 7590,
+    "universalisId": 7590,
+    "patch": 2.2,
     "task": {}
   },
   "Apricot": {
     "icon": "/i/025000/025317.png",
     "name": "Apricot",
-    "id": 7592,
+    "universalisId": 7592,
+    "patch": 2.2,
     "task": {}
   },
   "Blood Orange": {
     "icon": "/i/025000/025312.png",
     "name": "Blood Orange",
-    "id": 7595,
+    "universalisId": 7595,
+    "patch": 2.2,
     "task": {}
   },
   "Bamboo Stick": {
     "icon": "/i/022000/022451.png",
     "name": "Bamboo Stick",
-    "id": 5365,
+    "universalisId": 5365,
+    "patch": 2,
     "task": {}
   },
   "Shroud Tea Leaves": {
     "icon": "/i/025000/025020.png",
     "name": "Shroud Tea Leaves",
-    "id": 7591,
+    "universalisId": 7591,
+    "patch": 2.2,
     "task": {}
   },
   "La Noscean Leek": {
     "icon": "/i/025000/025216.png",
     "name": "La Noscean Leek",
-    "id": 7593,
+    "universalisId": 7593,
+    "patch": 2.2,
     "task": {}
   },
   "Waterfowl Feather": {
     "icon": "/i/021000/021902.png",
     "name": "Waterfowl Feather",
-    "id": 8024,
+    "universalisId": 8024,
+    "patch": 2.3,
     "task": {}
   },
   "Young Cieldalaes Spinach": {
     "icon": "/i/025000/025206.png",
     "name": "Young Cieldalaes Spinach",
-    "id": 7594,
+    "universalisId": 7594,
+    "patch": 2.2,
     "task": {}
   },
   "Ferberite": {
     "icon": "/i/021000/021203.png",
     "name": "Ferberite",
-    "id": 7588,
+    "universalisId": 7588,
+    "patch": 2.2,
     "task": {}
   },
   "Raw Iolite": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Iolite",
-    "id": 5150,
+    "universalisId": 5150,
+    "patch": 2,
     "task": {}
   },
   "Raw Topaz": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Topaz",
-    "id": 5149,
+    "universalisId": 5149,
+    "patch": 2,
     "task": {}
   },
   "Native Gold": {
     "icon": "/i/020000/020816.png",
     "name": "Native Gold",
-    "id": 7589,
+    "universalisId": 7589,
+    "patch": 2.2,
     "task": {}
   },
   "Raw Diamond": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Diamond",
-    "id": 5147,
+    "universalisId": 5147,
+    "patch": 2,
     "task": {}
   },
   "Raw Emerald": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Emerald",
-    "id": 5148,
+    "universalisId": 5148,
+    "patch": 2,
     "task": {}
   },
   "Raw Ruby": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Ruby",
-    "id": 5146,
+    "universalisId": 5146,
+    "patch": 2,
     "task": {}
   },
   "Raw Sapphire": {
     "icon": "/i/021000/021453.png",
     "name": "Raw Sapphire",
-    "id": 5151,
+    "universalisId": 5151,
+    "patch": 2,
     "task": {}
   },
   "Grade 3 La Noscean Topsoil": {
     "icon": "/i/027000/027403.png",
     "name": "Grade 3 La Noscean Topsoil",
-    "id": 7760,
+    "universalisId": 7760,
+    "patch": 2.2,
     "task": {}
   },
   "Grade 3 Shroud Topsoil": {
     "icon": "/i/027000/027406.png",
     "name": "Grade 3 Shroud Topsoil",
-    "id": 7763,
+    "universalisId": 7763,
+    "patch": 2.2,
     "task": {}
   },
   "Umbral Rock": {
     "icon": "/i/021000/021213.png",
     "name": "Umbral Rock",
-    "id": 7610,
+    "universalisId": 7610,
+    "patch": 2.2,
     "task": {}
   },
   "Grade 3 Thanalan Topsoil": {
     "icon": "/i/027000/027409.png",
     "name": "Grade 3 Thanalan Topsoil",
-    "id": 7766,
+    "universalisId": 7766,
+    "patch": 2.2,
     "task": {}
   },
   "Fragrant Log": {
     "icon": "/i/022000/022415.png",
     "name": "Fragrant Log",
-    "id": 7611,
+    "universalisId": 7611,
+    "patch": 2.2,
     "task": {}
   },
   "Redolent Log": {
     "icon": "/i/022000/022415.png",
     "name": "Redolent Log",
-    "id": 8031,
+    "universalisId": 8031,
+    "patch": 2.3,
     "task": {}
   },
   "Antumbral Rock": {
     "icon": "/i/021000/021213.png",
     "name": "Antumbral Rock",
-    "id": 8030,
+    "universalisId": 8030,
+    "patch": 2.3,
     "task": {}
   },
   "Platinum Ore": {
     "icon": "/i/021000/021213.png",
     "name": "Platinum Ore",
-    "id": 5120,
+    "universalisId": 5120,
+    "patch": 2,
     "task": {}
   },
   "Ebony Log": {
     "icon": "/i/022000/022402.png",
     "name": "Ebony Log",
-    "id": 5394,
+    "universalisId": 5394,
+    "patch": 2,
     "task": {}
   },
   "Cypress Log": {
     "icon": "/i/022000/022415.png",
     "name": "Cypress Log",
-    "id": 9518,
+    "universalisId": 9518,
+    "patch": 2.45,
     "task": {}
   },
   "Pumice": {
     "icon": "/i/021000/021454.png",
     "name": "Pumice",
-    "id": 9519,
+    "universalisId": 9519,
+    "patch": 2.45,
     "task": {}
   },
   "Rosemary": {
     "icon": "/i/025000/025002.png",
     "name": "Rosemary",
-    "id": 10096,
+    "universalisId": 10096,
+    "patch": 2.5,
     "task": {}
   },
   "Virgin Basilisk Egg": {
     "icon": "/i/021000/021215.png",
     "name": "Virgin Basilisk Egg",
-    "id": 10093,
+    "universalisId": 10093,
+    "patch": 2.5,
     "task": {}
   },
   "Tungstite": {
     "icon": "/i/021000/021209.png",
     "name": "Tungstite",
-    "id": 16724,
+    "universalisId": 16724,
+    "patch": 3.4,
     "task": {}
   },
   "Zeolite Ore": {
     "icon": "/i/021000/021210.png",
     "name": "Zeolite Ore",
-    "id": 16726,
+    "universalisId": 16726,
+    "patch": 3.4,
     "task": {}
   },
   "Luminium Ore": {
     "icon": "/i/021000/021227.png",
     "name": "Luminium Ore",
-    "id": 16725,
+    "universalisId": 16725,
+    "patch": 3.4,
     "task": {}
   },
   "Teak Log": {
     "icon": "/i/022000/022403.png",
     "name": "Teak Log",
-    "id": 5392,
+    "universalisId": 5392,
+    "patch": 2,
     "task": {}
   },
   "Star Cotton Boll": {
     "icon": "/i/025000/025032.png",
     "name": "Star Cotton Boll",
-    "id": 16721,
+    "universalisId": 16721,
+    "patch": 3.4,
     "task": {}
   },
   "Brown Mushroom": {
     "icon": "/i/025000/025405.png",
     "name": "Brown Mushroom",
-    "id": 16722,
+    "universalisId": 16722,
+    "patch": 3.4,
     "task": {}
   },
   "Noble Sage": {
     "icon": "/i/025000/025002.png",
     "name": "Noble Sage",
-    "id": 16723,
+    "universalisId": 16723,
+    "patch": 3.4,
     "task": {}
   },
   "Lightning Moraine": {
     "icon": "/i/021000/021461.png",
     "name": "Lightning Moraine",
-    "id": 5218,
+    "universalisId": 5218,
+    "patch": 2,
     "task": { "aetherialReduce": [12936, 18, 12] }
   },
   "Radiant Astral Moraine": {
     "icon": "/i/021000/021463.png",
     "name": "Radiant Astral Moraine",
-    "id": 15949,
+    "universalisId": 15949,
+    "patch": 3.3,
     "task": { "aetherialReduce": [15648, 19, 13] }
   },
   "Radiant Lightning Moraine": {
     "icon": "/i/021000/021461.png",
     "name": "Radiant Lightning Moraine",
-    "id": 5224,
+    "universalisId": 5224,
+    "patch": 2,
     "task": { "aetherialReduce": [12938, 18, 12] }
   },
   "Bright Lightning Rock": {
     "icon": "/i/021000/021475.png",
     "name": "Bright Lightning Rock",
-    "id": 12967,
+    "universalisId": 12967,
+    "patch": 3,
     "task": { "aetherialReduce": [12937, 18, 12] }
   },
   "Lightning Crystal": {
     "icon": "/i/020000/020011.png",
     "name": "Lightning Crystal",
-    "id": 12,
+    "universalisId": 12,
+    "patch": 2,
     "task": {}
   },
   "Rarefied Pyrite": {
     "icon": "/i/021000/021207.png",
     "name": "Rarefied Pyrite",
-    "id": 32970,
+    "universalisId": 32970,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -431,7 +501,8 @@
   "Rarefied Chalcocite": {
     "icon": "/i/021000/021209.png",
     "name": "Rarefied Chalcocite",
-    "id": 32971,
+    "universalisId": 32971,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -446,7 +517,8 @@
   "Rarefied Limonite": {
     "icon": "/i/021000/021206.png",
     "name": "Rarefied Limonite",
-    "id": 32972,
+    "universalisId": 32972,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -461,31 +533,36 @@
   "Fire Moraine": {
     "icon": "/i/021000/021456.png",
     "name": "Fire Moraine",
-    "id": 5214,
+    "universalisId": 5214,
+    "patch": 2,
     "task": { "aetherialReduce": [12936, 14, 8] }
   },
   "Radiant Fire Moraine": {
     "icon": "/i/021000/021456.png",
     "name": "Radiant Fire Moraine",
-    "id": 5220,
+    "universalisId": 5220,
+    "patch": 2,
     "task": { "aetherialReduce": [12938, 14, 8] }
   },
   "Bright Fire Rock": {
     "icon": "/i/021000/021471.png",
     "name": "Bright Fire Rock",
-    "id": 12966,
+    "universalisId": 12966,
+    "patch": 3,
     "task": { "aetherialReduce": [12937, 14, 8] }
   },
   "Fire Crystal": {
     "icon": "/i/020000/020007.png",
     "name": "Fire Crystal",
-    "id": 8,
+    "universalisId": 8,
+    "patch": 2,
     "task": {}
   },
   "Rarefied Abalathian Spring Water": {
     "icon": "/i/022000/022614.png",
     "name": "Rarefied Abalathian Spring Water",
-    "id": 32973,
+    "universalisId": 32973,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -500,7 +577,8 @@
   "Rarefied Aurum Regis Sand": {
     "icon": "/i/021000/021220.png",
     "name": "Rarefied Aurum Regis Sand",
-    "id": 32974,
+    "universalisId": 32974,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -515,7 +593,8 @@
   "Rarefied Raw Triphane": {
     "icon": "/i/021000/021474.png",
     "name": "Rarefied Raw Triphane",
-    "id": 32975,
+    "universalisId": 32975,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -530,7 +609,8 @@
   "Rarefied Raw Kyanite": {
     "icon": "/i/021000/021472.png",
     "name": "Rarefied Raw Kyanite",
-    "id": 32977,
+    "universalisId": 32977,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -545,7 +625,8 @@
   "Rarefied Raw Star Spinel": {
     "icon": "/i/021000/021475.png",
     "name": "Rarefied Raw Star Spinel",
-    "id": 32976,
+    "universalisId": 32976,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -560,7 +641,8 @@
   "Yellow Copper Ore": {
     "icon": "/i/021000/021207.png",
     "name": "Yellow Copper Ore",
-    "id": 5108,
+    "universalisId": 5108,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -575,7 +657,8 @@
   "Pyrite": {
     "icon": "/i/021000/021207.png",
     "name": "Pyrite",
-    "id": 5109,
+    "universalisId": 5109,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -590,7 +673,8 @@
   "Limonite": {
     "icon": "/i/021000/021206.png",
     "name": "Limonite",
-    "id": 5112,
+    "universalisId": 5112,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -605,7 +689,8 @@
   "Chalcocite": {
     "icon": "/i/021000/021209.png",
     "name": "Chalcocite",
-    "id": 12941,
+    "universalisId": 12941,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -620,7 +705,8 @@
   "Green Quartz": {
     "icon": "/i/021000/021459.png",
     "name": "Green Quartz",
-    "id": 5161,
+    "universalisId": 5161,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -635,7 +721,8 @@
   "Yellow Quartz": {
     "icon": "/i/021000/021458.png",
     "name": "Yellow Quartz",
-    "id": 5162,
+    "universalisId": 5162,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -650,7 +737,8 @@
   "Abalathian Rock Salt": {
     "icon": "/i/022000/022617.png",
     "name": "Abalathian Rock Salt",
-    "id": 12901,
+    "universalisId": 12901,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -665,7 +753,8 @@
   "Red Quartz": {
     "icon": "/i/021000/021456.png",
     "name": "Red Quartz",
-    "id": 5159,
+    "universalisId": 5159,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -680,7 +769,8 @@
   "Light Kidney Ore": {
     "icon": "/i/021000/021206.png",
     "name": "Light Kidney Ore",
-    "id": 5117,
+    "universalisId": 5117,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -695,7 +785,8 @@
   "Cuprite": {
     "icon": "/i/021000/021206.png",
     "name": "Cuprite",
-    "id": 12942,
+    "universalisId": 12942,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -710,7 +801,8 @@
   "Adamantite Ore": {
     "icon": "/i/021000/021224.png",
     "name": "Adamantite Ore",
-    "id": 12538,
+    "universalisId": 12538,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -725,7 +817,8 @@
   "Astral Moraine": {
     "icon": "/i/021000/021463.png",
     "name": "Astral Moraine",
-    "id": 5226,
+    "universalisId": 5226,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -740,7 +833,8 @@
   "Violet Quartz": {
     "icon": "/i/021000/021461.png",
     "name": "Violet Quartz",
-    "id": 5163,
+    "universalisId": 5163,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -755,7 +849,8 @@
   "Aurum Regis Ore": {
     "icon": "/i/021000/021225.png",
     "name": "Aurum Regis Ore",
-    "id": 12536,
+    "universalisId": 12536,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -770,7 +865,8 @@
   "Lumythrite Ore": {
     "icon": "/i/021000/021221.png",
     "name": "Lumythrite Ore",
-    "id": 14148,
+    "universalisId": 14148,
+    "patch": 3.15,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -785,7 +881,8 @@
   "Sun Mica": {
     "icon": "/i/021000/021227.png",
     "name": "Sun Mica",
-    "id": 12540,
+    "universalisId": 12540,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -800,7 +897,8 @@
   "Blue Quartz": {
     "icon": "/i/021000/021457.png",
     "name": "Blue Quartz",
-    "id": 5160,
+    "universalisId": 5160,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -815,7 +913,8 @@
   "Red Alumen": {
     "icon": "/i/022000/022656.png",
     "name": "Red Alumen",
-    "id": 12945,
+    "universalisId": 12945,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -830,7 +929,8 @@
   "Rarefied Raw Azurite": {
     "icon": "/i/021000/021472.png",
     "name": "Rarefied Raw Azurite",
-    "id": 32978,
+    "universalisId": 32978,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -845,7 +945,8 @@
   "Rarefied Silvergrace Ore": {
     "icon": "/i/021000/021213.png",
     "name": "Rarefied Silvergrace Ore",
-    "id": 32979,
+    "universalisId": 32979,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -860,7 +961,8 @@
   "Rarefied Titancopper Ore": {
     "icon": "/i/021000/021202.png",
     "name": "Rarefied Titancopper Ore",
-    "id": 32980,
+    "universalisId": 32980,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -875,7 +977,8 @@
   "Rarefied Raw Petalite": {
     "icon": "/i/021000/021477.png",
     "name": "Rarefied Raw Petalite",
-    "id": 32982,
+    "universalisId": 32982,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -890,7 +993,8 @@
   "Rarefied Raw Lazurite": {
     "icon": "/i/021000/021472.png",
     "name": "Rarefied Raw Lazurite",
-    "id": 32981,
+    "universalisId": 32981,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -905,7 +1009,8 @@
   "Rarefied Sea Salt": {
     "icon": "/i/022000/022617.png",
     "name": "Rarefied Sea Salt",
-    "id": 32983,
+    "universalisId": 32983,
+    "patch": 5.4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -920,7 +1025,8 @@
   "Rarefied Raw Onyx": {
     "icon": "/i/021000/021231.png",
     "name": "Rarefied Raw Onyx",
-    "id": 32985,
+    "universalisId": 32985,
+    "patch": 5.4,
     "task": {
       "whiteScrips": {
         "HighCollectability": 1000,
@@ -935,7 +1041,8 @@
   "Pearl Sprouts": {
     "icon": "/i/025000/025208.png",
     "name": "Pearl Sprouts",
-    "id": 12877,
+    "universalisId": 12877,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -950,7 +1057,8 @@
   "Coerthan Tea Leaves": {
     "icon": "/i/025000/025020.png",
     "name": "Coerthan Tea Leaves",
-    "id": 12882,
+    "universalisId": 12882,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -965,7 +1073,8 @@
   "Chives": {
     "icon": "/i/025000/025035.png",
     "name": "Chives",
-    "id": 12884,
+    "universalisId": 12884,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -980,19 +1089,22 @@
   "Pearl Sprout Seeds": {
     "icon": "/i/027000/027455.png",
     "name": "Pearl Sprout Seeds",
-    "id": 13767,
+    "universalisId": 13767,
+    "patch": 3.1,
     "task": {}
   },
   "Coerthan Tea Seeds": {
     "icon": "/i/027000/027451.png",
     "name": "Coerthan Tea Seeds",
-    "id": 13768,
+    "universalisId": 13768,
+    "patch": 3.1,
     "task": {}
   },
   "Old World Fig": {
     "icon": "/i/025000/025318.png",
     "name": "Old World Fig",
-    "id": 12896,
+    "universalisId": 12896,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -1007,13 +1119,15 @@
   "Old World Fig Seeds": {
     "icon": "/i/027000/027457.png",
     "name": "Old World Fig Seeds",
-    "id": 13765,
+    "universalisId": 13765,
+    "patch": 3.1,
     "task": {}
   },
   "Porcini": {
     "icon": "/i/025000/025401.png",
     "name": "Porcini",
-    "id": 12899,
+    "universalisId": 12899,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -1028,7 +1142,8 @@
   "Dravanian Mistletoe": {
     "icon": "/i/025000/025001.png",
     "name": "Dravanian Mistletoe",
-    "id": 12943,
+    "universalisId": 12943,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1043,7 +1158,8 @@
   "Heavens Lemon": {
     "icon": "/i/025000/025305.png",
     "name": "Heavens Lemon",
-    "id": 12889,
+    "universalisId": 12889,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1058,7 +1174,8 @@
   "Abalathian Mistletoe": {
     "icon": "/i/025000/025001.png",
     "name": "Abalathian Mistletoe",
-    "id": 12944,
+    "universalisId": 12944,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1073,7 +1190,8 @@
   "Cloud Banana": {
     "icon": "/i/025000/025319.png",
     "name": "Cloud Banana",
-    "id": 12897,
+    "universalisId": 12897,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1088,7 +1206,8 @@
   "Morel": {
     "icon": "/i/025000/025408.png",
     "name": "Morel",
-    "id": 12898,
+    "universalisId": 12898,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1103,7 +1222,8 @@
   "Chysahl Greens": {
     "icon": "/i/025000/025222.png",
     "name": "Chysahl Greens",
-    "id": 12900,
+    "universalisId": 12900,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1118,7 +1238,8 @@
   "Vanilla Beans": {
     "icon": "/i/025000/025014.png",
     "name": "Vanilla Beans",
-    "id": 4833,
+    "universalisId": 4833,
+    "patch": 2,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1133,7 +1254,8 @@
   "Dravanian Paprika": {
     "icon": "/i/025000/025018.png",
     "name": "Dravanian Paprika",
-    "id": 12903,
+    "universalisId": 12903,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1148,7 +1270,8 @@
   "Frost Cotton Boll": {
     "icon": "/i/025000/025032.png",
     "name": "Frost Cotton Boll",
-    "id": 14154,
+    "universalisId": 14154,
+    "patch": 3.15,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1163,7 +1286,8 @@
   "Seventh Heaven": {
     "icon": "/i/022000/022627.png",
     "name": "Seventh Heaven",
-    "id": 12634,
+    "universalisId": 12634,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1178,7 +1302,8 @@
   "Honeydew Almonds": {
     "icon": "/i/025000/025017.png",
     "name": "Honeydew Almonds",
-    "id": 12902,
+    "universalisId": 12902,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1193,7 +1318,8 @@
   "Snurbleberry": {
     "icon": "/i/025000/025306.png",
     "name": "Snurbleberry",
-    "id": 12904,
+    "universalisId": 12904,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1208,7 +1334,8 @@
   "Wattle Bark": {
     "icon": "/i/023000/023001.png",
     "name": "Wattle Bark",
-    "id": 12587,
+    "universalisId": 12587,
+    "patch": 3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1223,7 +1350,8 @@
   "Old-growth Camphorwood Log": {
     "icon": "/i/022000/022414.png",
     "name": "Old-growth Camphorwood Log",
-    "id": 14957,
+    "universalisId": 14957,
+    "patch": 3.15,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1238,7 +1366,8 @@
   "Crystallized Sap": {
     "icon": "/i/020000/020018.png",
     "name": "Crystallized Sap",
-    "id": 15647,
+    "universalisId": 15647,
+    "patch": 3.3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1253,7 +1382,8 @@
   "Smithsonite Ore": {
     "icon": "/i/021000/021473.png",
     "name": "Smithsonite Ore",
-    "id": 14151,
+    "universalisId": 14151,
+    "patch": 3.15,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1268,7 +1398,8 @@
   "Meteorite": {
     "icon": "/i/021000/021203.png",
     "name": "Meteorite",
-    "id": 15646,
+    "universalisId": 15646,
+    "patch": 3.3,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1283,49 +1414,57 @@
   "Perlite": {
     "icon": "/i/021000/021463.png",
     "name": "Perlite",
-    "id": 20010,
+    "universalisId": 20010,
+    "patch": 4,
     "task": { "aetherialReduce": [-1] }
   },
   "Dacite": {
     "icon": "/i/021000/021458.png",
     "name": "Dacite",
-    "id": 33152,
-    "task": { "aetherialReduce": [-1] }
+    "universalisId": 33152,
+    "patch": 5.4,
+    "task": { "aetherialReduce": [20015, 19, 13] }
   },
   "Yanxian Soil": {
     "icon": "/i/021000/021466.png",
     "name": "Yanxian Soil",
-    "id": 23220,
+    "universalisId": 23220,
+    "patch": 4.3,
     "task": { "aetherialReduce": [23182] }
   },
   "Almandine": {
     "icon": "/i/021000/021471.png",
     "name": "Almandine",
-    "id": 20011,
+    "universalisId": 20011,
+    "patch": 4,
     "task": { "aetherialReduce": [-1] }
   },
   "Rhodolite": {
     "icon": "/i/021000/021474.png",
     "name": "Rhodolite",
-    "id": 33153,
+    "universalisId": 33153,
+    "patch": 5.4,
     "task": { "aetherialReduce": [20013, 14, 8] }
   },
   "Ice Crystal": {
     "icon": "/i/020000/020009.png",
     "name": "Ice Crystal",
-    "id": 9,
+    "universalisId": 9,
+    "patch": 2,
     "task": {}
   },
   "Schorl": {
     "icon": "/i/021000/021476.png",
     "name": "Schorl",
-    "id": 20009,
+    "universalisId": 20009,
+    "patch": 4,
     "task": { "aetherialReduce": [20014, 18, 12] }
   },
   "Raw Triphane": {
     "icon": "/i/021000/021474.png",
     "name": "Raw Triphane",
-    "id": 19968,
+    "universalisId": 19968,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1340,7 +1479,8 @@
   "Raw Star Spinel": {
     "icon": "/i/021000/021475.png",
     "name": "Raw Star Spinel",
-    "id": 19970,
+    "universalisId": 19970,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1355,7 +1495,8 @@
   "Raw Rhodonite": {
     "icon": "/i/021000/021471.png",
     "name": "Raw Rhodonite",
-    "id": 19973,
+    "universalisId": 19973,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1370,13 +1511,15 @@
   "Pummelite": {
     "icon": "/i/021000/021209.png",
     "name": "Pummelite",
-    "id": 17944,
+    "universalisId": 17944,
+    "patch": 4,
     "task": {}
   },
   "Raw Imperial Jade": {
     "icon": "/i/021000/021252.png",
     "name": "Raw Imperial Jade",
-    "id": 19972,
+    "universalisId": 19972,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1391,7 +1534,8 @@
   "Raw Azurite": {
     "icon": "/i/021000/021472.png",
     "name": "Raw Azurite",
-    "id": 19971,
+    "universalisId": 19971,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1406,13 +1550,15 @@
   "Ala Mhigan Salt Crystal": {
     "icon": "/i/022000/022617.png",
     "name": "Ala Mhigan Salt Crystal",
-    "id": 19907,
+    "universalisId": 19907,
+    "patch": 4,
     "task": {}
   },
   "Chromite Ore": {
     "icon": "/i/021000/021205.png",
     "name": "Chromite Ore",
-    "id": 19959,
+    "universalisId": 19959,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1427,13 +1573,15 @@
   "Gyr Abanian Spring Water": {
     "icon": "/i/022000/022614.png",
     "name": "Gyr Abanian Spring Water",
-    "id": 21085,
+    "universalisId": 21085,
+    "patch": 4.1,
     "task": {}
   },
   "Palladium Ore": {
     "icon": "/i/021000/021217.png",
     "name": "Palladium Ore",
-    "id": 19958,
+    "universalisId": 19958,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1448,49 +1596,57 @@
   "Torreya Branch": {
     "icon": "/i/022000/022416.png",
     "name": "Torreya Branch",
-    "id": 19937,
+    "universalisId": 19937,
+    "patch": 4,
     "task": { "aetherialReduce": [20016, 15, 9] }
   },
   "Yanxian Verbena": {
     "icon": "/i/025000/025009.png",
     "name": "Yanxian Verbena",
-    "id": 23221,
+    "universalisId": 23221,
+    "patch": 4.3,
     "task": { "aetherialReduce": [23182, 18, 12] }
   },
   "Windtea Leaves": {
     "icon": "/i/025000/025022.png",
     "name": "Windtea Leaves",
-    "id": 19916,
+    "universalisId": 19916,
+    "patch": 4,
     "task": { "aetherialReduce": [-1] }
   },
   "Countess Tea Leaves": {
     "icon": "/i/025000/025015.png",
     "name": "Countess Tea Leaves",
-    "id": 33151,
+    "universalisId": 33151,
+    "patch": 5.4,
     "task": { "aetherialReduce": [-1] }
   },
   "Wind Crystal": {
     "icon": "/i/020000/020010.png",
     "name": "Wind Crystal",
-    "id": 10,
+    "universalisId": 10,
+    "patch": 2,
     "task": {}
   },
   "Doman Yellow": {
     "icon": "/i/027000/027407.png",
     "name": "Doman Yellow",
-    "id": 20012,
+    "universalisId": 20012,
+    "patch": 4,
     "task": { "aetherialReduce": [20013, 17, 11] }
   },
   "Earth Crystal": {
     "icon": "/i/020000/020012.png",
     "name": "Earth Crystal",
-    "id": 11,
+    "universalisId": 11,
+    "patch": 2,
     "task": {}
   },
   "Beech Branch": {
     "icon": "/i/022000/022417.png",
     "name": "Beech Branch",
-    "id": 19936,
+    "universalisId": 19936,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1505,7 +1661,8 @@
   "Bamboo Shoot": {
     "icon": "/i/025000/025229.png",
     "name": "Bamboo Shoot",
-    "id": 19860,
+    "universalisId": 19860,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1520,7 +1677,8 @@
   "Othardian Plum": {
     "icon": "/i/025000/025311.png",
     "name": "Othardian Plum",
-    "id": 19852,
+    "universalisId": 19852,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1535,13 +1693,15 @@
   "Hallowed Basil": {
     "icon": "/i/025000/025010.png",
     "name": "Hallowed Basil",
-    "id": 19918,
+    "universalisId": 19918,
+    "patch": 4,
     "task": {}
   },
   "Lotus Root": {
     "icon": "/i/025000/025226.png",
     "name": "Lotus Root",
-    "id": 19865,
+    "universalisId": 19865,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1556,7 +1716,8 @@
   "Jhammel Ginger": {
     "icon": "/i/025000/025012.png",
     "name": "Jhammel Ginger",
-    "id": 19857,
+    "universalisId": 19857,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1571,13 +1732,15 @@
   "Rhalgr's Streak": {
     "icon": "/i/025000/025507.png",
     "name": "Rhalgr's Streak",
-    "id": 17948,
+    "universalisId": 17948,
+    "patch": 4,
     "task": {}
   },
   "Torreya Log": {
     "icon": "/i/022000/022405.png",
     "name": "Torreya Log",
-    "id": 19934,
+    "universalisId": 19934,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1592,7 +1755,8 @@
   "Rhea": {
     "icon": "/i/021000/021651.png",
     "name": "Rhea",
-    "id": 19991,
+    "universalisId": 19991,
+    "patch": 4,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1607,109 +1771,127 @@
   "Azim Cotton Boll": {
     "icon": "/i/025000/025037.png",
     "name": "Azim Cotton Boll",
-    "id": 21086,
+    "universalisId": 21086,
+    "patch": 4.1,
     "task": {}
   },
   "Nightsteel Ore": {
     "icon": "/i/021000/021203.png",
     "name": "Nightsteel Ore",
-    "id": 22417,
+    "universalisId": 22417,
+    "patch": 4.2,
     "task": {}
   },
   "Hawk's Eye": {
     "icon": "/i/021000/021228.png",
     "name": "Hawk's Eye",
-    "id": 23179,
+    "universalisId": 23179,
+    "patch": 4.3,
     "task": {}
   },
   "Silvergrace Ore": {
     "icon": "/i/021000/021213.png",
     "name": "Silvergrace Ore",
-    "id": 22418,
+    "universalisId": 22418,
+    "patch": 4.2,
     "task": {}
   },
   "Azim Spring Water": {
     "icon": "/i/022000/022678.png",
     "name": "Azim Spring Water",
-    "id": 24255,
+    "universalisId": 24255,
+    "patch": 4.4,
     "task": {}
   },
   "Black Willow Log": {
     "icon": "/i/022000/022402.png",
     "name": "Black Willow Log",
-    "id": 22419,
+    "universalisId": 22419,
+    "patch": 4.2,
     "task": {}
   },
   "Hardened Veteran Tree Sap": {
     "icon": "/i/022000/022638.png",
     "name": "Hardened Veteran Tree Sap",
-    "id": 23180,
+    "universalisId": 23180,
+    "patch": 4.3,
     "task": {}
   },
   "Hingan Flax": {
     "icon": "/i/021000/021673.png",
     "name": "Hingan Flax",
-    "id": 22420,
+    "universalisId": 22420,
+    "patch": 4.2,
     "task": {}
   },
   "Gyr Abanian Ore": {
     "icon": "/i/021000/021216.png",
     "name": "Gyr Abanian Ore",
-    "id": 24240,
+    "universalisId": 24240,
+    "patch": 4.4,
     "task": {}
   },
   "Evergleam Ore": {
     "icon": "/i/021000/021223.png",
     "name": "Evergleam Ore",
-    "id": 24241,
+    "universalisId": 24241,
+    "patch": 4.4,
     "task": {}
   },
   "Urunday Log": {
     "icon": "/i/022000/022420.png",
     "name": "Urunday Log",
-    "id": 24242,
+    "universalisId": 24242,
+    "patch": 4.4,
     "task": {}
   },
   "Yanxian Cotton Boll": {
     "icon": "/i/021000/021652.png",
     "name": "Yanxian Cotton Boll",
-    "id": 24243,
+    "universalisId": 24243,
+    "patch": 4.4,
     "task": {}
   },
   "Gale Rock": {
     "icon": "/i/021000/021473.png",
     "name": "Gale Rock",
-    "id": 27805,
-    "task": { "aetherialReduce": [27811] }
+    "universalisId": 27805,
+    "patch": 5,
+    "task": { "aetherialReduce": [27811, 19, 13] }
   },
   "Thunder Rock": {
     "icon": "/i/021000/021482.png",
     "name": "Thunder Rock",
-    "id": 30591,
+    "universalisId": 30591,
+    "patch": 5.3,
     "task": { "aetherialReduce": [30590] }
   },
   "Water Crystal": {
     "icon": "/i/020000/020008.png",
     "name": "Water Crystal",
-    "id": 13,
+    "universalisId": 13,
+    "patch": 2,
     "task": {}
   },
   "Solarite": {
     "icon": "/i/021000/021467.png",
     "name": "Solarite",
-    "id": 27806,
+    "universalisId": 27806,
+    "patch": 5,
     "task": { "aetherialReduce": [27812, 18, 12] }
   },
   "Shade Quartz": {
     "icon": "/i/021000/021462.png",
     "name": "Shade Quartz",
-    "id": 27807,
+    "universalisId": 27807,
+    "patch": 5,
     "task": { "aetherialReduce": [27813, 14, 8] }
   },
   "Raw Hematite": {
     "icon": "/i/021000/021476.png",
     "name": "Raw Hematite",
-    "id": 27726,
+    "universalisId": 27726,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1724,7 +1906,8 @@
   "Raw Diaspore": {
     "icon": "/i/021000/021473.png",
     "name": "Raw Diaspore",
-    "id": 27727,
+    "universalisId": 27727,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1739,13 +1922,15 @@
   "Raw Lazurite": {
     "icon": "/i/021000/021472.png",
     "name": "Raw Lazurite",
-    "id": 27728,
+    "universalisId": 27728,
+    "patch": 5,
     "task": {}
   },
   "Raw Triplite": {
     "icon": "/i/021000/021471.png",
     "name": "Raw Triplite",
-    "id": 27729,
+    "universalisId": 27729,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1760,7 +1945,8 @@
   "Raw Petalite": {
     "icon": "/i/021000/021477.png",
     "name": "Raw Petalite",
-    "id": 27730,
+    "universalisId": 27730,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1775,7 +1961,8 @@
   "Raw Onyx": {
     "icon": "/i/021000/021231.png",
     "name": "Raw Onyx",
-    "id": 27731,
+    "universalisId": 27731,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1790,7 +1977,8 @@
   "Prismstone": {
     "icon": "/i/021000/021232.png",
     "name": "Prismstone",
-    "id": 27705,
+    "universalisId": 27705,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1805,13 +1993,15 @@
   "Beryllium Ore": {
     "icon": "/i/021000/021455.png",
     "name": "Beryllium Ore",
-    "id": 28717,
+    "universalisId": 28717,
+    "patch": 5.1,
     "task": {}
   },
   "Tungsten Ore": {
     "icon": "/i/021000/021203.png",
     "name": "Tungsten Ore",
-    "id": 27704,
+    "universalisId": 27704,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1826,31 +2016,36 @@
   "Bog Sage": {
     "icon": "/i/025000/025009.png",
     "name": "Bog Sage",
-    "id": 27810,
+    "universalisId": 27810,
+    "patch": 5,
     "task": { "aetherialReduce": [27814, 15, 9] }
   },
   "Levin Mint": {
     "icon": "/i/025000/025039.png",
     "name": "Levin Mint",
-    "id": 30592,
+    "universalisId": 30592,
+    "patch": 5.3,
     "task": { "aetherialReduce": [30590] }
   },
   "Sweet Marjoram": {
     "icon": "/i/025000/025015.png",
     "name": "Sweet Marjoram",
-    "id": 27809,
+    "universalisId": 27809,
+    "patch": 5,
     "task": { "aetherialReduce": [27812] }
   },
   "White Clay": {
     "icon": "/i/022000/022610.png",
     "name": "White Clay",
-    "id": 27808,
+    "universalisId": 27808,
+    "patch": 5,
     "task": { "aetherialReduce": [27811, 17, 11] }
   },
   "White Oak Branch": {
     "icon": "/i/022000/022416.png",
     "name": "White Oak Branch",
-    "id": 27816,
+    "universalisId": 27816,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1865,7 +2060,8 @@
   "Broad Beans": {
     "icon": "/i/025000/025353.png",
     "name": "Broad Beans",
-    "id": 27833,
+    "universalisId": 27833,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1880,13 +2076,15 @@
   "Peppermint": {
     "icon": "/i/025000/025016.png",
     "name": "Peppermint",
-    "id": 27836,
+    "universalisId": 27836,
+    "patch": 5,
     "task": {}
   },
   "Russet Popoto": {
     "icon": "/i/025000/025204.png",
     "name": "Russet Popoto",
-    "id": 27822,
+    "universalisId": 27822,
+    "patch": 5,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1901,7 +2099,8 @@
   "Mist Spinach": {
     "icon": "/i/025000/025206.png",
     "name": "Mist Spinach",
-    "id": 27828,
+    "universalisId": 27828,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1916,7 +2115,8 @@
   "Lemonette": {
     "icon": "/i/025000/025305.png",
     "name": "Lemonette",
-    "id": 27835,
+    "universalisId": 27835,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1931,7 +2131,8 @@
   "Sandalwood Log": {
     "icon": "/i/022000/022401.png",
     "name": "Sandalwood Log",
-    "id": 27688,
+    "universalisId": 27688,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1946,13 +2147,15 @@
   "Sandalwood Sap": {
     "icon": "/i/022000/022638.png",
     "name": "Sandalwood Sap",
-    "id": 28716,
+    "universalisId": 28716,
+    "patch": 5.1,
     "task": {}
   },
   "Ethereal Cocoon": {
     "icon": "/i/021000/021661.png",
     "name": "Ethereal Cocoon",
-    "id": 27761,
+    "universalisId": 27761,
+    "patch": 5,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1967,400 +2170,92 @@
   "Brashgold Ore": {
     "icon": "/i/021000/021227.png",
     "name": "Brashgold Ore",
-    "id": 30486,
+    "universalisId": 30486,
+    "patch": 5.3,
     "task": {}
   },
   "Fireheart Cobalt": {
     "icon": "/i/021000/021227.png",
     "name": "Fireheart Cobalt",
-    "id": 29968,
+    "universalisId": 29968,
+    "patch": 5.2,
     "task": {}
   },
   "Purpure Shell Chip": {
     "icon": "/i/021000/021469.png",
     "name": "Purpure Shell Chip",
-    "id": 29970,
+    "universalisId": 29970,
+    "patch": 5.2,
     "task": {}
   },
   "Merbau Log": {
     "icon": "/i/022000/022423.png",
     "name": "Merbau Log",
-    "id": 29972,
+    "universalisId": 29972,
+    "patch": 5.2,
     "task": {}
   },
   "Tender Dill": {
     "icon": "/i/025000/025036.png",
     "name": "Tender Dill",
-    "id": 30485,
+    "universalisId": 30485,
+    "patch": 5.3,
     "task": {}
   },
   "Imperial Fern": {
     "icon": "/i/025000/025038.png",
     "name": "Imperial Fern",
-    "id": 29978,
+    "universalisId": 29978,
+    "patch": 5.2,
     "task": {}
   },
   "Ashen Alumen": {
     "icon": "/i/022000/022604.png",
     "name": "Ashen Alumen",
-    "id": 29976,
+    "universalisId": 29976,
+    "patch": 5.2,
     "task": {}
   },
   "Duskblooms": {
     "icon": "/i/025000/025022.png",
     "name": "Duskblooms",
-    "id": 29974,
+    "universalisId": 29974,
+    "patch": 5.2,
     "task": {}
   },
   "Hard Water": {
     "icon": "/i/022000/022689.png",
     "name": "Hard Water",
-    "id": 32955,
+    "universalisId": 32955,
+    "patch": 5.4,
     "task": {}
   },
   "Solstice Stone": {
     "icon": "/i/021000/021232.png",
     "name": "Solstice Stone",
-    "id": 32952,
+    "universalisId": 32952,
+    "patch": 5.4,
     "task": {}
   },
   "Dolomite": {
     "icon": "/i/021000/021225.png",
     "name": "Dolomite",
-    "id": 32951,
+    "universalisId": 32951,
+    "patch": 5.4,
     "task": {}
   },
   "Wattle Petribark": {
     "icon": "/i/022000/022418.png",
     "name": "Wattle Petribark",
-    "id": 32954,
+    "universalisId": 32954,
+    "patch": 5.4,
     "task": {}
   },
   "Silver Beech Log": {
     "icon": "/i/022000/022412.png",
     "name": "Silver Beech Log",
-    "id": 32950,
+    "universalisId": 32950,
+    "patch": 5.4,
     "task": {}
-  },
-  "Raindrop Cotton Boll": {
-    "icon": "/i/025000/025040.png",
-    "name": "Raindrop Cotton Boll",
-    "id": 32953,
-    "task": {}
-  },
-  "Rarefied Reef Rock": {
-    "icon": "/i/021000/021203.png",
-    "name": "Rarefied Reef Rock",
-    "id": 32984,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 36,
-        "MidReward": 22,
-        "LowReward": 15
-      }
-    }
-  },
-  "Rarefied Tungsten Ore": {
-    "icon": "/i/021000/021203.png",
-    "name": "Rarefied Tungsten Ore",
-    "id": 32986,
-    "task": {
-      "whiteScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 50,
-        "MidReward": 30,
-        "LowReward": 20
-      }
-    }
-  },
-  "Rarefied Gyr Abanian Alumen": {
-    "icon": "/i/022000/022644.png",
-    "name": "Rarefied Gyr Abanian Alumen",
-    "id": 32987,
-    "task": {
-      "whiteScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 50,
-        "MidReward": 30,
-        "LowReward": 20
-      }
-    }
-  },
-  "Rarefied Dark Chestnut Sap": {
-    "icon": "/i/022000/022654.png",
-    "name": "Rarefied Dark Chestnut Sap",
-    "id": 32992,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Dark Chestnut Log": {
-    "icon": "/i/022000/022420.png",
-    "name": "Rarefied Dark Chestnut Log",
-    "id": 32993,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Dark Chestnut Branch": {
-    "icon": "/i/022000/022416.png",
-    "name": "Rarefied Dark Chestnut Branch",
-    "id": 32994,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Dark Chestnut": {
-    "icon": "/i/025000/025302.png",
-    "name": "Rarefied Dark Chestnut",
-    "id": 32995,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Dark Chestnut Resin": {
-    "icon": "/i/022000/022674.png",
-    "name": "Rarefied Dark Chestnut Resin",
-    "id": 32996,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Larch Log": {
-    "icon": "/i/022000/022403.png",
-    "name": "Rarefied Larch Log",
-    "id": 32997,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Larch Sap": {
-    "icon": "/i/022000/022642.png",
-    "name": "Rarefied Larch Sap",
-    "id": 32999,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Shiitake Mushroom": {
-    "icon": "/i/025000/025401.png",
-    "name": "Rarefied Shiitake Mushroom",
-    "id": 32998,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Pine Resin": {
-    "icon": "/i/022000/022638.png",
-    "name": "Rarefied Pine Resin",
-    "id": 33000,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Pine Log": {
-    "icon": "/i/022000/022414.png",
-    "name": "Rarefied Pine Log",
-    "id": 33001,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 30,
-        "MidReward": 18,
-        "LowReward": 12
-      }
-    }
-  },
-  "Rarefied Pixie Apple": {
-    "icon": "/i/025000/025308.png",
-    "name": "Rarefied Pixie Apple",
-    "id": 33002,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 32,
-        "MidReward": 20,
-        "LowReward": 13
-      }
-    }
-  },
-  "Rarefied Miracle Apple Log": {
-    "icon": "/i/022000/022404.png",
-    "name": "Rarefied Miracle Apple Log",
-    "id": 33004,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 32,
-        "MidReward": 20,
-        "LowReward": 13
-      }
-    }
-  },
-  "Rarefied White Oak Log": {
-    "icon": "/i/022000/022407.png",
-    "name": "Rarefied White Oak Log",
-    "id": 33003,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 32,
-        "MidReward": 20,
-        "LowReward": 13
-      }
-    }
-  },
-  "Rarefied Sandteak Log": {
-    "icon": "/i/022000/022403.png",
-    "name": "Rarefied Sandteak Log",
-    "id": 33005,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 34,
-        "MidReward": 21,
-        "LowReward": 14
-      }
-    }
-  },
-  "Rarefied Amber Cloves": {
-    "icon": "/i/025000/025023.png",
-    "name": "Rarefied Amber Cloves",
-    "id": 33007,
-    "task": {
-      "whiteScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 50,
-        "MidReward": 30,
-        "LowReward": 20
-      }
-    }
-  },
-  "Rarefied Kelp": {
-    "icon": "/i/025000/025225.png",
-    "name": "Rarefied Kelp",
-    "id": 33006,
-    "task": {
-      "yellowScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 36,
-        "MidReward": 22,
-        "LowReward": 15
-      }
-    }
-  },
-  "Rarefied Coral": {
-    "icon": "/i/029000/029062.png",
-    "name": "Rarefied Coral",
-    "id": 33008,
-    "task": {
-      "whiteScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 50,
-        "MidReward": 30,
-        "LowReward": 20
-      }
-    }
-  },
-  "Rarefied Urunday Log": {
-    "icon": "/i/022000/022420.png",
-    "name": "Rarefied Urunday Log",
-    "id": 33009,
-    "task": {
-      "whiteScrips": {
-        "HighCollectability": 1000,
-        "MidCollectability": 800,
-        "LowCollectability": 600,
-        "HighReward": 50,
-        "MidReward": 30,
-        "LowReward": 20
-      }
-    }
   }
 }

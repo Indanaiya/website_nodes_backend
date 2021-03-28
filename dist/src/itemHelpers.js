@@ -106,6 +106,7 @@ class ItemHelper {
                 const valid = item.validateSync();
                 if (valid !== undefined) {
                     console.log({ reason: valid, item, itemDetails });
+                    throw valid;
                 }
                 return item.save().then(() => addItemReturn.ADDED);
             }
@@ -196,6 +197,14 @@ class ItemHelper {
                         lastUploadTime: universalisObj.lastUploadTime,
                         updatedAt: Date.now().toString(),
                     };
+                }).catch((err) => {
+                    if (err instanceof errors_js_1.ItemNotFoundError) {
+                        // TODO aught to make it null or an empty object to differentiate between unmarketable and not-looked up yet
+                        console.log(`Item not found: ${item.universalisId}`);
+                    }
+                    else {
+                        throw err;
+                    }
                 });
             }));
             return item.save().then(() => item);

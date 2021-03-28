@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
+const express = require("express");
 const nodeHelpers_js_1 = require("../src/nodeHelpers.js");
 const itemHelpers_js_1 = require("../src/itemHelpers.js");
 const getServers_js_1 = require("./getServers.js");
@@ -75,7 +75,7 @@ function getNodesWithItemData(...servers) {
         });
     });
 }
-const router = express_1.default.Router();
+const router = express.Router();
 router.route("/").get((_, res) => {
     nodeHelpers_js_1.default.getAllNodes()
         .then((response) => res.json(response))

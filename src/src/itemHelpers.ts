@@ -15,7 +15,7 @@ import { promises as fs } from "fs";
 
 import { DEFAULT_SERVER, ITEM_TTL, SERVERS } from "../src/constants.js";
 import fetchFromUniversalis from "../src/fetchFromUniversalis.js";
-import { InvalidArgumentError, DBError } from "../src/errors.js";
+import { InvalidArgumentError, DBError, ItemNotFoundError } from "../src/errors.js";
 import { validateServers } from "./validateServers.js";
 
 /**
@@ -152,6 +152,7 @@ export class ItemHelper<
       const valid = item.validateSync();
       if (valid !== undefined) {
         console.log({ reason: valid, item, itemDetails });
+        throw valid
       }
       return item.save().then(() => addItemReturn.ADDED);
     }
@@ -258,7 +259,14 @@ export class ItemHelper<
               updatedAt: Date.now().toString(),
             };
           }
-        );
+        ).catch((err) => {
+          if(err instanceof ItemNotFoundError){
+            // TODO aught to make it null or an empty object to differentiate between unmarketable and not-looked up yet
+            console.log(`Item not found: ${item.universalisId}`)
+          }else{
+            throw err;
+          }
+        });
       })
     );
     return item.save().then(() => item);

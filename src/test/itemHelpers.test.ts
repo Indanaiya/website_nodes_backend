@@ -10,13 +10,17 @@ const fetchFromUniversalis = mockFunction(fFU);
 
 import {
   addItemReturn,
+  aethersandItemHelper,
   gatherableItemHelper,
   getMarketInfo,
   ItemHelper,
   phantasmagoriaItemHelper,
 } from "../src/itemHelpers.js";
 import {
+  AethersandItem,
   GatherableItem,
+  IAethersandItem,
+  IAethersandItemBaseDocument,
   IGatherableItem,
   IGatherableItemBaseDocument,
   IProtoItem,
@@ -32,6 +36,7 @@ import { SERVERS, DEFAULT_SERVER } from "../src/constants";
 
 const PHANTASMAGORIA_MATS_JSON_PATH = "res/test/phantasmagoriaMatsTest.json";
 const GATHERABLE_ITEMS_JSON_PATH = "res/test/gatherableItemsTest.json";
+const AETHERSAND_ITEMS_JSON_PATH = "res/test/aethersandsTest.json";
 const TEST_SERVER_NAME = "Moogle";
 const TEST_SERVER_NAME_2 = "Anima";
 const FAKE_SERVER_NAME = "1234";
@@ -273,6 +278,7 @@ describe("itemHelpersTest", () => {
     PhantaItem,
     PHANTASMAGORIA_MATS_JSON_PATH
   );
+
   describeItemHelper<IGatherableItemBaseDocument, IGatherableItem>(
     "gatherableItem",
     gatherableItemHelper,
@@ -295,3 +301,15 @@ describe("itemHelpersTest", () => {
     GATHERABLE_ITEMS_JSON_PATH
   );
 });
+
+describeItemHelper<IAethersandItemBaseDocument, IAethersandItem>(
+  "aethersandItem",
+  aethersandItemHelper,
+  {
+    "name": "Chiaroglow Aethersand",
+    "universalisId": 27811,
+    "icon": "/i/021000/021235.png"
+  },
+  AethersandItem,
+  AETHERSAND_ITEMS_JSON_PATH
+)
