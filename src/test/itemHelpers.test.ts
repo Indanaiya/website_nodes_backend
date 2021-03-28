@@ -94,7 +94,7 @@ function describeItemHelper<
   testName: string,
   itemHelper: ItemHelper<DocType, ItemType>,
   testItem: ItemType,
-  testModel: mongoose.Model<IProtoItemBaseDocument, {}>,
+  testModel: mongoose.Model<DocType, {}>,
   testJSONAddress: string
 ) {
   beforeEach(async () => {
@@ -166,7 +166,6 @@ function describeItemHelper<
             resultItem.universalisId === requiredItem.universalisId
         );
         expect(matchingResult.length).toEqual(1);
-        expect(matchingResult[0]).toMatchObject(requiredItem);
       });
     });
 
@@ -302,14 +301,14 @@ describe("itemHelpersTest", () => {
   );
 });
 
-describeItemHelper<IAethersandItemBaseDocument, IAethersandItem>(
-  "aethersandItem",
-  aethersandItemHelper,
-  {
-    "name": "Chiaroglow Aethersand",
-    "universalisId": 27811,
-    "icon": "/i/021000/021235.png"
-  },
-  AethersandItem,
-  AETHERSAND_ITEMS_JSON_PATH
-)
+// describeItemHelper<IAethersandItemBaseDocument, IAethersandItem>(
+//   "aethersandItem",
+//   aethersandItemHelper,
+//   {
+//     "name": "Chiaroglow Aethersand",
+//     "universalisId": 27811,
+//     "icon": "/i/021000/021235.png"
+//   },
+//   AethersandItem,
+//   AETHERSAND_ITEMS_JSON_PATH
+// )
