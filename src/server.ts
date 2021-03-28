@@ -31,17 +31,15 @@ function fillCollection<
   DocType extends IProtoItemBaseDocument,
   ItemType extends IProtoItem
 >(name: string, helper: ItemHelper<DocType, ItemType>, dataPath: string) {
-  helper
-    .addAllItems(dataPath)
-    .then((results) => {
-      console.log(`${name} results:`, results);
-      console.log(`Finished adding ${name} items to collection`);
-      results.forEach((result) => {
-        if (result.status === "rejected") {
-          console.log(result, `did not complete successfully`);
-        }
-      });
+  helper.addAllItems(dataPath).then((results) => {
+    console.log(`${name} results:`, results);
+    console.log(`Finished adding ${name} items to collection`);
+    results.forEach((result) => {
+      if (result.status === "rejected") {
+        console.log(result, `did not complete successfully`);
+      }
     });
+  });
 }
 
 // Middleware
@@ -75,8 +73,21 @@ connection.once("open", () => {
 });
 
 // Add documents to the database
-fillCollection("Phantasmagoria Items", phantasmagoriaItemHelper, PHANTASMAGORIA_MATS_JSON_PATH);
-fillCollection("Gatherable Items", gatherableItemHelper, GATHERABLE_ITEMS_JSON_PATH)
+fillCollection(
+  "Phantasmagoria Items",
+  phantasmagoriaItemHelper,
+  PHANTASMAGORIA_MATS_JSON_PATH
+);
+fillCollection(
+  "Gatherable Items",
+  gatherableItemHelper,
+  GATHERABLE_ITEMS_JSON_PATH
+);
+NodeHelper.addAllNodes(GATHERING_NODES_JSON_PATH)
+  .then(() => {
+    console.log(`Finished adding nodes to collection`);
+  })
+  .catch((err) => console.log("Failed to add nodes to collection", err));
 
 // aethersandItemHelper
 // .addAllItems(AETHERSAND_JSON_PATH)
