@@ -24,7 +24,7 @@ function getItems(
 
   model
     .getItems(...servers)
-    .then((response) => res.json(response))
+    .then(({items}) => res.json(items))
     .catch((err) => res.status(400).json("Error: " + err));
 }
 

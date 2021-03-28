@@ -15,7 +15,11 @@ import { promises as fs } from "fs";
 
 import { DEFAULT_SERVER, ITEM_TTL, SERVERS } from "../src/constants.js";
 import fetchFromUniversalis from "../src/fetchFromUniversalis.js";
-import { InvalidArgumentError, DBError, ItemNotFoundError } from "../src/errors.js";
+import {
+  InvalidArgumentError,
+  DBError,
+  ItemNotFoundError,
+} from "../src/errors.js";
 import { validateServers } from "./validateServers.js";
 
 /**
@@ -147,12 +151,12 @@ export class ItemHelper<
         universalisId: itemDetails.universalisId,
         ...this.addFunction(itemDetails),
       });
-     // This can be removed for performance reasons but it's a handy thing to have in case something goes wrong
+      // This can be removed for performance reasons but it's a handy thing to have in case something goes wrong
 
       const valid = item.validateSync();
       if (valid !== undefined) {
         console.log({ reason: valid, item, itemDetails });
-        throw valid
+        throw valid;
       }
       return item.save().then(() => addItemReturn.ADDED);
     }
@@ -164,7 +168,9 @@ export class ItemHelper<
    *
    * @param servers The servers to retrieve market information from (will update the prices if they are outdated)
    */
-  async getItems(...servers: string[]) {
+  async getItems(
+    ...servers: string[]
+  ): Promise<{ items: DocType[]; failures: [number] }> {
     servers = validateServers(...servers);
 
     // Update the out of date items
@@ -204,7 +210,7 @@ export class ItemHelper<
       };
     });
 
-    await Promise.all(
+    const updates = await Promise.allSettled(
       outOfDatePrices.map((item) =>
         item.servers.length > 0
           ? this.updateItem(item.item, ...item.servers)
@@ -212,13 +218,22 @@ export class ItemHelper<
       )
     );
 
+    const failures = updates
+      .map((result, index) =>
+        result.status === "rejected"
+          ? outOfDatePrices[index].item.universalisId
+          : null
+      )
+      .filter((val) => val !== null) as [number];
+
     //Return the items
     const projection =
       servers.map((server) => `marketInfo.${server}`).join(" ") +
       " name universalisId " +
       this.projection;
 
-    return this.model.find({}, projection);
+    const newItems = await this.model.find({}, projection);
+    return { items: newItems, failures };
   }
 
   /** UPDATE */
@@ -241,8 +256,8 @@ export class ItemHelper<
 
     await Promise.all(
       servers.map((server) => {
-        return fetchFromUniversalis(item.universalisId, server).then(
-          (universalisObj) => {
+        return fetchFromUniversalis(item.universalisId, server)
+          .then((universalisObj) => {
             item.marketInfo![server] = {
               price: universalisObj.listings[0]?.pricePerUnit ?? null,
               saleVelocity: {
@@ -258,15 +273,15 @@ export class ItemHelper<
               lastUploadTime: universalisObj.lastUploadTime,
               updatedAt: Date.now().toString(),
             };
-          }
-        ).catch((err) => {
-          if(err instanceof ItemNotFoundError){
-            // TODO aught to make it null or an empty object to differentiate between unmarketable and not-looked up yet
-            console.log(`Item not found: ${item.universalisId}`)
-          }else{
-            throw err;
-          }
-        });
+          })
+          .catch((err) => {
+            if (err instanceof ItemNotFoundError) {
+              // TODO aught to make it null or an empty object to differentiate between unmarketable and not-looked up yet
+              console.log(`Item not found: ${item.universalisId}`);
+            } else {
+              throw err;
+            }
+          });
       })
     );
     return item.save().then(() => item);
