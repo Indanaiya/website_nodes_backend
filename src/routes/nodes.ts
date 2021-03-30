@@ -48,7 +48,7 @@ async function getAethersands(
   [key: number]: IAethersandItemBaseDocument;
 }> {
   const aethersandsArray = await aethersandItemHelper.getItems(...servers);
-  console.log({failures: aethersandsArray.failures})
+  console.log({ failures: aethersandsArray.failures });
   return itemArrayToItemObject(aethersandsArray.items);
 }
 
@@ -60,10 +60,10 @@ async function getGatherableItems(
   ...servers: string[]
 ): Promise<{
   [key: number]: NewGatherableItemBaseDocument;
-}>{
+}> {
   const aethersands = await getAethersands(...servers);
   const gatherableItemsArray = await gatherableItemHelper.getItems(...servers);
-  console.log({failures: gatherableItemsArray.failures})
+  console.log({ failures: gatherableItemsArray.failures });
   const newGatherableItems: NewGatherableItemBaseDocument[] = gatherableItemsArray.items.map(
     (item: any) => {
       if (item.task?.aetherialReduce !== undefined) {
@@ -100,19 +100,16 @@ async function getNodesWithItemData(...servers: string[]) {
       lifespan,
       name,
       level,
-    }) => {
-      const items = oldItems.map((item) => gatherableItems[item]);
-      return {
-        filters,
-        location,
-        spawnTimes,
-        _id,
-        items,
-        lifespan,
-        name,
-        level,
-      };
-    }
+    }) => ({
+      filters,
+      location,
+      spawnTimes,
+      _id,
+      items: oldItems.map((item) => gatherableItems[item]),
+      lifespan,
+      name,
+      level,
+    })
   );
 }
 

@@ -2,3 +2,14 @@
 /node_modules/*
 .env
 coverage/*
+dist/server.js
+dist/server.js.map
+dist/routes/items.js
+dist/routes/items.js.map
+dist/routes/nodes.js
+dist/routes/nodes.js.map
+dist/src/itemHelpers.js
+dist/src/itemHelpers.js.map
+dist/test/itemHelpers.test.js
+dist/test/itemHelpers.test.js.map
+globalConfig.json
