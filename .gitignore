@@ -12,4 +12,5 @@ dist/src/itemHelpers.js
 dist/src/itemHelpers.js.map
 dist/test/itemHelpers.test.js
 dist/test/itemHelpers.test.js.map
+dist/*
 globalConfig.json
