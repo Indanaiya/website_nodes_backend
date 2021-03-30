@@ -4,6 +4,7 @@
     "name": "Spruce Log",
     "universalisId": 5395,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Vampire Plant": {
@@ -11,6 +12,7 @@
     "name": "Vampire Plant",
     "universalisId": 5547,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Thavnairian Mistletoe": {
@@ -18,6 +20,7 @@
     "name": "Thavnairian Mistletoe",
     "universalisId": 5537,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Prickly Pineapple": {
@@ -25,6 +28,7 @@
     "name": "Prickly Pineapple",
     "universalisId": 4816,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Prickly Pineapple Seeds": {
@@ -32,6 +36,7 @@
     "name": "Prickly Pineapple Seeds",
     "universalisId": 7734,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Fire Cluster": {
@@ -39,6 +44,7 @@
     "name": "Fire Cluster",
     "universalisId": 14,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Ice Cluster": {
@@ -46,6 +52,7 @@
     "name": "Ice Cluster",
     "universalisId": 15,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Wind Cluster": {
@@ -53,6 +60,7 @@
     "name": "Wind Cluster",
     "universalisId": 16,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Earth Cluster": {
@@ -60,6 +68,7 @@
     "name": "Earth Cluster",
     "universalisId": 17,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Lightning Cluster": {
@@ -67,6 +76,7 @@
     "name": "Lightning Cluster",
     "universalisId": 18,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Water Cluster": {
@@ -74,6 +84,7 @@
     "name": "Water Cluster",
     "universalisId": 19,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Silkworm Cocoon": {
@@ -81,6 +92,7 @@
     "name": "Silkworm Cocoon",
     "universalisId": 5350,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Mazlaya Greens": {
@@ -88,6 +100,7 @@
     "name": "Mazlaya Greens",
     "universalisId": 10098,
     "patch": 2.51,
+    "untradeable": false,
     "task": {}
   },
   "Trillium": {
@@ -95,6 +108,7 @@
     "name": "Trillium",
     "universalisId": 5545,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Trillium Bulb": {
@@ -102,6 +116,7 @@
     "name": "Trillium Bulb",
     "universalisId": 5546,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Kidragora": {
@@ -109,6 +124,7 @@
     "name": "Kidragora",
     "universalisId": 6209,
     "patch": 2.1,
+    "untradeable": false,
     "task": {}
   },
   "Honey Lemon": {
@@ -116,6 +132,7 @@
     "name": "Honey Lemon",
     "universalisId": 6147,
     "patch": 2.1,
+    "untradeable": false,
     "task": {}
   },
   "Honey Lemon Seeds": {
@@ -123,6 +140,7 @@
     "name": "Honey Lemon Seeds",
     "universalisId": 7733,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Dzemael Tomato": {
@@ -130,6 +148,7 @@
     "name": "Dzemael Tomato",
     "universalisId": 6148,
     "patch": 2.1,
+    "untradeable": false,
     "task": {}
   },
   "Dzemael Tomato Seeds": {
@@ -137,6 +156,7 @@
     "name": "Dzemael Tomato Seeds",
     "universalisId": 7724,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Black Truffle": {
@@ -144,6 +164,7 @@
     "name": "Black Truffle",
     "universalisId": 4800,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Darksteel Ore": {
@@ -151,6 +172,7 @@
     "name": "Darksteel Ore",
     "universalisId": 5121,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Gregarious Worm": {
@@ -158,6 +180,7 @@
     "name": "Gregarious Worm",
     "universalisId": 10095,
     "patch": 2.51,
+    "untradeable": false,
     "task": {}
   },
   "Gold Ore": {
@@ -165,6 +188,7 @@
     "name": "Gold Ore",
     "universalisId": 5118,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Coblyn Larva": {
@@ -172,6 +196,7 @@
     "name": "Coblyn Larva",
     "universalisId": 6199,
     "patch": 2.1,
+    "untradeable": false,
     "task": {}
   },
   "Volcanic Rock Salt": {
@@ -179,6 +204,7 @@
     "name": "Volcanic Rock Salt",
     "universalisId": 6152,
     "patch": 2.1,
+    "untradeable": false,
     "task": {}
   },
   "Astral Rock": {
@@ -186,6 +212,7 @@
     "name": "Astral Rock",
     "universalisId": 5158,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Gold Sand": {
@@ -193,6 +220,7 @@
     "name": "Gold Sand",
     "universalisId": 5273,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Scarlet Sap": {
@@ -200,6 +228,7 @@
     "name": "Scarlet Sap",
     "universalisId": 7590,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Apricot": {
@@ -207,6 +236,7 @@
     "name": "Apricot",
     "universalisId": 7592,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Blood Orange": {
@@ -214,6 +244,7 @@
     "name": "Blood Orange",
     "universalisId": 7595,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Bamboo Stick": {
@@ -221,6 +252,7 @@
     "name": "Bamboo Stick",
     "universalisId": 5365,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Shroud Tea Leaves": {
@@ -228,6 +260,7 @@
     "name": "Shroud Tea Leaves",
     "universalisId": 7591,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "La Noscean Leek": {
@@ -235,6 +268,7 @@
     "name": "La Noscean Leek",
     "universalisId": 7593,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Waterfowl Feather": {
@@ -242,6 +276,7 @@
     "name": "Waterfowl Feather",
     "universalisId": 8024,
     "patch": 2.3,
+    "untradeable": false,
     "task": {}
   },
   "Young Cieldalaes Spinach": {
@@ -249,6 +284,7 @@
     "name": "Young Cieldalaes Spinach",
     "universalisId": 7594,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Ferberite": {
@@ -256,6 +292,7 @@
     "name": "Ferberite",
     "universalisId": 7588,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Iolite": {
@@ -263,6 +300,7 @@
     "name": "Raw Iolite",
     "universalisId": 5150,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Topaz": {
@@ -270,6 +308,7 @@
     "name": "Raw Topaz",
     "universalisId": 5149,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Native Gold": {
@@ -277,6 +316,7 @@
     "name": "Native Gold",
     "universalisId": 7589,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Diamond": {
@@ -284,6 +324,7 @@
     "name": "Raw Diamond",
     "universalisId": 5147,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Emerald": {
@@ -291,6 +332,7 @@
     "name": "Raw Emerald",
     "universalisId": 5148,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Ruby": {
@@ -298,6 +340,7 @@
     "name": "Raw Ruby",
     "universalisId": 5146,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Raw Sapphire": {
@@ -305,6 +348,7 @@
     "name": "Raw Sapphire",
     "universalisId": 5151,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Grade 3 La Noscean Topsoil": {
@@ -312,6 +356,7 @@
     "name": "Grade 3 La Noscean Topsoil",
     "universalisId": 7760,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Grade 3 Shroud Topsoil": {
@@ -319,6 +364,7 @@
     "name": "Grade 3 Shroud Topsoil",
     "universalisId": 7763,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Umbral Rock": {
@@ -326,6 +372,7 @@
     "name": "Umbral Rock",
     "universalisId": 7610,
     "patch": 2.2,
+    "untradeable": true,
     "task": {}
   },
   "Grade 3 Thanalan Topsoil": {
@@ -333,6 +380,7 @@
     "name": "Grade 3 Thanalan Topsoil",
     "universalisId": 7766,
     "patch": 2.2,
+    "untradeable": false,
     "task": {}
   },
   "Fragrant Log": {
@@ -340,6 +388,7 @@
     "name": "Fragrant Log",
     "universalisId": 7611,
     "patch": 2.2,
+    "untradeable": true,
     "task": {}
   },
   "Redolent Log": {
@@ -347,6 +396,7 @@
     "name": "Redolent Log",
     "universalisId": 8031,
     "patch": 2.3,
+    "untradeable": true,
     "task": {}
   },
   "Antumbral Rock": {
@@ -354,6 +404,7 @@
     "name": "Antumbral Rock",
     "universalisId": 8030,
     "patch": 2.3,
+    "untradeable": true,
     "task": {}
   },
   "Platinum Ore": {
@@ -361,6 +412,7 @@
     "name": "Platinum Ore",
     "universalisId": 5120,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Ebony Log": {
@@ -368,6 +420,7 @@
     "name": "Ebony Log",
     "universalisId": 5394,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Cypress Log": {
@@ -375,6 +428,7 @@
     "name": "Cypress Log",
     "universalisId": 9518,
     "patch": 2.45,
+    "untradeable": false,
     "task": {}
   },
   "Pumice": {
@@ -382,6 +436,7 @@
     "name": "Pumice",
     "universalisId": 9519,
     "patch": 2.45,
+    "untradeable": false,
     "task": {}
   },
   "Rosemary": {
@@ -389,6 +444,7 @@
     "name": "Rosemary",
     "universalisId": 10096,
     "patch": 2.5,
+    "untradeable": false,
     "task": {}
   },
   "Virgin Basilisk Egg": {
@@ -396,6 +452,7 @@
     "name": "Virgin Basilisk Egg",
     "universalisId": 10093,
     "patch": 2.5,
+    "untradeable": false,
     "task": {}
   },
   "Tungstite": {
@@ -403,6 +460,7 @@
     "name": "Tungstite",
     "universalisId": 16724,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Zeolite Ore": {
@@ -410,6 +468,7 @@
     "name": "Zeolite Ore",
     "universalisId": 16726,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Luminium Ore": {
@@ -417,6 +476,7 @@
     "name": "Luminium Ore",
     "universalisId": 16725,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Teak Log": {
@@ -424,6 +484,7 @@
     "name": "Teak Log",
     "universalisId": 5392,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Star Cotton Boll": {
@@ -431,6 +492,7 @@
     "name": "Star Cotton Boll",
     "universalisId": 16721,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Brown Mushroom": {
@@ -438,6 +500,7 @@
     "name": "Brown Mushroom",
     "universalisId": 16722,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Noble Sage": {
@@ -445,6 +508,7 @@
     "name": "Noble Sage",
     "universalisId": 16723,
     "patch": 3.4,
+    "untradeable": false,
     "task": {}
   },
   "Lightning Moraine": {
@@ -452,6 +516,7 @@
     "name": "Lightning Moraine",
     "universalisId": 5218,
     "patch": 2,
+    "untradeable": false,
     "task": { "aetherialReduce": [12936, 18, 12] }
   },
   "Radiant Astral Moraine": {
@@ -459,6 +524,7 @@
     "name": "Radiant Astral Moraine",
     "universalisId": 15949,
     "patch": 3.3,
+    "untradeable": false,
     "task": { "aetherialReduce": [15648, 19, 13] }
   },
   "Radiant Lightning Moraine": {
@@ -466,6 +532,7 @@
     "name": "Radiant Lightning Moraine",
     "universalisId": 5224,
     "patch": 2,
+    "untradeable": false,
     "task": { "aetherialReduce": [12938, 18, 12] }
   },
   "Bright Lightning Rock": {
@@ -473,6 +540,7 @@
     "name": "Bright Lightning Rock",
     "universalisId": 12967,
     "patch": 3,
+    "untradeable": false,
     "task": { "aetherialReduce": [12937, 18, 12] }
   },
   "Lightning Crystal": {
@@ -480,6 +548,7 @@
     "name": "Lightning Crystal",
     "universalisId": 12,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Rarefied Pyrite": {
@@ -487,6 +556,7 @@
     "name": "Rarefied Pyrite",
     "universalisId": 32970,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -503,6 +573,7 @@
     "name": "Rarefied Chalcocite",
     "universalisId": 32971,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -519,6 +590,7 @@
     "name": "Rarefied Limonite",
     "universalisId": 32972,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -535,6 +607,7 @@
     "name": "Fire Moraine",
     "universalisId": 5214,
     "patch": 2,
+    "untradeable": false,
     "task": { "aetherialReduce": [12936, 14, 8] }
   },
   "Radiant Fire Moraine": {
@@ -542,6 +615,7 @@
     "name": "Radiant Fire Moraine",
     "universalisId": 5220,
     "patch": 2,
+    "untradeable": false,
     "task": { "aetherialReduce": [12938, 14, 8] }
   },
   "Bright Fire Rock": {
@@ -549,6 +623,7 @@
     "name": "Bright Fire Rock",
     "universalisId": 12966,
     "patch": 3,
+    "untradeable": false,
     "task": { "aetherialReduce": [12937, 14, 8] }
   },
   "Fire Crystal": {
@@ -556,6 +631,7 @@
     "name": "Fire Crystal",
     "universalisId": 8,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Rarefied Abalathian Spring Water": {
@@ -563,6 +639,7 @@
     "name": "Rarefied Abalathian Spring Water",
     "universalisId": 32973,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -579,6 +656,7 @@
     "name": "Rarefied Aurum Regis Sand",
     "universalisId": 32974,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -595,6 +673,7 @@
     "name": "Rarefied Raw Triphane",
     "universalisId": 32975,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -611,6 +690,7 @@
     "name": "Rarefied Raw Kyanite",
     "universalisId": 32977,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -627,6 +707,7 @@
     "name": "Rarefied Raw Star Spinel",
     "universalisId": 32976,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -643,6 +724,7 @@
     "name": "Yellow Copper Ore",
     "universalisId": 5108,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -659,6 +741,7 @@
     "name": "Pyrite",
     "universalisId": 5109,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -675,6 +758,7 @@
     "name": "Limonite",
     "universalisId": 5112,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -691,6 +775,7 @@
     "name": "Chalcocite",
     "universalisId": 12941,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -707,6 +792,7 @@
     "name": "Green Quartz",
     "universalisId": 5161,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -723,6 +809,7 @@
     "name": "Yellow Quartz",
     "universalisId": 5162,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -739,6 +826,7 @@
     "name": "Abalathian Rock Salt",
     "universalisId": 12901,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -755,6 +843,7 @@
     "name": "Red Quartz",
     "universalisId": 5159,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -771,6 +860,7 @@
     "name": "Light Kidney Ore",
     "universalisId": 5117,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -787,6 +877,7 @@
     "name": "Cuprite",
     "universalisId": 12942,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -803,6 +894,7 @@
     "name": "Adamantite Ore",
     "universalisId": 12538,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -819,6 +911,7 @@
     "name": "Astral Moraine",
     "universalisId": 5226,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -835,6 +928,7 @@
     "name": "Violet Quartz",
     "universalisId": 5163,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -851,6 +945,7 @@
     "name": "Aurum Regis Ore",
     "universalisId": 12536,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -867,6 +962,7 @@
     "name": "Lumythrite Ore",
     "universalisId": 14148,
     "patch": 3.15,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -883,6 +979,7 @@
     "name": "Sun Mica",
     "universalisId": 12540,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -899,6 +996,7 @@
     "name": "Blue Quartz",
     "universalisId": 5160,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -915,6 +1013,7 @@
     "name": "Red Alumen",
     "universalisId": 12945,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -931,6 +1030,7 @@
     "name": "Rarefied Raw Azurite",
     "universalisId": 32978,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -947,6 +1047,7 @@
     "name": "Rarefied Silvergrace Ore",
     "universalisId": 32979,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -963,6 +1064,7 @@
     "name": "Rarefied Titancopper Ore",
     "universalisId": 32980,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -979,6 +1081,7 @@
     "name": "Rarefied Raw Petalite",
     "universalisId": 32982,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -995,6 +1098,7 @@
     "name": "Rarefied Raw Lazurite",
     "universalisId": 32981,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -1011,6 +1115,7 @@
     "name": "Rarefied Sea Salt",
     "universalisId": 32983,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "yellowScrips": {
         "HighCollectability": 1000,
@@ -1027,6 +1132,7 @@
     "name": "Rarefied Raw Onyx",
     "universalisId": 32985,
     "patch": 5.4,
+    "untradeable": true,
     "task": {
       "whiteScrips": {
         "HighCollectability": 1000,
@@ -1043,6 +1149,7 @@
     "name": "Pearl Sprouts",
     "universalisId": 12877,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1059,6 +1166,7 @@
     "name": "Coerthan Tea Leaves",
     "universalisId": 12882,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1075,6 +1183,7 @@
     "name": "Chives",
     "universalisId": 12884,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1091,6 +1200,7 @@
     "name": "Pearl Sprout Seeds",
     "universalisId": 13767,
     "patch": 3.1,
+    "untradeable": false,
     "task": {}
   },
   "Coerthan Tea Seeds": {
@@ -1098,6 +1208,7 @@
     "name": "Coerthan Tea Seeds",
     "universalisId": 13768,
     "patch": 3.1,
+    "untradeable": false,
     "task": {}
   },
   "Old World Fig": {
@@ -1105,6 +1216,7 @@
     "name": "Old World Fig",
     "universalisId": 12896,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -1121,6 +1233,7 @@
     "name": "Old World Fig Seeds",
     "universalisId": 13765,
     "patch": 3.1,
+    "untradeable": false,
     "task": {}
   },
   "Porcini": {
@@ -1128,6 +1241,7 @@
     "name": "Porcini",
     "universalisId": 12899,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 370,
@@ -1144,6 +1258,7 @@
     "name": "Dravanian Mistletoe",
     "universalisId": 12943,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1160,6 +1275,7 @@
     "name": "Heavens Lemon",
     "universalisId": 12889,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1176,6 +1292,7 @@
     "name": "Abalathian Mistletoe",
     "universalisId": 12944,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1192,6 +1309,7 @@
     "name": "Cloud Banana",
     "universalisId": 12897,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1208,6 +1326,7 @@
     "name": "Morel",
     "universalisId": 12898,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1224,6 +1343,7 @@
     "name": "Chysahl Greens",
     "universalisId": 12900,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1240,6 +1360,7 @@
     "name": "Vanilla Beans",
     "universalisId": 4833,
     "patch": 2,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1256,6 +1377,7 @@
     "name": "Dravanian Paprika",
     "universalisId": 12903,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1272,6 +1394,7 @@
     "name": "Frost Cotton Boll",
     "universalisId": 14154,
     "patch": 3.15,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1288,6 +1411,7 @@
     "name": "Seventh Heaven",
     "universalisId": 12634,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1304,6 +1428,7 @@
     "name": "Honeydew Almonds",
     "universalisId": 12902,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1320,6 +1445,7 @@
     "name": "Snurbleberry",
     "universalisId": 12904,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1336,6 +1462,7 @@
     "name": "Wattle Bark",
     "universalisId": 12587,
     "patch": 3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1352,6 +1479,7 @@
     "name": "Old-growth Camphorwood Log",
     "universalisId": 14957,
     "patch": 3.15,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1368,6 +1496,7 @@
     "name": "Crystallized Sap",
     "universalisId": 15647,
     "patch": 3.3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1384,6 +1513,7 @@
     "name": "Smithsonite Ore",
     "universalisId": 14151,
     "patch": 3.15,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1400,6 +1530,7 @@
     "name": "Meteorite",
     "universalisId": 15646,
     "patch": 3.3,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1416,6 +1547,7 @@
     "name": "Perlite",
     "universalisId": 20010,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [-1] }
   },
   "Dacite": {
@@ -1423,6 +1555,7 @@
     "name": "Dacite",
     "universalisId": 33152,
     "patch": 5.4,
+    "untradeable": false,
     "task": { "aetherialReduce": [20015, 19, 13] }
   },
   "Yanxian Soil": {
@@ -1430,6 +1563,7 @@
     "name": "Yanxian Soil",
     "universalisId": 23220,
     "patch": 4.3,
+    "untradeable": false,
     "task": { "aetherialReduce": [23182] }
   },
   "Almandine": {
@@ -1437,6 +1571,7 @@
     "name": "Almandine",
     "universalisId": 20011,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [-1] }
   },
   "Rhodolite": {
@@ -1444,6 +1579,7 @@
     "name": "Rhodolite",
     "universalisId": 33153,
     "patch": 5.4,
+    "untradeable": false,
     "task": { "aetherialReduce": [20013, 14, 8] }
   },
   "Ice Crystal": {
@@ -1451,6 +1587,7 @@
     "name": "Ice Crystal",
     "universalisId": 9,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Schorl": {
@@ -1458,6 +1595,7 @@
     "name": "Schorl",
     "universalisId": 20009,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [20014, 18, 12] }
   },
   "Raw Triphane": {
@@ -1465,6 +1603,7 @@
     "name": "Raw Triphane",
     "universalisId": 19968,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1481,6 +1620,7 @@
     "name": "Raw Star Spinel",
     "universalisId": 19970,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1497,6 +1637,7 @@
     "name": "Raw Rhodonite",
     "universalisId": 19973,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1513,6 +1654,7 @@
     "name": "Pummelite",
     "universalisId": 17944,
     "patch": 4,
+    "untradeable": true,
     "task": {}
   },
   "Raw Imperial Jade": {
@@ -1520,6 +1662,7 @@
     "name": "Raw Imperial Jade",
     "universalisId": 19972,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1536,6 +1679,7 @@
     "name": "Raw Azurite",
     "universalisId": 19971,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1552,6 +1696,7 @@
     "name": "Ala Mhigan Salt Crystal",
     "universalisId": 19907,
     "patch": 4,
+    "untradeable": false,
     "task": {}
   },
   "Chromite Ore": {
@@ -1559,6 +1704,7 @@
     "name": "Chromite Ore",
     "universalisId": 19959,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1575,6 +1721,7 @@
     "name": "Gyr Abanian Spring Water",
     "universalisId": 21085,
     "patch": 4.1,
+    "untradeable": false,
     "task": {}
   },
   "Palladium Ore": {
@@ -1582,6 +1729,7 @@
     "name": "Palladium Ore",
     "universalisId": 19958,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1598,6 +1746,7 @@
     "name": "Torreya Branch",
     "universalisId": 19937,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [20016, 15, 9] }
   },
   "Yanxian Verbena": {
@@ -1605,6 +1754,7 @@
     "name": "Yanxian Verbena",
     "universalisId": 23221,
     "patch": 4.3,
+    "untradeable": false,
     "task": { "aetherialReduce": [23182, 18, 12] }
   },
   "Windtea Leaves": {
@@ -1612,6 +1762,7 @@
     "name": "Windtea Leaves",
     "universalisId": 19916,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [-1] }
   },
   "Countess Tea Leaves": {
@@ -1619,6 +1770,7 @@
     "name": "Countess Tea Leaves",
     "universalisId": 33151,
     "patch": 5.4,
+    "untradeable": false,
     "task": { "aetherialReduce": [-1] }
   },
   "Wind Crystal": {
@@ -1626,6 +1778,7 @@
     "name": "Wind Crystal",
     "universalisId": 10,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Doman Yellow": {
@@ -1633,6 +1786,7 @@
     "name": "Doman Yellow",
     "universalisId": 20012,
     "patch": 4,
+    "untradeable": false,
     "task": { "aetherialReduce": [20013, 17, 11] }
   },
   "Earth Crystal": {
@@ -1640,6 +1794,7 @@
     "name": "Earth Crystal",
     "universalisId": 11,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Beech Branch": {
@@ -1647,6 +1802,7 @@
     "name": "Beech Branch",
     "universalisId": 19936,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1663,6 +1819,7 @@
     "name": "Bamboo Shoot",
     "universalisId": 19860,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1679,6 +1836,7 @@
     "name": "Othardian Plum",
     "universalisId": 19852,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1695,6 +1853,7 @@
     "name": "Hallowed Basil",
     "universalisId": 19918,
     "patch": 4,
+    "untradeable": false,
     "task": {}
   },
   "Lotus Root": {
@@ -1702,6 +1861,7 @@
     "name": "Lotus Root",
     "universalisId": 19865,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1718,6 +1878,7 @@
     "name": "Jhammel Ginger",
     "universalisId": 19857,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1734,6 +1895,7 @@
     "name": "Rhalgr's Streak",
     "universalisId": 17948,
     "patch": 4,
+    "untradeable": true,
     "task": {}
   },
   "Torreya Log": {
@@ -1741,6 +1903,7 @@
     "name": "Torreya Log",
     "universalisId": 19934,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1757,6 +1920,7 @@
     "name": "Rhea",
     "universalisId": 19991,
     "patch": 4,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 530,
@@ -1773,6 +1937,7 @@
     "name": "Azim Cotton Boll",
     "universalisId": 21086,
     "patch": 4.1,
+    "untradeable": false,
     "task": {}
   },
   "Nightsteel Ore": {
@@ -1780,6 +1945,7 @@
     "name": "Nightsteel Ore",
     "universalisId": 22417,
     "patch": 4.2,
+    "untradeable": false,
     "task": {}
   },
   "Hawk's Eye": {
@@ -1787,6 +1953,7 @@
     "name": "Hawk's Eye",
     "universalisId": 23179,
     "patch": 4.3,
+    "untradeable": false,
     "task": {}
   },
   "Silvergrace Ore": {
@@ -1794,6 +1961,7 @@
     "name": "Silvergrace Ore",
     "universalisId": 22418,
     "patch": 4.2,
+    "untradeable": false,
     "task": {}
   },
   "Azim Spring Water": {
@@ -1801,6 +1969,7 @@
     "name": "Azim Spring Water",
     "universalisId": 24255,
     "patch": 4.4,
+    "untradeable": false,
     "task": {}
   },
   "Black Willow Log": {
@@ -1808,6 +1977,7 @@
     "name": "Black Willow Log",
     "universalisId": 22419,
     "patch": 4.2,
+    "untradeable": false,
     "task": {}
   },
   "Hardened Veteran Tree Sap": {
@@ -1815,6 +1985,7 @@
     "name": "Hardened Veteran Tree Sap",
     "universalisId": 23180,
     "patch": 4.3,
+    "untradeable": false,
     "task": {}
   },
   "Hingan Flax": {
@@ -1822,6 +1993,7 @@
     "name": "Hingan Flax",
     "universalisId": 22420,
     "patch": 4.2,
+    "untradeable": false,
     "task": {}
   },
   "Gyr Abanian Ore": {
@@ -1829,6 +2001,7 @@
     "name": "Gyr Abanian Ore",
     "universalisId": 24240,
     "patch": 4.4,
+    "untradeable": false,
     "task": {}
   },
   "Evergleam Ore": {
@@ -1836,6 +2009,7 @@
     "name": "Evergleam Ore",
     "universalisId": 24241,
     "patch": 4.4,
+    "untradeable": false,
     "task": {}
   },
   "Urunday Log": {
@@ -1843,6 +2017,7 @@
     "name": "Urunday Log",
     "universalisId": 24242,
     "patch": 4.4,
+    "untradeable": false,
     "task": {}
   },
   "Yanxian Cotton Boll": {
@@ -1850,6 +2025,7 @@
     "name": "Yanxian Cotton Boll",
     "universalisId": 24243,
     "patch": 4.4,
+    "untradeable": false,
     "task": {}
   },
   "Gale Rock": {
@@ -1857,6 +2033,7 @@
     "name": "Gale Rock",
     "universalisId": 27805,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27811, 19, 13] }
   },
   "Thunder Rock": {
@@ -1864,6 +2041,7 @@
     "name": "Thunder Rock",
     "universalisId": 30591,
     "patch": 5.3,
+    "untradeable": false,
     "task": { "aetherialReduce": [30590] }
   },
   "Water Crystal": {
@@ -1871,6 +2049,7 @@
     "name": "Water Crystal",
     "universalisId": 13,
     "patch": 2,
+    "untradeable": false,
     "task": {}
   },
   "Solarite": {
@@ -1878,6 +2057,7 @@
     "name": "Solarite",
     "universalisId": 27806,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27812, 18, 12] }
   },
   "Shade Quartz": {
@@ -1885,6 +2065,7 @@
     "name": "Shade Quartz",
     "universalisId": 27807,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27813, 14, 8] }
   },
   "Raw Hematite": {
@@ -1892,6 +2073,7 @@
     "name": "Raw Hematite",
     "universalisId": 27726,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1908,6 +2090,7 @@
     "name": "Raw Diaspore",
     "universalisId": 27727,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1924,6 +2107,7 @@
     "name": "Raw Lazurite",
     "universalisId": 27728,
     "patch": 5,
+    "untradeable": false,
     "task": {}
   },
   "Raw Triplite": {
@@ -1931,6 +2115,7 @@
     "name": "Raw Triplite",
     "universalisId": 27729,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -1947,6 +2132,7 @@
     "name": "Raw Petalite",
     "universalisId": 27730,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1963,6 +2149,7 @@
     "name": "Raw Onyx",
     "universalisId": 27731,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1979,6 +2166,7 @@
     "name": "Prismstone",
     "universalisId": 27705,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -1995,6 +2183,7 @@
     "name": "Beryllium Ore",
     "universalisId": 28717,
     "patch": 5.1,
+    "untradeable": false,
     "task": {}
   },
   "Tungsten Ore": {
@@ -2002,6 +2191,7 @@
     "name": "Tungsten Ore",
     "universalisId": 27704,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -2018,6 +2208,7 @@
     "name": "Bog Sage",
     "universalisId": 27810,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27814, 15, 9] }
   },
   "Levin Mint": {
@@ -2025,6 +2216,7 @@
     "name": "Levin Mint",
     "universalisId": 30592,
     "patch": 5.3,
+    "untradeable": false,
     "task": { "aetherialReduce": [30590] }
   },
   "Sweet Marjoram": {
@@ -2032,6 +2224,7 @@
     "name": "Sweet Marjoram",
     "universalisId": 27809,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27812] }
   },
   "White Clay": {
@@ -2039,6 +2232,7 @@
     "name": "White Clay",
     "universalisId": 27808,
     "patch": 5,
+    "untradeable": false,
     "task": { "aetherialReduce": [27811, 17, 11] }
   },
   "White Oak Branch": {
@@ -2046,6 +2240,7 @@
     "name": "White Oak Branch",
     "universalisId": 27816,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -2062,6 +2257,7 @@
     "name": "Broad Beans",
     "universalisId": 27833,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -2078,6 +2274,7 @@
     "name": "Peppermint",
     "universalisId": 27836,
     "patch": 5,
+    "untradeable": false,
     "task": {}
   },
   "Russet Popoto": {
@@ -2085,6 +2282,7 @@
     "name": "Russet Popoto",
     "universalisId": 27822,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "yellowScrips": {
         "HighCollectability": 500,
@@ -2101,6 +2299,7 @@
     "name": "Mist Spinach",
     "universalisId": 27828,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -2117,6 +2316,7 @@
     "name": "Lemonette",
     "universalisId": 27835,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -2133,6 +2333,7 @@
     "name": "Sandalwood Log",
     "universalisId": 27688,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -2149,6 +2350,7 @@
     "name": "Sandalwood Sap",
     "universalisId": 28716,
     "patch": 5.1,
+    "untradeable": false,
     "task": {}
   },
   "Ethereal Cocoon": {
@@ -2156,6 +2358,7 @@
     "name": "Ethereal Cocoon",
     "universalisId": 27761,
     "patch": 5,
+    "untradeable": false,
     "task": {
       "whiteScrips": {
         "HighCollectability": 530,
@@ -2172,6 +2375,7 @@
     "name": "Brashgold Ore",
     "universalisId": 30486,
     "patch": 5.3,
+    "untradeable": false,
     "task": {}
   },
   "Fireheart Cobalt": {
@@ -2179,6 +2383,7 @@
     "name": "Fireheart Cobalt",
     "universalisId": 29968,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Purpure Shell Chip": {
@@ -2186,6 +2391,7 @@
     "name": "Purpure Shell Chip",
     "universalisId": 29970,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Merbau Log": {
@@ -2193,6 +2399,7 @@
     "name": "Merbau Log",
     "universalisId": 29972,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Tender Dill": {
@@ -2200,6 +2407,7 @@
     "name": "Tender Dill",
     "universalisId": 30485,
     "patch": 5.3,
+    "untradeable": false,
     "task": {}
   },
   "Imperial Fern": {
@@ -2207,6 +2415,7 @@
     "name": "Imperial Fern",
     "universalisId": 29978,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Ashen Alumen": {
@@ -2214,6 +2423,7 @@
     "name": "Ashen Alumen",
     "universalisId": 29976,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Duskblooms": {
@@ -2221,6 +2431,7 @@
     "name": "Duskblooms",
     "universalisId": 29974,
     "patch": 5.2,
+    "untradeable": false,
     "task": {}
   },
   "Hard Water": {
@@ -2228,6 +2439,7 @@
     "name": "Hard Water",
     "universalisId": 32955,
     "patch": 5.4,
+    "untradeable": false,
     "task": {}
   },
   "Solstice Stone": {
@@ -2235,6 +2447,7 @@
     "name": "Solstice Stone",
     "universalisId": 32952,
     "patch": 5.4,
+    "untradeable": false,
     "task": {}
   },
   "Dolomite": {
@@ -2242,6 +2455,7 @@
     "name": "Dolomite",
     "universalisId": 32951,
     "patch": 5.4,
+    "untradeable": false,
     "task": {}
   },
   "Wattle Petribark": {
@@ -2249,6 +2463,7 @@
     "name": "Wattle Petribark",
     "universalisId": 32954,
     "patch": 5.4,
+    "untradeable": false,
     "task": {}
   },
   "Silver Beech Log": {
@@ -2256,6 +2471,372 @@
     "name": "Silver Beech Log",
     "universalisId": 32950,
     "patch": 5.4,
+    "untradeable": false,
     "task": {}
+  },
+  "Raindrop Cotton Boll": {
+    "icon": "/i/025000/025040.png",
+    "name": "Raindrop Cotton Boll",
+    "universalisId": 32953,
+    "patch": 5.4,
+    "untradeable": false,
+    "task": {}
+  },
+  "Rarefied Reef Rock": {
+    "icon": "/i/021000/021203.png",
+    "name": "Rarefied Reef Rock",
+    "universalisId": 32984,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 36,
+        "MidReward": 22,
+        "LowReward": 15
+      }
+    }
+  },
+  "Rarefied Tungsten Ore": {
+    "icon": "/i/021000/021203.png",
+    "name": "Rarefied Tungsten Ore",
+    "universalisId": 32986,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 50,
+        "MidReward": 30,
+        "LowReward": 20
+      }
+    }
+  },
+  "Rarefied Gyr Abanian Alumen": {
+    "icon": "/i/022000/022644.png",
+    "name": "Rarefied Gyr Abanian Alumen",
+    "universalisId": 32987,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 50,
+        "MidReward": 30,
+        "LowReward": 20
+      }
+    }
+  },
+  "Rarefied Dark Chestnut Sap": {
+    "icon": "/i/022000/022654.png",
+    "name": "Rarefied Dark Chestnut Sap",
+    "universalisId": 32992,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Dark Chestnut Log": {
+    "icon": "/i/022000/022420.png",
+    "name": "Rarefied Dark Chestnut Log",
+    "universalisId": 32993,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Dark Chestnut Branch": {
+    "icon": "/i/022000/022416.png",
+    "name": "Rarefied Dark Chestnut Branch",
+    "universalisId": 32994,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Dark Chestnut": {
+    "icon": "/i/025000/025302.png",
+    "name": "Rarefied Dark Chestnut",
+    "universalisId": 32995,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Dark Chestnut Resin": {
+    "icon": "/i/022000/022674.png",
+    "name": "Rarefied Dark Chestnut Resin",
+    "universalisId": 32996,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Larch Log": {
+    "icon": "/i/022000/022403.png",
+    "name": "Rarefied Larch Log",
+    "universalisId": 32997,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Larch Sap": {
+    "icon": "/i/022000/022642.png",
+    "name": "Rarefied Larch Sap",
+    "universalisId": 32999,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Shiitake Mushroom": {
+    "icon": "/i/025000/025401.png",
+    "name": "Rarefied Shiitake Mushroom",
+    "universalisId": 32998,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Pine Resin": {
+    "icon": "/i/022000/022638.png",
+    "name": "Rarefied Pine Resin",
+    "universalisId": 33000,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Pine Log": {
+    "icon": "/i/022000/022414.png",
+    "name": "Rarefied Pine Log",
+    "universalisId": 33001,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 30,
+        "MidReward": 18,
+        "LowReward": 12
+      }
+    }
+  },
+  "Rarefied Pixie Apple": {
+    "icon": "/i/025000/025308.png",
+    "name": "Rarefied Pixie Apple",
+    "universalisId": 33002,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 32,
+        "MidReward": 20,
+        "LowReward": 13
+      }
+    }
+  },
+  "Rarefied Miracle Apple Log": {
+    "icon": "/i/022000/022404.png",
+    "name": "Rarefied Miracle Apple Log",
+    "universalisId": 33004,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 32,
+        "MidReward": 20,
+        "LowReward": 13
+      }
+    }
+  },
+  "Rarefied White Oak Log": {
+    "icon": "/i/022000/022407.png",
+    "name": "Rarefied White Oak Log",
+    "universalisId": 33003,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 32,
+        "MidReward": 20,
+        "LowReward": 13
+      }
+    }
+  },
+  "Rarefied Sandteak Log": {
+    "icon": "/i/022000/022403.png",
+    "name": "Rarefied Sandteak Log",
+    "universalisId": 33005,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 34,
+        "MidReward": 21,
+        "LowReward": 14
+      }
+    }
+  },
+  "Rarefied Amber Cloves": {
+    "icon": "/i/025000/025023.png",
+    "name": "Rarefied Amber Cloves",
+    "universalisId": 33007,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 50,
+        "MidReward": 30,
+        "LowReward": 20
+      }
+    }
+  },
+  "Rarefied Kelp": {
+    "icon": "/i/025000/025225.png",
+    "name": "Rarefied Kelp",
+    "universalisId": 33006,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "yellowScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 36,
+        "MidReward": 22,
+        "LowReward": 15
+      }
+    }
+  },
+  "Rarefied Coral": {
+    "icon": "/i/029000/029062.png",
+    "name": "Rarefied Coral",
+    "universalisId": 33008,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 50,
+        "MidReward": 30,
+        "LowReward": 20
+      }
+    }
+  },
+  "Rarefied Urunday Log": {
+    "icon": "/i/022000/022420.png",
+    "name": "Rarefied Urunday Log",
+    "universalisId": 33009,
+    "patch": 5.4,
+    "untradeable": true,
+    "task": {
+      "whiteScrips": {
+        "HighCollectability": 1000,
+        "MidCollectability": 800,
+        "LowCollectability": 600,
+        "HighReward": 50,
+        "MidReward": 30,
+        "LowReward": 20
+      }
+    }
   }
 }

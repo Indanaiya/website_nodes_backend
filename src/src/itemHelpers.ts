@@ -8,7 +8,7 @@ import {
   IAethersandItem,
   IPhantaItem,
   IGatherableItem,
-  ServerPrices,
+  IServerPrices,
 } from "../models/Item.model.js";
 import { Model } from "mongoose";
 import { promises as fs } from "fs";
@@ -31,38 +31,22 @@ import { validateServers } from "./validateServers.js";
 export async function getMarketInfo(
   universalisId: number,
   server: string
-): Promise<ServerPrices> {
-  const universalisObj = await fetchFromUniversalis(universalisId, server);
-
-  //Destructuring the universalis object
-  const {
-    listings: {
-      0: { pricePerUnit },
-    },
-    regularSaleVelocity,
-    nqSaleVelocity,
-    hqSaleVelocity,
-    averagePrice,
-    averagePriceNQ,
-    averagePriceHQ,
-    lastUploadTime,
-  } = universalisObj;
-
-  return {
-    price: pricePerUnit,
+): Promise<IServerPrices> {
+  return fetchFromUniversalis(universalisId, server).then((universalisObj) => ({
+    price: universalisObj.listings[0]?.pricePerUnit ?? null,
     saleVelocity: {
-      overall: regularSaleVelocity,
-      nq: nqSaleVelocity,
-      hq: hqSaleVelocity,
+      overall: universalisObj.regularSaleVelocity,
+      nq: universalisObj.nqSaleVelocity,
+      hq: universalisObj.hqSaleVelocity,
     },
     avgPrice: {
-      overall: averagePrice,
-      nq: averagePriceNQ,
-      hq: averagePriceHQ,
+      overall: universalisObj.averagePrice,
+      nq: universalisObj.averagePriceNQ,
+      hq: universalisObj.averagePriceHQ,
     },
-    lastUploadTime: lastUploadTime,
+    lastUploadTime: universalisObj.lastUploadTime,
     updatedAt: Date.now().toString(),
-  };
+  }));
 }
 
 export enum addItemReturn {
@@ -146,9 +130,11 @@ export class ItemHelper<
     if (savedItemsWithItemName.length === 1) {
       return addItemReturn.ALREADY_PRESENT;
     } else {
+      //TODO is there a way to change this so I don't have to update it whenever I change IProtoItem
       const item = new this.model({
         name: itemDetails.name,
         universalisId: itemDetails.universalisId,
+        untradeable: itemDetails.untradeable,
         ...this.addFunction(itemDetails),
       });
       // This can be removed for performance reasons but it's a handy thing to have in case something goes wrong
@@ -254,37 +240,19 @@ export class ItemHelper<
       item.marketInfo = {};
     }
 
-    await Promise.all(
-      servers.map((server) => {
-        return fetchFromUniversalis(item.universalisId, server)
-          .then((universalisObj) => {
-            item.marketInfo![server] = {
-              price: universalisObj.listings[0]?.pricePerUnit ?? null,
-              saleVelocity: {
-                overall: universalisObj.regularSaleVelocity,
-                nq: universalisObj.nqSaleVelocity,
-                hq: universalisObj.hqSaleVelocity,
-              },
-              avgPrice: {
-                overall: universalisObj.averagePrice,
-                nq: universalisObj.averagePriceNQ,
-                hq: universalisObj.averagePriceHQ,
-              },
-              lastUploadTime: universalisObj.lastUploadTime,
-              updatedAt: Date.now().toString(),
-            };
-          })
-          .catch((err) => {
-            if (err instanceof ItemNotFoundError) {
-              // TODO aught to make it null or an empty object to differentiate between unmarketable and not-looked up yet
-              console.log(`Item not found: ${item.universalisId}`);
-            } else {
-              throw err;
-            }
-          });
-      })
-    );
-    return item.save().then(() => item);
+    if (item.untradeable === false) {
+      await Promise.all(
+        servers.map(async (server) => {
+          item.marketInfo![server] = await getMarketInfo(
+            item.universalisId,
+            server
+          );
+        })
+      );
+      await item.save();
+    }
+
+    return item;
   }
 
   /**

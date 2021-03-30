@@ -273,6 +273,7 @@ describe("itemHelpersTest", () => {
       name: testItemName,
       universalisId: 27744,
       tomestonePrice: 5,
+      untradeable: false,
     },
     PhantaItem,
     PHANTASMAGORIA_MATS_JSON_PATH
@@ -295,6 +296,7 @@ describe("itemHelpersTest", () => {
         },
       },
       patch: 5.3,
+      untradeable: false,
     },
     GatherableItem,
     GATHERABLE_ITEMS_JSON_PATH

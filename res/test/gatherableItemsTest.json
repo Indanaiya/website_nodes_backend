@@ -4,14 +4,16 @@
     "name": "Doman Yellow",
     "universalisId": 20012,
     "task": { "aetherialReduce": [20013, 17, 11] },
-    "patch": 5.3
+    "patch": 5.3,
+    "untradeable": false
   },
   "Earth Crystal": {
     "icon": "/i/020000/020012.png",
     "name": "Earth Crystal",
     "universalisId": 11,
     "task": {},
-    "patch": 5.3
+    "patch": 5.3,
+    "untradeable": false
   },
   "Beech Branch": {
     "icon": "/i/022000/022417.png",
@@ -27,6 +29,7 @@
         "LowReward": 12
       }
     },
-    "patch": 5.3
+    "patch": 5.3,
+    "untradeable": false
   }
 }

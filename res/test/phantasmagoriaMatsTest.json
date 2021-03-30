@@ -2,30 +2,35 @@
   "Multifaceted Varnish": {
     "name": "Multifaceted Varnish",
     "universalisId": 27695,
-    "tomestonePrice": 5
+    "tomestonePrice": 5,
+    "untradeable": false
   },
 
   "Multifaceted Abrasive": {
     "name": "Multifaceted Abrasive",
     "universalisId": 27718,
-    "tomestonePrice": 5
+    "tomestonePrice": 5,
+    "untradeable": false
   },
 
   "Multifaceted Resin": {
     "name": "Multifaceted Resin",
     "universalisId": 27719,
-    "tomestonePrice": 5
+    "tomestonePrice": 5,
+    "untradeable": false
   },
 
   "Multifaceted Alumen": {
     "name": "Multifaceted Alumen",
     "universalisId": 27744,
-    "tomestonePrice": 5
+    "tomestonePrice": 5,
+    "untradeable": false
   },
 
   "Multifaceted Cotton Cloth": {
     "name": "Multifaceted Cotton Cloth",
     "universalisId": 27762,
-    "tomestonePrice": 5
+    "tomestonePrice": 5,
+    "untradeable": false
   }
 }

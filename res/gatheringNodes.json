@@ -1,20 +1,5 @@
 [
   {
-    "id": 33588,
-    "items": [32955],
-    "location": {
-      "map": "Kholusia",
-      "aetheryteName": "Stilltide",
-      "placeName": "The Duergar's Tewel",
-      "x": 36.1,
-      "y": 12.2
-    },
-    "filters": { "patch": "5.4", "className": "MIN" },
-    "spawnTimes": [4, 16],
-    "lifespan": 2,
-    "level": 80
-  },
-  {
     "id": 33589,
     "items": [32952],
     "location": {
@@ -86,6 +71,186 @@
     },
     "filters": { "patch": "5.4", "className": "BTN" },
     "spawnTimes": [10, 22],
+    "lifespan": 2,
+    "level": 80
+  },
+  {
+    "id": 31510,
+    "items": [32984, 32986],
+    "location": {
+      "map": "The Tempest",
+      "aetheryteName": "The Ondo Cups",
+      "placeName": "The Ondo Cups",
+      "x": 32.7,
+      "y": 20.5
+    },
+    "filters": { "patch": "3.0", "className": "MIN" },
+    "spawnTimes": [2, 14],
+    "lifespan": 2,
+    "level": 80
+  },
+  {
+    "id": 31511,
+    "items": [32987],
+    "location": {
+      "map": "The Fringes",
+      "aetheryteName": "Castrum Oriens",
+      "placeName": "Virdjala",
+      "x": 31.5,
+      "y": 31.3
+    },
+    "filters": { "patch": "3.0", "className": "MIN" },
+    "spawnTimes": [10, 22],
+    "lifespan": 2,
+    "level": 80
+  },
+  {
+    "id": 31512,
+    "items": [32992, 32993, 32994],
+    "location": {
+      "map": "The Dravanian Forelands",
+      "aetheryteName": "Tailfeather",
+      "placeName": "The Smoldering Wastes",
+      "x": 29.1,
+      "y": 30
+    },
+    "filters": { "patch": "3.0", "className": "BTN" },
+    "spawnTimes": [10, 22],
+    "lifespan": 2,
+    "level": 55
+  },
+  {
+    "id": 31513,
+    "items": [32995, 32996],
+    "location": {
+      "map": "The Dravanian Forelands",
+      "aetheryteName": "Tailfeather",
+      "placeName": "Avalonia Fallen",
+      "x": 16.1,
+      "y": 36.4
+    },
+    "filters": { "patch": "3.0", "className": "BTN" },
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "level": 60
+  },
+  {
+    "id": 33021,
+    "items": [32997, 32999],
+    "location": {
+      "map": "The Ruby Sea",
+      "aetheryteName": "Tamamizu",
+      "placeName": "Isari",
+      "x": 5.9,
+      "y": 15.7
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [2, 14],
+    "lifespan": 2,
+    "level": 65
+  },
+  {
+    "id": 33022,
+    "items": [32998],
+    "location": {
+      "map": "The Ruby Sea",
+      "aetheryteName": "Tamamizu",
+      "placeName": "Shoal Rock",
+      "x": 33,
+      "y": 9.2
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [4, 16],
+    "lifespan": 2,
+    "level": 65
+  },
+  {
+    "id": 33023,
+    "items": [33000, 33001],
+    "location": {
+      "map": "Yanxia",
+      "aetheryteName": "Namai",
+      "placeName": "Doma",
+      "x": 18.6,
+      "y": 14.3
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [0, 12],
+    "lifespan": 2,
+    "level": 70
+  },
+  {
+    "id": 33024,
+    "items": [33002, 33004],
+    "location": {
+      "map": "Il Mheg",
+      "aetheryteName": "Lydha Lran",
+      "placeName": "The Woolen Way",
+      "x": 4,
+      "y": 23.1
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [10, 22],
+    "lifespan": 2,
+    "level": 75
+  },
+  {
+    "id": 33025,
+    "items": [33003],
+    "location": {
+      "map": "Kholusia",
+      "aetheryteName": "Stilltide",
+      "placeName": "The Chisel",
+      "x": 27.8,
+      "y": 32.7
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [8, 20],
+    "lifespan": 2,
+    "level": 75
+  },
+  {
+    "id": 33026,
+    "items": [33005, 33007],
+    "location": {
+      "map": "Amh Araeng",
+      "aetheryteName": "Mord Souq",
+      "placeName": "The Central Hills of Amber",
+      "x": 18.5,
+      "y": 20.4
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [2, 14],
+    "lifespan": 2,
+    "level": 80
+  },
+  {
+    "id": 33027,
+    "items": [33006, 33008],
+    "location": {
+      "map": "The Tempest",
+      "aetheryteName": "The Ondo Cups",
+      "placeName": "The Norvrandt Slope",
+      "x": 37.4,
+      "y": 11.6
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [4, 16],
+    "lifespan": 2,
+    "level": 80
+  },
+  {
+    "id": 33028,
+    "items": [33009],
+    "location": {
+      "map": "The Peaks",
+      "aetheryteName": "Ala Gannha",
+      "placeName": "Heather Falls",
+      "x": 30.5,
+      "y": 6.8
+    },
+    "filters": { "patch": "5.2", "className": "BTN" },
+    "spawnTimes": [0, 12],
     "lifespan": 2,
     "level": 80
   }

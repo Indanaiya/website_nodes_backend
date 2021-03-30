@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 import { SERVERS } from "../src/constants.js";
 
 // TODO since these things are optional I think I need to make them possibly undefined or something?
-export interface ServerPrices {
+export interface IServerPrices {
   price: number;
   saleVelocity: {
     overall: number;
@@ -20,8 +20,9 @@ export interface ServerPrices {
 
 export interface IProtoItem {
   name: string;
-  marketInfo?: { [serverName: string]: ServerPrices };
+  marketInfo?: { [serverName: string]: IServerPrices };
   universalisId: number;
+  untradeable: boolean;
 }
 //TODO need to look at the difference between Document and BaseDocument again
 export interface IProtoItemBaseDocument extends IProtoItem, mongoose.Document {}
@@ -52,13 +53,15 @@ export interface IAethersandItem extends IProtoItem {
   icon: string;
 }
 
-export interface IPhantaItemBaseDocument extends IPhantaItem, mongoose.Document {}
+export interface IPhantaItemBaseDocument
+  extends IPhantaItem,
+    mongoose.Document {}
 export interface IGatherableItemBaseDocument
   extends IGatherableItem,
-  mongoose.Document {}
+    mongoose.Document {}
 export interface IAethersandItemBaseDocument
   extends IAethersandItem,
-  mongoose.Document {}
+    mongoose.Document {}
 
 const marketInfoForSchema: { [key: string]: any } = {};
 for (let server of SERVERS) {
@@ -116,6 +119,7 @@ const protoItemSchema = {
     required: true,
     unique: true,
   },
+  untradeable: { type: Boolean, required: true },
 };
 
 const phantaItemSchema = new mongoose.Schema({
